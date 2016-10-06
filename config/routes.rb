@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   
 
   root 'users#index'
+
+  get '/profile/new' => 'users#new_profile'
+  post '/profile'
 end
