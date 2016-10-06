@@ -38,15 +38,15 @@
     <link href="/template/css/animations.css" rel="stylesheet">
     <link href="/template/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="/template/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
-    <link href="/template/plugins/hover/hover-min.css" rel="stylesheet">    
-    
+    <link href="/template/plugins/hover/hover-min.css" rel="stylesheet">
+
     <!-- The Project core CSS file -->
     <link href="/template/css/style.css" rel="stylesheet" >
     <!-- Color Scheme (In order to change the color scheme, replace the blue.css with the color scheme that you prefer)-->
     <link href="/template/css/skins/dark_cyan.css" rel="stylesheet">
-    
 
-    <!-- Custom css --> 
+
+    <!-- Custom css -->
     <link href="/template/css/custom.css" rel="stylesheet">
 
     <%= csrf_meta_tags %>
@@ -67,14 +67,14 @@
     <!-- scrollToTop -->
     <!-- ================ -->
     <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
-    
+
     <!-- page wrapper start -->
     <!-- ================ -->
     <div class="page-wrapper">
-    
+
       <!-- header-container start -->
       <div class="header-container">
-        
+
         <!-- header-top start -->
         <!-- classes:  -->
         <!-- "dark": dark version of header top e.g. class="header-top dark" -->
@@ -135,16 +135,16 @@
           </div>
         </div>
         <!-- header-top end -->
-        
+
         <!-- header start -->
         <!-- classes:  -->
         <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
         <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
         <!-- "full-width": mandatory class for the full-width menu layout -->
         <!-- "centered": mandatory class for the centered logo layout -->
-        <!-- ================ --> 
+        <!-- ================ -->
         <header class="header  fixed    clearfix">
-          
+
           <div class="container">
             <div class="row">
               <div class="col-md-3 ">
@@ -161,17 +161,17 @@
                   <div class="site-slogan">
                     Multipurpose HTML5 Template
                   </div>
-                  
+
                 </div>
                 <!-- header-left end -->
 
               </div>
               <div class="col-md-9">
-          
+
                 <!-- header-right start -->
                 <!-- ================ -->
                 <div class="header-right clearfix">
-                  
+
                 <!-- main-navigation start -->
                 <!-- classes: -->
                 <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
@@ -193,7 +193,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                         </button>
-                        
+
                       </div>
 
                       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -593,16 +593,29 @@
                               <li ><a href="blog-post.html">Blog Post</a></li>
                             </ul>
                           </li>
+                          <!-- Devise logout / login links !-->
+                          <% if user_signed_in? %>
+                          <li>
+                            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+                          </li>
+                          <% else %>
+                          <li>
+                            <%= link_to('Login', new_user_session_path)  %>
+                          </li>
+                          <li>
+                            <%= link_to('Sign up', new_user_registration_path ) %>
+                          </li>
+                          <% end %>
                         </ul>
                         <!-- main-menu end -->
-                        
+
                         <!-- header dropdown buttons -->
                         <div class="header-dropdown-buttons">
                           <a href="#" class="btn btn-sm hidden-xs btn-default">Apointment <i class="fa fa-hospital-o pl-5"></i></a>
                           <a href="#" class="btn btn-lg visible-xs btn-block btn-default">Make an Apointment <i class="fa fa-hospital-o pl-5"></i></a>
                         </div>
                         <!-- header dropdown buttons end-->
-                        
+
                       </div>
 
                     </div>
@@ -613,11 +626,11 @@
                 <!-- main-navigation end -->
                 </div>
                 <!-- header-right end -->
-          
+
               </div>
             </div>
           </div>
-          
+
         </header>
         <!-- header end -->
       </div>
@@ -640,7 +653,7 @@
         </div>
       </div>
       <!-- .subfooter end -->
-    
+
   </div>
   <!-- page-wrapper end -->
 
@@ -682,4 +695,3 @@
     <script type="text/javascript" src="/template/js/custom.js"></script>
   </body>
 </html>
-
