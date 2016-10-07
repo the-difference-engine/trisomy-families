@@ -63,7 +63,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  #heroku config:set HOST_NAME=qa-trisomy-families --remote qa
+  #heroku config:set HOST_NAME=qa-trisomy-families.herokuapp.com --remote qa
   config.action_mailer.default_url_options = { host: ENV['HOST_NAME'] }
 
   config.action_mailer.delivery_method = :smtp
