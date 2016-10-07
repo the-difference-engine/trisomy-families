@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root 'users#index'
 
   get '/profile/new' => 'children#new_profile'
+  get '/profile/:id' => 'children#show'
   post '/profile' => 'children#create_profile'
 end

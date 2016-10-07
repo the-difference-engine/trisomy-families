@@ -15,6 +15,11 @@ class ChildrenController < ApplicationController
       avatar: params[:avatar]
     )
     @child.save
-    redirect_to '/'
+    redirect_to "/profile/#{@child.id}"
+  end
+
+  def show
+    @child = Child.find_by(id: params[:id])
+    render 'show.html.erb'
   end
 end
