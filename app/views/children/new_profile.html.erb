@@ -13,7 +13,14 @@
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
     <%= select_tag(:trisomy_type, "") %> 
   </div>
-
+  <div>
+    <%= label_tag :date_of_birth %>
+    <%= date_field_tag :date_of_birth%>
+  </div>
+  <div>
+    <%= label_tag :date_of_death %>
+    <%= date_field_tag :date_of_death %>
+  </div>
   <div>
     <%= label_tag :state %>
     <%= select_tag(:state, "") %>
