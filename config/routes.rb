@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   get '/profile/new' => 'users#new_profile'
   post '/profile' => 'users#create_profile'
+
+  post '/event' => 'events#create'
 end
