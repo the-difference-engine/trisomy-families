@@ -11,7 +11,8 @@ class ChildrenController < ApplicationController
       death_date: Date.parse(params[:date_of_death]),
       state: params[:state],
       city: params[:city],
-      trisomy_story: params[:trisomy_story]
+      trisomy_story: params[:trisomy_story],
+      avatar: params[:avatar]
     )
     @child.save
     redirect_to '/'
