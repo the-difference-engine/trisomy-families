@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 skip_before_action :verify_authenticity_token
 
   def create
-    @user = User.find_by(id: current_user.id)
+    @user = User.find_by(id: 1)
 
     @event = Event.new(title: params[:title],
                        description: params[:description],
