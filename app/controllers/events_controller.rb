@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
 # Needs to be here for current_user to work
 # Might not be the most secure option
-skip_before_filter :verify_authenticity_token
+skip_before_action :verify_authenticity_token
 
   def create
     @user = User.find_by(id: current_user.id)
