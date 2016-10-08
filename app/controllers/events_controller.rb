@@ -15,7 +15,7 @@ skip_before_action :verify_authenticity_token
       redirect_to '/'
 
     else
-      flash[:alert] = 'Could not save event.'
+      flash[:alert] = @event.errors.full_messages
       redirect_to '/'
     end
   end
