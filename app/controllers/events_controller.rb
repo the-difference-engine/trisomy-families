@@ -16,7 +16,6 @@ skip_before_action :verify_authenticity_token
 
     else
       flash[:alert] = 'Could not save event.'
-      # add the reasons why it couldn't save to flash message
       redirect_to '/'
     end
   end
