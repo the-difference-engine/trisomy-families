@@ -4,6 +4,10 @@ class EventsController < ApplicationController
 # Might not be the most secure option
 skip_before_action :verify_authenticity_token
 
+  def new
+    
+  end
+
   def create
     @user = User.find_by(id: 1)
 
