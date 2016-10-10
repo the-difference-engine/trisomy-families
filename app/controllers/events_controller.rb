@@ -19,7 +19,7 @@ skip_before_action :verify_authenticity_token
 
     else
       flash[:alert] = @event.errors.full_messages
-      redirect_to '/'
+      render 'new'
     end
   end
 
