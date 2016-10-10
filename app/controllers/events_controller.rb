@@ -5,14 +5,13 @@ class EventsController < ApplicationController
 skip_before_action :verify_authenticity_token
 
   def new
-    
+    @event = Event.new
   end
 
   def create
     @user = User.find_by(id: 1)
 
     @event = Event.new(event_params)
-    @event.date = parse_date
 
     if @event.save
       flash[:notice] = 'New Event Created.'
@@ -27,11 +26,7 @@ skip_before_action :verify_authenticity_token
   private
 
     def event_params
-      params.permit(:title, :description, :date)
-    end
-
-    def parse_date
-      return Date.parse(params[:date_time])
+      params.require(:event).permit(:title, :description, :date)
     end
 
 end
