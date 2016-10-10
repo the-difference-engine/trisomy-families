@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   post '/profile' => 'users#create_profile'
 
   resources :events
+
+  get '/profile/new' => 'children#new_profile'
+  post '/profile' => 'children#create_profile'
+
 end

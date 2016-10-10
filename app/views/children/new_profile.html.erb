@@ -2,8 +2,8 @@
 
 <%= form_tag '/profile', method: :post do %>
   <div>
-    <%= label_tag :child_name, "Name of Child" %>
-    <%= text_field_tag :child_name %> 
+    <%= label_tag :child_first_name, "Name of Child" %>
+    <%= text_field_tag :first_name, nil, placeholder: 'First Name' %>  <%= text_field_tag :last_name, nil, placeholder: 'Last Name' %> 
   </div>
   <div>
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
@@ -11,7 +11,7 @@
   </div>
   <div>
     <%= label_tag :date_of_birth %>
-    <%= date_field_tag :date_of_birth %>
+    <%= date_field_tag :date_of_birth%>
   </div>
   <div>
     <%= label_tag :date_of_death %>
@@ -29,5 +29,5 @@
     <%= label_tag :trisomy_story %>
     <%= text_area_tag :trisomy_story %>
   </div>
-  <%= label_tag :image_of_child %>
+  <%= submit_tag %>
 <% end %>
