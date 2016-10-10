@@ -6,6 +6,5 @@ Rails.application.routes.draw do
   get '/profile/new' => 'users#new_profile'
   post '/profile' => 'users#create_profile'
 
-  get '/event/new' => 'events#new'
-  post '/event' => 'events#create'
+  resources :events
 end
