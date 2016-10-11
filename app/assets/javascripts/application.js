@@ -16,4 +16,5 @@
 //= require fullcalendar
 //= require angular
 //= require app
+//= require angular-ui-calendar
 //= require_tree .
