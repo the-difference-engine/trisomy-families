@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
+gem 'angular-ui-calendar-rails'
+
 gem 'devise'
 
 gem 'rails_12factor', group: :production
