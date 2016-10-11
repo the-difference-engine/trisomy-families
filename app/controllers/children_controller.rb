@@ -1,5 +1,9 @@
 class ChildrenController < ApplicationController
   def new_profile
+    unless user_signed_in?
+      flash[:warning] = 'You must be logged in to use this feature.'
+      redirect_to '/'
+    end
   end
 
   def create_profile
