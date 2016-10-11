@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require moment
+//= require fullcalendar
+//= require angular
+//= require app
 //= require_tree .

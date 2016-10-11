@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
 gem 'devise'
 
 gem 'rails_12factor', group: :production
