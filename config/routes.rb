@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  namespace :api do
+    namespace :v1 do
+
+      get '/events' => 'events#index'
+
+    end
+  end
+
   devise_for :users
 
   root 'users#index'

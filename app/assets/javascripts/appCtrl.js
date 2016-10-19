@@ -7,6 +7,7 @@
 
     $scope.events = [{title: 'New Event',start: new Date(y, m, 1)}];
 
+
     $scope.eventSources = [$scope.events];
   });
 })();

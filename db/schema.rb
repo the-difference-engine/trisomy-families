@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019232450) do
+ActiveRecord::Schema.define(version: 20161019234919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20161019232450) do
     t.datetime "updated_at",  null: false
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "type"
+    t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
   end
