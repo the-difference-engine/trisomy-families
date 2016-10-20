@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/profile/:id' => 'children#show'
   post '/profile' => 'children#create_profile'
   patch '/profile/:id' => 'children#update'
+  delete '/profile/:id' => 'children#destroy'
 end
