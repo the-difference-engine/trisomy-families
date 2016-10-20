@@ -1,0 +1,13 @@
+<h3><%= @child.first_name + " " + @child.last_name %></h3>
+<p>Birth date: <%= @child.birth_date %></p>
+<p>Death date: <%= @child.death_date %></p>
+<p>Trisomy Story: <%= @child.trisomy_story %></p>
+<p>Trisomy type: <%= @child.trisomy_type %></p>
+<p>City: <%= @child.city %></p>
+<p>state: <%= @child.state %></p>
+<%= form_for @child, url: "/profile/#{@child.id}", html: { multipart: true } do |form| %>
+  <%= form.file_field :avatar %>
+  <%= submit_tag %>
+<% end %>
+<%= image_tag @child.avatar.url %>
+
