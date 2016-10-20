@@ -31,10 +31,28 @@ class ChildrenController < ApplicationController
     render 'show.html.erb'
   end
 
+  def edit
+    @child = Child.find_by(id: params[:id])
+    render 'edit.html.erb'
+  end
+
   def update
     @child = Child.find_by(id: params[:id])
+    if user_params
+      @child.update(
+        user_params
+      )
+    end
     @child.update(
-      user_params
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      trisomy_type: params[:trisomy_type],
+      birth_date: calculated_birth_date,
+      death_date: calculated_death_date,
+      state: params[:state],
+      city: params[:city],
+      trisomy_story: params[:trisomy_story],
+      avatar: params[:avatar]
     )
   end
 
