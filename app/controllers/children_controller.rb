@@ -19,7 +19,8 @@ class ChildrenController < ApplicationController
       state: params[:state],
       city: params[:city],
       trisomy_story: params[:trisomy_story],
-      avatar: params[:avatar]
+      avatar: params[:avatar],
+      user_id: params[:user_id]
     )
     @child.save
     redirect_to "/profile/#{@child.id}"
@@ -30,11 +31,43 @@ class ChildrenController < ApplicationController
     render 'show.html.erb'
   end
 
-  def update
+  def edit
+    @child = Child.find_by(id: params[:id])
+    render 'edit.html.erb'
+  end
+
+  def update_photo
     @child = Child.find_by(id: params[:id])
     @child.update(
       user_params
     )
+    redirect_to "/profile/#{@child.id}"
+  end
+
+  def update
+    @child = Child.find_by(id: params[:id])
+    
+    calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
+    calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
+
+    @child.update(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      trisomy_type: params[:trisomy_type],
+      birth_date: calculated_birth_date,
+      death_date: calculated_death_date,
+      state: params[:state],
+      city: params[:city],
+      trisomy_story: params[:trisomy_story],
+      avatar: params[:avatar]
+    )
+    redirect_to "/profile/#{@child.id}"
+  end
+
+  def destroy
+    @child = Child.find_by(id: params[:id])
+    @child.destroy 
+    redirect_to '/'
   end
 
   private
