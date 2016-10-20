@@ -7,7 +7,7 @@
   </div>
   <div>
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
-    <%= select_tag(:trisomy_type, "ee") %> 
+    <%= select_tag(:trisomy_type, options_for_select(trisomy_type, "1")) %> 
   </div>
   <div>
     <%= label_tag :date_of_birth %>
