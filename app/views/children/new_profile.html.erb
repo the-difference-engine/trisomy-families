@@ -29,5 +29,8 @@
     <%= label_tag :trisomy_story %>
     <%= text_area_tag :trisomy_story %>
   </div>
+  <div>
+    <%= hidden_field_tag :user_id, current_user.id %>
+  </div>
   <%= submit_tag %>
 <% end %>
