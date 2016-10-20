@@ -35,13 +35,20 @@ class ChildrenController < ApplicationController
     render 'edit.html.erb'
   end
 
+  def update_photo
+    @child = Child.find_by(id: params[:id])
+    @child.update(
+      user_params
+    )
+    redirect_to "/profile/#{@child.id}"
+  end
+
   def update
     @child = Child.find_by(id: params[:id])
-    if user_params
-      @child.update(
-        user_params
-      )
-    end
+    
+    calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
+    calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
+
     @child.update(
       first_name: params[:first_name],
       last_name: params[:last_name],
@@ -53,6 +60,7 @@ class ChildrenController < ApplicationController
       trisomy_story: params[:trisomy_story],
       avatar: params[:avatar]
     )
+    redirect_to "/profile/#{@child.id}"
   end
 
   def destroy

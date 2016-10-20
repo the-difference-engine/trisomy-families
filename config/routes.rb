@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/profile/:id/edit' => 'children#edit'
   post '/profile' => 'children#create_profile'
   patch '/profile/:id' => 'children#update'
+  patch '/profile/:id/photo' => 'children#update_photo'
   delete '/profile/:id' => 'children#destroy'
 end
