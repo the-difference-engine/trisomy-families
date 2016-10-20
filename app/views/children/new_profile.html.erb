@@ -7,7 +7,7 @@
   </div>
   <div>
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
-    <%= select_tag(:trisomy_type, "") %> 
+    <%= select_tag(:trisomy_type, "ee") %> 
   </div>
   <div>
     <%= label_tag :date_of_birth %>
@@ -19,7 +19,7 @@
   </div>
   <div>
     <%= label_tag :state %>
-    <%= select_tag(:state, "") %>
+    <%= select_tag(:state, options_for_select(us_states, "IL")) %>
   </div>
   <div>
     <%= label_tag :city %>
