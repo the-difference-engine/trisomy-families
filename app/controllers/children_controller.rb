@@ -19,7 +19,8 @@ class ChildrenController < ApplicationController
       state: params[:state],
       city: params[:city],
       trisomy_story: params[:trisomy_story],
-      avatar: params[:avatar]
+      avatar: params[:avatar],
+      user_id: params[:user_id]
     )
     @child.save
     redirect_to "/profile/#{@child.id}"
