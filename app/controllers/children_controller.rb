@@ -37,6 +37,12 @@ class ChildrenController < ApplicationController
     )
   end
 
+  def destroy
+    @child = Child.find_by(id: params[:id])
+    @child.destroy 
+    redirect_to '/'
+  end
+
   private
 
   # Use strong_parameters for attribute whitelisting
