@@ -5,7 +5,7 @@
 <p>Trisomy type: <%= @child.trisomy_type %></p>
 <p>City: <%= @child.city %></p>
 <p>state: <%= @child.state %></p>
-<%= form_for @child, url: "/profile/#{@child.id}", html: { multipart: true } do |form| %>
+<%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
   <%= form.file_field :avatar %>
   <%= submit_tag %>
 <% end %>
