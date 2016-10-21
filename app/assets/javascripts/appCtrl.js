@@ -40,4 +40,5 @@
     $scope.eventSources = [$scope.events];
     window.$scope = $scope;
   })
+
 })();

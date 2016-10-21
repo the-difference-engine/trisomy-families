@@ -12,7 +12,6 @@ class Api::V1::EventsController < ApplicationController
       flash[:notice] = 'New Event Created.'
     else
       flash[:alert] = @event.errors.full_messages
-      puts @event.errors.full_messages
       render 'index'
     end
   end
