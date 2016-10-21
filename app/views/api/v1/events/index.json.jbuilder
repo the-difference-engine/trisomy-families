@@ -1,5 +1,5 @@
 json.array!(@events) do |event|
   json.extract! event, :title, :description
-  json.start event.start_time
-  json.end event.end_time
+  json.start event.start
+  json.end event.end
 end

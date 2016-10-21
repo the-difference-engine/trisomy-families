@@ -2,5 +2,42 @@
 <div ng-app="app">
   <div ng-controller="calendarCtrl" ng-init="setUp()">
       <div ui-calendar="calendarOptions" class="span8 calendar" ng-model="eventSources"></div>
+      <h2>Create Event</h2>
+      <form>
+        <div class="form-group">
+
+          <label for="eventTitle">Title</label>
+          <input type="text" class="form-control" id="eventTitle" ng-model="event.title">
+
+          <label for="eventDescription">Description</label>
+          <textarea class="form-control" rows="3" id="eventDescription" ng-model="event.description" ></textarea>
+
+          <label for="eventLocation">Location</label>
+          <input type="text" class="form-control" id="eventLocation" ng-model="event.location">
+
+          <label for="eventStart">Start Datetime</label>
+          <input type="datetime-local" class="form-control" id="eventStart" ng-model="event.start">
+
+          <label for="eventEnd">End Datetime</label>
+          <input type="datetime-local" class="form-control" id="eventEnd" ng-model="event.end">
+
+          <label for="ngvalueselect">Event Type</label>
+              <select class="form-control" name="ngvalueselect" ng-model="event.event_type" style="float: none;">
+                  <option value="birthdays">Birthdays</option>
+                  <option value="fundrasier">Fundrasier</option>
+                  <option value="family">Family</option>
+                  <option value="personal">Personal</option>
+                </select>
+
+          <label for="ngvalueselect">Event Type</label>
+              <select class="form-control" name="ngvalueselect" ng-model="event.allDay" style="float: none;">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+              </select>
+
+          <button type="submit" class="btn btn-primary" ng-click="createEvent()">Add</button>
+
+        </div>
+      </form>
   </div>
 </div>

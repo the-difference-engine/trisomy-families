@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       get '/events' => 'events#index'
+      post '/events' => 'events#create'
 
     end
   end
