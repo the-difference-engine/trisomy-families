@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "start"
+    t.datetime "end"
     t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
@@ -66,18 +66,6 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.datetime "start"
-    t.datetime "end"
-    t.string   "event_type"
-    t.boolean  "allDay"
-    t.string   "location"
   end
 
   create_table "users", force: :cascade do |t|
