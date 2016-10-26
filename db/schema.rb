@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021003213) do
+ActiveRecord::Schema.define(version: 20161026235349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.string   "city"
     t.string   "state"
     t.text     "trisomy_story"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.integer  "user_id"
     t.string   "nickname"
     t.integer  "birth_order"
-    t.string   "primary_diagnosis"
     t.string   "other_chrom_affected"
     t.string   "secondary_diagnosis"
     t.integer  "mosaic_percentage"
     t.string   "arms_affected"
+    t.integer  "primary_diagnosis_id"
+    t.integer  "secondary_diagnosis_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -45,8 +46,8 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "start"
+    t.datetime "end"
     t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
@@ -68,16 +69,29 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.datetime "start"
-    t.datetime "end"
-    t.string   "event_type"
-    t.boolean  "allDay"
-    t.string   "location"
+  create_table "primary_diagnoses", force: :cascade do |t|
+    t.boolean  "full"
+    t.boolean  "partial"
+    t.boolean  "mosaic"
+    t.boolean  "balanced_translocation"
+    t.boolean  "unbalanced_translocation"
+    t.boolean  "ring"
+    t.string   "other"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "secondary_diagnoses", force: :cascade do |t|
+    t.boolean  "full"
+    t.boolean  "partial"
+    t.boolean  "mosaic"
+    t.boolean  "balanced_translocation"
+    t.boolean  "unbalanced_translocation"
+    t.boolean  "ring"
+    t.boolean  "deletion"
+    t.string   "other"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|
