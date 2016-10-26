@@ -5,9 +5,14 @@
 <p>Trisomy type: <%= @child.trisomy_type %></p>
 <p>City: <%= @child.city %></p>
 <p>state: <%= @child.state %></p>
+
 <%= form_for @child, url: "/profile/#{@child.id}", html: { multipart: true } do |form| %>
   <%= form.file_field :avatar %>
+    <%= label_tag 'Story is private:' %>
+    <%= form.radio_button :private, true %>Yes
+    <%= form.radio_button :private, false %>No
   <%= submit_tag %>
 <% end %>
+
 <%= image_tag @child.avatar.url %>
 

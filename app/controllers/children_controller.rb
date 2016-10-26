@@ -19,7 +19,8 @@ class ChildrenController < ApplicationController
       state: params[:state],
       city: params[:city],
       trisomy_story: params[:trisomy_story],
-      avatar: params[:avatar]
+      avatar: params[:avatar],
+      private: params[:private]
     )
     @child.save
     redirect_to "/profile/#{@child.id}"
@@ -35,6 +36,7 @@ class ChildrenController < ApplicationController
     @child.update(
       user_params
     )
+    render 'show.html.erb'
   end
 
   private
@@ -43,6 +45,6 @@ class ChildrenController < ApplicationController
   # Be sure to update your create() and update() controller methods.
 
   def user_params
-    params.require(:child).permit(:avatar)
+    params.require(:child).permit(:avatar, :private)
   end
 end
