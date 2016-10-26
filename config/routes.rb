@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
+
+  namespace :api do
+    namespace :v1 do
+
+      get '/events' => 'events#index'
+      post '/events' => 'events#create'
+
+    end
+  end
+
   devise_for :users
 
   root 'users#index'
+
+  resources :events
 
   get '/profile/new' => 'children#new_profile'
   get '/profile/:id' => 'children#show'
@@ -12,4 +24,6 @@ Rails.application.routes.draw do
   get 'profile/:id/register' => 'children#register'
   post 'profile/:id/register' => 'children#confirm_register'
   delete '/profile/:id' => 'children#destroy'
+
+  get '/calendar' => 'users#calendar'
 end
