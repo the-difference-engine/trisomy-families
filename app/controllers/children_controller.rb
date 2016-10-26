@@ -70,6 +70,42 @@ class ChildrenController < ApplicationController
     redirect_to '/'
   end
 
+  def register
+    @child = Child.find_by(id: params[:id])
+    render 'register.html.erb'
+  end
+
+  def confirm_register
+    @child = Child.find_by(id: params[:id])
+    @user = User.find_by(id: @child.user_id)
+    @parent = Parent.new(
+      first_name: params[:parent_1_first_name],
+      last_name: params[:parent_1_last_name],
+      city: params[:parent_1_city],
+      state: params[:parent_1_state],
+      phone_number: params[:parent_1_phone_number],
+      email: params[:parent_1_email],
+      relationship: params[:parent_1_relationship]
+    )
+    @parent.save
+    @child.update(
+      nickname: params[:child_nickname],
+      birth_order: params[:child_birth_order],
+      primary_diagnosis: params[:child_primary_diagnosis],
+      secondary_diagnosis: params[:child_secondary_diagnosis],
+      other_chrom_affected: params[:child_other_chrom_affected],
+      mosaic_percentage: params[:child_mosaic_trisomy_percentage],
+      arms_affected: params[:child_partial_trisomy]
+    )
+    @user.update(
+      first_name: params[:user_first_name],
+      last_name: params[:user_last_name],
+      relationship: params[:user_relationship],
+      phone_number: params[:user_phone_number]
+    )
+    redirect_to '/'
+  end
+
   private
 
   # Use strong_parameters for attribute whitelisting
