@@ -8,9 +8,9 @@
 
 <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
   <%= form.file_field :avatar %>
-    <%= label_tag 'Story is private:' %>
-    <%= form.radio_button :private, true %>Yes
-    <%= form.radio_button :private, false %>No
+  <%= label_tag 'Story is private:' %>
+  <%= form.radio_button :private, true %> Yes
+  <%= form.radio_button :private, false %> No
   <%= submit_tag %>
 <% end %>
 
