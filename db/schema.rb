@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027222749) do
+ActiveRecord::Schema.define(version: 20161027225057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 20161027222749) do
     t.integer  "partial_trisomy_id"
     t.integer  "health_history_id"
     t.integer  "background_history_id"
-    t.integer  "school_therapy_id"
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
@@ -257,7 +256,6 @@ ActiveRecord::Schema.define(version: 20161027222749) do
     t.boolean  "home_schooled_bound"
     t.string   "highest_education"
     t.integer  "received_therapy_id"
-    t.integer  "background_history_id"
     t.boolean  "clinical_trial"
     t.boolean  "clinical_trial_participation"
   end
@@ -456,11 +454,6 @@ ActiveRecord::Schema.define(version: 20161027222749) do
     t.string   "other"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-  end
-
-  create_table "school_therapies", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "secondary_diagnoses", force: :cascade do |t|
