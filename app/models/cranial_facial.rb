@@ -1,0 +1,2 @@
+class CranialFacial < ApplicationRecord
+end

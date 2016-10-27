@@ -1,0 +1,2 @@
+class CongenitalHeartDefect < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class MuscularSkeletal < ApplicationRecord
+end

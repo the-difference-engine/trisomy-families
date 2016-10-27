@@ -1,0 +1,2 @@
+class BehavioralHealth < ApplicationRecord
+end

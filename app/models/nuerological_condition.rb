@@ -1,0 +1,2 @@
+class NuerologicalCondition < ApplicationRecord
+end

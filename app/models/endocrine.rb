@@ -1,0 +1,2 @@
+class Endocrine < ApplicationRecord
+end

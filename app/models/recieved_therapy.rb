@@ -1,0 +1,2 @@
+class RecievedTherapy < ApplicationRecord
+end
