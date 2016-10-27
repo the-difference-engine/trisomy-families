@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
-    t.boolean  "private",              default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "primary_diagnosis"
@@ -39,6 +38,7 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.string   "secondary_diagnosis"
     t.integer  "mosaic_percentage"
     t.string   "arms_affected"
+    t.boolean  "private",              default: false
   end
 
   create_table "events", force: :cascade do |t|
