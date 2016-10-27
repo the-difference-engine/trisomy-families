@@ -76,13 +76,19 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.string   "city"
     t.string   "state"
     t.text     "trisomy_story"
+<<<<<<< HEAD
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+=======
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+>>>>>>> 286093acca8577c9a562d6f013ec59cb7650bd22
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.boolean  "private",              default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
@@ -418,6 +424,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.datetime "avatar_updated_at"
   end
 
+<<<<<<< HEAD
   create_table "partial_trisomies", force: :cascade do |t|
     t.boolean  "p"
     t.boolean  "q"
@@ -469,6 +476,8 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.datetime "updated_at",               null: false
   end
 
+=======
+>>>>>>> 286093acca8577c9a562d6f013ec59cb7650bd22
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
