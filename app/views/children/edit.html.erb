@@ -1,0 +1,36 @@
+<%= form_tag "/profile/#{@child.id}", method: :patch do %>
+  <div>
+    <%= label_tag :child_first_name, "Name of Child" %>
+    <%= text_field_tag :first_name, @child.first_name, placeholder: 'First Name' %>  <%= text_field_tag :last_name, @child.last_name, placeholder: 'Last Name' %> 
+  </div>
+  <div>
+    <%= label_tag :trisomy_type, "Type of Trisomy" %>
+    <%= select_tag(:trisomy_type, @child.trisomy_type) %> 
+  </div>
+  <div>
+    <%= label_tag :date_of_birth %>
+    <%= date_field_tag :date_of_birth, @child.birth_date%>
+  </div>
+  <div>
+    <%= label_tag :date_of_death %>
+    <%= date_field_tag :date_of_death, @child.death_date  %>
+  </div>
+  <div>
+    <%= label_tag :state %>
+    <%= select_tag(:state, options_for_select(us_states, "#{@child.state}")) %>
+  </div>
+  <div>
+    <%= label_tag :city %>
+    <%= text_field_tag :city, @child.city %>
+  </div>
+  <div>
+    <%= label_tag :trisomy_story %>
+    <%= text_area_tag :trisomy_story, @child.trisomy_story %>
+  </div>
+  <div>
+    <%= label_tag 'Story is private:' %>
+    <%= radio_button_tag :private, true %>Yes
+    <%= radio_button_tag :private, false %>No
+  </div> 
+  <%= submit_tag %>
+<% end %>

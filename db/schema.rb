@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020014016) do
+ActiveRecord::Schema.define(version: 20161021003213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +24,21 @@ ActiveRecord::Schema.define(version: 20161020014016) do
     t.string   "city"
     t.string   "state"
     t.text     "trisomy_story"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
-    t.boolean  "private",             default: false
+    t.boolean  "private",              default: false
+    t.string   "nickname"
+    t.integer  "birth_order"
+    t.string   "primary_diagnosis"
+    t.string   "other_chrom_affected"
+    t.string   "secondary_diagnosis"
+    t.integer  "mosaic_percentage"
+    t.string   "arms_affected"
   end
 
   create_table "events", force: :cascade do |t|
@@ -39,11 +46,27 @@ ActiveRecord::Schema.define(version: 20161020014016) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "start"
+    t.datetime "end"
     t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
+  end
+
+  create_table "parents", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "city"
+    t.string   "state"
+    t.string   "phone_number"
+    t.string   "email"
+    t.string   "relationship"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,6 +90,10 @@ ActiveRecord::Schema.define(version: 20161020014016) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "relationship"
+    t.string   "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
