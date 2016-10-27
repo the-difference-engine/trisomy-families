@@ -1,0 +1,2 @@
+class SchoolTherapy < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class BackgroundHistory < ApplicationRecord
+end

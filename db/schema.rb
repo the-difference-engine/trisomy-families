@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026235349) do
+ActiveRecord::Schema.define(version: 20161027004737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "background_histories", force: :cascade do |t|
+    t.decimal  "weight_at_birth"
+    t.integer  "height_at_birth"
+    t.integer  "head_circumference_at_birth"
+    t.boolean  "trisomy_relative"
+    t.string   "delivery_method"
+    t.integer  "weight_id"
+    t.integer  "height_id"
+    t.integer  "head_circumference_id"
+    t.integer  "mother_complication_id"
+    t.string   "offered_c_section"
+    t.string   "child_complication"
+    t.string   "apgar_score"
+    t.integer  "gestation_age"
+    t.integer  "mother_age_at_birth"
+    t.integer  "father_age_at_birth"
+    t.boolean  "multiple_birth"
+    t.boolean  "multiple_birth_trisomy"
+    t.boolean  "siblings_with_trisomy"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "children", force: :cascade do |t|
     t.string   "first_name"
@@ -34,11 +57,10 @@ ActiveRecord::Schema.define(version: 20161026235349) do
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
-    t.string   "secondary_diagnosis"
     t.integer  "mosaic_percentage"
-    t.string   "arms_affected"
     t.integer  "primary_diagnosis_id"
     t.integer  "secondary_diagnosis_id"
+    t.integer  "partial_trisomy_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -51,6 +73,115 @@ ActiveRecord::Schema.define(version: 20161026235349) do
     t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
+  end
+
+  create_table "head_circumferences", force: :cascade do |t|
+    t.decimal  "one_month"
+    t.decimal  "two_month"
+    t.decimal  "three_month"
+    t.decimal  "four_month"
+    t.decimal  "five_month"
+    t.decimal  "six_month"
+    t.decimal  "one_year"
+    t.decimal  "eighteen_month"
+    t.decimal  "two_year"
+    t.decimal  "three_year"
+    t.decimal  "four_year"
+    t.decimal  "five_year"
+    t.decimal  "six_year"
+    t.decimal  "seven_year"
+    t.decimal  "eight_year"
+    t.decimal  "nine_year"
+    t.decimal  "ten_year"
+    t.decimal  "eleven_year"
+    t.decimal  "twelve_year"
+    t.decimal  "thirteen_year"
+    t.decimal  "fourteen_year"
+    t.decimal  "fifteen_year"
+    t.decimal  "sixteen_year"
+    t.decimal  "seventeen_year"
+    t.decimal  "eighteen_year"
+    t.decimal  "nineteen_year"
+    t.decimal  "twenty_year"
+    t.decimal  "twentyone_year"
+    t.decimal  "twentytwo_year"
+    t.decimal  "twentythree_year"
+    t.decimal  "twentyfour_year"
+    t.decimal  "twentyfive_year"
+    t.decimal  "twentysix_year"
+    t.decimal  "twentyseven_year"
+    t.decimal  "twentyeight_year"
+    t.decimal  "twentynine_year"
+    t.decimal  "thirty_year"
+    t.decimal  "thirtyone_year"
+    t.decimal  "thirtytwo_year"
+    t.decimal  "thirtythree_year"
+    t.decimal  "thirtyfour_year"
+    t.decimal  "thirtyfive_year"
+    t.decimal  "thirtysix_year"
+    t.decimal  "thirtyseven_year"
+    t.decimal  "thirtyeight_year"
+    t.decimal  "thirtynine_year"
+    t.decimal  "forty_year"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "health_histories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "heights", force: :cascade do |t|
+    t.decimal  "one_month"
+    t.decimal  "two_month"
+    t.decimal  "three_month"
+    t.decimal  "four_month"
+    t.decimal  "five_month"
+    t.decimal  "six_month"
+    t.decimal  "one_year"
+    t.decimal  "eighteen_month"
+    t.decimal  "two_year"
+    t.decimal  "three_year"
+    t.decimal  "four_year"
+    t.decimal  "five_year"
+    t.decimal  "six_year"
+    t.decimal  "seven_year"
+    t.decimal  "eight_year"
+    t.decimal  "nine_year"
+    t.decimal  "ten_year"
+    t.decimal  "eleven_year"
+    t.decimal  "twelve_year"
+    t.decimal  "thirteen_year"
+    t.decimal  "fourteen_year"
+    t.decimal  "fifteen_year"
+    t.decimal  "sixteen_year"
+    t.decimal  "seventeen_year"
+    t.decimal  "eighteen_year"
+    t.decimal  "nineteen_year"
+    t.decimal  "twenty_year"
+    t.decimal  "twentyone_year"
+    t.decimal  "twentytwo_year"
+    t.decimal  "twentythree_year"
+    t.decimal  "twentyfour_year"
+    t.decimal  "twentyfive_year"
+    t.decimal  "twentysix_year"
+    t.decimal  "twentyseven_year"
+    t.decimal  "twentyeight_year"
+    t.decimal  "twentynine_year"
+    t.decimal  "thirty_year"
+    t.decimal  "thirtyone_year"
+    t.decimal  "thirtytwo_year"
+    t.decimal  "thirtythree_year"
+    t.decimal  "thirtyfour_year"
+    t.decimal  "thirtyfive_year"
+    t.decimal  "thirtysix_year"
+    t.decimal  "thirtyseven_year"
+    t.decimal  "thirtyeight_year"
+    t.decimal  "thirtynine_year"
+    t.decimal  "forty_year"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "parents", force: :cascade do |t|
@@ -69,6 +200,15 @@ ActiveRecord::Schema.define(version: 20161026235349) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "partial_trisomies", force: :cascade do |t|
+    t.boolean  "p"
+    t.boolean  "q"
+    t.boolean  "both"
+    t.boolean  "unsure"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "primary_diagnoses", force: :cascade do |t|
     t.boolean  "full"
     t.boolean  "partial"
@@ -79,6 +219,11 @@ ActiveRecord::Schema.define(version: 20161026235349) do
     t.string   "other"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "school_therapies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "secondary_diagnoses", force: :cascade do |t|
@@ -121,6 +266,58 @@ ActiveRecord::Schema.define(version: 20161026235349) do
     t.string   "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "weights", force: :cascade do |t|
+    t.decimal  "one_month"
+    t.decimal  "two_month"
+    t.decimal  "three_month"
+    t.decimal  "four_month"
+    t.decimal  "five_month"
+    t.decimal  "six_month"
+    t.decimal  "one_year"
+    t.decimal  "eighteen_month"
+    t.decimal  "two_year"
+    t.decimal  "three_year"
+    t.decimal  "four_year"
+    t.decimal  "five_year"
+    t.decimal  "six_year"
+    t.decimal  "seven_year"
+    t.decimal  "eight_year"
+    t.decimal  "nine_year"
+    t.decimal  "ten_year"
+    t.decimal  "eleven_year"
+    t.decimal  "twelve_year"
+    t.decimal  "thirteen_year"
+    t.decimal  "fourteen_year"
+    t.decimal  "fifteen_year"
+    t.decimal  "sixteen_year"
+    t.decimal  "seventeen_year"
+    t.decimal  "eighteen_year"
+    t.decimal  "nineteen_year"
+    t.decimal  "twenty_year"
+    t.decimal  "twentyone_year"
+    t.decimal  "twentytwo_year"
+    t.decimal  "twentythree_year"
+    t.decimal  "twentyfour_year"
+    t.decimal  "twentyfive_year"
+    t.decimal  "twentysix_year"
+    t.decimal  "twentyseven_year"
+    t.decimal  "twentyeight_year"
+    t.decimal  "twentynine_year"
+    t.decimal  "thirty_year"
+    t.decimal  "thirtyone_year"
+    t.decimal  "thirtytwo_year"
+    t.decimal  "thirtythree_year"
+    t.decimal  "thirtyfour_year"
+    t.decimal  "thirtyfive_year"
+    t.decimal  "thirtysix_year"
+    t.decimal  "thirtyseven_year"
+    t.decimal  "thirtyeight_year"
+    t.decimal  "thirtynine_year"
+    t.decimal  "forty_year"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
 end
