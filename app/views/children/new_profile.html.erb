@@ -30,6 +30,10 @@
     <%= text_area_tag :trisomy_story %>
   </div>
   <div>
+    <%= label_tag 'Story is private:' %>
+    <%= radio_button_tag :private, true %>Yes
+    <%= radio_button_tag :private, false %>No
+  </div> 
     <%= hidden_field_tag :user_id, current_user.id %>
   </div>
   <%= submit_tag %>

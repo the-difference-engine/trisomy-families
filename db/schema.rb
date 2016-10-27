@@ -24,13 +24,14 @@ ActiveRecord::Schema.define(version: 20161021003213) do
     t.string   "city"
     t.string   "state"
     t.text     "trisomy_story"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.boolean  "private",              default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "primary_diagnosis"
