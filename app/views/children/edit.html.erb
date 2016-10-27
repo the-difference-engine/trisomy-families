@@ -5,23 +5,24 @@
   </div>
   <div>
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
-    <%= select_tag(:trisomy_type, @child.trisomy_type) %> 
+    <%= select_tag(:trisomy_type, options_for_select(trisomy_type, @child.trisomy_type)) %> 
+    <%#= select_tag(:trisomy_type, @child.trisomy_type) %> 
   </div>
   <div>
     <%= label_tag :date_of_birth %>
-    <%= date_field_tag :date_of_birth, @child.birth_date%>
+    <%= date_field_tag :date_of_birth, (@child.birth_date && @child.birth_date.to_date) || '' %>
   </div>
   <div>
     <%= label_tag :date_of_death %>
-    <%= date_field_tag :date_of_death, @child.death_date  %>
-  </div>
-  <div>
-    <%= label_tag :state %>
-    <%= select_tag(:state, options_for_select(us_states, "#{@child.state}")) %>
+    <%= date_field_tag :date_of_death, (@child.death_date && @child.death_date.to_date) || '' %>
   </div>
   <div>
     <%= label_tag :city %>
     <%= text_field_tag :city, @child.city %>
+  </div>
+  <div>
+    <%= label_tag :state %>
+    <%= select_tag(:state, options_for_select(us_states, "#{@child.state}")) %>
   </div>
   <div>
     <%= label_tag :trisomy_story %>
@@ -29,8 +30,9 @@
   </div>
   <div>
     <%= label_tag 'Story is private:' %>
-    <%= radio_button_tag :private, true %>Yes
-    <%= radio_button_tag :private, false %>No
+    
+    <%= radio_button_tag :private, true, @child.private %> Yes
+    <%= radio_button_tag :private, false, !@child.private %> No
   </div> 
   <%= submit_tag %>
 <% end %>
