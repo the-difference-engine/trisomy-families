@@ -220,7 +220,7 @@
                           </li>
                           <!-- mega-menu end -->
                           <li>
-                            <a href="#">Calendar</a>
+                            <a href="/calendar">Calendar</a>
                           </li>
                           <li>
                             <a href="#">Get Involved</a>
@@ -270,14 +270,14 @@
         <!-- header end -->
       </div>
 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
 
       <% flash.each do |name, message| %>
         <div class="alert alert-<%= name %> alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-          <%= message.html_safe %> 
+          <%= message.html_safe %>
         </div>
       <% end %>
 

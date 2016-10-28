@@ -1,6 +1,6 @@
 /* angular */
 (function(){
-  angular.module('app').controller('calendarCtrl', function($scope, $http, $httpParamSerializerJQLike) {
+  angular.module('app').controller('calendarCtrl', ['$http', '$httpParamSerializerJQLike', function($scope, $http, $httpParamSerializerJQLike) {
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -39,6 +39,6 @@
 
     $scope.eventSources = [$scope.events];
     window.$scope = $scope;
-  })
+  }])
 
 })();
