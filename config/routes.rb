@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
   namespace :api do
     namespace :v1 do
 
-      get '/events' => 'events#index'
-      post '/events' => 'events#create'
+      resources :events
 
     end
   end
@@ -15,9 +15,9 @@ Rails.application.routes.draw do
 
   resources :events
   get '/profile/new' => 'children#new_profile'
+  post '/profile' => 'children#create_profile'
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
-  post '/profile' => 'children#create_profile'
   patch '/profile/:id' => 'children#update'
   patch '/profile/:id/photo' => 'children#update_photo'
   get 'profile/:id/register' => 'children#register'

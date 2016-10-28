@@ -1,6 +1,6 @@
 /* angular */
 (function(){
-  angular.module('app').controller('calendarCtrl', function($scope, $http, $httpParamSerializerJQLike) {
+  angular.module('app').controller('calendarCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', function($scope, $http, $httpParamSerializerJQLike) {
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -37,8 +37,21 @@
 
     };
 
+   $scope.uiConfig = {
+     calendar:{
+       height: 650,
+       editable: true,
+       header:{
+         left: 'title',
+         center: '',
+         right: 'today prev,next'
+       },
+       eventClick: $scope.alertOnEventClick
+     }
+   };
+
     $scope.eventSources = [$scope.events];
     window.$scope = $scope;
-  })
+  }])
 
 })();

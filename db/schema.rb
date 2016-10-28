@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161027225057) do
+=======
+ActiveRecord::Schema.define(version: 20161027201709) do
+>>>>>>> 3edd0d46a4f8d35fa23e4ab922be895501297bf3
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "background_histories", force: :cascade do |t|
     t.decimal  "weight_at_birth"
     t.integer  "height_at_birth"
@@ -65,6 +70,23 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.boolean  "visual_processing"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+=======
+  create_table "admins", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+>>>>>>> 3edd0d46a4f8d35fa23e4ab922be895501297bf3
   end
 
   create_table "children", force: :cascade do |t|
@@ -87,6 +109,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
+<<<<<<< HEAD
     t.integer  "primary_diagnosis_id"
     t.integer  "secondary_diagnosis_id"
     t.integer  "partial_trisomy_id"
@@ -148,6 +171,10 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.boolean  "increased_abdominal_fat"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+=======
+    t.string   "arms_affected"
+    t.boolean  "private",              default: false
+>>>>>>> 3edd0d46a4f8d35fa23e4ab922be895501297bf3
   end
 
   create_table "events", force: :cascade do |t|
@@ -471,18 +498,18 @@ ActiveRecord::Schema.define(version: 20161027225057) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -495,6 +522,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.string   "last_name"
     t.string   "relationship"
     t.string   "phone_number"
+    t.boolean  "admin",                  default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
