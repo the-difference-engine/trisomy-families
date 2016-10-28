@@ -1,0 +1,14 @@
+<div class="container">
+      <h1>Events </h1>
+      <hr>
+      <% @events.each do |event| %>
+      <div class="row">
+        <div class="col-md-12">
+          <h2><a href="/events/<%= event.id %>"><%= event.title %></a></h2>
+          <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong><%= event.start.strftime("%A, %d %b") %></strong></p>
+          <p><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>  <strong><%= event.start.strftime("%l:%M %p") %></strong></p>
+          <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= event.location %></p>
+        </div>
+      </div>
+      <% end %>
+</div>

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
   namespace :api do
     namespace :v1 do
 
-      get '/events' => 'events#index'
-      post '/events' => 'events#create'
+      resources :events
 
     end
   end

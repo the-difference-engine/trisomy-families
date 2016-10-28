@@ -1,7 +1,13 @@
 
+<div class="container">
 <div ng-app="app">
   <div ng-controller="calendarCtrl" ng-init="setUp()">
+    <div class="row">
       <div ui-calendar="calendarOptions" class="span8 calendar" ng-model="eventSources"></div>
+    </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-8">
       <h2>Create Event</h2>
       <form>
         <div class="form-group">
@@ -23,13 +29,13 @@
 
           <label for="ngvalueselect">Event Type</label>
               <select class="form-control" name="ngvalueselect" ng-model="event.event_type" style="float: none;">
-                  <option value="birthdays">Birthdays</option>
+                  <option value="birthdays">Birthday</option>
                   <option value="fundrasier">Fundrasier</option>
                   <option value="family">Family</option>
                   <option value="personal">Personal</option>
                 </select>
 
-          <label for="ngvalueselect">Event Type</label>
+          <label for="ngvalueselect">All Day</label>
               <select class="form-control" name="ngvalueselect" ng-model="event.allDay" style="float: none;">
                         <option value="true">Yes</option>
                         <option value="false">No</option>
@@ -39,5 +45,8 @@
 
         </div>
       </form>
+    </div>
+    </div>
   </div>
+</div>
 </div>

@@ -1,0 +1,90 @@
+/* angular */
+(function(){
+  angular.module('app').controller('eventCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', '$location', function($scope, $http, $httpParamSerializerJQLike, $location) {
+
+    $scope.event = {};
+    $scope.editEnabled = false;
+    $scope.id = (/events\/(\d+)/.exec($location.absUrl())[1]);
+    $scope.original = {};
+
+    $scope.allDayOptions = ["true", "false"];
+
+    $scope.typeOptions = ["Birthday", "Fundrasier", "Family", "Personal"]
+
+    $scope.setUp = function() {
+      var url = '/api/v1/events/' + $scope.id;
+      $http.get(url).then(function(response) {
+        $scope.event = response.data;
+        $scope.event.start = new Date($scope.event.start);
+        $scope.event.end = new Date($scope.event.end);
+
+        var startDateForm = $scope.event.start.getFullYear().toString() + "-" + ($scope.event.start.getMonth() + 1).toString() + "-" + $scope.event.start.getDate().toString();
+        $scope.event.startDateForm = new Date(startDateForm);
+
+        var endDateForm = $scope.event.end.getFullYear().toString() + "-" + ($scope.event.end.getMonth() + 1).toString() + "-" + $scope.event.end.getDate().toString();
+        $scope.event.endDateForm = new Date(endDateForm);
+
+        $scope.event.startTimeForm = new Date($scope.event.start);
+        $scope.event.endTimeForm = new Date($scope.event.end);
+        $scope.original = angular.copy($scope.event);
+
+      })
+    };
+
+    $scope.formatDate = function() {
+      return moment($scope.event.start).format('ll');
+
+    };
+
+    $scope.formatTime = function() {
+      return moment($scope.event.start).format('LT');
+    };
+
+    $scope.toggleEditMode = function () {
+        $scope.editEnabled = !$scope.editEnabled;
+    };
+
+    $scope.modelHasChanged = function () {
+      return angular.equals($scope.event, $scope.original);
+    };
+
+    $scope.showError = function (ngModelController, error) {
+      return ngModelController.$error[error]
+    };
+
+    $scope.saveEdit = function () {
+      var newStartDate = $scope.event.startDateForm.getFullYear().toString() + "-" + ($scope.event.startDateForm.getMonth() + 1).toString() + "-" + $scope.event.startDateForm.getDate().toString() + " " + $scope.event.startTimeForm.getHours().toString() + ":" + $scope.event.startTimeForm.getMinutes().toString() + ":" + $scope.event.startTimeForm.getSeconds().toString();
+      $scope.event.start = new Date(newStartDate);
+
+      var newEndDate = $scope.event.endDateForm.getFullYear() + "-" + ($scope.event.endDateForm.getMonth() + 1).toString() + "-" + $scope.event.endDateForm.getDate().toString() + " " + $scope.event.startTimeForm.getHours().toString() + ":" + $scope.event.endTimeForm.getMinutes().toString() + ":" + $scope.event.endTimeForm.getSeconds().toString();
+      $scope.event.end = new Date(newEndDate);
+
+      var url = '/api/v1/events/' + $scope.id;
+      $http({
+          method: 'PUT',
+          url: url,
+          data: $httpParamSerializerJQLike($scope.event)
+
+      }).then(function successCallback(response) {
+        console.log("Sucessfully saved to database.");
+        $scope.original = angular.copy($scope.event);
+
+      }, function errorCallback(response) {
+        console.log("Post failed.")
+      });
+    };
+
+    $scope.resetModel = function () {
+      $scope.event = angular.copy($scope.original);
+    };
+
+    window.$scope = $scope;
+
+  }])
+  .directive("editEventForm", function() {
+    return {
+      templateUrl: "<%= asset_path('editEvent.html')%>"
+    };
+  })
+
+})();
