@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20161027201709) do
     t.string   "city"
     t.string   "state"
     t.text     "trisomy_story"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161027201709) do
     t.string   "secondary_diagnosis"
     t.integer  "mosaic_percentage"
     t.string   "arms_affected"
+    t.boolean  "private",              default: false
   end
 
   create_table "events", force: :cascade do |t|
