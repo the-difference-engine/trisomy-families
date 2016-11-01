@@ -37,18 +37,18 @@
 
     };
 
-   $scope.uiConfig = {
-     calendar:{
-       height: 650,
-       editable: true,
-       header:{
-         left: 'title',
-         center: '',
-         right: 'today prev,next'
-       },
-       eventClick: $scope.alertOnEventClick
-     }
-   };
+    $scope.uiConfig = {
+      calendar:{
+        height: 650,
+        editable: true,
+        header:{
+          left: 'title',
+          center: '',
+          right: 'today prev,next'
+        },
+        eventClick: $scope.alertOnEventClick
+      }
+    };
 
     $scope.eventSources = [$scope.events];
     window.$scope = $scope;

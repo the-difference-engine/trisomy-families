@@ -23,18 +23,19 @@ class Api::V1::EventsController < ApplicationController
 
   def update
     @event = Event.find_by(id: params[:id])
-    @event.update(event_params)
 
-    if @event.save
+    if @event.update(event_params)
+      flash[:notice] = 'Event changed'
       render json: {
         status: 200
       }
     else
       render json: {
-         error: @event.errors.full_messages,
-         status: 400
-       }
+        error: @event.errors.full_messages,
+        status: 400
+      }
     end
+
   end
 
   private

@@ -31,15 +31,6 @@ before_action :authenticate_user!
     end
   end
 
-  def edit
-    @event = Event.find_by(id: params[:id])
-  end
-
-  def update
-    @event = Event.find_by(id: params[:id])
-    @event.update(event_params)
-  end
-
   private
 
     def event_params

@@ -1,54 +1,52 @@
-
-<div class="container">
 <div ng-app="app">
   <div ng-controller="calendarCtrl" ng-init="setUp()">
     <div class="row">
       <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
     </div>
-      <hr>
-      <% if current_user.admin?%>
+
+    <hr>
+    <% if current_user.admin?%>
       <div class="row">
         <div class="col-md-8">
-      <h2>Create Event</h2>
-      <form>
-        <div class="form-group">
+          <h2>Create Event</h2>
 
-          <label for="eventTitle">Title</label>
-          <input type="text" class="form-control" id="eventTitle" ng-model="event.title">
+          <form>
+            <div class="form-group">
+              <label for="eventTitle">Title</label>
+              <input type="text" class="form-control" id="eventTitle" ng-model="event.title">
 
-          <label for="eventDescription">Description</label>
-          <textarea class="form-control" rows="3" id="eventDescription" ng-model="event.description" ></textarea>
+              <label for="eventDescription">Description</label>
+              <textarea class="form-control" rows="3" id="eventDescription" ng-model="event.description" ></textarea>
 
-          <label for="eventLocation">Location</label>
-          <input type="text" class="form-control" id="eventLocation" ng-model="event.location">
+              <label for="eventLocation">Location</label>
+              <input type="text" class="form-control" id="eventLocation" ng-model="event.location">
 
-          <label for="eventStart">Start Datetime</label>
-          <input type="datetime-local" class="form-control" id="eventStart" ng-model="event.start">
+              <label for="eventStart">Start Datetime</label>
+              <input type="datetime-local" class="form-control" id="eventStart" ng-model="event.start">
 
-          <label for="eventEnd">End Datetime</label>
-          <input type="datetime-local" class="form-control" id="eventEnd" ng-model="event.end">
+              <label for="eventEnd">End Datetime</label>
+              <input type="datetime-local" class="form-control" id="eventEnd" ng-model="event.end">
 
-          <label for="ngvalueselect">Event Type</label>
+              <label for="ngvalueselect">Event Type</label>
               <select class="form-control" name="ngvalueselect" ng-model="event.event_type" style="float: none;">
-                  <option value="birthdays">Birthday</option>
-                  <option value="fundrasier">Fundrasier</option>
-                  <option value="family">Family</option>
-                  <option value="personal">Personal</option>
-                </select>
-
-          <label for="ngvalueselect">All Day</label>
-              <select class="form-control" name="ngvalueselect" ng-model="event.allDay" style="float: none;">
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
+                <option value="birthdays">Birthday</option>
+                <option value="fundrasier">Fundraiser</option>
+                <option value="family">Family</option>
+                <option value="personal">Personal</option>
               </select>
 
-          <button type="submit" class="btn btn-primary" ng-click="createEvent()">Add</button>
+              <label for="ngvalueselect">All Day</label>
+              <select class="form-control" name="ngvalueselect" ng-model="event.allDay" style="float: none;">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
 
+              <button type="submit" class="btn btn-primary" ng-click="createEvent()">Add</button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-    </div>
+      </div>
     <% end %>
   </div>
 </div>
-</div>
+
