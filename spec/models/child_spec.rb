@@ -1,6 +1,5 @@
 require 'rails_helper'
 
 RSpec.describe Child, type: :model do
-  context 
   pending "add some examples to (or delete) #{__FILE__}"
 end
