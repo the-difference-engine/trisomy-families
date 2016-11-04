@@ -1,12 +1,13 @@
-<h1>Register Child</h1>
+<h1>Register Participant</h1>
 
 <%= form_tag "/profile/#{@child.id}/register", method: :post do %>
+  <h3>Your Info:</h3>
   <div>
     <%= label_tag :first_name, "Your name:" %>
     <%= text_field_tag :user_first_name, nil, placeholder: 'First Name' %>  <%= text_field_tag :user_last_name, nil, placeholder: 'Last Name' %> 
   </div>
   <div>
-    <%= label_tag :relationship, "Relationship to child" %>
+    <%= label_tag :relationship, "Relationship to participant" %>
     <%= select_tag( :user_relationship, options_for_select(user_relationship, " ")) %> 
   </div>
   <div>
@@ -68,7 +69,7 @@
     </div>
   </div>
   <div>
-    <h3>Child:</h3>
+    <h3>Participant:</h3>
     <div>
       <%= label_tag :child_nickname %>
       <%= text_field_tag :child_nickname %>
@@ -108,6 +109,8 @@
 <h1>Background History</h1>
 
 <%= form_tag "/profile/#{@child.id}/background", method: :post do %>
+  <h3>Participant Measurements</h3>
+  <h4>Weight Info:</h4>
   <div>
     <%= label_tag :weight_at_birth %>
     <%= number_field(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
@@ -128,6 +131,7 @@
     <%= label_tag :four_month %>
     <%= number_field(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
   </div>
+  <h4>Height Info:</h4>
   <div>
     <%= label_tag :height_at_birth %>
     <%= number_field(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
@@ -148,6 +152,7 @@
     <%= label_tag :four_month %>
     <%= number_field(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
   </div>
+  <h4>Head Circumference Info:</h4>
   <div>
     <%= label_tag :head_circumference_at_birth %>
     <%= number_field(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
@@ -168,6 +173,7 @@
     <%= label_tag :four_month %>
     <%= number_field(:hc_four_month, nil, in: 10..20, step: 0.5)  %> 
   </div>
+  <h3>Birth Information</h3>
   <div>
     <%= label_tag :mother_complications %>
   </div>
@@ -234,6 +240,7 @@
       <%= label_tag :multiple_birth_trisomy %>
       <%= check_box_tag :multiple_birth_trisomy %>
     </div>
+    <h3>Participant Genetic History:</h3>
     <div>
       <%= label_tag :siblings_with_trisomy %>
       <%= check_box_tag :siblings_with_trisomy %>
@@ -249,6 +256,7 @@
 <h1>Health History</h1>
 
 <%= form_tag "/profile/#{@child.id}/health", method: :post do %>
+<h3>Heart</h3>
   <div>
     <%= label_tag :chd %>
     <%= check_box_tag :chd %>
@@ -296,6 +304,7 @@
     <%= check_box_tag :multiple_cardiac_surgeries %>
     <!-- change to save a string -->
   </div>
+  <h3>Gastric/Intestinal</h3>
   <div>
     <%= label_tag :duodenal_atresia_stenosis_web %>
     <%= check_box_tag :duodenal_atresia_stenosis_web %>
@@ -346,6 +355,7 @@
     <%= label_tag :other_gastric_surgery %>
     <%= text_field_tag :other_gastric_surgery %>
   </div>
+  <h3>Nuerological</h3>
   <div>
     <%= label_tag :seizure_epilepsy %>
     <%= check_box_tag :seizure_epilepsy %>
@@ -374,6 +384,7 @@
     <%= label_tag :other_nuero_surgery %>
     <%= text_field_tag :other_nuero_surgery %>
   </div>
+  <h3>Muscular/Skeletal</h3>
   <div>
     <%= label_tag :atlanto_axial_instability %>
     <%= check_box_tag :atlanto_axial_instability %>
@@ -430,6 +441,7 @@
     <%= label_tag :rocker_bottom_feet_surgery %>
     <%= check_box_tag :rocker_bottom_feet_surgery %>
   </div>
+  <h3>Cranial/Facial</h3>
   <div>
     <%= label_tag :yes %>
     <%= radio_button_tag :sleep_apnea, 'yes' %>
@@ -460,11 +472,13 @@
     <%= label_tag :delayed_teething %>
     <%= check_box_tag :delayed_teething %>
   </div>
+  <h3>Cancer</h3>
   <div>
     <%= label_tag :cancer %>
     <%= select_tag( :cancer, options_for_select(cancer_options, " ")) %>
     <%= text_field_tag :cancer_other %>
   </div>
+  <h3>Endocrine</h3>
   <div>
     <%= label_tag :hyperthyroidism %>
     <%= check_box_tag :hyperthyroidism %>
@@ -509,9 +523,9 @@
     <%= label_tag :increased_abdominal_fat %>
     <%= check_box_tag :increased_abdominal_fat %>
   </div>
-  <h2>Hearing</h2>
+  <h3>Hearing</h3>
   <div>
-    <h3>Did the participant pass the infant hearing test?</h3>
+    <h4>Did the participant pass the infant hearing test?</h4>
     <%= radio_button_tag :hearing_test, 'yes' %>
     <%= label_tag :yes %>
     <%= radio_button_tag :hearing_test, 'no' %>
@@ -520,15 +534,15 @@
     <%= label_tag 'n/a' %>
   </div>
   <div>
-    <h3>Has the participant had an ABR?</h3>
+    <h4>Has the participant had an ABR?</h4>
     <%= check_box_tag :had_an_abr %>
   </div>
   <div>
-    <h3>Has the participant ever had an diagnosis of hearing loss and/or deafness?</h3>
+    <h4>Has the participant ever had an diagnosis of hearing loss and/or deafness?</h4>
     <%= select_tag( :hearing_loss_or_deaf, options_for_select(hearing_diagnosis, " ")) %>
   </div>
   <div>
-    <h3>Which best describes the hearing loss? Mark all that apply:</h3>
+    <h4>Which best describes the hearing loss? Mark all that apply:</h4>
     <%= check_box_tag :transient %>
     <%= label_tag :transient %>
     <%= check_box_tag :conductive %>
@@ -541,12 +555,12 @@
     <%= text_field_tag :other_hearing %>
   </div>
   <div>
-    <h3>Has the participant ever received treatment for hearing loss?</h3>
+    <h4>Has the participant ever received treatment for hearing loss?</h4>
     <%= select_tag( :hearing_loss_treatment, options_for_select(hearing_treatments, " ")) %>
   </div>
-  <h2>Vision</h2>
+  <h3>Vision</h3>
   <div>
-    <h3>Has the participant ever failed an eye exam?</h3>
+    <h4>Has the participant ever failed an eye exam?</h4>
     <%= radio_button_tag :failed_eye_exam, 'yes' %>
     <%= label_tag :yes %>
     <%= radio_button_tag :failed_eye_exam, 'no' %>
@@ -555,7 +569,7 @@
     <%= label_tag 'n/a' %>
   </div>
   <div>
-    <h3>Has the participant ever experience or been diagnosed with the following? Mark all that apply:</h3>
+    <h4>Has the participant ever experience or been diagnosed with the following? Mark all that apply:</h4>
     <%= check_box_tag :cataract %>
     <%= label_tag :cataract %>
     <%= check_box_tag :strabismus %>
@@ -599,9 +613,9 @@
     <%= check_box_tag :doesnt_close_eyes_when_sleeping %>
     <%= label_tag "Doesn't close eyes when sleeping" %>
   </div>
-  <h2>Behavior</h2>
+  <h3>Behavior</h3>
   <div>
-    <h3>Has the participant ever been diagnsed any of the following? Mark all that apply:</h3>
+    <h4>Has the participant ever been diagnsed any of the following? Mark all that apply:</h4>
     <%= check_box_tag :add %>
     <%= label_tag :add %>
     <%= check_box_tag :adhd %>
@@ -630,7 +644,7 @@
     <%= text_field_tag :other_diagnosis %>
   </div>
   <div>
-    <h3>Does/did the participant have any of the following developmental delays? Mark all that apply:</h3>
+    <h4>Does/did the participant have any of the following developmental delays? Mark all that apply:</h4>
     <%= check_box_tag :learning_disability %>
     <%= label_tag :learning_disability %>
     <%= check_box_tag :global_developmental_delay %>
@@ -652,9 +666,9 @@
     <%= label_tag :other_delay %>
     <%= text_field_tag :other_delay %>
   </div>
-  <h2>School/Therapies</h2>
+  <h3>School/Therapies</h3>
   <div>
-    <h3>Was/is the participant in EI?</h3>
+    <h4>Was/is the participant in EI?</h4>
     <%= radio_button_tag :in_ei, 'yes' %>
     <%= label_tag :yes %>
     <%= radio_button_tag :in_ei, 'no' %>
@@ -663,19 +677,19 @@
     <%= label_tag 'n/a' %>
   </div>
   <div>
-    <h3>Did/does the participant attend school?</h3>
+    <h4>Did/does the participant attend school?</h4>
     <%= check_box_tag :attend_school %>
   </div>
   <div>
-    <h3>Did/does the participant get home schooled or was/is homebound? </h3>
+    <h4>Did/does the participant get home schooled or was/is homebound? </h4>
     <%= check_box_tag :home_schooled_bound %>
   </div>
   <div>
-    <h3>What is the participant's highest level of education completed?</h3>
+    <h4>What is the participant's highest level of education completed?</h4>
     <%= select_tag( :highest_education, options_for_select(highest_education, " ")) %>
   </div>
   <div>
-    <h3>Has the participant ever received therapies? Mark all that apply:</h3>
+    <h4>Has the participant ever received therapies? Mark all that apply:</h4>
     <%= check_box_tag :ot %>
     <%= label_tag 'ot (occupational)' %>
     <%= check_box_tag :pt %>
@@ -701,13 +715,13 @@
     <%= label_tag :other_therapy %>
     <%= text_field_tag :other_therapy %>
   </div>
-  <h2>Clinical Research and Trials</h2>
+  <h3>Clinical Research and Trials</h3>
   <div>
-    <h3>Is the living participant currently participating in clinical trials or research studies?</h3>
+    <h4>Is the living participant currently participating in clinical trials or research studies?</h4>
     <%= check_box_tag :clinical_trial %>
   </div>
   <div>
-    <h3>Is the living participant (or legal guardian of minor participant) interested in participating in upcoming trials?</h3>
+    <h4>Is the living participant (or legal guardian of minor participant) interested in participating in upcoming trials?</h4>
     <%= check_box_tag :clinical_trial_participation %>
   </div>
   <div>
