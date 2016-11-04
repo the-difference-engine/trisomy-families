@@ -184,6 +184,7 @@ class ChildrenController < ApplicationController
       not_applicable: params[:not_applicable],
       other: params[:other]
     )
+    @congenital_heart_defect.save
     @intestinal_issue = IntestinalIssue.new(
       duodenal_atresia_stenosis_web: params[:duodenal_atresia_stenosis_web],
       anal_stenosis_atresia: params[:anal_stenosis_atresia],
@@ -202,6 +203,7 @@ class ChildrenController < ApplicationController
       ibs: params[:ibs],
       ibd: params[:ibd]
     )
+    @intestinal_issue.save
     @gastric_surgery = GastricSurgery.new(
       repair_of_duodenal_atresia_stenosis_web: params[:repair_of_duodenal_atresia_stenosis_web],
       repair_of_anal_stenosis_atresia: params[:repair_of_anal_stenosis_atresia],
@@ -211,6 +213,7 @@ class ChildrenController < ApplicationController
       none: params[:none],
       other: params[:other_gastric_surgery]
     )
+    @gastric_surgery.save
     @nuerological_condition = NuerologicalCondition.new(
       brain_malformation: params[:brain_malformation],
       cyst: params[:cyst],
@@ -223,6 +226,7 @@ class ChildrenController < ApplicationController
       stroke_surgery: params[:stroke_surgery],
       other: params[:other_nuero_surgery]
     )
+    @nuerological_condition.save
     @muscular_skeletal = MuscularSkeletal.new(
       atlanto_axial_instability: params[:atlanto_axial_instability],
       cervical_spine_degeneration: params[:cervical_spine_degeneration],
@@ -251,6 +255,7 @@ class ChildrenController < ApplicationController
       club_foot_surgery: params[:club_foot_surgery],
       rocker_bottom_feet_surgery: params[:rocker_bottom_feet_surgery]
     )
+    @muscular_skeletal.save
     @cranial_facial = CranialFacial.new(
       cranial_deformities: params[:cranial_deformities],
       cleft_palate: params[:cleft_palate],
@@ -263,6 +268,7 @@ class ChildrenController < ApplicationController
       overgrowth_of_gums: params[:overgrowth_of_gums],
       delayed_teething: params[:delayed_teething]
     )
+    @cranial_facial.save
     @endocrine = Endocrine.new(
       hyperthyroidism: params[:hyperthyroidism],
       hypothyroidism: params[:hypothyroidism],
@@ -286,6 +292,7 @@ class ChildrenController < ApplicationController
       unhealthy_cholesterol_levels: params[:unhealthy_cholesterol_levels],
       increased_abdominal_fat: params[:increased_abdominal_fat]
     )
+    @endocrine.save
     @hearing = Hearing.new(
       transient: params[:transient],
       conductive: params[:conductive],
@@ -293,6 +300,7 @@ class ChildrenController < ApplicationController
       unknown: params[:unknown],
       other: params[:other_hearing]
     )
+    @hearing.save
     @vision = Vision.new(
       cataract: params[:cataract],
       strabismus: params[:strabismus],
@@ -316,6 +324,7 @@ class ChildrenController < ApplicationController
       doesnt_blink_well: params[:doesnt_blink_well],
       doesnt_close_eyes_when_sleeping: params[:doesnt_close_eyes_when_sleeping] 
     )
+    @vision.save
     @behavioral_health = BehavioralHealth.new(
       add: params[:add],
       adhd: params[:adhd],
@@ -343,6 +352,7 @@ class ChildrenController < ApplicationController
       apraxia_dyspraxia: params[:apraxia_dyspraxia],
       visual_processing: params[:visual_processing]  
     )
+    @behavioral_health.save
     @received_therapy = ReceivedTherapy.new(
       ot: params[:ot],
       pt: params[:pt],
@@ -357,10 +367,11 @@ class ChildrenController < ApplicationController
       hyperbaric: params[:hyperbaric],
       other: params[:other_therapy]
     )
+    @received_therapy.save
     @child = Child.find_by(id: params[:id])
     @health_history = HealthHistory.new(
       chd: params[:chd],
-      chd_id: @chd.id,
+      chd_id: @congenital_heart_defect.id,
       offered_cardiac_surgery: params[:offered_cardiac_surgery],
       first_cardiac_surgery_age: params[:first_cardiac_surgery_age][0],
       first_cardiac_surgery_successful: params[:first_cardiac_surgery_successful],
@@ -390,6 +401,7 @@ class ChildrenController < ApplicationController
       clinical_trial: params[:clinical_trial],
       clinical_trial_participation: params[:clinical_trial_participation]
     )
+    @health_history.save
     render 'register.html.erb'
   end
 

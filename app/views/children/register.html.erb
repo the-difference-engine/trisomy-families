@@ -7,7 +7,7 @@
   </div>
   <div>
     <%= label_tag :relationship, "Relationship to child" %>
-    <%= select_tag( :user_relationship, options_for_select(user_relationship)) %> 
+    <%= select_tag( :user_relationship, options_for_select(user_relationship, " ")) %> 
   </div>
   <div>
     <%= label_tag :phone_number %>
@@ -79,13 +79,13 @@
     </div>
     <div>
       <%= label_tag :child_primary_diagnosis %>
-      <%= select_tag( :child_primary_diagnosis, options_for_select(primary_trisomy_diagnosis)) %>
+      <%= select_tag( :child_primary_diagnosis, options_for_select(primary_trisomy_diagnosis, " ")) %>
       <%= label_tag :other_primary_diagnosis %>
       <%= text_field_tag :other_primary_diagnosis %>
     </div>
     <div>
       <%= label_tag :child_secondary_diagnosis %>
-      <%= select_tag( :child_secondary_diagnosis, options_for_select(secondary_trisomy_diagnosis)) %>
+      <%= select_tag( :child_secondary_diagnosis, options_for_select(secondary_trisomy_diagnosis, " ")) %>
       <%= label_tag :other_secondary_diagnosis %>
       <%= text_field_tag :other_secondary_diagnosis %>
     </div>
@@ -99,7 +99,7 @@
     </div>
     <div>
       <%= label_tag :child_partial_trisomy %>
-      <%= select_tag( :child_partial_trisomy, options_for_select(partial_trisomy)) %>
+      <%= select_tag( :child_partial_trisomy, options_for_select(partial_trisomy, " ")) %>
     </div>
   </div>
   <%= submit_tag %>
@@ -192,7 +192,7 @@
     </div>
     <div>
       <%= label_tag :delivery_method %>
-      <%= select_tag( :delivery_method, options_for_select(delivery_method)) %>
+      <%= select_tag( :delivery_method, options_for_select(delivery_method, " ")) %>
     </div>
     <div>
       <%= label_tag :yes %>
@@ -281,7 +281,7 @@
   </div>
   <div>
     <%= label_tag :first_cardiac_surgery_age %>
-    <%= number_field(:first_cardiac_surgery_age, nil, in: 1.0..50, step: 1  %> 
+    <%= number_field(:first_cardiac_surgery_age, nil, in: 1.0..50, step: 1)  %> 
   </div>
   <div>
     <%= label_tag :yes %>
@@ -462,7 +462,7 @@
   </div>
   <div>
     <%= label_tag :cancer %>
-    <%= select_tag( :cancer, options_for_select(cancer_options)) %>
+    <%= select_tag( :cancer, options_for_select(cancer_options, " ")) %>
     <%= text_field_tag :cancer_other %>
   </div>
   <div>
@@ -525,7 +525,7 @@
   </div>
   <div>
     <h3>Has the participant ever had an diagnosis of hearing loss and/or deafness?</h3>
-    <%= select_tag( :hearing_loss_or_deaf, options_for_select(hearing_diagnosis)) %>
+    <%= select_tag( :hearing_loss_or_deaf, options_for_select(hearing_diagnosis, " ")) %>
   </div>
   <div>
     <h3>Which best describes the hearing loss? Mark all that apply:</h3>
@@ -542,7 +542,7 @@
   </div>
   <div>
     <h3>Has the participant ever received treatment for hearing loss?</h3>
-    <%= select_tag( :hearing_loss_treatment, options_for_select(hearing_treatments)) %>
+    <%= select_tag( :hearing_loss_treatment, options_for_select(hearing_treatments, " ")) %>
   </div>
   <h2>Vision</h2>
   <div>
@@ -672,7 +672,7 @@
   </div>
   <div>
     <h3>What is the participant's highest level of education completed?</h3>
-    <%= select_tag( :highest_education, options_for_select(highest_education)) %>
+    <%= select_tag( :highest_education, options_for_select(highest_education, " ")) %>
   </div>
   <div>
     <h3>Has the participant ever received therapies? Mark all that apply:</h3>
