@@ -9,7 +9,7 @@
 
     $scope.allDayOptions = ["true", "false"];
 
-    $scope.typeOptions = ["Birthday", "Fundrasier", "Family", "Personal"]
+    $scope.typeOptions = ["Birthday", "Fundraiser", "Family", "Personal"]
 
     $scope.setUp = function() {
       var url = '/api/v1/events/' + $scope.id;
@@ -33,15 +33,14 @@
 
     $scope.formatDate = function() {
       return moment($scope.event.start).format('ll');
-
     };
 
-    $scope.formatTime = function() {
-      return moment($scope.event.start).format('LT');
+    $scope.formatTime = function(eventTime) {
+      return moment(eventTime).format('LT');
     };
 
     $scope.toggleEditMode = function () {
-        $scope.editEnabled = !$scope.editEnabled;
+      $scope.editEnabled = !$scope.editEnabled;
     };
 
     $scope.modelHasChanged = function () {
@@ -56,14 +55,14 @@
       var newStartDate = $scope.event.startDateForm.getFullYear().toString() + "-" + ($scope.event.startDateForm.getMonth() + 1).toString() + "-" + $scope.event.startDateForm.getDate().toString() + " " + $scope.event.startTimeForm.getHours().toString() + ":" + $scope.event.startTimeForm.getMinutes().toString() + ":" + $scope.event.startTimeForm.getSeconds().toString();
       $scope.event.start = new Date(newStartDate);
 
-      var newEndDate = $scope.event.endDateForm.getFullYear() + "-" + ($scope.event.endDateForm.getMonth() + 1).toString() + "-" + $scope.event.endDateForm.getDate().toString() + " " + $scope.event.startTimeForm.getHours().toString() + ":" + $scope.event.endTimeForm.getMinutes().toString() + ":" + $scope.event.endTimeForm.getSeconds().toString();
+      var newEndDate = $scope.event.endDateForm.getFullYear() + "-" + ($scope.event.endDateForm.getMonth() + 1).toString() + "-" + $scope.event.endDateForm.getDate().toString() + " " + $scope.event.endTimeForm.getHours().toString() + ":" + $scope.event.endTimeForm.getMinutes().toString() + ":" + $scope.event.endTimeForm.getSeconds().toString();
       $scope.event.end = new Date(newEndDate);
 
       var url = '/api/v1/events/' + $scope.id;
       $http({
-          method: 'PUT',
-          url: url,
-          data: $httpParamSerializerJQLike($scope.event)
+        method: 'PUT',
+        url: url,
+        data: $httpParamSerializerJQLike($scope.event)
 
       }).then(function successCallback(response) {
         console.log("Sucessfully saved to database.");
