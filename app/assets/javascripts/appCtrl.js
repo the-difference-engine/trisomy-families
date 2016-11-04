@@ -11,6 +11,8 @@
     $scope.setUp = function() {
       $http.get('/api/v1/events').then(function(response) {
         for(var i = 0; i < response.data.length; i++) {
+          response.data[i].start = new Date(response.data[i])
+          response.data[i].end = new Date(response.data[i])
           $scope.events.push(response.data[i]);
         }
       })
