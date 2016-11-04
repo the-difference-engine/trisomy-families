@@ -1,12 +1,12 @@
-class CreateRecievedTherapies < ActiveRecord::Migration[5.0]
+class CreateReceivedTherapies < ActiveRecord::Migration[5.0]
   def change
-    create_table :recieved_therapies do |t|
-      t.boolean :ot 
-      t.boolean :pt 
-      t.boolean :dt 
+    create_table :received_therapies do |t|
+      t.boolean :ot
+      t.boolean :pt
+      t.boolean :dt
       t.boolean :st
       t.boolean :dtv
-      t.boolean :dth 
+      t.boolean :dth
       t.boolean :vital_stim
       t.boolean :aquatic
       t.boolean :reflex_integration

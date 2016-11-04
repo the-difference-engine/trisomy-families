@@ -183,8 +183,8 @@
       <%= check_box_tag :unsure %>
       <%= label_tag :extra_fluid %>
       <%= check_box_tag :extra_fluid %>
-      <%= label_tag :other %>
-      <%= check_box_tag :other %>
+      <%= label_tag :other_complications %>
+      <%= text_field_tag :other_complications %>
     </div>
     <div>
       <%= label_tag :delivery_method %>
@@ -323,7 +323,8 @@
     <%= check_box_tag :colorectal_carcinoma %>
     <%= label_tag :ibs %>
     <%= check_box_tag :ibs %>
-    <!-- create ibd -->
+    <%= label_tag :ibd %>
+    <%= check_box_tag :ibd %>
   </div>
   <div>
     <%= label_tag :repair_of_duodenal_atresia_stenosis_web %>
@@ -338,8 +339,8 @@
     <%= check_box_tag :fundoplication_nissen_wrap %>
     <%= label_tag :none %>
     <%= check_box_tag :none %>
-    <%= label_tag :other %>
-    <%= text_field_tag :other %>
+    <%= label_tag :other_gastric_surgery %>
+    <%= text_field_tag :other_gastric_surgery %>
   </div>
   <div>
     <%= label_tag :seizure_epilepsy %>
@@ -356,8 +357,6 @@
     <%= check_box_tag :stroke %>
     <%= label_tag :unsure %>
     <%= check_box_tag :unsure %>
-    <%= label_tag :other %>
-    <%= text_field_tag :other %>
   </div>
   <div>
     <%= label_tag :brain_malformation_surgery %>
@@ -368,8 +367,8 @@
     <%= check_box_tag :cp_surgery %>
     <%= label_tag :stroke_surgery %>
     <%= check_box_tag :stroke_surgery %>
-    <%= label_tag :other %>
-    <%= text_field_tag :other %>
+    <%= label_tag :other_nuero_surgery %>
+    <%= text_field_tag :other_nuero_surgery %>
   </div>
   <div>
     <%= label_tag :atlanto_axial_instability %>
@@ -496,8 +495,8 @@
     <%= check_box_tag :delayed_late_puberty %>
     <%= label_tag :unsure %>
     <%= check_box_tag :unsure %>
-    <%= label_tag :other %>
-    <%= text_field_tag :other %>
+    <%= label_tag :other_endocrine %>
+    <%= text_field_tag :other_endocrine %>
     <%= label_tag :high_blood_sugar %>
     <%= check_box_tag :high_blood_sugar %>
     <%= label_tag :unhealthy_cholesterol_levels %>
@@ -505,136 +504,208 @@
     <%= label_tag :increased_abdominal_fat %>
     <%= check_box_tag :increased_abdominal_fat %>
   </div>
+  <h2>Hearing</h2>
   <div>
-    <%= label_tag :one_month %>
-    <%= number_field(:one_month, nil, in: 1.0..20, step: 0.5)  %> 
+    <h3>Did the participant pass the infant hearing test?</h3>
+    <%= radio_button_tag :hearing_test, 'yes' %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :hearing_test, 'no' %>
+    <%= label_tag :no %>
+    <%= radio_button_tag :hearing_test, 'n/a' %>
+    <%= label_tag 'n/a' %>
   </div>
   <div>
-    <%= label_tag :two_month %>
-    <%= number_field(:two_month, nil, in: 1.0..20, step: 0.5)  %> 
+    <h3>Has the participant had an ABR?</h3>
+    <%= check_box_tag :had_an_abr %>
   </div>
   <div>
-    <%= label_tag :three_month %>
-    <%= number_field(:three_month, nil, in: 1.0..20, step: 0.5)  %> 
+    <h3>Has the participant ever had an diagnosis of hearing loss and/or deafness?</h3>
+    <%= select_tag :hearing_loss_or_deaf %>
   </div>
   <div>
-    <%= label_tag :four_month %>
-    <%= number_field(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
+    <h3>Which best describes the hearing loss? Mark all that apply:</h3>
+    <%= check_box_tag :transient %>
+    <%= label_tag :transient %>
+    <%= check_box_tag :conductive %>
+    <%= label_tag :conductive %>
+    <%= check_box_tag :nerve_loss %>
+    <%= label_tag :nerve_loss %>
+    <%= check_box_tag :unknown %>
+    <%= label_tag :unknown %>
+    <%= label_tag :other_hearing %>
+    <%= text_field_tag :other_hearing %>
   </div>
   <div>
-    <%= label_tag :height_at_birth %>
-    <%= number_field(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+    <h3>Has the participant ever received treatment for hearing loss?</h3>
+    <%= select_tag :hearing_loss_treatment %>
+  </div>
+  <h2>Vision</h2>
+  <div>
+    <h3>Has the participant ever failed an eye exam?</h3>
+    <%= radio_button_tag :failed_eye_exam, 'yes' %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :failed_eye_exam, 'no' %>
+    <%= label_tag :no %>
+    <%= radio_button_tag :failed_eye_exam, 'n/a' %>
+    <%= label_tag 'n/a' %>
   </div>
   <div>
-    <%= label_tag :one_month %>
-    <%= number_field(:height_one_month, nil, in: 10..30, step: 0.5)  %> 
+    <h3>Has the participant ever experience or been diagnosed with the following? Mark all that apply:</h3>
+    <%= check_box_tag :cataract %>
+    <%= label_tag :cataract %>
+    <%= check_box_tag :strabismus %>
+    <%= label_tag :strabismus %>
+    <%= check_box_tag :lazy_eye %>
+    <%= label_tag :lazy_eye %>
+    <%= check_box_tag :near_sighted %>
+    <%= label_tag :near_sighted %>
+    <%= check_box_tag :far_sighted %>
+    <%= label_tag :far_sighted %>
+    <%= check_box_tag :cvi %>
+    <%= label_tag :cvi %>
+    <%= check_box_tag :astigmatism %>
+    <%= label_tag 'astigmatism (blurry vision)' %>
+    <%= check_box_tag :ptosis %>
+    <%= label_tag 'ptosis (droopy eyelid)' %>
+    <%= check_box_tag :blockage_of_tear_duct %>
+    <%= label_tag :blockage_of_tear_duct %>
+    <%= check_box_tag :depth_perception_problems %>
+    <%= label_tag :depth_perception_problems %>
+    <%= check_box_tag :blindness %>
+    <%= label_tag :blindness %>
+    <%= check_box_tag :glaucoma %>
+    <%= label_tag :glaucoma %>
+    <%= check_box_tag :torn_retina %>
+    <%= label_tag :torn_retina %>
+    <%= check_box_tag :detached_retina %>
+    <%= label_tag :detached_retina %>
+    <%= check_box_tag :undeveloped_eyes %>
+    <%= label_tag :undeveloped_eyes %>
+    <%= check_box_tag :underdeveloped_eyes %>
+    <%= label_tag :underdeveloped_eyes %>
+    <%= check_box_tag :undeveloped_eye_socket %>
+    <%= label_tag :undeveloped_eye_socket %>
+    <%= check_box_tag :underdeveloped_eye_socket %>
+    <%= label_tag :underdeveloped_eye_socket %>
+    <%= check_box_tag :dry_eyes %>
+    <%= label_tag :dry_eyes %>
+    <%= check_box_tag :doesnt_blink_well %>
+    <%= label_tag "Doesn't blink well" %>
+    <%= check_box_tag :doesnt_close_eyes_when_sleeping %>
+    <%= label_tag "Doesn't close eyes when sleeping" %>
+  </div>
+  <h2>Behavior</h2>
+  <div>
+    <h3>Has the participant ever been diagnsed any of the following? Mark all that apply:</h3>
+    <%= check_box_tag :add %>
+    <%= label_tag :add %>
+    <%= check_box_tag :adhd %>
+    <%= label_tag :adhd %>
+    <%= check_box_tag :bipolar %>
+    <%= label_tag :bipolar %>
+    <%= check_box_tag :autism_spectrum %>
+    <%= label_tag :autism_spectrum %>
+    <%= check_box_tag :depression %>
+    <%= label_tag :depression %>
+    <%= check_box_tag :anxiety_disorder %>
+    <%= label_tag :anxiety_disorder%>
+    <%= check_box_tag :ocd %>
+    <%= label_tag :ocd %>
+    <%= check_box_tag :schizophrenia %>
+    <%= label_tag :schizophrenia %>
+    <%= check_box_tag :addictions %>
+    <%= label_tag :addictions %>
+    <%= check_box_tag :personality_disorder %>
+    <%= label_tag :personality_disorder %>
+    <%= check_box_tag :eating_disorder %>
+    <%= label_tag :eating_disorder %>
+    <%= check_box_tag :odd %>
+    <%= label_tag :odd %>
+    <%= label_tag :other_diagnosis %>
+    <%= text_field_tag :other_diagnosis %>
   </div>
   <div>
-    <%= label_tag :two_month %>
-    <%= number_field(:height_two_month, nil, in: 10..30, step: 0.5)  %> 
+    <h3>Does/did the participant have any of the following developmental delays? Mark all that apply:</h3>
+    <%= check_box_tag :learning_disability %>
+    <%= label_tag :learning_disability %>
+    <%= check_box_tag :global_developmental_delay %>
+    <%= label_tag :global_developmental_delay %>
+    <%= check_box_tag :intellectual_disability %>
+    <%= label_tag :intellectual_disability %>
+    <%= check_box_tag :speech_delay %>
+    <%= label_tag :speech_delay %>
+    <%= check_box_tag :receptive_delay %>
+    <%= label_tag :receptive_delay %>
+    <%= check_box_tag :expressive_delay %>
+    <%= label_tag :expressive_delay%>
+    <%= check_box_tag :auditory_processing_disorder %>
+    <%= label_tag :auditory_processing_disorder %>
+    <%= check_box_tag :apraxia_dyspraxia %>
+    <%= label_tag 'apraxia/dyspraxia' %>
+    <%= check_box_tag :visual_processing %>
+    <%= label_tag :visual_processing %>
+    <%= label_tag :other_delay %>
+    <%= text_field_tag :other_delay %>
+  </div>
+  <h2>School/Therapies</h2>
+  <div>
+    <h3>Was/is the participant in EI?</h3>
+    <%= radio_button_tag :in_ei, 'yes' %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :in_ei, 'no' %>
+    <%= label_tag :no %>
+    <%= radio_button_tag :in_ei, 'n/a' %>
+    <%= label_tag 'n/a' %>
   </div>
   <div>
-    <%= label_tag :three_month %>
-    <%= number_field(:height_three_month, nil, in: 10..30, step: 0.5)  %> 
+    <h3>Did/does the participant attend school?</h3>
+    <%= check_box_tag :attend_school %>
   </div>
   <div>
-    <%= label_tag :four_month %>
-    <%= number_field(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
+    <h3>Did/does the participant get home schooled or was/is homebound? </h3>
+    <%= check_box_tag :home_schooled_bound %>
   </div>
   <div>
-    <%= label_tag :head_circumference_at_birth %>
-    <%= number_field(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+    <h3>What is the participant's highest level of education completed?</h3>
+    <%= select_tag :highest_education %>
   </div>
   <div>
-    <%= label_tag :one_month %>
-    <%= number_field(:hc_one_month, nil, in: 10..20, step: 0.5)  %> 
+    <h3>Has the participant ever received therapies? Mark all that apply:</h3>
+    <%= check_box_tag :ot %>
+    <%= label_tag 'ot (occupational)' %>
+    <%= check_box_tag :pt %>
+    <%= label_tag 'pt (physical)' %>
+    <%= check_box_tag :dt %>
+    <%= label_tag 'dt (developmental)' %>
+    <%= check_box_tag :st %>
+    <%= label_tag 'st (speech)' %>
+    <%= check_box_tag :dtv %>
+    <%= label_tag 'dtv (vision)' %>
+    <%= check_box_tag :dth %>
+    <%= label_tag 'dth (hearing)' %>
+    <%= check_box_tag :vital_stim %>
+    <%= label_tag :vital_stim %>
+    <%= check_box_tag :aquatic %>
+    <%= label_tag :aquatic %>
+    <%= check_box_tag :reflex_integration %>
+    <%= label_tag :reflex_integration %>
+    <%= check_box_tag :hippotherapy_equine %>
+    <%= label_tag 'hippotherapy/equine' %>
+    <%= check_box_tag :hyperbaric %>
+    <%= label_tag :hyperbaric %>
+    <%= label_tag :other_therapy %>
+    <%= text_field_tag :other_therapy %>
+  </div>
+  <h2>Clinical Research and Trials</h2>
+  <div>
+    <h3>Is the living participant currently participating in clinical trials or research studies?</h3>
+    <%= check_box_tag :clinical_trial %>
   </div>
   <div>
-    <%= label_tag :two_month %>
-    <%= number_field(:hc_two_month, nil, in: 10..20, step: 0.5)  %> 
+    <h3>Is the living participant (or legal guardian of minor participant) interested in participating in upcoming trials?</h3>
+    <%= check_box_tag :clinical_trial_participation %>
   </div>
   <div>
-    <%= label_tag :three_month %>
-    <%= number_field(:hc_three_month, nil, in: 10..20, step: 0.5)  %> 
+    <%= submit_tag %>
   </div>
-  <div>
-    <%= label_tag :four_month %>
-    <%= number_field(:hc_four_month, nil, in: 10..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :mother_complications %>
-  </div>
-  <div>
-    <div>
-      <%= label_tag :gestational_diabetes %>
-      <%= check_box_tag :gestational_diabetes %>
-      <%= label_tag 'pre-eclampsia' %>
-      <%= check_box_tag :preeclampsia %>
-      <%= label_tag :clampsia %>
-      <%= check_box_tag :clampsia %>
-      <%= label_tag :rh_factor %>
-      <%= check_box_tag :rh_factor %>
-      <%= label_tag :separated_placenta %>
-      <%= check_box_tag :separated_placenta %>
-      <%= label_tag :unsure %>
-      <%= check_box_tag :unsure %>
-      <%= label_tag :extra_fluid %>
-      <%= check_box_tag :extra_fluid %>
-      <%= label_tag :other %>
-      <%= check_box_tag :other %>
-    </div>
-    <div>
-      <%= label_tag :delivery_method %>
-      <%= select_tag :delivery_method, " " %>
-    </div>
-    <div>
-      <%= label_tag :yes %>
-      <%= radio_button_tag :offered_c_section, 'yes' %>
-      <%= label_tag :no %>
-      <%= radio_button_tag :offered_c_section, 'no' %>
-      <%= label_tag :unsure %>
-      <%= radio_button_tag :offered_c_section, 'unsure' %>
-    </div>
-    <div>
-      <%= label_tag :yes %>
-      <%= radio_button_tag :child_complications, 'yes' %>
-      <%= label_tag :no %>
-      <%= radio_button_tag :child_complications, 'no' %>
-      <%= label_tag :unsure %>
-      <%= radio_button_tag :child_complications, 'unsure' %>
-    </div>
-    <div>
-      <%= label_tag :apgar_scores %>
-      <%= text_field_tag :apgar_scores %>
-    </div>
-    <div>
-      <%= label_tag :gestation_age %>
-      <%= number_field :gestation_age, nil, in: 0..50, step: 1 %>
-    </div>
-    <div>
-      <%= label_tag :mother_age_at_birth %>
-      <%= number_field :mother_age_at_birth, nil, in: 14..50, step: 1 %>
-    </div>
-    <div>
-      <%= label_tag :father_age_at_birth %>
-      <%= number_field :father_age_at_birth, nil, in: 14..50, step: 1 %>
-    </div>
-    <div>
-      <%= label_tag :multiple_birth %>
-      <%= check_box_tag :multiple_birth %>
-    </div>
-    <div>
-      <%= label_tag :multiple_birth_trisomy %>
-      <%= check_box_tag :multiple_birth_trisomy %>
-    </div>
-    <div>
-      <%= label_tag :siblings_with_trisomy %>
-      <%= check_box_tag :siblings_with_trisomy %>
-    </div>
-    <div>
-      <%= label_tag :trisomy_relative %>
-      <%= check_box_tag :trisomy_relative %>
-    </div>
-  </div>
-  <%= submit_tag %>
 <% end %>

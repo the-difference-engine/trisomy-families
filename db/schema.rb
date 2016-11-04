@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027225057) do
+ActiveRecord::Schema.define(version: 20161104004039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.boolean  "eating_disorder"
     t.boolean  "odd"
     t.boolean  "conduct_disorder"
-    t.string   "other"
+    t.string   "other_diagnosis"
     t.boolean  "none"
     t.boolean  "learning_disability"
     t.boolean  "global_developmental_delay"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.boolean  "visual_processing"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "other_delay"
   end
 
   create_table "children", force: :cascade do |t|
@@ -276,6 +277,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.integer  "received_therapy_id"
     t.boolean  "clinical_trial"
     t.boolean  "clinical_trial_participation"
+    t.integer  "hearing_id"
   end
 
   create_table "hearings", force: :cascade do |t|
@@ -358,6 +360,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.boolean  "ibs"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.boolean  "ibd"
   end
 
   create_table "mother_complications", force: :cascade do |t|
@@ -369,7 +372,7 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.boolean  "separated_placenta"
     t.boolean  "unsure"
     t.boolean  "extra_fluid"
-    t.boolean  "other"
+    t.string   "other"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -455,6 +458,23 @@ ActiveRecord::Schema.define(version: 20161027225057) do
     t.string   "other"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "received_therapies", force: :cascade do |t|
+    t.boolean  "ot"
+    t.boolean  "pt"
+    t.boolean  "dt"
+    t.boolean  "st"
+    t.boolean  "dtv"
+    t.boolean  "dth"
+    t.boolean  "vital_stim"
+    t.boolean  "aquatic"
+    t.boolean  "reflex_integration"
+    t.boolean  "hippotherapy_equine"
+    t.boolean  "hyperbaric"
+    t.string   "other"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "recieved_therapies", force: :cascade do |t|

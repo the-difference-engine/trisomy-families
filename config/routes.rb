@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-
   devise_for :admins
   namespace :api do
     namespace :v1 do
-
       resources :events
-
     end
   end
 
@@ -24,6 +21,7 @@ Rails.application.routes.draw do
   post 'profile/:id/register' => 'children#confirm_register'
   delete '/profile/:id' => 'children#destroy'
   post 'profile/:id/background' => 'children#background_history'
+  post 'profile/:id/health' => 'children#health_history'
 
   get '/calendar' => 'users#calendar'
 end
