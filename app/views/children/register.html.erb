@@ -1,21 +1,20 @@
-<h1>Register Participant</h1>
+<h1>Basic Registration for Participant</h1>
 
 <%= form_tag "/profile/#{@child.id}/register", method: :post do %>
   <h3>Your Info:</h3>
-  <div>
-    <%= label_tag :first_name, "Your name:" %>
-    <%= text_field_tag :user_first_name, nil, placeholder: 'First Name' %>  <%= text_field_tag :user_last_name, nil, placeholder: 'Last Name' %> 
-  </div>
-  <div>
-    <%= label_tag :relationship, "Relationship to participant" %>
-    <%= select_tag( :user_relationship, options_for_select(user_relationship, " ")) %> 
-  </div>
-  <div>
-    <%= label_tag :phone_number %>
-    <%= text_field_tag :user_phone_number%>
-  </div>
-  <div>
-    <h3>Parent/Guardian 1:</h3>
+    <div>
+      <%= label_tag :first_name, "Your name:" %>
+      <%= text_field_tag :user_first_name, nil, placeholder: 'First Name' %>  <%= text_field_tag :user_last_name, nil, placeholder: 'Last Name' %> 
+    </div>
+    <div>
+      <%= label_tag :relationship, "Relationship to participant" %>
+      <%= select_tag( :user_relationship, options_for_select(user_relationship, " ")) %> 
+    </div>
+    <div>
+      <%= label_tag :phone_number %>
+      <%= text_field_tag :user_phone_number%>
+    </div>
+  <h3>Parent/Guardian 1:</h3>
     <div>
       <%= label_tag :parent_1_first_name %>
       <%= text_field_tag :parent_1_first_name %>
@@ -40,9 +39,7 @@
       <%= label_tag :parent_1_email %>
       <%= text_field_tag :parent_1_email %>
     </div>
-  </div>
-  <div>
-    <h3>Parent/Guardian 2:</h3>
+  <h3>Parent/Guardian 2:</h3>
     <div>
       <%= label_tag :parent_2_first_name %>
       <%= text_field_tag :parent_2_first_name %>
@@ -67,9 +64,7 @@
       <%= label_tag :parent_2_email %>
       <%= text_field_tag :parent_2_email %>
     </div>
-  </div>
-  <div>
-    <h3>Participant:</h3>
+  <h3>Participant:</h3>
     <div>
       <%= label_tag :child_nickname %>
       <%= text_field_tag :child_nickname %>
@@ -102,203 +97,234 @@
       <%= label_tag :child_partial_trisomy %>
       <%= select_tag( :child_partial_trisomy, options_for_select(partial_trisomy, " ")) %>
     </div>
-  </div>
-  <%= submit_tag %>
+<%= submit_tag %>
 <% end %>
 
-<h1>Background History</h1>
+<h1>Full Registration</h1>
+
+<h2>Background History:</h2>
 
 <%= form_tag "/profile/#{@child.id}/background", method: :post do %>
   <h3>Participant Measurements</h3>
-  <h4>Weight Info:</h4>
-  <div>
-    <%= label_tag :weight_at_birth %>
-    <%= number_field(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :one_month %>
-    <%= number_field(:one_month, nil, in: 1.0..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :two_month %>
-    <%= number_field(:two_month, nil, in: 1.0..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :three_month %>
-    <%= number_field(:three_month, nil, in: 1.0..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :four_month %>
-    <%= number_field(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
-  </div>
-  <h4>Height Info:</h4>
-  <div>
-    <%= label_tag :height_at_birth %>
-    <%= number_field(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :one_month %>
-    <%= number_field(:height_one_month, nil, in: 10..30, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :two_month %>
-    <%= number_field(:height_two_month, nil, in: 10..30, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :three_month %>
-    <%= number_field(:height_three_month, nil, in: 10..30, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :four_month %>
-    <%= number_field(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
-  </div>
-  <h4>Head Circumference Info:</h4>
-  <div>
-    <%= label_tag :head_circumference_at_birth %>
-    <%= number_field(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :one_month %>
-    <%= number_field(:hc_one_month, nil, in: 10..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :two_month %>
-    <%= number_field(:hc_two_month, nil, in: 10..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :three_month %>
-    <%= number_field(:hc_three_month, nil, in: 10..20, step: 0.5)  %> 
-  </div>
-  <div>
-    <%= label_tag :four_month %>
-    <%= number_field(:hc_four_month, nil, in: 10..20, step: 0.5)  %> 
-  </div>
+    <h4>Weight Info:</h4>
+      <div>
+        <%= label_tag :weight_at_birth %>
+        <%= number_field(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :one_month %>
+        <%= number_field(:one_month, nil, in: 1.0..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :two_month %>
+        <%= number_field(:two_month, nil, in: 1.0..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :three_month %>
+        <%= number_field(:three_month, nil, in: 1.0..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :four_month %>
+        <%= number_field(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
+      </div>
+    <h4>Height Info:</h4>
+      <div>
+        <%= label_tag :height_at_birth %>
+        <%= number_field(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :one_month %>
+        <%= number_field(:height_one_month, nil, in: 10..30, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :two_month %>
+        <%= number_field(:height_two_month, nil, in: 10..30, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :three_month %>
+        <%= number_field(:height_three_month, nil, in: 10..30, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :four_month %>
+        <%= number_field(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
+      </div>
+    <h4>Head Circumference Info:</h4>
+      <div>
+        <%= label_tag :head_circumference_at_birth %>
+        <%= number_field(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :one_month %>
+        <%= number_field(:hc_one_month, nil, in: 10..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :two_month %>
+        <%= number_field(:hc_two_month, nil, in: 10..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :three_month %>
+        <%= number_field(:hc_three_month, nil, in: 10..20, step: 0.5)  %> 
+      </div>
+      <div>
+        <%= label_tag :four_month %>
+        <%= number_field(:hc_four_month, nil, in: 10..20, step: 0.5)  %> 
+      </div>
   <h3>Birth Information</h3>
-  <div>
-    <%= label_tag :mother_complications %>
-  </div>
-  <div>
-    <div>
-      <%= label_tag :gestational_diabetes %>
-      <%= check_box_tag :gestational_diabetes %>
-      <%= label_tag 'pre-eclampsia' %>
-      <%= check_box_tag :preeclampsia %>
-      <%= label_tag :clampsia %>
-      <%= check_box_tag :clampsia %>
-      <%= label_tag :rh_factor %>
-      <%= check_box_tag :rh_factor %>
-      <%= label_tag :separated_placenta %>
-      <%= check_box_tag :separated_placenta %>
-      <%= label_tag :unsure %>
-      <%= check_box_tag :unsure %>
-      <%= label_tag :extra_fluid %>
-      <%= check_box_tag :extra_fluid %>
-      <%= label_tag :other_complications %>
-      <%= text_field_tag :other_complications %>
-    </div>
-    <div>
-      <%= label_tag :delivery_method %>
-      <%= select_tag( :delivery_method, options_for_select(delivery_method, " ")) %>
-    </div>
-    <div>
-      <%= label_tag :yes %>
-      <%= radio_button_tag :offered_c_section, 'yes' %>
-      <%= label_tag :no %>
-      <%= radio_button_tag :offered_c_section, 'no' %>
-      <%= label_tag :unsure %>
-      <%= radio_button_tag :offered_c_section, 'unsure' %>
-    </div>
-    <div>
-      <%= label_tag :yes %>
-      <%= radio_button_tag :child_complications, 'yes' %>
-      <%= label_tag :no %>
-      <%= radio_button_tag :child_complications, 'no' %>
-      <%= label_tag :unsure %>
-      <%= radio_button_tag :child_complications, 'unsure' %>
-    </div>
-    <div>
-      <%= label_tag :apgar_scores %>
-      <%= text_field_tag :apgar_scores %>
-    </div>
-    <div>
-      <%= label_tag :gestation_age %>
-      <%= number_field :gestation_age, nil, in: 0..50, step: 1 %>
-    </div>
-    <div>
-      <%= label_tag :mother_age_at_birth %>
-      <%= number_field :mother_age_at_birth, nil, in: 14..50, step: 1 %>
-    </div>
-    <div>
-      <%= label_tag :father_age_at_birth %>
-      <%= number_field :father_age_at_birth, nil, in: 14..50, step: 1 %>
-    </div>
-    <div>
-      <%= label_tag :multiple_birth %>
-      <%= check_box_tag :multiple_birth %>
-    </div>
-    <div>
-      <%= label_tag :multiple_birth_trisomy %>
-      <%= check_box_tag :multiple_birth_trisomy %>
-    </div>
-    <h3>Participant Genetic History:</h3>
-    <div>
-      <%= label_tag :siblings_with_trisomy %>
-      <%= check_box_tag :siblings_with_trisomy %>
-    </div>
-    <div>
-      <%= label_tag :trisomy_relative %>
-      <%= check_box_tag :trisomy_relative %>
-    </div>
-  </div>
+    <p>Mother Complications:</p>
+      <div>
+        <%= label_tag :gestational_diabetes %>
+        <%= check_box_tag :gestational_diabetes %>
+        <br>
+        <%= label_tag 'pre-eclampsia' %>
+        <%= check_box_tag :preeclampsia %>
+        <br>
+        <%= label_tag :clampsia %>
+        <%= check_box_tag :clampsia %>
+        <br>
+        <%= label_tag :rh_factor %>
+        <%= check_box_tag :rh_factor %>
+        <br>
+        <%= label_tag :separated_placenta %>
+        <%= check_box_tag :separated_placenta %>
+        <br>
+        <%= label_tag :unsure %>
+        <%= check_box_tag :unsure %>
+        <br>
+        <%= label_tag :extra_fluid %>
+        <%= check_box_tag :extra_fluid %>
+        <br>
+        <%= label_tag :other_complications %>
+        <%= text_field_tag :other_complications %>
+      </div>
+    <br>
+      <div>
+        <%= label_tag 'Delivery Method:' %>
+        <%= select_tag( :delivery_method, options_for_select(delivery_method, " ")) %>
+      </div>
+    <br>
+      <div>
+      <p>Offered a c-section?</p>
+        <%= label_tag :yes %>
+        <%= radio_button_tag :offered_c_section, 'yes' %>
+        <br>
+        <%= label_tag :no %>
+        <%= radio_button_tag :offered_c_section, 'no' %>
+        <br>
+        <%= label_tag :unsure %>
+        <%= radio_button_tag :offered_c_section, 'unsure' %>
+      </div>
+    <br>
+      <div>
+        <p>Did the child have complications at birth?</p>
+        <%= label_tag :yes %>
+        <%= radio_button_tag :child_complications, 'yes' %>
+        <br>
+        <%= label_tag :no %>
+        <%= radio_button_tag :child_complications, 'no' %>
+        <br>
+        <%= label_tag :unsure %>
+        <%= radio_button_tag :child_complications, 'unsure' %>
+      </div>
+    <br>
+      <div>
+        <%= label_tag :apgar_scores %>
+        <%= text_field_tag :apgar_scores %>
+      </div>
+      <div>
+        <%= label_tag :gestation_age %>
+        <%= number_field :gestation_age, nil, in: 0..50, step: 1 %>
+      </div>
+      <div>
+        <%= label_tag :mother_age_at_birth %>
+        <%= number_field :mother_age_at_birth, nil, in: 14..50, step: 1 %>
+      </div>
+      <div>
+        <%= label_tag :father_age_at_birth %>
+        <%= number_field :father_age_at_birth, nil, in: 14..50, step: 1 %>
+      </div>
+      <div>
+        <%= label_tag :multiple_birth %>
+        <%= check_box_tag :multiple_birth %>
+      </div>
+      <div>
+        <%= label_tag :multiple_birth_trisomy %>
+        <%= check_box_tag :multiple_birth_trisomy %>
+      </div>
+      <h3>Participant Genetic History</h3>
+      <div>
+        <%= label_tag :siblings_with_trisomy %>
+        <%= check_box_tag :siblings_with_trisomy %>
+      </div>
+      <div>
+        <%= label_tag :trisomy_relative %>
+        <%= check_box_tag :trisomy_relative %>
+      </div>
   <%= submit_tag %>
 <% end %>
 
-<h1>Health History</h1>
+<h2>Health History</h2>
 
 <%= form_tag "/profile/#{@child.id}/health", method: :post do %>
 <h3>Heart</h3>
   <div>
-    <%= label_tag :chd %>
+    <%= label_tag 'Congenital Heart Disease?' %>
     <%= check_box_tag :chd %>
   </div>
   <div>
     <%= label_tag :asd %>
     <%= check_box_tag :asd %>
+    <br>
     <%= label_tag :vsd %>
     <%= check_box_tag :vsd %>
+    <br>
     <%= label_tag :pda %>
     <%= check_box_tag :pda %>
+    <br>
     <%= label_tag :av_canal_defect %>
     <%= check_box_tag :av_canal_defect %>
+    <br>
     <%= label_tag :dorv %>
     <%= check_box_tag :dorv %>
+    <br>
     <%= label_tag :tof %>
     <%= check_box_tag :tof %>
+    <br>
     <%= label_tag :pfo %>
     <%= check_box_tag :pfo %>
+    <br>
     <%= label_tag :other %>
     <%= check_box_tag :other %>
   </div>
+  <br>
   <div>
+    <p>Offered cardiac surgery?</p>
     <%= label_tag :yes %>
     <%= radio_button_tag :offered_cardiac_surgery, 'yes' %>
+    <br>
     <%= label_tag :no %>
     <%= radio_button_tag :offered_cardiac_surgery, 'no' %>
+    <br>
     <%= label_tag 'n/a' %>
     <%= radio_button_tag :offered_cardiac_surgery, 'n/a' %>
   </div>
+  <br>
   <div>
     <%= label_tag :first_cardiac_surgery_age %>
     <%= number_field(:first_cardiac_surgery_age, nil, in: 1.0..50, step: 1)  %> 
   </div>
+  <br>
   <div>
+    <p>Was the first caridac surgery successful?</p>
     <%= label_tag :yes %>
     <%= radio_button_tag :first_cardiac_surgery_successful, 'yes' %>
+    <br>
     <%= label_tag :no %>
     <%= radio_button_tag :first_cardiac_surgery_successful, 'no' %>
+    <br>
     <%= label_tag 'n/a' %>
     <%= radio_button_tag :first_cardiac_surgery_successful, 'n/a' %>
   </div>
+  <br>
   <div>
     <%= label_tag :multiple_cardiac_surgeries %>
     <%= check_box_tag :multiple_cardiac_surgeries %>
@@ -308,50 +334,72 @@
   <div>
     <%= label_tag :duodenal_atresia_stenosis_web %>
     <%= check_box_tag :duodenal_atresia_stenosis_web %>
+    <br>
     <%= label_tag :anal_stenosis_atresia %>
     <%= check_box_tag :anal_stenosis_atresia %>
+    <br>
     <%= label_tag :esophageal_atresia %>
     <%= check_box_tag :esophageal_atresia %>
+    <br>
     <%= label_tag :hirschsprung_disease %>
     <%= check_box_tag :hirschsprung_disease %>
+    <br>
     <%= label_tag :chronic_constipation %>
     <%= check_box_tag :chronic_constipation %>
+    <br>
     <%= label_tag :dysphagia %>
     <%= check_box_tag :dysphagia %>
+    <br>
     <%= label_tag :aspiration %>
     <%= check_box_tag :aspiration %>
+    <br>
     <%= label_tag :chronic_diarrhea %>
     <%= check_box_tag :chronic_diarrhea %>
+    <br>
     <%= label_tag :pyloric_stenosis %>
     <%= check_box_tag :pyloric_stenosis %>
+    <br>
     <%= label_tag :gastroesophageal_reflux %>
     <%= check_box_tag :gastroesophageal_reflux %>
+    <br>
     <%= label_tag :pepticulcers_gallstones %>
     <%= check_box_tag :pepticulcers_gallstones %>
+    <br>
     <%= label_tag :hemorrhoids %>
     <%= check_box_tag :hemorrhoids %>
+    <br>
     <%= label_tag :diverticulitis_diverticulosis %>
     <%= check_box_tag :diverticulitis_diverticulosis %>
+    <br>
     <%= label_tag :colorectal_carcinoma %>
     <%= check_box_tag :colorectal_carcinoma %>
+    <br>
     <%= label_tag :ibs %>
     <%= check_box_tag :ibs %>
+    <br>
     <%= label_tag :ibd %>
     <%= check_box_tag :ibd %>
   </div>
+  <br>
   <div>
     <%= label_tag :repair_of_duodenal_atresia_stenosis_web %>
     <%= check_box_tag :repair_of_duodenal_atresia_stenosis_web %>
+    <br>
     <%= label_tag :repair_of_anal_stenosis_atresia %>
     <%= check_box_tag :repair_of_anal_stenosis_atresia %>
+    <br>
     <%= label_tag :gastrostomy_tube_placement %>
     <%= check_box_tag :gastrostomy_tube_placement %>
+    <br>
     <%= label_tag :surgery_for_hirschsprung_disease %>
     <%= check_box_tag :surgery_for_hirschsprung_disease %>
+    <br>
     <%= label_tag :fundoplication_nissen_wrap %>
     <%= check_box_tag :fundoplication_nissen_wrap %>
+    <br>
     <%= label_tag :none %>
     <%= check_box_tag :none %>
+    <br>
     <%= label_tag :other_gastric_surgery %>
     <%= text_field_tag :other_gastric_surgery %>
   </div>
@@ -363,24 +411,32 @@
   <div>
     <%= label_tag :brain_malformation %>
     <%= check_box_tag :brain_malformation %>
+    <br>
     <%= label_tag :cyst %>
     <%= check_box_tag :cyst %>
+    <br>
     <%= label_tag :cp %>
     <%= check_box_tag :cp %>
+    <br>
     <%= label_tag :stroke %>
     <%= check_box_tag :stroke %>
+    <br>
     <%= label_tag :unsure %>
     <%= check_box_tag :unsure %>
   </div>
   <div>
     <%= label_tag :brain_malformation_surgery %>
     <%= check_box_tag :brain_malformation_surgery %>
+    <br>
     <%= label_tag :cyst_surgery %>
     <%= check_box_tag :cyst_surgery %>
+    <br>
     <%= label_tag :cp_surgery %>
     <%= check_box_tag :cp_surgery %>
+    <br>
     <%= label_tag :stroke_surgery %>
     <%= check_box_tag :stroke_surgery %>
+    <br>
     <%= label_tag :other_nuero_surgery %>
     <%= text_field_tag :other_nuero_surgery %>
   </div>
@@ -388,87 +444,123 @@
   <div>
     <%= label_tag :atlanto_axial_instability %>
     <%= check_box_tag :atlanto_axial_instability %>
+    <br>
     <%= label_tag :cervical_spine_degeneration %>
     <%= check_box_tag :cervical_spine_degeneration %>
+    <br>
     <%= label_tag :osteopenia %>
     <%= check_box_tag :osteopenia %>
+    <br>
     <%= label_tag :osteoporosis %>
     <%= check_box_tag :osteoporosis %>
+    <br>
     <%= label_tag :fractures %>
     <%= check_box_tag :fractures %>
+    <br>
     <%= label_tag :scoliosis %>
     <%= check_box_tag :scoliosis %>
+    <br>
     <%= label_tag :lordosis %>
     <%= check_box_tag :lordosis %>
+    <br>
     <%= label_tag :kyphosis %>
     <%= check_box_tag :kyphosis %>
+    <br>
     <%= label_tag :hand_bone_missing %>
     <%= check_box_tag :hand_bone_missing %>
+    <br>
     <%= label_tag :leg_bone_missing %>
     <%= check_box_tag :leg_bone_missing %>
+    <br>
     <%= label_tag :rib_deformities %>
     <%= check_box_tag :rib_deformities %>
+    <br>
     <%= label_tag :club_foot %>
     <%= check_box_tag :club_foot %>
+    <br>
     <%= label_tag :rocker_bottom_feet %>
     <%= check_box_tag :rocker_bottom_feet %>
   </div>
   <div>
     <%= label_tag :atlanto_axial_instability_surgery %>
     <%= check_box_tag :atlanto_axial_instability_surgery %>
+    <br>
     <%= label_tag :cervical_spine_degeneration_surgery %>
     <%= check_box_tag :cervical_spine_degeneration_surgery %>
+    <br>
     <%= label_tag :osteopenia_surgery %>
     <%= check_box_tag :osteopenia_surgery %>
+    <br>
     <%= label_tag :osteoporosis_surgery %>
     <%= check_box_tag :osteoporosis_surgery %>
+    <br>
     <%= label_tag :fractures_surgery %>
     <%= check_box_tag :fractures_surgery %>
+    <br>
     <%= label_tag :scoliosis_surgery %>
     <%= check_box_tag :scoliosis_surgery %>
+    <br>
     <%= label_tag :lordosis_surgery %>
     <%= check_box_tag :lordosis_surgery %>
+    <br>
     <%= label_tag :kyphosis_surgery %>
     <%= check_box_tag :kyphosis_surgery %>
+    <br>
     <%= label_tag :hand_bone_missing_surgery %>
     <%= check_box_tag :hand_bone_missing_surgery %>
+    <br>
     <%= label_tag :leg_bone_missing_surgery %>
     <%= check_box_tag :leg_bone_missing_surgery %>
+    <br>
     <%= label_tag :rib_deformities_surgery %>
     <%= check_box_tag :rib_deformities_surgery %>
+    <br>
     <%= label_tag :club_foot_surgery %>
     <%= check_box_tag :club_foot_surgery %>
+    <br>
     <%= label_tag :rocker_bottom_feet_surgery %>
     <%= check_box_tag :rocker_bottom_feet_surgery %>
   </div>
   <h3>Cranial/Facial</h3>
   <div>
+    <p>Sleep Apnea?</p>
     <%= label_tag :yes %>
     <%= radio_button_tag :sleep_apnea, 'yes' %>
+    <br>
     <%= label_tag :no %>
     <%= radio_button_tag :sleep_apnea, 'no' %>
+    <br>
     <%= label_tag 'n/a' %>
     <%= radio_button_tag :sleep_apnea, 'n/a' %>
   </div>
   <div>
     <%= label_tag :cranial_deformities %>
     <%= check_box_tag :cranial_deformities %>
+    <br>
     <%= label_tag :cleft_palate %>
     <%= check_box_tag :cleft_palate %>
+    <br>
     <%= label_tag :cleft_lip %>
     <%= check_box_tag :cleft_lip %>
+    <br>
     <%= label_tag :high_arch %>
     <%= check_box_tag :high_arch %>
+    <br>
     <%= label_tag :low_set_ears %>
     <%= check_box_tag :low_set_ears %>
+    <br>
     <%= label_tag :wide_spaced_eyes %>
     <%= check_box_tag :wide_spaced_eyes %>
+    <br>
     <%= label_tag :wild_eyebrows %>
     <%= check_box_tag :wild_eyebrows %>
+    <br>
     <%= label_tag :extraordinarily_long_eyelashes %>
     <%= check_box_tag :extraordinarily_long_eyelashes %>
+    <br>
     <%= label_tag :overgrowth_of_gums %>
     <%= check_box_tag :overgrowth_of_gums %>
+    <br>
     <%= label_tag :delayed_teething %>
     <%= check_box_tag :delayed_teething %>
   </div>
@@ -482,44 +574,63 @@
   <div>
     <%= label_tag :hyperthyroidism %>
     <%= check_box_tag :hyperthyroidism %>
+    <br>
     <%= label_tag :hypothyroidism %>
     <%= check_box_tag :hypothyroidism %>
+    <br>
     <%= label_tag :early_onset_pubic_hair %>
     <%= check_box_tag :early_onset_pubic_hair %>
+    <br>
     <%= label_tag :early_onset_puberty %>
     <%= check_box_tag :early_onset_puberty %>
+    <br>
     <%= label_tag :growth_hormone_deficiency %>
     <%= check_box_tag :growth_hormone_deficiency %>
+    <br>
     <%= label_tag :calcium_deficiency %>
     <%= check_box_tag :calcium_deficiency %>
+    <br>
     <%= label_tag :high_cortisol %>
     <%= check_box_tag :high_cortisol %>
+    <br>
     <%= label_tag :diabetes %>
     <%= check_box_tag :diabetes %>
+    <br>
     <%= label_tag :hypoglycemia %>
     <%= check_box_tag :hypoglycemia %>
+    <br>
     <%= label_tag :cushings_disease %>
     <%= check_box_tag :cushings_disease %>
+    <br>
     <%= label_tag :vitamin_d_deficiency %>
     <%= check_box_tag :vitamin_d_deficiency %>
+    <br>
     <%= label_tag :anemia %>
     <%= check_box_tag :anemia %>
+    <br>
     <%= label_tag :failure_to_thrive %>
     <%= check_box_tag :failure_to_thrive %>
+    <br>
     <%= label_tag :high_blood_pressure %>
     <%= check_box_tag :high_blood_pressure %>
+    <br>
     <%= label_tag :low_blood_pressure %>
     <%= check_box_tag :low_blood_pressure %>
+    <br>
     <%= label_tag :delayed_late_puberty %>
     <%= check_box_tag :delayed_late_puberty %>
+    <br>
     <%= label_tag :unsure %>
     <%= check_box_tag :unsure %>
+    <br>
     <%= label_tag :other_endocrine %>
     <%= text_field_tag :other_endocrine %>
     <%= label_tag :high_blood_sugar %>
     <%= check_box_tag :high_blood_sugar %>
+    <br>
     <%= label_tag :unhealthy_cholesterol_levels %>
     <%= check_box_tag :unhealthy_cholesterol_levels %>
+    <br>
     <%= label_tag :increased_abdominal_fat %>
     <%= check_box_tag :increased_abdominal_fat %>
   </div>
@@ -528,8 +639,10 @@
     <h4>Did the participant pass the infant hearing test?</h4>
     <%= radio_button_tag :hearing_test, 'yes' %>
     <%= label_tag :yes %>
+    <br>
     <%= radio_button_tag :hearing_test, 'no' %>
     <%= label_tag :no %>
+    <br>
     <%= radio_button_tag :hearing_test, 'n/a' %>
     <%= label_tag 'n/a' %>
   </div>
@@ -545,12 +658,16 @@
     <h4>Which best describes the hearing loss? Mark all that apply:</h4>
     <%= check_box_tag :transient %>
     <%= label_tag :transient %>
+    <br>
     <%= check_box_tag :conductive %>
     <%= label_tag :conductive %>
+    <br>
     <%= check_box_tag :nerve_loss %>
     <%= label_tag :nerve_loss %>
+    <br>
     <%= check_box_tag :unknown %>
     <%= label_tag :unknown %>
+    <br>
     <%= label_tag :other_hearing %>
     <%= text_field_tag :other_hearing %>
   </div>
@@ -561,120 +678,165 @@
   <h3>Vision</h3>
   <div>
     <h4>Has the participant ever failed an eye exam?</h4>
-    <%= radio_button_tag :failed_eye_exam, 'yes' %>
     <%= label_tag :yes %>
-    <%= radio_button_tag :failed_eye_exam, 'no' %>
+    <%= radio_button_tag :failed_eye_exam, 'yes' %>
+    <br>
     <%= label_tag :no %>
-    <%= radio_button_tag :failed_eye_exam, 'n/a' %>
+    <%= radio_button_tag :failed_eye_exam, 'no' %>
+    <br>
     <%= label_tag 'n/a' %>
+    <%= radio_button_tag :failed_eye_exam, 'n/a' %>
   </div>
   <div>
     <h4>Has the participant ever experience or been diagnosed with the following? Mark all that apply:</h4>
-    <%= check_box_tag :cataract %>
     <%= label_tag :cataract %>
-    <%= check_box_tag :strabismus %>
+    <%= check_box_tag :cataract %>
+    <br>
     <%= label_tag :strabismus %>
-    <%= check_box_tag :lazy_eye %>
+    <%= check_box_tag :strabismus %>
+    <br>
     <%= label_tag :lazy_eye %>
-    <%= check_box_tag :near_sighted %>
+    <%= check_box_tag :lazy_eye %>
+    <br>
     <%= label_tag :near_sighted %>
-    <%= check_box_tag :far_sighted %>
+    <%= check_box_tag :near_sighted %>
+    <br>
     <%= label_tag :far_sighted %>
-    <%= check_box_tag :cvi %>
+    <%= check_box_tag :far_sighted %>
+    <br>
     <%= label_tag :cvi %>
-    <%= check_box_tag :astigmatism %>
+    <%= check_box_tag :cvi %>
+    <br>
     <%= label_tag 'astigmatism (blurry vision)' %>
-    <%= check_box_tag :ptosis %>
+    <%= check_box_tag :astigmatism %>
+    <br>
     <%= label_tag 'ptosis (droopy eyelid)' %>
-    <%= check_box_tag :blockage_of_tear_duct %>
+    <%= check_box_tag :ptosis %>
+    <br>
     <%= label_tag :blockage_of_tear_duct %>
-    <%= check_box_tag :depth_perception_problems %>
+    <%= check_box_tag :blockage_of_tear_duct %>
+    <br>
     <%= label_tag :depth_perception_problems %>
-    <%= check_box_tag :blindness %>
+    <%= check_box_tag :depth_perception_problems %>
+    <br>
     <%= label_tag :blindness %>
-    <%= check_box_tag :glaucoma %>
+    <%= check_box_tag :blindness %>
+    <br>
     <%= label_tag :glaucoma %>
-    <%= check_box_tag :torn_retina %>
+    <%= check_box_tag :glaucoma %>
+    <br>
     <%= label_tag :torn_retina %>
-    <%= check_box_tag :detached_retina %>
+    <%= check_box_tag :torn_retina %>
+    <br>
     <%= label_tag :detached_retina %>
-    <%= check_box_tag :undeveloped_eyes %>
+    <%= check_box_tag :detached_retina %>
+    <br>
     <%= label_tag :undeveloped_eyes %>
-    <%= check_box_tag :underdeveloped_eyes %>
+    <%= check_box_tag :undeveloped_eyes %>
+    <br>
     <%= label_tag :underdeveloped_eyes %>
-    <%= check_box_tag :undeveloped_eye_socket %>
+    <%= check_box_tag :underdeveloped_eyes %>
+    <br>
     <%= label_tag :undeveloped_eye_socket %>
-    <%= check_box_tag :underdeveloped_eye_socket %>
+    <%= check_box_tag :undeveloped_eye_socket %>
+    <br>
     <%= label_tag :underdeveloped_eye_socket %>
-    <%= check_box_tag :dry_eyes %>
+    <%= check_box_tag :underdeveloped_eye_socket %>
+    <br>
     <%= label_tag :dry_eyes %>
-    <%= check_box_tag :doesnt_blink_well %>
+    <%= check_box_tag :dry_eyes %>
+    <br>
     <%= label_tag "Doesn't blink well" %>
-    <%= check_box_tag :doesnt_close_eyes_when_sleeping %>
+    <%= check_box_tag :doesnt_blink_well %>
+    <br>
     <%= label_tag "Doesn't close eyes when sleeping" %>
+    <%= check_box_tag :doesnt_close_eyes_when_sleeping %>
   </div>
   <h3>Behavior</h3>
   <div>
     <h4>Has the participant ever been diagnsed any of the following? Mark all that apply:</h4>
-    <%= check_box_tag :add %>
     <%= label_tag :add %>
-    <%= check_box_tag :adhd %>
+    <%= check_box_tag :add %>
+    <br>
     <%= label_tag :adhd %>
-    <%= check_box_tag :bipolar %>
+    <%= check_box_tag :adhd %>
+    <br>
     <%= label_tag :bipolar %>
-    <%= check_box_tag :autism_spectrum %>
+    <%= check_box_tag :bipolar %>
+    <br>
     <%= label_tag :autism_spectrum %>
-    <%= check_box_tag :depression %>
+    <%= check_box_tag :autism_spectrum %>
+    <br>
     <%= label_tag :depression %>
-    <%= check_box_tag :anxiety_disorder %>
+    <%= check_box_tag :depression %>
+    <br>
     <%= label_tag :anxiety_disorder%>
-    <%= check_box_tag :ocd %>
+    <%= check_box_tag :anxiety_disorder %>
+    <br>
     <%= label_tag :ocd %>
-    <%= check_box_tag :schizophrenia %>
+    <%= check_box_tag :ocd %>
+    <br>
     <%= label_tag :schizophrenia %>
-    <%= check_box_tag :addictions %>
+    <%= check_box_tag :schizophrenia %>
+    <br>
     <%= label_tag :addictions %>
-    <%= check_box_tag :personality_disorder %>
+    <%= check_box_tag :addictions %>
+    <br>
     <%= label_tag :personality_disorder %>
-    <%= check_box_tag :eating_disorder %>
+    <%= check_box_tag :personality_disorder %>
+    <br>
     <%= label_tag :eating_disorder %>
-    <%= check_box_tag :odd %>
+    <%= check_box_tag :eating_disorder %>
+    <br>
     <%= label_tag :odd %>
+    <%= check_box_tag :odd %>
+    <br>
     <%= label_tag :other_diagnosis %>
     <%= text_field_tag :other_diagnosis %>
   </div>
   <div>
     <h4>Does/did the participant have any of the following developmental delays? Mark all that apply:</h4>
-    <%= check_box_tag :learning_disability %>
     <%= label_tag :learning_disability %>
-    <%= check_box_tag :global_developmental_delay %>
+    <%= check_box_tag :learning_disability %>
+    <br>
     <%= label_tag :global_developmental_delay %>
-    <%= check_box_tag :intellectual_disability %>
+    <%= check_box_tag :global_developmental_delay %>
+    <br>
     <%= label_tag :intellectual_disability %>
-    <%= check_box_tag :speech_delay %>
+    <%= check_box_tag :intellectual_disability %>
+    <br>
     <%= label_tag :speech_delay %>
-    <%= check_box_tag :receptive_delay %>
+    <%= check_box_tag :speech_delay %>
+    <br>
     <%= label_tag :receptive_delay %>
-    <%= check_box_tag :expressive_delay %>
+    <%= check_box_tag :receptive_delay %>
+    <br>
     <%= label_tag :expressive_delay%>
-    <%= check_box_tag :auditory_processing_disorder %>
+    <%= check_box_tag :expressive_delay %>
+    <br>
     <%= label_tag :auditory_processing_disorder %>
-    <%= check_box_tag :apraxia_dyspraxia %>
+    <%= check_box_tag :auditory_processing_disorder %>
+    <br>
     <%= label_tag 'apraxia/dyspraxia' %>
-    <%= check_box_tag :visual_processing %>
+    <%= check_box_tag :apraxia_dyspraxia %>
+    <br>
     <%= label_tag :visual_processing %>
+    <%= check_box_tag :visual_processing %>
+    <br>
     <%= label_tag :other_delay %>
     <%= text_field_tag :other_delay %>
   </div>
   <h3>School/Therapies</h3>
   <div>
     <h4>Was/is the participant in EI?</h4>
-    <%= radio_button_tag :in_ei, 'yes' %>
     <%= label_tag :yes %>
-    <%= radio_button_tag :in_ei, 'no' %>
+    <%= radio_button_tag :in_ei, 'yes' %>
+    <br>
     <%= label_tag :no %>
-    <%= radio_button_tag :in_ei, 'n/a' %>
+    <%= radio_button_tag :in_ei, 'no' %>
+    <br>
     <%= label_tag 'n/a' %>
+    <%= radio_button_tag :in_ei, 'n/a' %>
   </div>
   <div>
     <h4>Did/does the participant attend school?</h4>
@@ -690,28 +852,39 @@
   </div>
   <div>
     <h4>Has the participant ever received therapies? Mark all that apply:</h4>
-    <%= check_box_tag :ot %>
     <%= label_tag 'ot (occupational)' %>
-    <%= check_box_tag :pt %>
+    <%= check_box_tag :ot %>
+    <br>
     <%= label_tag 'pt (physical)' %>
-    <%= check_box_tag :dt %>
+    <%= check_box_tag :pt %>
+    <br>
     <%= label_tag 'dt (developmental)' %>
-    <%= check_box_tag :st %>
+    <%= check_box_tag :dt %>
+    <br>
     <%= label_tag 'st (speech)' %>
-    <%= check_box_tag :dtv %>
+    <%= check_box_tag :st %>
+    <br>
     <%= label_tag 'dtv (vision)' %>
-    <%= check_box_tag :dth %>
+    <%= check_box_tag :dtv %>
+    <br>
     <%= label_tag 'dth (hearing)' %>
-    <%= check_box_tag :vital_stim %>
+    <%= check_box_tag :dth %>
+    <br>
     <%= label_tag :vital_stim %>
-    <%= check_box_tag :aquatic %>
+    <%= check_box_tag :vital_stim %>
+    <br>
     <%= label_tag :aquatic %>
-    <%= check_box_tag :reflex_integration %>
+    <%= check_box_tag :aquatic %>
+    <br>
     <%= label_tag :reflex_integration %>
-    <%= check_box_tag :hippotherapy_equine %>
+    <%= check_box_tag :reflex_integration %>
+    <br>
     <%= label_tag 'hippotherapy/equine' %>
-    <%= check_box_tag :hyperbaric %>
+    <%= check_box_tag :hippotherapy_equine %>
+    <br>
     <%= label_tag :hyperbaric %>
+    <%= check_box_tag :hyperbaric %>
+    <br>
     <%= label_tag :other_therapy %>
     <%= text_field_tag :other_therapy %>
   </div>
