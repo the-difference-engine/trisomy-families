@@ -27,3 +27,35 @@
   background-color:#f1f1f1; 
   height:175px
 }
+
+/* SLIDESHOW */
+
+.arrow-div {
+  border:1px solid black; 
+  z-index:10;
+  padding-top:125px; 
+  padding-left:10px;  
+}      
+.slide-show-container div {
+  width: 100%; 
+  height: 175px;
+  position:absolute;
+}
+.hidden {
+  display:none;
+}
+.disabled {
+  pointer-events:none;
+}
+#slide-1 {
+  background-color: red;
+}
+#slide-2 {
+  background-color: green;
+}
+#slide-3 {
+  background-color: blue;
+}
+#slide-4 {
+  background-color: yellow;
+}

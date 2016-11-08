@@ -1,15 +1,15 @@
 <header class="header fixed clearfix">
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3 ">
+      <div class="col-md-2">
         <!-- header-left start -->
         <!-- ================ -->
         <div class="header-left clearfix">
 
           <!-- logo -->
           <div id="logo" class="logo">
-            <a href="/"><img id="logo_img" src="/template/images/TrisomyFamilies_Logo.jpg" alt="The Project"></a>
+            <a href="/"><img id="logo_img" style="height:75px;" src="/template/images/TrisomyFamilies_Logo.jpg" alt="The Project"></a>
           </div>
 
           <!-- name-and-slogan -->
@@ -21,43 +21,30 @@
         <!-- header-left end -->
 
       </div>
-      <div class="col-md-7 slide-show-container">
-        <div>
-          <h2>Slide Show goes here</h2>
-        </div>
+      <div class="col-md-8 slide-show-container">
+        <%= render '/partials/slide-show' %>
       </div>
       <div class="col-md-2">
-
-        <!-- header-right start -->
-        <!-- ================ -->
         <div class="header-right clearfix">                
         <!-- Devise logout / login links !-->
         <% if user_signed_in? %>
-          <h3 align="right"><%= link_to('Create Profile', profile_new_path) %></h3>                  
-          <h3 align="right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>                
+          <h3 align="center"><%= link_to('Create Profile', profile_new_path) %></h3>                  
+          <h3 align="center"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>                
         <% else %>
-          <h3 align="right"><%= link_to('Login', new_user_session_path)  %></h3>                
-          <h3 align="right"><%= link_to('Sign up', new_user_registration_path ) %></h3>                  
+          <h3 align="center"><%= link_to('Login', new_user_session_path)  %></h3>                
+          <h3 align="center"><%= link_to('Sign up', new_user_registration_path ) %></h3>                  
         <% end %>            
         <!-- main-navigation start -->
         <!-- classes: -->
         <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
         <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
         <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
-        <!-- ================ -->
-        
-        <!-- main-navigation end -->
         </div>
-        <!-- header-right end -->
-
       </div>
     </div>
     <div class="row">
       <div clss="col-xs-12">
         <div class="main-navigation  animated with-dropdown-buttons">
-
-          <!-- navbar start -->
-          <!-- ================ -->
           <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
 

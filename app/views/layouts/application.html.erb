@@ -62,8 +62,6 @@
 
       <%= yield %>
 
-      <%= render '/partials/slide-show' %>
-
       <!-- .subfooter start -->
       <!-- ================ -->
       <div class="subfooter">
@@ -118,5 +116,114 @@
     <script type="text/javascript" src="/template/js/template.js"></script>
     <!-- Custom Scripts -->
     <script type="text/javascript" src="/template/js/custom.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        var i = 1;
+        var counter = 1;
+        var maxSlideNum = $('#slides').children().length;
+
+        var slideLeft = function() {
+          // Restart timer
+          clearInterval(slideTimer);
+          
+          // prevent breaking from clicking too fast
+          $('#left').addClass("disabled");
+
+          // remove fadeInLeft classes
+          $("#slides div").removeClass("fadeInLeft");
+
+          // fade slide out
+          if (i == maxSlideNum) {
+            $("#slides div:nth-child("+i+")").addClass("animated fadeOutLeft");
+            $("#slides div:nth-child(1)").removeClass("hidden");  
+          } else {
+            $("#slides div:nth-child("+i+")").addClass("animated fadeOutLeft");
+            $("#slides div:nth-child("+(i+1)+")").removeClass("hidden");  
+          }          
+
+          // fade slide in
+          if (i == maxSlideNum) {
+            $("#slides div:nth-child(1)").addClass("animated fadeInRight"); 
+          } else {
+            $("#slides div:nth-child("+(i+1)+")").addClass("animated fadeInRight"); 
+          }                 
+
+          // Do after animation
+          window.setTimeout( function(){
+            $("#slides div:nth-child("+i+")").addClass("hidden");
+            $("#slides div:nth-child("+i+")").removeClass("animated fadeOutLeft");
+
+            // reset counter variable
+            i += 1;
+            if (i == maxSlideNum + 1) {
+              i = 1;
+            }
+
+            // re-enable left trigger
+            $('#left').removeClass("disabled");
+
+            // restart timer
+            slideTimer = setInterval(slideLeft, 5000);
+
+          }, 700);
+
+        }
+
+        var slideTimer = setInterval(slideLeft, 5000);
+        
+        $('#left').click(slideLeft);
+
+        $('#right').click(function() {
+          // Restart timer
+          clearInterval(slideTimer);
+
+          // prevent breaking from clicking too fast
+          $('#right').addClass("disabled");
+
+          // remove fadeInRight classes
+          $("#slides div").removeClass("fadeInRight");
+
+          // fade out          
+          if (i == 1) {
+            $("#slides div:nth-child("+i+")").addClass("animated fadeOutRight");
+            $("#slides div:nth-child(4)").removeClass("hidden");  
+          } else {
+            $("#slides div:nth-child("+i+")").addClass("animated fadeOutRight");
+            $("#slides div:nth-child("+(i-1)+")").removeClass("hidden");
+          }
+            
+          // fade in
+          if (i == 1) {
+            $("#slides div:nth-child("+maxSlideNum+")").addClass("animated fadeInLeft");             
+          } else {
+            $("#slides div:nth-child("+(i-1)+")").addClass("animated fadeInLeft"); 
+          }
+
+          // Do after animation
+          window.setTimeout( function(){
+            $("#slides div:nth-child("+i+")").addClass("hidden");
+            $("#slides div:nth-child("+i+")").removeClass("animated fadeOutRight");
+
+            // reset counter variable
+            i -= 1;
+            if (i == 0) {
+              i = maxSlideNum;
+            }
+
+            // re-enable right trigger
+            $('#right').removeClass("disabled");
+
+            // restart timer
+            slideTimer = setInterval(slideLeft, 5000);
+
+          }, 700)                                   
+          
+        })
+
+    });
+  </script>
   </body>
 </html>
