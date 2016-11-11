@@ -71,7 +71,7 @@
     </div>
     <div>
       <%= label_tag :child_birth_order %>
-      <%= number_field :child_birth_order, in: 1..15, step: 1 %>
+      <%= number_field_tag :child_birth_order, in: 1..15, step: 1 %>
     </div>
     <div>
       <%= label_tag :child_primary_diagnosis %>
@@ -91,7 +91,7 @@
     </div>
     <div>
       <%= label_tag :child_mosaic_trisomy_percentage %>
-      <%= number_field :child_mosaic_trisomy_percentage, in: 0..100, step: 1 %>
+      <%= number_field_tag :child_mosaic_trisomy_percentage, in: 0..100, step: 1 %>
     </div>
     <div>
       <%= label_tag :child_partial_trisomy %>
@@ -109,65 +109,65 @@
     <h4>Weight Info:</h4>
       <div>
         <%= label_tag :weight_at_birth %>
-        <%= number_field(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :one_month %>
-        <%= number_field(:one_month, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:one_month, nil, in: 1.0..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :two_month %>
-        <%= number_field(:two_month, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:two_month, nil, in: 1.0..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :three_month %>
-        <%= number_field(:three_month, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:three_month, nil, in: 1.0..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :four_month %>
-        <%= number_field(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
       </div>
     <h4>Height Info:</h4>
       <div>
         <%= label_tag :height_at_birth %>
-        <%= number_field(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :one_month %>
-        <%= number_field(:height_one_month, nil, in: 10..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_one_month, nil, in: 10..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :two_month %>
-        <%= number_field(:height_two_month, nil, in: 10..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_two_month, nil, in: 10..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :three_month %>
-        <%= number_field(:height_three_month, nil, in: 10..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_three_month, nil, in: 10..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :four_month %>
-        <%= number_field(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
       </div>
     <h4>Head Circumference Info:</h4>
       <div>
         <%= label_tag :head_circumference_at_birth %>
-        <%= number_field(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+        <%= number_field_tag(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :one_month %>
-        <%= number_field(:hc_one_month, nil, in: 10..20, step: 0.5)  %> 
+        <%= number_field_tag(:hc_one_month, nil, in: 10..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :two_month %>
-        <%= number_field(:hc_two_month, nil, in: 10..20, step: 0.5)  %> 
+        <%= number_field_tag(:hc_two_month, nil, in: 10..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :three_month %>
-        <%= number_field(:hc_three_month, nil, in: 10..20, step: 0.5)  %> 
+        <%= number_field_tag(:hc_three_month, nil, in: 10..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :four_month %>
-        <%= number_field(:hc_four_month, nil, in: 10..20, step: 0.5)  %> 
+        <%= number_field_tag(:hc_four_month, nil, in: 10..20, step: 0.5)  %> 
       </div>
   <h3>Birth Information</h3>
     <p>Mother Complications:</p>
@@ -232,15 +232,15 @@
       </div>
       <div>
         <%= label_tag :gestation_age %>
-        <%= number_field :gestation_age, nil, in: 0..50, step: 1 %>
+        <%= number_field_tag :gestation_age, nil, in: 0..50, step: 1 %>
       </div>
       <div>
         <%= label_tag :mother_age_at_birth %>
-        <%= number_field :mother_age_at_birth, nil, in: 14..50, step: 1 %>
+        <%= number_field_tag :mother_age_at_birth, nil, in: 14..50, step: 1 %>
       </div>
       <div>
         <%= label_tag :father_age_at_birth %>
-        <%= number_field :father_age_at_birth, nil, in: 14..50, step: 1 %>
+        <%= number_field_tag :father_age_at_birth, nil, in: 14..50, step: 1 %>
       </div>
       <div>
         <%= label_tag :multiple_birth %>
@@ -310,11 +310,11 @@
   <br>
   <div>
     <%= label_tag :first_cardiac_surgery_age %>
-    <%= number_field(:first_cardiac_surgery_age, nil, in: 1.0..50, step: 1)  %> 
+    <%= number_field_tag(:first_cardiac_surgery_age, nil, in: 1.0..50, step: 1)  %> 
   </div>
   <br>
   <div>
-    <p>Was the first caridac surgery successful?</p>
+    <p>Was the first cardiac surgery successful?</p>
     <%= label_tag :yes %>
     <%= radio_button_tag :first_cardiac_surgery_successful, 'yes' %>
     <br>
@@ -403,7 +403,7 @@
     <%= label_tag :other_gastric_surgery %>
     <%= text_field_tag :other_gastric_surgery %>
   </div>
-  <h3>Nuerological</h3>
+  <h3>Neurological</h3>
   <div>
     <%= label_tag :seizure_epilepsy %>
     <%= check_box_tag :seizure_epilepsy %>
@@ -625,6 +625,7 @@
     <br>
     <%= label_tag :other_endocrine %>
     <%= text_field_tag :other_endocrine %>
+    <br>
     <%= label_tag :high_blood_sugar %>
     <%= check_box_tag :high_blood_sugar %>
     <br>
@@ -634,6 +635,7 @@
     <%= label_tag :increased_abdominal_fat %>
     <%= check_box_tag :increased_abdominal_fat %>
   </div>
+
   <h3>Hearing</h3>
   <div>
     <h4>Did the participant pass the infant hearing test?</h4>
@@ -675,6 +677,7 @@
     <h4>Has the participant ever received treatment for hearing loss?</h4>
     <%= select_tag( :hearing_loss_treatment, options_for_select(hearing_treatments, " ")) %>
   </div>
+
   <h3>Vision</h3>
   <div>
     <h4>Has the participant ever failed an eye exam?</h4>
@@ -754,7 +757,7 @@
   </div>
   <h3>Behavior</h3>
   <div>
-    <h4>Has the participant ever been diagnsed any of the following? Mark all that apply:</h4>
+    <h4>Has the participant ever been diagnosed with any of the following? Mark all that apply:</h4>
     <%= label_tag :add %>
     <%= check_box_tag :add %>
     <br>
