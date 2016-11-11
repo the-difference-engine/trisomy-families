@@ -19,9 +19,15 @@ Rails.application.routes.draw do
   patch '/profile/:id/photo' => 'children#update_photo'
   get 'profile/:id/register' => 'children#register'
   post 'profile/:id/register' => 'children#confirm_register'
+  get 'profile/:id/edit_registration' => 'children#edit_registration'
+  get 'profile/:id/edit_background_history' => 'children#edit_background_history'
+  get 'profile/:id/edit_health_history' => 'children#edit_health_history'
   delete '/profile/:id' => 'children#destroy'
   post 'profile/:id/background' => 'children#background_history'
   post 'profile/:id/health' => 'children#health_history'
+  patch 'profile/:id/register' => 'children#update_registration'
+  patch 'profile/:id/health' => 'children#update_health_history'
+  patch 'profile/:id/background' => 'children#update_background_history'
 
   get '/calendar' => 'users#calendar'
 end
