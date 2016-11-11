@@ -64,6 +64,7 @@
   <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
   <body class="no-trans  transparent-header  ">
 
+
     <!-- scrollToTop -->
     <!-- ================ -->
     <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
@@ -275,7 +276,6 @@
       <p class="alert"><%= alert %></p> -->
 
       <div class="container">
-
         <% flash.each do |name, message| %>
           <div class="alert alert-<%= name %> alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -285,6 +285,8 @@
         <% end %>
 
         <%= yield %>
+        <img src="http://cliparts.co/cliparts/Lcd/jM9/LcdjM9p6i.svg" style="float: left; margin: -590px;">
+
       </div>
 
       <!-- .subfooter start -->
