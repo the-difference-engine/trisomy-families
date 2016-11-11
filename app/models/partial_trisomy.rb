@@ -1,0 +1,2 @@
+class PartialTrisomy < ApplicationRecord
+end
