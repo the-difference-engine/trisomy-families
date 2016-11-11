@@ -21,7 +21,7 @@ class ChildrenController < ApplicationController
       trisomy_story: params[:trisomy_story],
       avatar: params[:avatar],
       private: params[:private],
-      user_id: params[:user_id]
+      user_id: current_user.id
     )
     @child.save
     redirect_to "/profile/#{@child.id}"
