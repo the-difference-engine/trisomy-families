@@ -14,3 +14,56 @@
  *= require_self
  *= require fullcalendar
  */
+
+.top-nav-menu li {
+  display:inline-block;
+  padding-left:25px;
+  padding-right:25px;      
+}
+.top-nav-menu {
+  margin-top:10px;
+}
+.social-icons a {
+  font-size:24px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+/* SLIDESHOW */
+
+.slide-show-container {
+  background-color:#f1f1f1; 
+  height:175px;
+  padding-left:0;
+}
+.arrow-div {
+  z-index:10;
+  padding-top:75px; 
+  padding-left:10px;  
+} 
+.slide-container {
+  overflow:hidden;  
+}     
+.slide-show-container div {
+  width: 100%; 
+  height: 175px;
+  position:absolute;
+}
+.hidden {
+  display:none;
+}
+.disabled {
+  pointer-events:none;
+}
+#slide-1 {
+  background-color: red;
+}
+#slide-2 {
+  background-color: green;
+}
+#slide-3 {
+  background-color: blue;
+}
+#slide-4 {
+  background-color: yellow;
+}
