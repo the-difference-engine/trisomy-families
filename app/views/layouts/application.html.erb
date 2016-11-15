@@ -12,46 +12,26 @@
   <!-- "transparent-header": makes the header transparent and pulls the banner to top -->
   <!-- "gradient-background-header": applies gradient background to header -->
   <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
-  <body class="no-trans  transparent-header  ">
+  <body class="no-trans  transparent-header">
 
-    <!-- scrollToTop -->
-    <!-- ================ -->
-    <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
-
-    <!-- page wrapper start -->
-    <!-- ================ -->
+    <div class="scrollToTop circle">
+      <i class="icon-up-open-big"></i>
+    </div>
     <div class="page-wrapper">
-
-      <!-- header-container start -->
       <div class="header-container">
-
-        <!-- header-top start -->
         <!-- classes:  -->
         <!-- "dark": dark version of header top e.g. class="header-top dark" -->
         <!-- "colored": colored version of header top e.g. class="header-top colored" -->
-        <!-- ================ -->
-
-        <%= render '/partials/layout-header-top' %>
-        
-        <!-- header-top end -->
-
-        <!-- header start -->
+        <%= render '/partials/layout-header-top' %>        
         <!-- classes:  -->
         <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
         <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
         <!-- "full-width": mandatory class for the full-width menu layout -->
         <!-- "centered": mandatory class for the centered logo layout -->
-        <!-- ================ -->
-
         <%= render '/partials/layout-header' %>
-
-        <!-- header end -->
       </div>
-
-
       <!-- <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p> -->
-
       <div class="container">
 
         <% flash.each do |name, message| %>
@@ -67,12 +47,19 @@
 
       <!-- .subfooter start -->
       <!-- ================ -->
+
       <div class="subfooter">
         <div class="container">
           <div class="subfooter-inner">
             <div class="row">
               <div class="col-md-12">
-                <p class="text-center">Created by <a target="_blank" href="http://thedifferenceengine.io">The Difference Engine</a>. All Rights Reserved</p>
+                <!-- <p class="text-center">Created by <a target="_blank" href="http://thedifferenceengine.io">The Difference Engine</a>. All Rights Reserved</p> -->
+                <p class="text-center social-icons">
+                  <a href="#"><i class="fa fa-facebook" aria-hidden="true" title="Follow us on Facebook"></i></a>
+                  <a href="#"><i class="fa fa-twitter" aria-hidden="true" title="Follow us on Twitter"></i></a>
+                  <a href="#"><i class="fa fa-youtube" aria-hidden="true" title="See our channel on YouTube"></i></a>
+                  <a href="#"><i class="fa fa-money" aria-hidden="true" title="Make a donation!"></i></a>
+                </p>
               </div>
             </div>
           </div>
@@ -80,8 +67,7 @@
       </div>
       <!-- .subfooter end -->
 
-  </div>
-  <!-- page-wrapper end -->
+    </div>
 
     <!-- JavaScript files placed at the end of the document so the pages load faster -->
     <!-- ================================================== -->
@@ -122,111 +108,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-    <script>
-    $(document).ready(function() {
-        var i = 1;
-        var counter = 1;
-        var maxSlideNum = $('#slides').children().length;
-
-        var slideLeft = function() {
-          // Restart timer
-          clearInterval(slideTimer);
-          
-          // prevent breaking from clicking too fast
-          $('#left').addClass("disabled");
-
-          // remove fadeInLeft classes
-          $("#slides div").removeClass("fadeInLeft");
-
-          // fade slide out
-          if (i == maxSlideNum) {
-            $("#slides div:nth-child("+i+")").addClass("animated fadeOutLeft");
-            $("#slides div:nth-child(1)").removeClass("hidden");  
-          } else {
-            $("#slides div:nth-child("+i+")").addClass("animated fadeOutLeft");
-            $("#slides div:nth-child("+(i+1)+")").removeClass("hidden");  
-          }          
-
-          // fade slide in
-          if (i == maxSlideNum) {
-            $("#slides div:nth-child(1)").addClass("animated fadeInRight"); 
-          } else {
-            $("#slides div:nth-child("+(i+1)+")").addClass("animated fadeInRight"); 
-          }                 
-
-          // Do after animation
-          window.setTimeout( function(){
-            $("#slides div:nth-child("+i+")").addClass("hidden");
-            $("#slides div:nth-child("+i+")").removeClass("animated fadeOutLeft");
-
-            // reset counter variable
-            i += 1;
-            if (i == maxSlideNum + 1) {
-              i = 1;
-            }
-
-            // re-enable left trigger
-            $('#left').removeClass("disabled");
-
-            // restart timer
-            slideTimer = setInterval(slideLeft, 5000);
-
-          }, 700);
-
-        }
-
-        var slideTimer = setInterval(slideLeft, 5000);
-        
-        $('#left').click(slideLeft);
-
-        $('#right').click(function() {
-          // Restart timer
-          clearInterval(slideTimer);
-
-          // prevent breaking from clicking too fast
-          $('#right').addClass("disabled");
-
-          // remove fadeInRight classes
-          $("#slides div").removeClass("fadeInRight");
-
-          // fade out          
-          if (i == 1) {
-            $("#slides div:nth-child("+i+")").addClass("animated fadeOutRight");
-            $("#slides div:nth-child(4)").removeClass("hidden");  
-          } else {
-            $("#slides div:nth-child("+i+")").addClass("animated fadeOutRight");
-            $("#slides div:nth-child("+(i-1)+")").removeClass("hidden");
-          }
-            
-          // fade in
-          if (i == 1) {
-            $("#slides div:nth-child("+maxSlideNum+")").addClass("animated fadeInLeft");             
-          } else {
-            $("#slides div:nth-child("+(i-1)+")").addClass("animated fadeInLeft"); 
-          }
-
-          // Do after animation
-          window.setTimeout( function(){
-            $("#slides div:nth-child("+i+")").addClass("hidden");
-            $("#slides div:nth-child("+i+")").removeClass("animated fadeOutRight");
-
-            // reset counter variable
-            i -= 1;
-            if (i == 0) {
-              i = maxSlideNum;
-            }
-
-            // re-enable right trigger
-            $('#right').removeClass("disabled");
-
-            // restart timer
-            slideTimer = setInterval(slideLeft, 5000);
-
-          }, 700)                                   
-          
-        })
-
-    });
-  </script>
   </body>
 </html>

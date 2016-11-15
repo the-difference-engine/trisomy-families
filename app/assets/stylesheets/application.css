@@ -23,19 +23,27 @@
 .top-nav-menu {
   margin-top:10px;
 }
-.slide-show-container {
-  background-color:#f1f1f1; 
-  height:175px
+.social-icons a {
+  font-size:24px;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 /* SLIDESHOW */
 
+.slide-show-container {
+  background-color:#f1f1f1; 
+  height:175px;
+  padding-left:0;
+}
 .arrow-div {
-  border:1px solid black; 
   z-index:10;
-  padding-top:125px; 
+  padding-top:75px; 
   padding-left:10px;  
-}      
+} 
+.slide-container {
+  overflow:hidden;  
+}     
 .slide-show-container div {
   width: 100%; 
   height: 175px;

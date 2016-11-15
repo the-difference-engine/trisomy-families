@@ -5,17 +5,17 @@
       <div class="col-md-2">
         <!-- header-left start -->
         <!-- ================ -->
-        <div class="header-left clearfix">
+        <div class="header-left clearfix" style="padding-top:45px;">
 
           <!-- logo -->
           <div id="logo" class="logo">
-            <a href="/"><img id="logo_img" style="height:75px;" src="/template/images/TrisomyFamilies_Logo.jpg" alt="The Project"></a>
+            <a href="/"><img id="logo_img" class="img-responsive" src="/template/images/TrisomyFamilies_Logo.jpg" alt="The Project"></a>
           </div>
 
           <!-- name-and-slogan -->
-          <div class="site-slogan">
-            <!-- Multipurpose HTML5 Template -->
-          </div>
+          <!-- <div class="site-slogan">
+            Multipurpose HTML5 Template
+          </div> -->
 
         </div>
         <!-- header-left end -->
@@ -25,7 +25,7 @@
         <%= render '/partials/slide-show' %>
       </div>
       <div class="col-md-2">
-        <div class="header-right clearfix">                
+        <div style="padding-top:30px;" class="header-right clearfix">                
         <!-- Devise logout / login links !-->
         <% if user_signed_in? %>
           <h3 align="center"><%= link_to('Create Profile', profile_new_path) %></h3>                  
