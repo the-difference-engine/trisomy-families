@@ -97,7 +97,8 @@ class ChildrenController < ApplicationController
       secondary_diagnosis: params[:child_secondary_diagnosis],
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
-      arms_affected: params[:child_partial_trisomy]
+      partial_trisomy: params[:child_partial_trisomy],
+      parent_id: @parent.id
     )
     @user.update(
       first_name: params[:user_first_name],
@@ -110,7 +111,7 @@ class ChildrenController < ApplicationController
 
   def edit_registration
     @child = Child.find_by(id: params[:id])
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: @child.user_id)
     @parent = Parent.find_by(id: params[:id])
     render 'edit_registration.html.erb'
   end
@@ -279,6 +280,10 @@ class ChildrenController < ApplicationController
       head_circumference_id: @head_circumference.id,
       weight_id: @weight.id,
       height_id: @height.id
+    )
+
+    @child.update(
+      background_history_id: @background_history.id
     )
 
     redirect_to "/profile/#{@child.id}"
