@@ -105,12 +105,12 @@ ActiveRecord::Schema.define(version: 20161104004039) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
+    t.boolean  "private",                default: false
     t.integer  "primary_diagnosis_id"
     t.integer  "secondary_diagnosis_id"
     t.integer  "partial_trisomy_id"
     t.integer  "health_history_id"
     t.integer  "background_history_id"
-    t.boolean  "private",                default: false
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
@@ -461,23 +461,6 @@ ActiveRecord::Schema.define(version: 20161104004039) do
   end
 
   create_table "received_therapies", force: :cascade do |t|
-    t.boolean  "ot"
-    t.boolean  "pt"
-    t.boolean  "dt"
-    t.boolean  "st"
-    t.boolean  "dtv"
-    t.boolean  "dth"
-    t.boolean  "vital_stim"
-    t.boolean  "aquatic"
-    t.boolean  "reflex_integration"
-    t.boolean  "hippotherapy_equine"
-    t.boolean  "hyperbaric"
-    t.string   "other"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  create_table "recieved_therapies", force: :cascade do |t|
     t.boolean  "ot"
     t.boolean  "pt"
     t.boolean  "dt"
