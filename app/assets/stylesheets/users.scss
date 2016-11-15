@@ -13,10 +13,63 @@ body, html {
 */}
 
 #image {
-  margin-top: 323px;
-  height: 52%
+  margin-top: 300px;
+  height: 48%
 }
 
 #research {
-  float: left;
+  position: absolute;
+  margin-left: -97px;
+  bottom: 190px;
+  color: red;
+  font-size: 85%;
+  bottom: 404.5px;
+}
+
+#family-stories {
+  margin-left: -121px;
+  position: absolute;
+  color: red;
+  font-size: 85%;
+  bottom: 309.5px;
+}
+
+#query-data {
+  margin-left: -107px;
+  position: absolute;
+  color: red;
+  font-size: 80%;
+  bottom: 240px;
+}
+
+#fb-pages {
+  margin-left: -118px;
+  position: absolute;
+  color: red;
+  font-size: 85%;
+  bottom: 215px;
+}
+
+#family-blogs {
+  margin-left: -104px;
+  position: absolute;
+  color: red;
+  font-size: 85%;
+  bottom: 335px;
+}
+
+#professional-center {
+  margin-left: -120px;
+  position: absolute;
+  color: red;
+  font-size: 70%;
+  bottom: 427.5px;
+}
+
+#family-center {
+  margin-left: -100px;
+  position: absolute;
+  color: red;
+  font-size: 77%;
+  bottom: 191px;
 }
