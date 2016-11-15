@@ -21,7 +21,7 @@ class ChildrenController < ApplicationController
       trisomy_story: params[:trisomy_story],
       avatar: params[:avatar],
       private: params[:private],
-      user_id: params[:user_id]
+      user_id: current_user.id
     )
     @child.save
     redirect_to "/profile/#{@child.id}"
@@ -97,8 +97,12 @@ class ChildrenController < ApplicationController
       secondary_diagnosis: params[:child_secondary_diagnosis],
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
+<<<<<<< HEAD
       partial_trisomy: params[:child_partial_trisomy],
       parent_id: @parent.id
+=======
+      partial_trisomy: params[:child_partial_trisomy]
+>>>>>>> 175341269c9292e8469000dd7a2161e85f056088
     )
     @user.update(
       first_name: params[:user_first_name],
@@ -187,16 +191,16 @@ class ChildrenController < ApplicationController
     @head_circumference.save
 
     @background_history = BackgroundHistory.new(
-      weight_at_birth: params[:weight_at_birth][0],
-      height_at_birth: params[:height_at_birth][0],
-      head_circumference_at_birth: params[:head_circumference_at_birth][0],
+      weight_at_birth: params[:weight_at_birth],
+      height_at_birth: params[:height_at_birth],
+      head_circumference_at_birth: params[:head_circumference_at_birth],
       delivery_method: params[:delivery_method],
       offered_c_section: params[:offered_c_section],
-      child_complication: params[:child_complication],
-      apgar_score: params[:apgar_score],
-      gestation_age: params[:gestation_age][0],
-      mother_age_at_birth: params[:mother_age_at_birth][0],
-      father_age_at_birth: params[:father_age_at_birth][0],
+      child_complication: params[:child_complications],
+      apgar_score: params[:apgar_scores],
+      gestation_age: params[:gestation_age],
+      mother_age_at_birth: params[:mother_age_at_birth],
+      father_age_at_birth: params[:father_age_at_birth],
       multiple_birth: params[:multiple_birth],
       multiple_birth_trisomy: params[:multiple_birth_trisomy],
       siblings_with_trisomy: params[:siblings_with_trisomy],
@@ -302,6 +306,7 @@ class ChildrenController < ApplicationController
       other: params[:other]
     )
     @congenital_heart_defect.save
+
     @intestinal_issue = IntestinalIssue.new(
       duodenal_atresia_stenosis_web: params[:duodenal_atresia_stenosis_web],
       anal_stenosis_atresia: params[:anal_stenosis_atresia],
@@ -321,6 +326,7 @@ class ChildrenController < ApplicationController
       ibd: params[:ibd]
     )
     @intestinal_issue.save
+
     @gastric_surgery = GastricSurgery.new(
       repair_of_duodenal_atresia_stenosis_web: params[:repair_of_duodenal_atresia_stenosis_web],
       repair_of_anal_stenosis_atresia: params[:repair_of_anal_stenosis_atresia],
@@ -331,6 +337,7 @@ class ChildrenController < ApplicationController
       other: params[:other_gastric_surgery]
     )
     @gastric_surgery.save
+
     @nuerological_condition = NuerologicalCondition.new(
       brain_malformation: params[:brain_malformation],
       cyst: params[:cyst],
@@ -344,6 +351,7 @@ class ChildrenController < ApplicationController
       other: params[:other_nuero_surgery]
     )
     @nuerological_condition.save
+
     @muscular_skeletal = MuscularSkeletal.new(
       atlanto_axial_instability: params[:atlanto_axial_instability],
       cervical_spine_degeneration: params[:cervical_spine_degeneration],
@@ -373,6 +381,7 @@ class ChildrenController < ApplicationController
       rocker_bottom_feet_surgery: params[:rocker_bottom_feet_surgery]
     )
     @muscular_skeletal.save
+
     @cranial_facial = CranialFacial.new(
       cranial_deformities: params[:cranial_deformities],
       cleft_palate: params[:cleft_palate],
@@ -386,6 +395,7 @@ class ChildrenController < ApplicationController
       delayed_teething: params[:delayed_teething]
     )
     @cranial_facial.save
+
     @endocrine = Endocrine.new(
       hyperthyroidism: params[:hyperthyroidism],
       hypothyroidism: params[:hypothyroidism],
@@ -410,6 +420,7 @@ class ChildrenController < ApplicationController
       increased_abdominal_fat: params[:increased_abdominal_fat]
     )
     @endocrine.save
+
     @hearing = Hearing.new(
       transient: params[:transient],
       conductive: params[:conductive],
@@ -418,6 +429,7 @@ class ChildrenController < ApplicationController
       other: params[:other_hearing]
     )
     @hearing.save
+
     @vision = Vision.new(
       cataract: params[:cataract],
       strabismus: params[:strabismus],
@@ -442,6 +454,7 @@ class ChildrenController < ApplicationController
       doesnt_close_eyes_when_sleeping: params[:doesnt_close_eyes_when_sleeping] 
     )
     @vision.save
+
     @behavioral_health = BehavioralHealth.new(
       add: params[:add],
       adhd: params[:adhd],
@@ -470,6 +483,7 @@ class ChildrenController < ApplicationController
       visual_processing: params[:visual_processing]  
     )
     @behavioral_health.save
+
     @received_therapy = ReceivedTherapy.new(
       ot: params[:ot],
       pt: params[:pt],
@@ -485,12 +499,13 @@ class ChildrenController < ApplicationController
       other: params[:other_therapy]
     )
     @received_therapy.save
+
     @child = Child.find_by(id: params[:id])
     @health_history = HealthHistory.new(
       chd: params[:chd],
       chd_id: @congenital_heart_defect.id,
       offered_cardiac_surgery: params[:offered_cardiac_surgery],
-      first_cardiac_surgery_age: params[:first_cardiac_surgery_age][0],
+      first_cardiac_surgery_age: params[:first_cardiac_surgery_age],
       first_cardiac_surgery_successful: params[:first_cardiac_surgery_successful],
       multiple_cardiac_surgeries: params[:multiple_cardiac_surgeries],
       intestinal_issues_id: @intestinal_issue.id,
