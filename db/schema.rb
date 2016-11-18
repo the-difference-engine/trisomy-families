@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20161118004929) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
+    t.boolean  "private",               default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.boolean  "private",               default: false
