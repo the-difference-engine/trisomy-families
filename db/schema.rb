@@ -105,15 +105,12 @@ ActiveRecord::Schema.define(version: 20161118020452) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-<<<<<<< HEAD
-=======
     t.boolean  "private",                default: false
     t.integer  "primary_diagnosis_id"
     t.integer  "secondary_diagnosis_id"
     t.integer  "partial_trisomy_id"
     t.integer  "health_history_id"
     t.integer  "background_history_id"
->>>>>>> 51261a40f21715a7a118e7f27aba054cea08ab79
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.boolean  "private",                   default: false
