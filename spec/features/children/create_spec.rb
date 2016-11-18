@@ -15,6 +15,7 @@ RSpec.feature "User creates a profile", :type => :feature do
     fill_in "date_of_death", :with => "12/08/2015"
     fill_in "city", :with => "Chicago"
     fill_in "trisomy_story", :with => "hello"
+    page.choose("private_false")
     click_button "Save changes"
 
     expect(page).to have_text("Johnny Rocket")
