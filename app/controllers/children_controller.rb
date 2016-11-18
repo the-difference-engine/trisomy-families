@@ -87,7 +87,8 @@ class ChildrenController < ApplicationController
       state: params[:parent_1_state],
       phone_number: params[:parent_1_phone_number],
       email: params[:parent_1_email],
-      relationship: params[:parent_1_relationship]
+      relationship: params[:parent_1_relationship],
+      child_id: @child.id
     )
     @parent.save
     @child.update(
@@ -97,12 +98,8 @@ class ChildrenController < ApplicationController
       secondary_diagnosis: params[:child_secondary_diagnosis],
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
-<<<<<<< HEAD
       partial_trisomy: params[:child_partial_trisomy],
       parent_id: @parent.id
-=======
-      partial_trisomy: params[:child_partial_trisomy]
->>>>>>> 175341269c9292e8469000dd7a2161e85f056088
     )
     @user.update(
       first_name: params[:user_first_name],
