@@ -1,0 +1,22 @@
+<h1>Stories</h1>
+<hr>
+<h1>Parents</h1>
+<hr>
+<h1>Participants</h1>
+<div class="row">
+<% @children.each do |child| %>
+<div class="col-md-6">
+<div class="media">
+  <div class="media-left">
+    <a href="profile/<%= child.id %>">
+      <img class="media-object" src="https://a.ppy.sh/8401625_1467085076.jpg" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><%= child.first_name %> <%= child.last_name %></h4>
+    ...
+  </div>
+</div>
+</div>
+<% end %>
+</div>
