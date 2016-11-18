@@ -16,6 +16,10 @@
     </div>
   <h3>Parent/Guardian 1:</h3>
     <div>
+      <%= label_tag :parent_1_relationship %>
+      <%= select_tag :parent_1_relationship, options_for_select(parents, @parent.relationship) %>
+    </div>
+    <div>
       <%= label_tag :parent_1_first_name %>
       <%= text_field_tag :parent_1_first_name, @parent.first_name %>
     </div>
@@ -39,6 +43,35 @@
       <%= label_tag :parent_1_email %>
       <%= text_field_tag :parent_1_email, @parent.email %>
     </div>
+  <h3>Parent/Guardian 2:</h3>
+    <div>
+      <%= label_tag :parent_1_relationship %>
+      <%= select_tag :parent_1_relationship, options_for_select(parents, @parent.relationship_2) %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_first_name %>
+      <%= text_field_tag :parent_2_first_name, @parent.first_name_2 %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_last_name %>
+      <%= text_field_tag :parent_2_last_name, @parent.last_name_2 %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_phone_number %>
+      <%= text_field_tag :parent_2_phone_number, @parent.phone_number_2 %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_state %>
+      <%= select_tag(:parent_2_state, options_for_select(us_states, @parent.state_2)) %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_city %>
+      <%= text_field_tag :parent_2_city, @parent.city_2 %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_email %>
+      <%= text_field_tag :parent_2_email, @parent.email_2 %>
+    </div>
   <h3>Participant:</h3>
     <div>
       <%= label_tag :child_nickname %>
@@ -50,13 +83,13 @@
     </div>
     <div>
       <%= label_tag :child_primary_diagnosis %>
-      <%= select_tag( :child_primary_diagnosis, options_for_select(primary_trisomy_diagnosis, @child.primary_trisomy_diagnosis)) %>
+      <%= select_tag( :child_primary_diagnosis, options_for_select(primary_trisomy_diagnosis, @child.primary_diagnosis)) %>
       <%= label_tag :other_primary_diagnosis %>
       <%= text_field_tag :other_primary_diagnosis, @child.other_primary_diagnosis %>
     </div>
     <div>
       <%= label_tag :child_secondary_diagnosis %>
-      <%= select_tag( :child_secondary_diagnosis, options_for_select(secondary_trisomy_diagnosis, @child_secondary_diagnosis)) %>
+      <%= select_tag( :child_secondary_diagnosis, options_for_select(secondary_trisomy_diagnosis, @child.secondary_diagnosis)) %>
       <%= label_tag :other_secondary_diagnosis %>
       <%= text_field_tag :other_secondary_diagnosis, @child.other_secondary_diagnosis %>
     </div>

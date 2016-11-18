@@ -7,6 +7,7 @@
 <p>state: <%= @child.state %></p>
 
 <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
+  <p>Profile picture: </p>
   <%= form.file_field :avatar %>
   <%= label_tag 'Story is private:' %>
   <%= form.radio_button :private, true %> Yes
@@ -14,6 +15,7 @@
   <%= submit_tag %>
 <% end %>
 
+<p>Profile picture: </p>
 <%= image_tag @child.avatar.url %>
 
 <div>

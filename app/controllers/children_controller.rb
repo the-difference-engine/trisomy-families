@@ -91,11 +91,24 @@ class ChildrenController < ApplicationController
       child_id: @child.id
     )
     @parent.save
+    @parent = Parent.new(
+      first_name_2: params[:parent_2_first_name],
+      last_name_2: params[:parent_2_last_name],
+      city_2: params[:parent_2_city],
+      state_2: params[:parent_2_state],
+      phone_number_2: params[:parent_2_phone_number],
+      email_2: params[:parent_2_email],
+      relationship_2: params[:parent_2_relationship],
+      child_id: @child.id
+    )
+    @parent.save
     @child.update(
       nickname: params[:child_nickname],
       birth_order: params[:child_birth_order],
       primary_diagnosis: params[:child_primary_diagnosis],
+      other_primary_diagnosis: params[:other_primary_diagnosis],
       secondary_diagnosis: params[:child_secondary_diagnosis],
+      other_secondary_diagnosis: params[:other_secondary_diagnosis],
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
       partial_trisomy: params[:child_partial_trisomy],
@@ -113,14 +126,14 @@ class ChildrenController < ApplicationController
   def edit_registration
     @child = Child.find_by(id: params[:id])
     @user = User.find_by(id: @child.user_id)
-    @parent = Parent.find_by(id: params[:id])
+    @parent = Parent.find_by(child_id: @child.id)
     render 'edit_registration.html.erb'
   end
 
   def update_registration
     @child = Child.find_by(id: params[:id])
     @user = User.find_by(id: @child.user_id)
-    @parent = Parent.find_by(id: params[:id])
+    @parent = Parent.find_by(child_id: @child.id)
     @parent = Parent.update(
       first_name: params[:parent_1_first_name],
       last_name: params[:parent_1_last_name],
@@ -129,6 +142,15 @@ class ChildrenController < ApplicationController
       phone_number: params[:parent_1_phone_number],
       email: params[:parent_1_email],
       relationship: params[:parent_1_relationship]
+    )
+    @parent = Parent.update(
+      first_name_2: params[:parent_2_first_name],
+      last_name_2: params[:parent_2_last_name],
+      city_2: params[:parent_2_city],
+      state_2: params[:parent_2_state],
+      phone_number_2: params[:parent_2_phone_number],
+      email_2: params[:parent_2_email],
+      relationship_2: params[:parent_2_relationship]
     )
     @child.update(
       nickname: params[:child_nickname],
@@ -208,7 +230,9 @@ class ChildrenController < ApplicationController
       height_id: @height.id
     )
     @background_history.save
-
+    @child.update(
+      background_history_id: @background_history.id
+    )
     render 'register.html.erb'
   end
 
@@ -282,7 +306,6 @@ class ChildrenController < ApplicationController
       weight_id: @weight.id,
       height_id: @height.id
     )
-
     @child.update(
       background_history_id: @background_history.id
     )
@@ -291,6 +314,7 @@ class ChildrenController < ApplicationController
   end
 
   def health_history
+    @child = Child.find_by(id: params[:id])
     @congenital_heart_defect = CongenitalHeartDefect.new(
       asd: params[:asd],
       vsd: params[:vsd],
@@ -531,6 +555,9 @@ class ChildrenController < ApplicationController
       clinical_trial_participation: params[:clinical_trial_participation]
     )
     @health_history.save
+    @child.update(
+      health_history_id: @health_history.id
+    )
     render 'register.html.erb'
   end
 
@@ -791,6 +818,9 @@ class ChildrenController < ApplicationController
       received_therapy_id: @received_therapy.id,
       clinical_trial: params[:clinical_trial],
       clinical_trial_participation: params[:clinical_trial_participation]
+    )
+    @child.update(
+      health_history_id: @health_history.id
     )
     redirect_to "/profile/#{@child.id}"
   end

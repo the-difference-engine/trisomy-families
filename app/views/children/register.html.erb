@@ -16,6 +16,10 @@
     </div>
   <h3>Parent/Guardian 1:</h3>
     <div>
+      <%= label_tag :parent_1_relationship %>
+      <%= select_tag :parent_1_relationship, options_for_select(parents, "") %>
+    </div>
+    <div>
       <%= label_tag :parent_1_first_name %>
       <%= text_field_tag :parent_1_first_name %>
     </div>
@@ -40,6 +44,10 @@
       <%= text_field_tag :parent_1_email %>
     </div>
   <h3>Parent/Guardian 2:</h3>
+    <div>
+      <%= label_tag :parent_1_relationship %>
+      <%= select_tag :parent_1_relationship, options_for_select(parents, "") %>
+    </div>
     <div>
       <%= label_tag :parent_2_first_name %>
       <%= text_field_tag :parent_2_first_name %>
