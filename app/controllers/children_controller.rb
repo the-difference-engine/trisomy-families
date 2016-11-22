@@ -47,28 +47,31 @@ class ChildrenController < ApplicationController
 
   def update
     @child = Child.find_by(id: params[:id])
-    
+
     calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
     calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
 
     @child.update(
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      trisomy_type: params[:trisomy_type],
-      birth_date: calculated_birth_date,
-      death_date: calculated_death_date,
-      state: params[:state],
-      city: params[:city],
-      trisomy_story: params[:trisomy_story],
-      private: params[:private],
-      avatar: params[:avatar]
+      first_name: params[:first_name] || @child.first_name,
+      last_name: params[:last_name] || @child.last_name,
+      trisomy_type: params[:trisomy_type] || @child.trisomy_type,
+      birth_date: calculated_birth_date || @child.birth_date,
+      death_date: calculated_death_date || @child.death_date,
+      state: params[:state] || @child.state,
+      city: params[:city] || @child.city,
+      trisomy_story: params[:trisomy_story] || @child.trisomy_story,
+      private: params[:private] || @child.private
     )
+    if @child.save
+      flash[:notice] = 'New Event Created.'
+    end
+
     redirect_to "/profile/#{@child.id}"
   end
 
   def destroy
     @child = Child.find_by(id: params[:id])
-    @child.destroy 
+    @child.destroy
     redirect_to '/'
   end
 
@@ -468,7 +471,7 @@ class ChildrenController < ApplicationController
       underdeveloped_eye_socket: params[:underdeveloped_eye_socket],
       dry_eyes: params[:dry_eyes],
       doesnt_blink_well: params[:doesnt_blink_well],
-      doesnt_close_eyes_when_sleeping: params[:doesnt_close_eyes_when_sleeping] 
+      doesnt_close_eyes_when_sleeping: params[:doesnt_close_eyes_when_sleeping]
     )
     @vision.save
 
@@ -497,7 +500,7 @@ class ChildrenController < ApplicationController
       expressive_delay: params[:expressive_delay],
       auditory_processing_disorder: params[:auditory_processing_disorder],
       apraxia_dyspraxia: params[:apraxia_dyspraxia],
-      visual_processing: params[:visual_processing]  
+      visual_processing: params[:visual_processing]
     )
     @behavioral_health.save
 

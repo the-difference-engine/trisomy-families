@@ -1,11 +1,5 @@
-<h3><%= @child.first_name + " " + @child.last_name %></h3>
-<p>Birth date: <%= @child.birth_date %></p>
-<p>Death date: <%= @child.death_date %></p>
-<p>Trisomy Story: <%= @child.trisomy_story %></p>
-<p>Trisomy type: <%= @child.trisomy_type %></p>
-<p>City: <%= @child.city %></p>
-<p>state: <%= @child.state %></p>
 
+<<<<<<< HEAD
 <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
   <p>Profile picture: </p>
   <%= form.file_field :avatar %>
@@ -22,5 +16,51 @@
   <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit" %><br>
   <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"} %><br>
   <%= link_to 'Register Profile',"/profile/#{@child.id}/register" %><br>
-</div>
+=======
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1><%= @child.first_name + " " + @child.last_name%></h1>
+    </div>
+    <div class="col-md-6">
+      <%= image_tag @child.avatar.url, :class => "img-thumbnail"%>
+    </div>
+    <div class="col-md-6 bg-info">
+      <br>
+      <p>Birthday: <%= @child.birth_date.strftime("%B %d") %></p>
+      <p>Age: </p>
+      <p><p>Birth Date: <%= @child.birth_date.strftime("%b %d, %Y") %></p></p>
+      <p>Trisomy Type: <%= @child.trisomy_type %></p>
+      <% if @child.death_date %>
+      <p>Death Date: <%= @child.death_date %></p>
+      <% end %>
+      <p>City: <%= @child.city %></p>
+      <p>State: <%= @child.state %></p>
+    </div>
 
+>>>>>>> 60d501851ee2954ab1b0d9fc68228648f4b24bd4
+</div>
+<hr>
+<div class="row">
+  <div class="md-col-8">
+    <h2>Trisomy Story </h2>
+    <p><%= @child.trisomy_story %></p>
+  </div>
+  <hr>
+  <div>
+    <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
+        <%= form.file_field :avatar, :class => "form-group" %>
+        <%= label_tag 'Story is private:' %>
+        <%= form.radio_button :private, true %> Yes
+        <%= form.radio_button :private, false %> No
+        <%= submit_tag nil, class: "btn btn-success"%>
+        <% end %>
+
+    <div>
+      <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default" %><br>
+      <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"}, :class => "btn btn-danger" %>
+    </div>
+
+  </div>
+</div>
+</div>

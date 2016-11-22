@@ -25,15 +25,15 @@
         <%= render '/partials/slide-show' %>
       </div>
       <div class="col-md-2">
-        <div style="padding-top:30px;" class="header-right clearfix">                
+        <div style="padding-top:30px;" class="header-right clearfix">
         <!-- Devise logout / login links !-->
         <% if user_signed_in? %>
-          <h3 align="center"><%= link_to('Create Profile', profile_new_path) %></h3>                  
-          <h3 align="center"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>                
+          <h3 align="center"><%= link_to('Create Profile', profile_new_path) %></h3>
+          <h3 align="center"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>
         <% else %>
-          <h3 align="center"><%= link_to('Login', new_user_session_path)  %></h3>                
-          <h3 align="center"><%= link_to('Sign up', new_user_registration_path ) %></h3>                  
-        <% end %>            
+          <h3 align="center"><%= link_to('Login', new_user_session_path)  %></h3>
+          <h3 align="center"><%= link_to('Sign up', new_user_registration_path ) %></h3>
+        <% end %>
         <!-- main-navigation start -->
         <!-- classes: -->
         <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
@@ -75,7 +75,10 @@
                   </li>
                   <li>
                     <a href="#">Trisomy Store</a>
-                  </li>                          
+                  </li>
+                  <li>
+                    <a href="/family-dashboard">Family Dashboard</a>
+                  </li>
                 </ul>
                 <!-- main-menu end -->
 
