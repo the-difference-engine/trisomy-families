@@ -533,6 +533,7 @@ class ChildrenController < ApplicationController
       sleep_apnea: params[:sleep_apnea],
       cranial_facial_id: @cranial_facial.id,
       cancer: params[:cancer],
+      other_cancer: params[:cancer_other],
       endocrine_id: @endocrine.id,
       hearing_test: params[:hearing_test],
       had_an_abr: params[:had_an_abr],
@@ -559,18 +560,18 @@ class ChildrenController < ApplicationController
 
   def edit_health_history
     @child = Child.find_by(id: params[:id])
-    @congenital_heart_defect = CongenitalHeartDefect.find_by(id: params[:id])
-    @intestinal_issue = IntestinalIssue.find_by(id: params[:id])
-    @gastric_surgery = GastricSurgery.find_by(id: params[:id])
-    @nuerological_condition = NuerologicalCondition.find_by(id: params[:id])
-    @muscular_skeletal = MuscularSkeletal.find_by(id: params[:id])
-    @cranial_facial = CranialFacial.find_by(id: params[:id])
-    @endocrine = Endocrine.find_by(id: params[:id])
-    @hearing = Hearing.find_by(id: params[:id])
-    @vision = Vision.find_by(id: params[:id])
-    @behavioral_health = BehavioralHealth.find_by(id: params[:id])
-    @received_therapy = ReceivedTherapy.find_by(id: params[:id])
-    @health_history = HealthHistory.find_by(id: params[:id])
+    @health_history = HealthHistory.find_by(id: @child.health_history_id)
+    @congenital_heart_defect = CongenitalHeartDefect.find_by(id: @health_history.chd_id)
+    @intestinal_issue = IntestinalIssue.find_by(id: @health_history.intestinal_issues_id)
+    @gastric_surgery = GastricSurgery.find_by(id: @health_history.gastric_surgery_id)
+    @nuerological_condition = NuerologicalCondition.find_by(id: @health_history.nuerological_condition_id)
+    @muscular_skeletal = MuscularSkeletal.find_by(id: @health_history.muscular_skeletal_id)
+    @cranial_facial = CranialFacial.find_by(id: @health_history.cranial_facial_id)
+    @endocrine = Endocrine.find_by(id: @health_history.endocrine_id)
+    @hearing = Hearing.find_by(id: @health_history.hearing_id)
+    @vision = Vision.find_by(id: @health_history.vision_id)
+    @behavioral_health = BehavioralHealth.find_by(id: @health_history.behavioral_health_id)
+    @received_therapy = ReceivedTherapy.find_by(id: @health_history.received_therapy_id)
     render 'edit_health_history.html.erb'
   end
 
@@ -798,6 +799,7 @@ class ChildrenController < ApplicationController
       sleep_apnea: params[:sleep_apnea],
       cranial_facial_id: @cranial_facial.id,
       cancer: params[:cancer],
+      other_cancer: params[:cancer_other],
       endocrine_id: @endocrine.id,
       hearing_test: params[:hearing_test],
       had_an_abr: params[:had_an_abr],

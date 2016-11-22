@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118020452) do
+ActiveRecord::Schema.define(version: 20161122014237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,12 +105,6 @@ ActiveRecord::Schema.define(version: 20161118020452) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                default: false
-    t.integer  "primary_diagnosis_id"
-    t.integer  "secondary_diagnosis_id"
-    t.integer  "partial_trisomy_id"
-    t.integer  "health_history_id"
-    t.integer  "background_history_id"
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.boolean  "private",                   default: false
@@ -287,6 +281,7 @@ ActiveRecord::Schema.define(version: 20161118020452) do
     t.boolean  "clinical_trial"
     t.boolean  "clinical_trial_participation"
     t.integer  "hearing_id"
+    t.string   "other_cancer"
   end
 
   create_table "hearings", force: :cascade do |t|
