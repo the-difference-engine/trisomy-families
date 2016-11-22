@@ -45,8 +45,8 @@
     </div>
   <h3>Parent/Guardian 2:</h3>
     <div>
-      <%= label_tag :parent_1_relationship %>
-      <%= select_tag :parent_1_relationship, options_for_select(parents, @parent.relationship_2) %>
+      <%= label_tag :parent_2_relationship %>
+      <%= select_tag :parent_2_relationship, options_for_select(parents, @parent.relationship_2) %>
     </div>
     <div>
       <%= label_tag :parent_2_first_name %>
@@ -79,7 +79,7 @@
     </div>
     <div>
       <%= label_tag :child_birth_order %>
-      <%= number_field :child_birth_order, in: 1..15, step: 1 %>
+      <%= number_field_tag :child_birth_order, @child.birth_order, in: 1..15, step: 1 %>
     </div>
     <div>
       <%= label_tag :child_primary_diagnosis %>
@@ -99,7 +99,7 @@
     </div>
     <div>
       <%= label_tag :child_mosaic_trisomy_percentage %>
-      <%= number_field :child_mosaic_trisomy_percentage, in: 0..100, step: 1 %>
+      <%= number_field_tag :child_mosaic_trisomy_percentage, @child.mosaic_percentage, in: 0..100, step: 1 %>
     </div>
     <div>
       <%= label_tag :child_partial_trisomy %>

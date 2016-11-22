@@ -88,18 +88,14 @@ class ChildrenController < ApplicationController
       phone_number: params[:parent_1_phone_number],
       email: params[:parent_1_email],
       relationship: params[:parent_1_relationship],
-      child_id: @child.id
-    )
-    @parent.save
-    @parent = Parent.new(
+      child_id: @child.id,
       first_name_2: params[:parent_2_first_name],
       last_name_2: params[:parent_2_last_name],
       city_2: params[:parent_2_city],
       state_2: params[:parent_2_state],
       phone_number_2: params[:parent_2_phone_number],
       email_2: params[:parent_2_email],
-      relationship_2: params[:parent_2_relationship],
-      child_id: @child.id
+      relationship_2: params[:parent_2_relationship]
     )
     @parent.save
     @child.update(
