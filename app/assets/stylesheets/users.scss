@@ -1,3 +1,75 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body, html {
+  height: 100%;
+  }
+
+#sidebar {
+    position:absolute;
+    top:0; bottom:0; left:0;
+    width:150px;
+/*    background-image: url("http://worldartsme.com/images/dna-cute-clipart-1.jpg");
+*/}
+
+#image {
+  margin-top: 300px;
+  height: 44.5%
+}
+
+#research {
+  position: absolute;
+  margin-left: -97px;
+  bottom: 190px;
+  color: azure;
+  font-size: 85%;
+  bottom: 477.5px;
+}
+
+#family-stories {
+  margin-left: -121px;
+  position: absolute;
+  color: azure;
+  font-size: 85%;
+  bottom: 380.5px;
+}
+
+#query-data {
+  margin-left: -107px;
+  position: absolute;
+  color: azure;
+  font-size: 80%;
+  bottom: 310px;
+}
+
+#fb-pages {
+  margin-left: -118px;
+  position: absolute;
+  color: azure;
+  font-size: 85%;
+  bottom: 285px;
+}
+
+#family-blogs {
+  margin-left: -104px;
+  position: absolute;
+  color: azure;
+  font-size: 85%;
+  bottom: 406px;
+}
+
+#professional-center {
+  margin-left: -120px;
+  position: absolute;
+  color: azure;
+  font-size: 70%;
+  bottom: 500.5px;
+}
+
+#family-center {
+  margin-left: -100px;
+  position: absolute;
+  color: azure;
+  font-size: 77%;
+  bottom: 261px;
+}
