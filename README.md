@@ -26,8 +26,8 @@ If you need extra help, refer to this page: https://github.com/thoughtbot/paperc
 https://docs.google.com/document/d/1Mlzv_yHtl_F1ph_-vf6VZhWs3B9-9kUDH46VBY3Fo7w/edit
 
 - Trisomy Family heroku servers:
-https://qa-svp-chicago.herokuapp.com/
-https://demo-svp-chicago.herokuapp.com/
-https://prod-svp-chicago.herokuapp.com/
+https://qa-trisomy-families.herokuapp.com/
+https://demo-trisomy-families.herokuapp.com/
+https://prod-trisomy-families.herokuapp.com/
 
 - Run rspec test in terminal: rspec
