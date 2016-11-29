@@ -1,0 +1,49 @@
+<head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h1>Family Center </h1>
+    <h3>Map</h3>
+    <div id="map"></div>
+    
+    <form class="form-inline">
+      <h4>Search For:</h4>
+      <div class="form-group">
+        <%= select_tag(:state, options_for_select(us_states), class: "form-control") %>
+      </div>
+      <div class="form-group">
+        <label for="name"></label>
+        <input type="text" class="form-control" id="name" placeholder="Last Name"></input>
+      </div>
+      <div class="form-group">
+        <label for="searchQueryCategory"></label>
+        <select class="form-control" id="searchQueryCategory">
+          <option>Family</option>
+          <option>Physician</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-default">Search</button>
+    </form>
+
+    <script>
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=ENV['GMAP_API']&callback=initMap">
+    </script>
+  </body>
