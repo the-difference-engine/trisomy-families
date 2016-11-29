@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111010024) do
+ActiveRecord::Schema.define(version: 20161129005814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,12 +105,7 @@ ActiveRecord::Schema.define(version: 20161111010024) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                default: false
-    t.integer  "primary_diagnosis_id"
-    t.integer  "secondary_diagnosis_id"
-    t.integer  "partial_trisomy_id"
-    t.integer  "health_history_id"
-    t.integer  "background_history_id"
+    t.boolean  "private",               default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.string   "primary_diagnosis"
@@ -521,6 +516,11 @@ ActiveRecord::Schema.define(version: 20161111010024) do
     t.string   "relationship"
     t.string   "phone_number"
     t.boolean  "admin",                  default: false
+    t.string   "family_name"
+    t.string   "address"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zip_code"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
