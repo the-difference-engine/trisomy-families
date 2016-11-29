@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Getting started:
 
-Things you may want to cover:
+- Make sure you are using Rails 5, this is a must. We are all currently using Ruby 2.2.3p173  or Ruby 2.3.1p112. Its not essential but have the same exact version, but something to keep in mind.
 
-* Ruby version
+- In your terminal, cd into the folder you want to create the app. Then create the app:
+git clone https://github.com/the-difference-engine/trisomy-families.git
 
-* System dependencies
+- Create database: rake db:create
 
-* Configuration
+- Migrate database: rake db:migrate
 
-* Database creation
+- Troubleshooting postgres problems:
+https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2
+http://stackoverflow.com/questions/13573204/psql-could-not-connect-to-server-no-such-file-or-directory-mac-os-x
 
-* Database initialization
+- Set up environment variables
 
-* How to run the test suite
+- Install Image Magick: install Image Magic: brew install imagemagick
+If you need extra help, refer to this page: https://github.com/thoughtbot/paperclip#requirements
 
-* Services (job queues, cache servers, search engines, etc.)
+- Run local server and verify application is running.
 
-* Deployment instructions
+- Set up heroku servers:
+https://docs.google.com/document/d/1Mlzv_yHtl_F1ph_-vf6VZhWs3B9-9kUDH46VBY3Fo7w/edit
 
-* ...
+- Trisomy Family heroku servers:
+https://qa-trisomy-families.herokuapp.com/
+https://demo-trisomy-families.herokuapp.com/
+https://prod-trisomy-families.herokuapp.com/
+
+- Run rspec test in terminal: rspec
