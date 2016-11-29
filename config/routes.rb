@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'profile/:id/edit_background_history' => 'children#edit_background_history'
   get 'profile/:id/edit_health_history' => 'children#edit_health_history'
   delete '/profile/:id' => 'children#destroy'
+  get 'profile/:id/background' => 'children#add_background'
+  get 'profile/:id/health_history' => 'children#add_health_history'
   post 'profile/:id/background' => 'children#background_history'
   post 'profile/:id/health' => 'children#health_history'
   patch 'profile/:id/register' => 'children#update_registration'

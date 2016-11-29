@@ -1,6 +1,6 @@
 <h1>Basic Registration for Participant</h1>
 
-<%= form_tag "/profile/#{@child.id}/register", method: :post do %>
+<%= form_tag "/profile/#{@child.id}/register", method: :patch do %>
   <h3>Your Info:</h3>
     <div>
       <%= label_tag :first_name, "Your name:" %>

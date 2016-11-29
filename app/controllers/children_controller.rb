@@ -119,7 +119,7 @@ class ChildrenController < ApplicationController
       relationship: params[:user_relationship],
       phone_number: params[:user_phone_number]
     )
-    redirect_to '/'
+    redirect_to "/profile/#{@child.id}"
   end
 
   def edit_registration
@@ -169,6 +169,11 @@ class ChildrenController < ApplicationController
     redirect_to "/profile/#{@child.id}"
   end
 
+  def add_background
+    @child = Child.find_by(id: params[:id])
+    render 'add_background.html.erb'
+  end
+
   def background_history
     @child = Child.find_by(id: params[:id])
     @mother_complications = MotherComplication.new(
@@ -180,7 +185,6 @@ class ChildrenController < ApplicationController
       unsure: params[:unsure],
       extra_fluid: params[:extra_fluid],
       other: params[:other_complications]
-      # otherdetails
     )
     @mother_complications.save
 
@@ -232,16 +236,16 @@ class ChildrenController < ApplicationController
     @child.update(
       background_history_id: @background_history.id
     )
-    render 'register.html.erb'
+    redirect_to "/profile/#{@child.id}"
   end
 
   def edit_background_history
     @child = Child.find_by(id: params[:id])
-    @mother_complications = MotherComplication.find_by(id: params[:id])
-    @weight = Weight.find_by(id: params[:id])
-    @height = Height.find_by(id: params[:id])
-    @head_circumference = HeadCircumference.find_by(id: params[:id])
-    @background_history = BackgroundHistory.find_by(id: params[:id])
+    @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
+    @mother_complications = MotherComplication.find_by(id: @background_history.mother_complication_id)
+    @weight = Weight.find_by(id: @background_history.weight_id)
+    @height = Height.find_by(id: @background_history.height_id)
+    @head_circumference = HeadCircumference.find_by(id: @background_history.head_circumference_id)
     render 'edit_background_history.html.erb'
   end
 
@@ -261,7 +265,6 @@ class ChildrenController < ApplicationController
       unsure: params[:unsure],
       extra_fluid: params[:extra_fluid],
       other: params[:other_complications]
-      # otherdetails
     )
 
     @weight = Weight.update(
@@ -310,6 +313,11 @@ class ChildrenController < ApplicationController
     )
 
     redirect_to "/profile/#{@child.id}"
+  end
+
+  def add_health_history
+    @child = Child.find_by(id: params[:id])
+    render 'add_health_history.html.erb'
   end
 
   def health_history
@@ -558,7 +566,7 @@ class ChildrenController < ApplicationController
     @child.update(
       health_history_id: @health_history.id
     )
-    render 'register.html.erb'
+    redirect_to "/profile/#{@child.id}"
   end
 
   def edit_health_history
