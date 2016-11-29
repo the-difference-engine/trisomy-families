@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :events
 
+
   get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'
   get '/profile/:id' => 'children#show'
@@ -27,4 +28,6 @@ Rails.application.routes.draw do
   get '/calendar' => 'users#calendar'
 
   get '/family-dashboard' => 'families#index'
+
+  get '/family-center' => 'family_center#index'
 end
