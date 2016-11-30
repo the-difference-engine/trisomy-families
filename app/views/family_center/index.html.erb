@@ -9,8 +9,11 @@
   <body>
     <h1>Family Center </h1>
     <h3>Map</h3>
+    <div ng-app="app">
+      <div ng-controller="familycenterCtrl" ng-init="setUp()">
+      {{ 2 + 2 }}
     <div id="map"></div>
-    
+
     <form class="form-inline">
       <h4>Search For:</h4>
       <div class="form-group">
@@ -18,21 +21,23 @@
       </div>
       <div class="form-group">
         <label for="name"></label>
-        <input type="text" class="form-control" id="name" placeholder="Last Name"></input>
+        <input type="text" class="form-control" id="name" placeholder="Last Name" ng-model="query.name"></input>
       </div>
       <div class="form-group">
-        <label for="searchQueryCategory"></label>
-        <select class="form-control" id="searchQueryCategory">
+        <label for="searchQueryType"></label>
+        <select class="form-control" id="searchQueryType" ng-model="query.type">
           <option>Family</option>
           <option>Physician</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-default">Search</button>
+      <button type="submit" class="btn btn-default" ng-click="performSearch()">Search</button>
     </form>
+  </div>
+  </div>
 
     <script>
       function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
+        var uluru = {lat: 37.0902, lng: 95.7129};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
@@ -44,6 +49,6 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=ENV['GMAP_API']&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzNgVwahZQ63o16EMv8eU4XFvdkgdr2XM&callback=initMap">
     </script>
   </body>
