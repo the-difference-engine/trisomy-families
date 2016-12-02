@@ -33,7 +33,7 @@ class ChildrenController < ApplicationController
       render 'show.html.erb'
     else
       flash[:warning] = 'You must be logged in to use this feature.'
-      redirect_to '/'
+      redirect_to '/users/sign_in'
     end
   end
 
