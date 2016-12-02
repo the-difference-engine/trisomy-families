@@ -36,6 +36,8 @@ gem 'angular-ui-calendar-rails'
 
 gem 'devise'
 
+gem 'geocoder'
+
 gem 'rails_12factor', group: :production
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
@@ -57,6 +59,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry'
+  gem 'faker', '~> 1.6.6'
 end
 
 group :test do
