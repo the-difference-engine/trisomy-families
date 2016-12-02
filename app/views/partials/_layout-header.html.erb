@@ -77,7 +77,9 @@
                     <a href="#">Trisomy Store</a>
                   </li>
                   <li>
-                    <a href="/family-dashboard">Family Dashboard</a>
+                    <% if current_user %>
+                      <%= link_to('Family Dashboard', '/family-dashboard') %>
+                    <% end %>
                   </li>
                 </ul>
                 <!-- main-menu end -->
