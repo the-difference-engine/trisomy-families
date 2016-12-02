@@ -28,8 +28,13 @@ class ChildrenController < ApplicationController
   end
 
   def show
-    @child = Child.find_by(id: params[:id])
-    render 'show.html.erb'
+    if user_signed_in?
+      @child = Child.find_by(id: params[:id])
+      render 'show.html.erb'
+    else
+      flash[:warning] = 'You must be logged in to use this feature.'
+      redirect_to '/'
+    end
   end
 
   def edit
