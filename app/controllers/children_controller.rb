@@ -89,6 +89,7 @@ class ChildrenController < ApplicationController
   end
 
   def register
+    @parent = Parent.new
     @child = Child.find_by(id: params[:id])
     render 'register.html.erb'
   end
@@ -113,7 +114,13 @@ class ChildrenController < ApplicationController
       email_2: params[:parent_2_email],
       relationship_2: params[:parent_2_relationship]
     )
-    @parent.save
+    if @parent.save
+      flash[:success] = "Profile Registered!"
+      redirect_to "/profile/#{@child.id}"
+    else
+      flash[:warning] = "Parents could not be saved"
+      render 'register.html.erb'
+    end
     @child.update(
       nickname: params[:child_nickname],
       birth_order: params[:child_birth_order],
@@ -126,13 +133,26 @@ class ChildrenController < ApplicationController
       partial_trisomy: params[:child_partial_trisomy],
       parent_id: @parent.id
     )
+    if @child.update
+      flash[:success] = "Profile Registered!"
+      redirect_to "profile/#{@child.id}"
+    else
+      flash[:warning] = "Child could not be updated!"
+      render 'register.html.erb'
+    end
     @user.update(
       first_name: params[:user_first_name],
       last_name: params[:user_last_name],
       relationship: params[:user_relationship],
       phone_number: params[:user_phone_number]
     )
-    redirect_to "/profile/#{@child.id}"
+    if user.update
+      flash[:success] = "Profile Registered!"
+      redirect_to "/profile/#{@child.id}"
+    else
+      flash[:warning] = "User could not be updated!"
+      render 'register.html.erb'
+    end
   end
 
   def edit_registration
