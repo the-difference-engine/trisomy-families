@@ -5,9 +5,14 @@ class Child < ApplicationRecord
   validates :last_name, presence: true
   validates :trisomy_type, presence: true
   validates :birth_date, presence: true
+  validates :death_date, presence: true
   validates :state, presence: true
   validates :city, presence: true
   validates :trisomy_story, presence: true
   validates :private, inclusion: [true, false]
+  validates :nickname, presence: true, on: :update
+  validates :birth_order, presence: true, on: :update
+  validates :primary_diagnosis, presence: true, on: :update
+
   belongs_to :user
 end

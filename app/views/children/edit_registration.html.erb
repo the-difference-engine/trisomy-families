@@ -2,6 +2,17 @@
 
 <%= form_tag "/profile/#{@child.id}/register", method: :patch do %>
   <h3>Your Info:</h3>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being updated:</h2>
+   
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
     <div>
       <%= label_tag :first_name, "Your name:" %>
       <%= text_field_tag :user_first_name, @user.first_name, placeholder: 'First Name' %>  <%= text_field_tag :user_last_name, @user.last_name, placeholder: 'Last Name' %> 
@@ -15,6 +26,17 @@
       <%= text_field_tag :user_phone_number, @user.phone_number%>
     </div>
   <h3>Parent/Guardian 1:</h3>
+    <% if @parent.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@parent.errors.count, "error") %> prohibited this parent from being saved:</h2>
+     
+        <ul>
+        <% @parent.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div>
       <%= label_tag :parent_1_relationship %>
       <%= select_tag :parent_1_relationship, options_for_select(parents, @parent.relationship) %>
@@ -73,6 +95,17 @@
       <%= text_field_tag :parent_2_email, @parent.email_2 %>
     </div>
   <h3>Participant:</h3>
+    <% if @child.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@child.errors.count, "error") %> prohibited this child from being updated:</h2>
+     
+        <ul>
+        <% @child.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div>
       <%= label_tag :child_nickname %>
       <%= text_field_tag :child_nickname, @child.nickname %>

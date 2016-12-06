@@ -89,12 +89,14 @@ class ChildrenController < ApplicationController
   end
 
   def register
+    @user = current_user
     @parent = Parent.new
     @child = Child.find_by(id: params[:id])
     render 'register.html.erb'
   end
 
   def confirm_register
+    # @user = current_user
     @child = Child.find_by(id: params[:id])
     @user = User.find_by(id: @child.user_id)
     @parent = Parent.new(
@@ -114,13 +116,6 @@ class ChildrenController < ApplicationController
       email_2: params[:parent_2_email],
       relationship_2: params[:parent_2_relationship]
     )
-    if @parent.save
-      flash[:success] = "Profile Registered!"
-      redirect_to "/profile/#{@child.id}"
-    else
-      flash[:warning] = "Parents could not be saved"
-      render 'register.html.erb'
-    end
     @child.update(
       nickname: params[:child_nickname],
       birth_order: params[:child_birth_order],
@@ -133,24 +128,35 @@ class ChildrenController < ApplicationController
       partial_trisomy: params[:child_partial_trisomy],
       parent_id: @parent.id
     )
-    if @child.update
-      flash[:success] = "Profile Registered!"
-      redirect_to "profile/#{@child.id}"
-    else
-      flash[:warning] = "Child could not be updated!"
-      render 'register.html.erb'
-    end
     @user.update(
       first_name: params[:user_first_name],
       last_name: params[:user_last_name],
       relationship: params[:user_relationship],
       phone_number: params[:user_phone_number]
     )
-    if user.update
+    if @parent.save &&
+       @child.update(
+         nickname: params[:child_nickname],
+         birth_order: params[:child_birth_order],
+         primary_diagnosis: params[:child_primary_diagnosis],
+         other_primary_diagnosis: params[:other_primary_diagnosis],
+         secondary_diagnosis: params[:child_secondary_diagnosis],
+         other_secondary_diagnosis: params[:other_secondary_diagnosis],
+         other_chrom_affected: params[:child_other_chrom_affected],
+         mosaic_percentage: params[:child_mosaic_trisomy_percentage],
+         partial_trisomy: params[:child_partial_trisomy],
+         parent_id: @parent.id
+       ) &&
+       @user.update(
+         first_name: params[:user_first_name],
+         last_name: params[:user_last_name],
+         relationship: params[:user_relationship],
+         phone_number: params[:user_phone_number]
+       )
       flash[:success] = "Profile Registered!"
       redirect_to "/profile/#{@child.id}"
     else
-      flash[:warning] = "User could not be updated!"
+      flash[:warning] = "Profile could not be registered!"
       render 'register.html.erb'
     end
   end
@@ -166,40 +172,44 @@ class ChildrenController < ApplicationController
     @child = Child.find_by(id: params[:id])
     @user = User.find_by(id: @child.user_id)
     @parent = Parent.find_by(child_id: @child.id)
-    @parent = Parent.update(
-      first_name: params[:parent_1_first_name],
-      last_name: params[:parent_1_last_name],
-      city: params[:parent_1_city],
-      state: params[:parent_1_state],
-      phone_number: params[:parent_1_phone_number],
-      email: params[:parent_1_email],
-      relationship: params[:parent_1_relationship]
-    )
-    @parent = Parent.update(
-      first_name_2: params[:parent_2_first_name],
-      last_name_2: params[:parent_2_last_name],
-      city_2: params[:parent_2_city],
-      state_2: params[:parent_2_state],
-      phone_number_2: params[:parent_2_phone_number],
-      email_2: params[:parent_2_email],
-      relationship_2: params[:parent_2_relationship]
-    )
-    @child.update(
-      nickname: params[:child_nickname],
-      birth_order: params[:child_birth_order],
-      primary_diagnosis: params[:child_primary_diagnosis],
-      secondary_diagnosis: params[:child_secondary_diagnosis],
-      other_chrom_affected: params[:child_other_chrom_affected],
-      mosaic_percentage: params[:child_mosaic_trisomy_percentage],
-      partial_trisomy: params[:child_partial_trisomy]
-    )
-    @user.update(
-      first_name: params[:user_first_name],
-      last_name: params[:user_last_name],
-      relationship: params[:user_relationship],
-      phone_number: params[:user_phone_number]
-    )
-    redirect_to "/profile/#{@child.id}"
+    if 
+      @parent.update(
+        first_name: params[:parent_1_first_name],
+        last_name: params[:parent_1_last_name],
+        city: params[:parent_1_city],
+        state: params[:parent_1_state],
+        phone_number: params[:parent_1_phone_number],
+        email: params[:parent_1_email],
+        relationship: params[:parent_1_relationship],
+        first_name_2: params[:parent_2_first_name],
+        last_name_2: params[:parent_2_last_name],
+        city_2: params[:parent_2_city],
+        state_2: params[:parent_2_state],
+        phone_number_2: params[:parent_2_phone_number],
+        email_2: params[:parent_2_email],
+        relationship_2: params[:parent_2_relationship]
+      ) &&
+      @child.update(
+        nickname: params[:child_nickname],
+        birth_order: params[:child_birth_order],
+        primary_diagnosis: params[:child_primary_diagnosis],
+        secondary_diagnosis: params[:child_secondary_diagnosis],
+        other_chrom_affected: params[:child_other_chrom_affected],
+        mosaic_percentage: params[:child_mosaic_trisomy_percentage],
+        partial_trisomy: params[:child_partial_trisomy]
+      ) &&
+      @user.update(
+        first_name: params[:user_first_name],
+        last_name: params[:user_last_name],
+        relationship: params[:user_relationship],
+        phone_number: params[:user_phone_number]
+      )
+      flash[:success] = "Profile Updated!"
+      redirect_to "/profile/#{@child.id}"
+    else
+      flash[:warning] = "Profile could not be updated!"
+      render 'edit_registration.html.erb'
+    end
   end
 
   def add_background
