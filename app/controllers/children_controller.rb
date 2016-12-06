@@ -41,7 +41,7 @@ class ChildrenController < ApplicationController
       render 'show.html.erb'
     else
       flash[:warning] = 'You must be logged in to use this feature.'
-      redirect_to '/'
+      redirect_to '/users/sign_in'
     end
   end
 
@@ -171,7 +171,7 @@ class ChildrenController < ApplicationController
       secondary_diagnosis: params[:child_secondary_diagnosis],
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
-      arms_affected: params[:child_partial_trisomy]
+      partial_trisomy: params[:child_partial_trisomy]
     )
     @user.update(
       first_name: params[:user_first_name],
@@ -624,7 +624,7 @@ class ChildrenController < ApplicationController
       not_applicable: params[:not_applicable],
       other: params[:other]
     )
-    
+
     @intestinal_issue = IntestinalIssue.update(
       duodenal_atresia_stenosis_web: params[:duodenal_atresia_stenosis_web],
       anal_stenosis_atresia: params[:anal_stenosis_atresia],
@@ -643,7 +643,7 @@ class ChildrenController < ApplicationController
       ibs: params[:ibs],
       ibd: params[:ibd]
     )
-    
+
     @gastric_surgery = GastricSurgery.update(
       repair_of_duodenal_atresia_stenosis_web: params[:repair_of_duodenal_atresia_stenosis_web],
       repair_of_anal_stenosis_atresia: params[:repair_of_anal_stenosis_atresia],
@@ -653,7 +653,7 @@ class ChildrenController < ApplicationController
       none: params[:none],
       other: params[:other_gastric_surgery]
     )
-    
+
     @nuerological_condition = NuerologicalCondition.update(
       brain_malformation: params[:brain_malformation],
       cyst: params[:cyst],
@@ -666,7 +666,7 @@ class ChildrenController < ApplicationController
       stroke_surgery: params[:stroke_surgery],
       other: params[:other_nuero_surgery]
     )
-    
+
     @muscular_skeletal = MuscularSkeletal.update(
       atlanto_axial_instability: params[:atlanto_axial_instability],
       cervical_spine_degeneration: params[:cervical_spine_degeneration],
@@ -695,7 +695,7 @@ class ChildrenController < ApplicationController
       club_foot_surgery: params[:club_foot_surgery],
       rocker_bottom_feet_surgery: params[:rocker_bottom_feet_surgery]
     )
-    
+
     @cranial_facial = CranialFacial.update(
       cranial_deformities: params[:cranial_deformities],
       cleft_palate: params[:cleft_palate],
@@ -708,7 +708,7 @@ class ChildrenController < ApplicationController
       overgrowth_of_gums: params[:overgrowth_of_gums],
       delayed_teething: params[:delayed_teething]
     )
-    
+
     @endocrine = Endocrine.update(
       hyperthyroidism: params[:hyperthyroidism],
       hypothyroidism: params[:hypothyroidism],
@@ -732,7 +732,7 @@ class ChildrenController < ApplicationController
       unhealthy_cholesterol_levels: params[:unhealthy_cholesterol_levels],
       increased_abdominal_fat: params[:increased_abdominal_fat]
     )
-    
+
     @hearing = Hearing.update(
       transient: params[:transient],
       conductive: params[:conductive],
@@ -740,7 +740,7 @@ class ChildrenController < ApplicationController
       unknown: params[:unknown],
       other: params[:other_hearing]
     )
-    
+
     @vision = Vision.update(
       cataract: params[:cataract],
       strabismus: params[:strabismus],
@@ -762,9 +762,9 @@ class ChildrenController < ApplicationController
       underdeveloped_eye_socket: params[:underdeveloped_eye_socket],
       dry_eyes: params[:dry_eyes],
       doesnt_blink_well: params[:doesnt_blink_well],
-      doesnt_close_eyes_when_sleeping: params[:doesnt_close_eyes_when_sleeping] 
+      doesnt_close_eyes_when_sleeping: params[:doesnt_close_eyes_when_sleeping]
     )
-    
+
     @behavioral_health = BehavioralHealth.update(
       add: params[:add],
       adhd: params[:adhd],
@@ -790,9 +790,9 @@ class ChildrenController < ApplicationController
       expressive_delay: params[:expressive_delay],
       auditory_processing_disorder: params[:auditory_processing_disorder],
       apraxia_dyspraxia: params[:apraxia_dyspraxia],
-      visual_processing: params[:visual_processing]  
+      visual_processing: params[:visual_processing]
     )
-    
+
     @received_therapy = ReceivedTherapy.update(
       ot: params[:ot],
       pt: params[:pt],
