@@ -4,8 +4,19 @@ class EventsController < ApplicationController
 # Might not be the most secure option
 skip_before_action :verify_authenticity_token
 
+before_action :authenticate_user!
+
+  def index
+    #order the events by date
+    @events = Event.order(:start).all
+  end
+
   def new
     @event = Event.new
+  end
+
+  def show
+    @event = Event.find_by(id: params[:id])
   end
 
   def create
@@ -23,7 +34,7 @@ skip_before_action :verify_authenticity_token
   private
 
     def event_params
-      params.require(:event).permit(:title, :description, :date)
+      params.require(:event).permit(:title, :description, :start, :end)
     end
 
 end

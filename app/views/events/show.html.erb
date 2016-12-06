@@ -1,0 +1,83 @@
+<div class="container">
+  <div ng-app="app">
+    <div ng-controller="eventCtrl" ng-init=setUp()>
+      <div class="row">
+        <div class="col-md-6">
+          <div ng-hide=editEnabled>
+            <h1> 
+              <strong> {{ event.title }} </strong>
+            </h1>
+          </div>
+
+          <div ng-show=editEnabled edit-event-form>
+          </div>
+        </div>
+
+        <div class="col-md-6 text-right">
+          <input class="btn btn-default" type="button" value="Upload Photo">
+          <% if current_user.admin? %>
+            <input class="btn btn-default" type="button" value="Edit" ng-hide="editEnabled" ng-click="toggleEditMode()">
+            <input class="btn btn-success" type="button" value="Save" ng-show="editEnabled" ng-disabled="modelHasChanged()" ng-click="saveEdit()">
+            <input class="btn btn-danger" type="button" value="Cancel" ng-show="editEnabled" ng-click="resetModel(); toggleEditMode()">
+
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> <span class="caret"></span>
+              </button>
+
+              <ul class="dropdown-menu">
+                <li><a href="#">Invite Others</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Cancel Event</a></li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <hr>
+      <h3>
+        <div ng-hide=editEnabled>
+          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            {{ formatDate() }}
+        </div>
+      </h3>
+
+      <h4>
+        <div ng-hide=editEnabled>
+          <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>  
+          <strong>
+            {{ formatTime(event.start) }} - {{ formatTime(event.end) }}
+          </strong>
+        </div>
+      </h4>
+
+      <hr>
+      <h4>
+        <div ng-hide=editEnabled>
+          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+            {{ event.location }}
+        </div>
+      </h4>
+
+      <p>
+        <div ng-hide=editEnabled>
+          Type: {{ event.event_type }}
+        </div>
+      </p>
+
+      <p>
+        <div ng-hide=editEnabled>
+          <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+            {{ event.description }}
+        </div>
+      </p>
+
+      <p>
+        <div ng-hide=editEnabled>
+          All Day: {{ event.allDay }}
+        </div>
+      </p>
+    </div>
+  </div>
+</div>

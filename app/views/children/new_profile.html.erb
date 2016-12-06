@@ -1,36 +1,59 @@
-<h1>Complete Profile</h1>
 
+<div class="container">
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1 class="text-center">Family Member Profile</h1>
+    <p class="text-center">Add a member to your family dashboard.</p>
+    <hr>
 <%= form_tag '/profile', method: :post do %>
-  <div>
-    <%= label_tag :child_first_name, "Name of Child" %>
-    <%= text_field_tag :first_name, nil, placeholder: 'First Name' %>  <%= text_field_tag :last_name, nil, placeholder: 'Last Name' %> 
+<h5 style="color:gray">Basic Info</h5>
+  <div class="form-group">
+    <%= label_tag :child_first_name, "Full Name" %>
+    <%= text_field_tag :first_name, @child.first_name, class: "form-control", placeholder: 'First Name' %>
   </div>
-  <div>
+  <div class="form-group">
+    <%= text_field_tag :last_name, nil, class: "form-control", placeholder: 'Last Name' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :date_of_birth, "Date of Birth" %>
+    <%= date_field_tag :date_of_birth, nil, class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= label_tag :date_of_death, "Date of Death (optional)" %>
+    <%= date_field_tag :date_of_death, nil, class: "form-control" %>
+  </div>
+  <hr>
+  <h5 style="color:gray">Location</h5>
+  <div class="form-group">
+    <%= label_tag :state, 'State' %>
+    <%= select_tag(:state, options_for_select(us_states, "IL"), class: "form-control") %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :city, 'City' %>
+    <%= text_field_tag :city, nil, class: "form-control" %>
+  </div>
+  <hr>
+  <h5 style="color:gray">Trisomy</h5>
+  <div class="form-group">
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
-    <%= select_tag(:trisomy_type, options_for_select(trisomy_type, "1")) %> 
+    <%= select_tag(:trisomy_type, options_for_select(trisomy_type, "1")) %>
   </div>
-  <div>
-    <%= label_tag :date_of_birth %>
-    <%= date_field_tag :date_of_birth%>
+  <div class="form-group">
+    <%= label_tag :trisomy_story, "Trisomy Story" %>
+    <%= text_area_tag :trisomy_story, nil, class: "form-control", row: "3" %>
   </div>
-  <div>
-    <%= label_tag :date_of_death %>
-    <%= date_field_tag :date_of_death %>
+  <div class="form-group">
+    <%= label_tag :story_privacy, 'Story is private:' %>
+    <%= radio_button_tag :private, true %>Yes
+    <%= radio_button_tag :private, false %>No
   </div>
-  <div>
-    <%= label_tag :state %>
-    <%= select_tag(:state, options_for_select(us_states, "IL")) %>
-  </div>
-  <div>
-    <%= label_tag :city %>
-    <%= text_field_tag :city %>
-  </div>
-  <div>
-    <%= label_tag :trisomy_story %>
-    <%= text_area_tag :trisomy_story %>
-  </div>
+  <hr>
   <div>
     <%= hidden_field_tag :user_id, current_user.id %>
   </div>
-  <%= submit_tag %>
+
+  <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
+</div> <!-- col-md-6 -->
+</div> <!-- row -->
+</div> <!-- container -->
 <% end %>

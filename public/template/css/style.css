@@ -424,9 +424,8 @@ tbody {
   border-bottom: 1px solid #3c9acd;
 }
 .header {
-  border-top: 1px solid #ffffff;
   border-bottom: 2px solid #f1f1f1;
-  background-color: #fcfcfc;
+  background-color: #fff;
 }
 .header.dark {
   background-color: #394245;
@@ -7774,3 +7773,4 @@ h6.media-heading {
   color: #fff;
 }
 /*# sourceMappingURL=style.css.map */
+

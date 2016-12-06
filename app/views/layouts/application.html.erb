@@ -4,57 +4,7 @@
 <html lang="en">
   <!--<![endif]-->
 
-  <head>
-    <title>TrisomyFamilies</title>
-
-    <meta charset="utf-8">
-    <meta name="description" content="The Project a Bootstrap-based, Responsive HTML5 Template">
-    <meta name="author" content="htmlcoder.me">
-
-    <!-- Mobile Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-
-    <!-- Web Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/template/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Font Awesome CSS -->
-    <link href="/template/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Fontello CSS -->
-    <link href="/template/fonts/fontello/css/fontello.css" rel="stylesheet">
-
-    <!-- Plugins -->
-    <link href="/template/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <link href="/template/plugins/rs-plugin/css/settings.css" rel="stylesheet">
-    <link href="/template/css/animations.css" rel="stylesheet">
-    <link href="/template/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="/template/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
-    <link href="/template/plugins/hover/hover-min.css" rel="stylesheet">
-
-    <!-- The Project core CSS file -->
-    <link href="/template/css/style.css" rel="stylesheet" >
-    <!-- Color Scheme (In order to change the color scheme, replace the blue.css with the color scheme that you prefer)-->
-    <link href="/template/css/skins/blue.css" rel="stylesheet">
-
-
-    <!-- Custom css -->
-    <link href="/template/css/custom.css" rel="stylesheet">
-
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-  </head>
+  <%= render '/partials/layout-head' %>
 
   <!-- body classes:  -->
   <!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
@@ -62,235 +12,54 @@
   <!-- "transparent-header": makes the header transparent and pulls the banner to top -->
   <!-- "gradient-background-header": applies gradient background to header -->
   <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
-  <body class="no-trans  transparent-header  ">
+  <body class="no-trans  transparent-header">
 
-    <!-- scrollToTop -->
-    <!-- ================ -->
-    <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
-
-    <!-- page wrapper start -->
-    <!-- ================ -->
+    <div class="scrollToTop circle">
+      <i class="icon-up-open-big"></i>
+    </div>
     <div class="page-wrapper">
-
-      <!-- header-container start -->
       <div class="header-container">
-
-        <!-- header-top start -->
         <!-- classes:  -->
         <!-- "dark": dark version of header top e.g. class="header-top dark" -->
         <!-- "colored": colored version of header top e.g. class="header-top colored" -->
-        <!-- ================ -->
-        <div class="header-top colored">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-2 col-sm-5">
-                <!-- header-top-first start -->
-                <!-- ================ -->
-                <div class="header-top-first clearfix">
-                  <ul class="social-links circle small clearfix hidden-xs">
-                    <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-                    <li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
-                    <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
-                    <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="youtube"><a target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube-play"></i></a></li>
-                    <li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
-                    <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-                    <li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
-                  </ul>
-                  <div class="social-links hidden-lg hidden-md hidden-sm circle small">
-                    <div class="btn-group dropdown">
-                      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-alt"></i></button>
-                      <ul class="dropdown-menu dropdown-animation">
-                        <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-                        <li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
-                        <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
-                        <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
-                        <li class="youtube"><a target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube-play"></i></a></li>
-                        <li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
-                        <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-                        <li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <!-- header-top-first end -->
-              </div>
-              <div class="col-xs-10 col-sm-7">
-
-                <!-- header-top-second start -->
-                <!-- ================ -->
-                <div id="header-top-second"  class="clearfix text-right">
-                  <nav>
-                    <ul class="list-inline">
-                      <li><a class="link-light " href="#"><i class="fa fa-user-md pr-5"></i>Find a Trisomy Doctor</a></li>
-                      <li><a class="link-light" href="#"><i class="fa fa-flask pr-5"></i>Research</a></li>
-                      <li><a class="link-light" href="#"><i class="fa fa-info-circle pr-5"></i>FAQ</a></li>
-                      <li><a class="link-light" href="#">Contact Us</a></li>
-                    </ul>
-                  </nav>
-                </div>
-                <!-- header-top-second end -->
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- header-top end -->
-
-        <!-- header start -->
+        <%= render '/partials/layout-header-top' %>        
         <!-- classes:  -->
         <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
         <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
         <!-- "full-width": mandatory class for the full-width menu layout -->
         <!-- "centered": mandatory class for the centered logo layout -->
-        <!-- ================ -->
-        <header class="header  fixed    clearfix">
-
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3 ">
-                <!-- header-left start -->
-                <!-- ================ -->
-                <div class="header-left clearfix">
-
-                  <!-- logo -->
-                  <div id="logo" class="logo">
-                    <a href="/"><img id="logo_img" src="/template/images/TrisomyFamilies_Logo.jpg" alt="The Project"></a>
-                  </div>
-
-                  <!-- name-and-slogan -->
-                  <div class="site-slogan">
-                    <!-- Multipurpose HTML5 Template -->
-                  </div>
-
-                </div>
-                <!-- header-left end -->
-
-              </div>
-              <div class="col-md-9">
-
-                <!-- header-right start -->
-                <!-- ================ -->
-                <div class="header-right clearfix">
-
-                <!-- main-navigation start -->
-                <!-- classes: -->
-                <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
-                <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
-                <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
-                <!-- ================ -->
-                <div class="main-navigation  animated with-dropdown-buttons">
-
-                  <!-- navbar start -->
-                  <!-- ================ -->
-                  <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-
-                      <!-- Toggle get grouped for better mobile display -->
-                      <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                        </button>
-
-                      </div>
-
-                      <!-- Collect the nav links, forms, and other content for toggling -->
-                      <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                        <!-- main-menu -->
-                        <ul class="nav navbar-nav ">
-
-                          <!-- mega-menu start -->
-                          <li>
-                            <a href="#">About Us</a>
-                          </li>
-                          <!-- mega-menu end -->
-                          <!-- mega-menu start -->
-                          <!-- <li>
-                            <a href="#">FAQ</a>
-                          </li> -->
-                          <!-- mega-menu end -->
-                          <!-- <li>
-                            <a href="#">Contact Us</a>
-                          </li> -->
-                          <!-- mega-menu start -->
-                          <li>
-                            <a href="#">Donate</a>
-                          </li>
-                          <!-- mega-menu end -->
-                          <li>
-                            <a href="#">Calendar</a>
-                          </li>
-                          <li>
-                            <a href="#">Get Involved</a>
-                          </li>
-                          <!-- Devise logout / login links !-->
-                          <% if user_signed_in? %>
-                            <li>
-                              <%= link_to('Create Profile', profile_new_path) %>
-                            </li>
-                            <li>
-                              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-                            </li>
-                          <% else %>
-                            <li>
-                              <%= link_to('Login', new_user_session_path)  %>
-                            </li>
-                            <li>
-                              <%= link_to('Sign up', new_user_registration_path ) %>
-                            </li>
-                          <% end %>
-                        </ul>
-                        <!-- main-menu end -->
-
-                        <!-- header dropdown buttons -->
-                        <!-- <div class="header-dropdown-buttons">
-                          <a href="#" class="btn btn-sm hidden-xs btn-default">Apointment <i class="fa fa-hospital-o pl-5"></i></a>
-                          <a href="#" class="btn btn-lg visible-xs btn-block btn-default">Make an Apointment <i class="fa fa-hospital-o pl-5"></i></a>
-                        </div> -->
-                        <!-- header dropdown buttons end-->
-
-                      </div>
-
-                    </div>
-                  </nav>
-                  <!-- navbar end -->
-
-                </div>
-                <!-- main-navigation end -->
-                </div>
-                <!-- header-right end -->
-
-              </div>
-            </div>
-          </div>
-
-        </header>
-        <!-- header end -->
+        <%= render '/partials/layout-header' %>
       </div>
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
+      <div class="container">
 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+        <% flash.each do |name, message| %>
+          <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <%= message.html_safe %>
+          </div>
+        <% end %>
 
-      <% flash.each do |name, message| %>
-        <div class="alert alert-<%= name %> alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-          <%= message.html_safe %> 
-        </div>
-      <% end %>
-
-      <%= yield %>
+        <%= yield %>
+      </div>
 
       <!-- .subfooter start -->
       <!-- ================ -->
+
       <div class="subfooter">
         <div class="container">
           <div class="subfooter-inner">
             <div class="row">
               <div class="col-md-12">
-                <p class="text-center">Created by <a target="_blank" href="http://thedifferenceengine.io">The Difference Engine</a>. All Rights Reserved</p>
+                <!-- <p class="text-center">Created by <a target="_blank" href="http://thedifferenceengine.io">The Difference Engine</a>. All Rights Reserved</p> -->
+                <p class="text-center social-icons">
+                  <a href="#"><i class="fa fa-facebook" aria-hidden="true" title="Follow us on Facebook"></i></a>
+                  <a href="#"><i class="fa fa-twitter" aria-hidden="true" title="Follow us on Twitter"></i></a>
+                  <a href="#"><i class="fa fa-youtube" aria-hidden="true" title="See our channel on YouTube"></i></a>
+                  <a href="#"><i class="fa fa-money" aria-hidden="true" title="Make a donation!"></i></a>
+                </p>
               </div>
             </div>
           </div>
@@ -298,8 +67,7 @@
       </div>
       <!-- .subfooter end -->
 
-  </div>
-  <!-- page-wrapper end -->
+    </div>
 
     <!-- JavaScript files placed at the end of the document so the pages load faster -->
     <!-- ================================================== -->
@@ -337,5 +105,8 @@
     <script type="text/javascript" src="/template/js/template.js"></script>
     <!-- Custom Scripts -->
     <script type="text/javascript" src="/template/js/custom.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
   </body>
 </html>

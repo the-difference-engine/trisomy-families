@@ -1,0 +1,109 @@
+<h1>Basic Registration for Participant</h1>
+
+<%= form_tag "/profile/#{@child.id}/register", method: :post do %>
+  <h3>Your Info:</h3>
+    <div>
+      <%= label_tag :first_name, "Your name:" %>
+      <%= text_field_tag :user_first_name, nil, placeholder: 'First Name' %>  <%= text_field_tag :user_last_name, nil, placeholder: 'Last Name' %> 
+    </div>
+    <div>
+      <%= label_tag :relationship, "Relationship to participant" %>
+      <%= select_tag( :user_relationship, options_for_select(user_relationship, " ")) %> 
+    </div>
+    <div>
+      <%= label_tag :phone_number %>
+      <%= text_field_tag :user_phone_number%>
+    </div>
+  <h3>Parent/Guardian 1:</h3>
+    <div>
+      <%= label_tag :parent_1_relationship %>
+      <%= select_tag :parent_1_relationship, options_for_select(parents, "") %>
+    </div>
+    <div>
+      <%= label_tag :parent_1_first_name %>
+      <%= text_field_tag :parent_1_first_name %>
+    </div>
+    <div>
+      <%= label_tag :parent_1_last_name %>
+      <%= text_field_tag :parent_1_last_name %>
+    </div>
+    <div>
+      <%= label_tag :parent_1_phone_number %>
+      <%= text_field_tag :parent_1_phone_number %>
+    </div>
+    <div>
+      <%= label_tag :parent_1_state %>
+      <%= select_tag(:parent_1_state, options_for_select(us_states, "IL")) %>
+    </div>
+    <div>
+      <%= label_tag :parent_1_city %>
+      <%= text_field_tag :parent_1_city %>
+    </div>
+    <div>
+      <%= label_tag :parent_1_email %>
+      <%= text_field_tag :parent_1_email %>
+    </div>
+  <h3>Parent/Guardian 2:</h3>
+    <div>
+      <%= label_tag :parent_1_relationship %>
+      <%= select_tag :parent_1_relationship, options_for_select(parents, "") %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_first_name %>
+      <%= text_field_tag :parent_2_first_name %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_last_name %>
+      <%= text_field_tag :parent_2_last_name %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_phone_number %>
+      <%= text_field_tag :parent_2_phone_number %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_state %>
+      <%= select_tag(:parent_2_state, options_for_select(us_states, "IL")) %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_city %>
+      <%= text_field_tag :parent_2_city %>
+    </div>
+    <div>
+      <%= label_tag :parent_2_email %>
+      <%= text_field_tag :parent_2_email %>
+    </div>
+  <h3>Participant:</h3>
+    <div>
+      <%= label_tag :child_nickname %>
+      <%= text_field_tag :child_nickname %>
+    </div>
+    <div>
+      <%= label_tag :child_birth_order %>
+      <%= number_field_tag :child_birth_order, in: 1..15, step: 1 %>
+    </div>
+    <div>
+      <%= label_tag :child_primary_diagnosis %>
+      <%= select_tag( :child_primary_diagnosis, options_for_select(primary_trisomy_diagnosis, " ")) %>
+      <%= label_tag :other_primary_diagnosis %>
+      <%= text_field_tag :other_primary_diagnosis %>
+    </div>
+    <div>
+      <%= label_tag :child_secondary_diagnosis %>
+      <%= select_tag( :child_secondary_diagnosis, options_for_select(secondary_trisomy_diagnosis, " ")) %>
+      <%= label_tag :other_secondary_diagnosis %>
+      <%= text_field_tag :other_secondary_diagnosis %>
+    </div>
+    <div>
+      <%= label_tag :child_other_chrom_affected %>
+      <%= select_tag( :child_other_chrom_affected, options_for_select(trisomy_type, "1")) %>
+    </div>
+    <div>
+      <%= label_tag :child_mosaic_trisomy_percentage %>
+      <%= number_field_tag :child_mosaic_trisomy_percentage, in: 0..100, step: 1 %>
+    </div>
+    <div>
+      <%= label_tag :child_partial_trisomy %>
+      <%= select_tag( :child_partial_trisomy, options_for_select(partial_trisomy, " ")) %>
+    </div>
+<%= submit_tag %>
+<% end %>

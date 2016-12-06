@@ -1,0 +1,2 @@
+class PrimaryDiagnosis < ApplicationRecord
+end
