@@ -3,12 +3,24 @@ class Api::V1::SearchController < ApplicationController
   def index
     if params[:type] == "physician"
       rows = Physician.where(hash_params)
+      if params[:limit] != nil
+        rows = rows.limit(params[:limit].to_i)
+      end
+
+      render json: rows, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
 
     elsif params[:type] == "family"
       rows = User.where(hash_params)
+      if params[:limit] != nil
+        rows = rows.limit(params[:limit].to_i)
+      end
+
+      render json: rows, each_serializer: Api::V1::FamilySerializer, adapter: :json_api, root: false
 
     else
-      render nothing: true, status: 404
+      render json: {
+        status: 404
+      }
     end
 
   end
@@ -17,11 +29,21 @@ class Api::V1::SearchController < ApplicationController
 
   def hash_params
     h = {}
-    h[:state] = params[:state] if params[:state] != ""
-    h[:city] = params[:city] if params[:city] != ""
-    h[:last_name] = params[:last_name] if params[:last_name] != ""
-    h[:speciality] = params[:speciality] if params[:speciality] != "" && params[type] == "physician"
+    if params[:state] != nil
+      h[:state] = params[:state]
+    end
+    if params[:city] != nil
+      h[:city] = params[:city]
+    end
+    if params[:last_name] != nil
+      h[:last_name] = params[:last_name]
+    end
+    if params[:type] == "physician"
+      if params[:speciality] != nil
+        h[:speciality] = params[:speciality]
+      end
+    end
     return h
   end
-  
+
 end
