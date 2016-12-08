@@ -31,3 +31,33 @@ https://demo-svp-chicago.herokuapp.com/
 https://prod-svp-chicago.herokuapp.com/
 
 - Run rspec test in terminal: rspec
+
+# API Endpoint Reference
+
+## Search
+
+Search for physicians or trisomy families.
+
+### Request
+`GET /v1/search`
+
+| Query Parameter | Value |
+|---|---|
+|  type | *Required.* Valid types are: **_physician_** and **_family_**. Accepts max. one type value|
+| state | *Optional.* Only accepts abbr. state names. Example: IL |
+| city | *Optional.* Example: Chicago |
+| last_name | *Optional.* |
+| speciality | *Optional.* Only valid for physician search types. Accepts max. one speciality value.|
+| limit | *Optional.* The number of results to return. |
+
+### Response
+
+On success, response body contains an array of objects. If no matches are found, an empty array is returned.
+
+On error, the header status code is an error code and the response body contains an error object.
+
+Example:
+
+```json
+
+```
