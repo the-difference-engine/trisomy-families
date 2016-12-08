@@ -32,7 +32,7 @@ https://prod-svp-chicago.herokuapp.com/
 
 - Run rspec test in terminal: rspec
 
-# API Endpoint Reference
+# API Endpoint Reference V1.0
 
 ## Search
 
@@ -59,5 +59,25 @@ On error, the header status code is an error code and the response body contains
 Example:
 
 ```json
-
+{
+    "data": [
+        {
+            "attributes": {
+                "address": "1 S. Cactus St.",
+                "city": "Avon Lake",
+                "first-name": "Lauryn",
+                "last-name": "Ankunding",
+                "latitude": -82.0282001,
+                "link": "http://emard.co/josephine.adams",
+                "longitude": 41.5053178,
+                "phone-number": "14-236-5824",
+                "speciality": "nesciunt",
+                "state": "OH",
+                "zip-code": "44012"
+            },
+            "id": "253",
+            "type": "physician"
+        }
+    ]
+}
 ```
