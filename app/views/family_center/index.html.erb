@@ -8,10 +8,9 @@
   </head>
   <body>
     <h1>Family Center </h1>
-    <h3>Map</h3>
     <div ng-app="app">
-      <div ng-controller="familycenterCtrl" ng-init="setUp()">
-      {{ 2 + 2 }}
+      <div ng-controller="familycenterCtrl">
+      <h3>{{ searchResults }}</h3>
     <div id="map"></div>
 
     <form class="form-inline">
@@ -21,34 +20,21 @@
       </div>
       <div class="form-group">
         <label for="name"></label>
-        <input type="text" class="form-control" id="name" placeholder="Last Name" ng-model="query.name"></input>
+        <input type="text" class="form-control" id="name" placeholder="Last Name" ng-model="query.last_name"></input>
       </div>
       <div class="form-group">
         <label for="searchQueryType"></label>
         <select class="form-control" id="searchQueryType" ng-model="query.type">
-          <option>Family</option>
-          <option>Physician</option>
+          <option value="family">Family</option>
+          <option value="physician">Physician</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-default" ng-click="performSearch()">Search</button>
+      <button type="button" class="btn btn-success" ng-click="performSearch()">Search</button>
     </form>
   </div>
   </div>
 
-    <script>
-      function initMap() {
-        var uluru = {lat: 37.0902, lng: 95.7129};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzNgVwahZQ63o16EMv8eU4XFvdkgdr2XM&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzNgVwahZQ63o16EMv8eU4XFvdkgdr2XM">
     </script>
   </body>
