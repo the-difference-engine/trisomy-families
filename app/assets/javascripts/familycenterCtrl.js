@@ -3,9 +3,9 @@
   angular.module('app').controller('familycenterCtrl', ['$scope','$http', '$httpParamSerializerJQLike', '$timeout', function($scope, $http, $httpParamSerializerJQLike, $timeout) {
 
     $scope.data = [];
-    // $scope.markers = [];
     $scope.map;
     $scope.searchResults = "";
+    $scope.markers = [];
 
     $timeout(function() {
       var uluru = {lat: 41.0906369, lng: -85.0814343};
@@ -22,6 +22,8 @@
         position: latlng,
         title: firstname,
       });
+
+      $scope.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', function() {
 
@@ -42,7 +44,7 @@
         infoWindow.setContent(contentString);
 
         infoWindow.open($scope.map, marker);
-        // $scope.markers.push(marker);
+
       });
     };
 
@@ -77,7 +79,37 @@
     };
 
 
+    var printResultNum = function() {
+
+      var num  = $scope.data["data"].length;
+
+      if (num === 1) {
+
+        return num + ' result';
+
+      } else if (num === 0) {
+
+
+        return '0 results';
+
+      } else {
+
+        return num + ' results';
+
+      }
+    };
+
+    var removeMarkers = function() {
+      for (var i = 0; i < $scope.markers.length; i++) {
+        $scope.markers[i].setMap(null);
+      }
+
+      $scope.markers = [];
+    }
+
     $scope.performSearch = function() {
+
+      if ($scope.search_form.$dirty) {
       var url = "/api/v1/search?" + $httpParamSerializerJQLike($scope.query);
 
       $http({
@@ -86,9 +118,15 @@
 
       }).then(function(response) {
         $scope.data = response.data;
-        $scope.searchResults = response.data["data"].length + ' results';
+        $scope.searchResults = printResultNum();
+        removeMarkers();
+        $scope.search_form.$setPristine();
         $scope.initializeMap();
       });
+
+      // else present form field warnings
+    };
+
     };
 
     window.$scope = $scope;
