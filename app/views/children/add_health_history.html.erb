@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
 <%= form_tag "/profile/#{@child.id}/health", method: :post do %>
 <h3>Heart</h3>
   <% if @congenital_heart_defect.errors.any? %>
