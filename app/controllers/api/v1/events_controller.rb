@@ -10,6 +10,7 @@ class Api::V1::EventsController < ApplicationController
 
     if @event.save
       flash[:notice] = 'New Event Created.'
+      redirect_to '/calendar'
     else
       flash[:alert] = @event.errors.full_messages
       render 'index'

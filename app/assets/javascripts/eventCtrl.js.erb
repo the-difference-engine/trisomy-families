@@ -80,10 +80,10 @@
     window.$scope = $scope;
 
   }])
-  .directive("editEventForm", function() {
+  .directive("editEventForm", [function() {
     return {
       templateUrl: "<%= asset_path('editEvent.html')%>"
     };
-  })
+  }])
 
 })();

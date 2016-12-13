@@ -36,6 +36,7 @@ gem 'momentjs-rails'
 gem 'angular-ui-calendar-rails'
 
 gem 'devise'
+gem 'seed_dump'
 
 gem 'geocoder'
 
