@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do
   
   context "Creates a valid event" do
-    current_event_count = Event.count
-
     event = Event.create(
       title: "December Event", 
       description: "This is an event.", 
@@ -15,26 +13,50 @@ RSpec.describe Event, type: :model do
       allDay: false
     )
     
-    it "will add an event to the database" do
-      expect(Event.count).to eq(current_event_count + 1)
-    end
+    it "is valid with title, description, start, end, event type, all day, and location" do
+      expect(event).to be_valid
+    end  
   end
 
   context "Creates an invalid event" do
-    current_event_count = Event.count
 
     event = Event.create(
       title: "", 
-      description: "This is an event.", 
-      location: "1600 Pennsylvania Ave NW, Washington, DC 20500", 
-      start: "2016-12-16 19:00:00", 
-      end: "2016-12-16 20:00:00",
-      event_type: "Personal",
-      allDay: false
+      description: "", 
+      location: "", 
+      start: "", 
+      end: "",
+      event_type: "",
+      allDay: nil
     )
     
-    it "will not add an event to the database" do
-      expect(Event.count).to eq(current_event_count)
+    it "is invalid without a title" do
+      event.valid?
+      expect(event.errors[:title]).to include("can't be blank")
+    end
+    it "is invalid without a description" do
+      event.valid?
+      expect(event.errors[:description]).to include("can't be blank")
+    end
+    it "is invalid without a location" do
+      event.valid?
+      expect(event.errors[:location]).to include("can't be blank")
+    end
+    it "is invalid without a start" do
+      event.valid?
+      expect(event.errors[:start]).to include("can't be blank")
+    end
+    it "is invalid without an end" do
+      event.valid?
+      expect(event.errors[:end]).to include("can't be blank")
+    end
+    it "is invalid without an event_type" do
+      event.valid?
+      expect(event.errors[:event_type]).to include("can't be blank")
+    end
+    it "is invalid without an allDay" do
+      event.valid?
+      expect(event.errors[:allDay]).to include("can't be blank")
     end
   end
 end
