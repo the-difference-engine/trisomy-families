@@ -9,11 +9,11 @@ class Api::V1::EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-      # flash[:notice] = 'New Event Created.'
-      redirect_to '/'
+      flash[:notice] = 'New Event Created.'
+      redirect_to '/calendar'
     else
-      # flash[:alert] = @event.errors.full_messages
-      # render 'index'
+      flash[:alert] = @event.errors.full_messages
+      render 'index'
     end
   end
 

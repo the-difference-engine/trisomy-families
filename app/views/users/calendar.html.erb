@@ -5,7 +5,7 @@
     </div>
 
     <hr>
-    <% if current_user.admin?%>
+    <% if user_signed_in? && current_user.admin? %>
       <div class="row">
         <div class="col-md-8">
           <h2>Create Event</h2>
@@ -28,7 +28,7 @@
               <input type="datetime-local" class="form-control" id="eventEnd" ng-model="event.end">
 
               <label for="ngvalueselect">Event Type</label>
-              <select class="form-control" name="ngvalueselect" ng-model="event.event_type" style="float: none;">
+              <select class="form-control" name="ngvalueselect" id="eventType" ng-model="event.event_type" style="float: none;">
                 <option value="birthdays">Birthday</option>
                 <option value="fundrasier">Fundraiser</option>
                 <option value="family">Family</option>
@@ -36,12 +36,12 @@
               </select>
 
               <label for="ngvalueselect">All Day</label>
-              <select class="form-control" name="ngvalueselect" ng-model="event.allDay" style="float: none;">
+              <select class="form-control" name="ngvalueselect" id="eventAllDay" ng-model="event.allDay" style="float: none;">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
 
-              <button type="submit" class="btn btn-primary" ng-click="createEvent()">Add</button>
+              <button type="submit" class="btn btn-primary" id="createEvent" ng-click="createEvent()">Add</button>
             </div>
           </form>
         </div>
