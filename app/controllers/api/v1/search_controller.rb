@@ -33,7 +33,7 @@ class Api::V1::SearchController < ApplicationController
         render json: rows, each_serializer: Api::V1::FamilySerializer, adapter: :json_api, root: false
       end
     else
-      render json: { status: 404 }
+      render json: { status: 404, error: "Not found"}, status: 404
     end
   end
 
