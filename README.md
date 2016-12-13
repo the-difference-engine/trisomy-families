@@ -31,3 +31,55 @@ https://demo-trisomy-families.herokuapp.com/
 https://prod-trisomy-families.herokuapp.com/
 
 - Run rspec test in terminal: rspec
+
+# API Endpoint Reference V1.0
+
+## Search
+
+Search for physicians or trisomy families.
+
+### Request
+`GET /v1/search`
+
+| Query Parameter | Value |
+|---|---|
+|  type | *Required.* Valid types are: **_physician_** and **_family_**. Accepts max. one type value|
+| state | *Optional.* Only accepts abbr. state names. Example: IL |
+| city | *Optional.* Example: Chicago |
+| last_name | *Optional.* |
+| speciality | *Optional.* Only valid for physician search types. Accepts max. one speciality value.|
+| fields | *Optional.* Comma-separated list of fields to include. |
+| limit | *Optional.* The number of results to return. |
+
+### Response
+
+On success, response body contains an array of objects. If no matches are found, an empty array is returned.
+
+On error, the header status code is an error code and the response body contains an error object.
+
+Example:
+
+```json
+{
+    "data": [
+        {
+            "attributes": {
+                "address": "1 S. Cactus St.",
+                "city": "Avon Lake",
+                "first-name": "Lauryn",
+                "last-name": "Ankunding",
+                "latitude": -82.0282001,
+                "longitude": 41.5053178,
+                "phone-number": "14-236-5824",
+                "speciality": "pediatrician",
+                "state": "OH",
+                "zip-code": "44012",
+                "link": "http://emard.co/josephine.adams",
+                "self-url": "/doctors/297"
+            },
+            "id": "253",
+            "type": "physician"
+        }
+    ]
+}
+```
