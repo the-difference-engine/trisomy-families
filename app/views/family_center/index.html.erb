@@ -4,32 +4,49 @@
         height: 400px;
         width: 100%;
        }
+
+       btn:focus {
+         color: none;
+       }
+       button:focus {
+
+       }
+       .btn-success:focus {
+         border-color: none;
+       }
+       .btn:focus {
+         outline: none;
+       }
     </style>
   </head>
   <body>
     <h1>Family Center </h1>
     <div ng-app="app">
-      <div ng-controller="familycenterCtrl">
+      <div ng-controller="MapSearchController">
       <h3>{{ searchResults }}</h3>
     <div id="map"></div>
 
-    <form class="form-inline">
+    <form name="search_form" class="form-inline">
       <h4>Search For:</h4>
-      <div class="form-group">
-        <%= select_tag(:state, options_for_select(us_states), class: "form-control") %>
-      </div>
-      <div class="form-group">
-        <label for="name"></label>
-        <input type="text" class="form-control" id="name" placeholder="Last Name" ng-model="query.last_name"></input>
-      </div>
       <div class="form-group">
         <label for="searchQueryType"></label>
         <select class="form-control" id="searchQueryType" ng-model="query.type">
+          <option value="">----Select----</option>
           <option value="family">Family</option>
           <option value="physician">Physician</option>
         </select>
       </div>
-      <button type="button" class="btn btn-success" ng-click="performSearch()">Search</button>
+
+      <div class="form-group">
+        <label for="name"></label>
+        <input type="text" class="form-control" id="name" placeholder="Last Name" ng-model="query.last_name" ng-minlength="1"></input>
+      </div>
+
+      <div class="form-group">
+        <ang-select-usstates ng-model="query.state" name="State" id="selectState" class="form-control"></ang-select-usstates>
+      </div>
+
+      <input type="button" value="Search" ng-click="performSearch()">
     </form>
   </div>
   </div>

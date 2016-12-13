@@ -48,6 +48,7 @@ Search for physicians or trisomy families.
 | city | *Optional.* Example: Chicago |
 | last_name | *Optional.* |
 | speciality | *Optional.* Only valid for physician search types. Accepts max. one speciality value.|
+| fields | *Optional.* Comma-separated list of fields to include. |
 | limit | *Optional.* The number of results to return. |
 
 ### Response
@@ -68,12 +69,13 @@ Example:
                 "first-name": "Lauryn",
                 "last-name": "Ankunding",
                 "latitude": -82.0282001,
-                "link": "http://emard.co/josephine.adams",
                 "longitude": 41.5053178,
                 "phone-number": "14-236-5824",
-                "speciality": "nesciunt",
+                "speciality": "pediatrician",
                 "state": "OH",
-                "zip-code": "44012"
+                "zip-code": "44012",
+                "link": "http://emard.co/josephine.adams",
+                "self-url": "/doctors/297"
             },
             "id": "253",
             "type": "physician"
