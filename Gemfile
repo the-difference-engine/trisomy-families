@@ -45,6 +45,7 @@ gem 'rails_12factor', group: :production
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'faker', '~> 1.6.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -63,7 +64,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry'
-  gem 'faker', '~> 1.6.6'
 end
 
 group :test do
