@@ -1,7 +1,29 @@
 <h2>Health History</h2>
+  <% if @health_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@health_history.errors.count, "error") %> prohibited this health_history from being updated:</h2>
+   
+      <ul>
+      <% @health_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 <%= form_tag "/profile/#{@child.id}/health", method: :patch do %>
 <h3>Heart</h3>
+  <% if @congenital_heart_defect.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@congenital_heart_defect.errors.count, "error") %> prohibited this congenital_heart_defect from being updated:</h2>
+   
+      <ul>
+      <% @congenital_heart_defect.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= label_tag 'Congenital Heart Disease?' %>
     <%= check_box_tag :chd, nil, @health_history.chd %>
@@ -67,6 +89,17 @@
     <!-- change to save a string -->
   </div>
   <h3>Gastric/Intestinal</h3>
+    <% if @intestinal_issue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@intestinal_issue.errors.count, "error") %> prohibited this intestinal_issue from being updated:</h2>
+   
+      <ul>
+      <% @intestinal_issue.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= label_tag :duodenal_atresia_stenosis_web %>
     <%= check_box_tag :duodenal_atresia_stenosis_web, nil, @intestinal_issue.duodenal_atresia_stenosis_web %>
@@ -117,6 +150,17 @@
     <%= check_box_tag :ibd, nil, @intestinal_issue.ibd %>
   </div>
   <br>
+    <% if @gastric_surgery.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gastric_surgery.errors.count, "error") %> prohibited this gastric_surgery from being updated:</h2>
+   
+      <ul>
+      <% @gastric_surgery.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= label_tag :repair_of_duodenal_atresia_stenosis_web %>
     <%= check_box_tag :repair_of_duodenal_atresia_stenosis_web, nil, @gastric_surgery.repair_of_duodenal_atresia_stenosis_web %>
@@ -140,6 +184,17 @@
     <%= text_field_tag :other_gastric_surgery, @gastric_surgery.other %>
   </div>
   <h3>Neurological</h3>
+    <% if @nuerological_condition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@nuerological_condition.errors.count, "error") %> prohibited this nuerological_condition from being updated:</h2>
+   
+      <ul>
+      <% @nuerological_condition.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= label_tag :seizure_epilepsy %>
     <%= check_box_tag :seizure_epilepsy, nil, @health_history.seizure_epilepsy %>
@@ -175,6 +230,17 @@
     <%= text_field_tag :other_nuero_surgery, @nuerological_condition.other %>
   </div>
   <h3>Muscular/Skeletal</h3>
+    <% if @muscular_skeletal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@muscular_skeletal.errors.count, "error") %> prohibited this muscular_skeletal from being updated:</h2>
+   
+      <ul>
+      <% @muscular_skeletal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= label_tag :atlanto_axial_instability %>
     <%= check_box_tag :atlanto_axial_instability, nil, @muscular_skeletal.atlanto_axial_instability %>
@@ -255,6 +321,17 @@
     <%= check_box_tag :rocker_bottom_feet_surgery, nil, @muscular_skeletal.rocker_bottom_feet_surgery %>
   </div>
   <h3>Cranial/Facial</h3>
+    <% if @cranial_facial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cranial_facial.errors.count, "error") %> prohibited this cranial_facial from being updated:</h2>
+   
+      <ul>
+      <% @cranial_facial.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <p>Sleep Apnea?</p>
     <%= label_tag :yes %>
@@ -305,6 +382,17 @@
     <%= text_field_tag :cancer_other, @health_history.other_cancer %>
   </div>
   <h3>Endocrine</h3>
+    <% if @endocrine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@endocrine.errors.count, "error") %> prohibited this endocrine from being updated:</h2>
+   
+      <ul>
+      <% @endocrine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= label_tag :hyperthyroidism %>
     <%= check_box_tag :hyperthyroidism, nil, @endocrine.hyperthyroidism %>
@@ -371,6 +459,17 @@
   </div>
 
   <h3>Hearing</h3>
+    <% if @hearing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hearing.errors.count, "error") %> prohibited this hearing from being updated:</h2>
+   
+      <ul>
+      <% @hearing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <h4>Did the participant pass the infant hearing test?</h4>
     <%= label_tag :yes %>
@@ -405,6 +504,17 @@
   </div>
 
   <h3>Vision</h3>
+    <% if @vision.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vision.errors.count, "error") %> prohibited this vision from being updated:</h2>
+   
+      <ul>
+      <% @vision.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <h4>Has the participant ever failed an eye exam?</h4>
     <%= label_tag :yes %>
@@ -480,6 +590,17 @@
     <%= check_box_tag :doesnt_close_eyes_when_sleeping, nil, @vision.doesnt_close_eyes_when_sleeping %>
   </div>
   <h3>Behavior</h3>
+    <% if @behavioral_health.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@behavioral_health.errors.count, "error") %> prohibited this behavioral_health from being updated:</h2>
+   
+      <ul>
+      <% @behavioral_health.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <h4>Has the participant ever been diagnosed with any of the following? Mark all that apply:</h4>
     <%= label_tag :add %>
@@ -554,6 +675,17 @@
     <%= text_field_tag :other_delay, @behavioral_health.other_delay %>
   </div>
   <h3>School/Therapies</h3>
+    <% if @received_therapy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@received_therapy.errors.count, "error") %> prohibited this received_therapy from being updated:</h2>
+   
+      <ul>
+      <% @received_therapy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <h4>Was/is the participant in EI?</h4>
     <%= label_tag :yes %>
