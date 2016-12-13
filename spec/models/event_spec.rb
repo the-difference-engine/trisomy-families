@@ -56,7 +56,7 @@ RSpec.describe Event, type: :model do
     end
     it "is invalid without an allDay" do
       event.valid?
-      expect(event.errors[:allDay]).to include("can't be blank")
+      expect(event.errors[:allDay]).to include("is not included in the list")
     end
   end
 end
