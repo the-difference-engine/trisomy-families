@@ -33,10 +33,14 @@
           method: 'POST',
           url: '/api/v1/events',
           data: $httpParamSerializerJQLike($scope.event)
+
+      }).then(function successCallback(response) {
+        $scope.events.push($scope.event);
+        console.log("Sucessfully saved to database.");
+
+      }, function errorCallback(response) {
+        console.log("Post failed.")
       });
-
-      $scope.events.push($scope.event);
-
     };
 
     $scope.uiConfig = {

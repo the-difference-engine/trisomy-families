@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :events
+      resources :search
     end
   end
 
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :events
+
 
   get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'
@@ -35,4 +37,6 @@ Rails.application.routes.draw do
   get '/calendar' => 'users#calendar'
 
   get '/family-dashboard' => 'families#index'
+
+  get '/family-center' => 'family_center#index'
 end
