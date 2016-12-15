@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'fullcalendar-rails'
+
 gem 'momentjs-rails'
 
 gem 'angular-ui-calendar-rails'
@@ -37,9 +38,14 @@ gem 'angular-ui-calendar-rails'
 gem 'devise'
 gem 'seed_dump'
 
+gem 'geocoder'
+
 gem 'rails_12factor', group: :production
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'faker', '~> 1.6.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
