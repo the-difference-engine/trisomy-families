@@ -1,0 +1,13 @@
+json.id child.id
+json.first_name child.first_name
+json.last_name child.last_name
+json.trisomy_type child.trisomy_type
+json.birth_date child.birth_date
+json.death_date child.death_date
+json.city child.city
+json.state child.state
+json.mosaic_percentage child.mosaic_percentage
+json.health_history_id child.health_history_id
+json.secondary_diagnosis child.secondary_diagnosis
+json.primary_diagnosis child.primary_diagnosis
+json.other_chrom_affected child.other_chrom_affected

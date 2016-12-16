@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :events
       resources :search
+      resources :children
     end
   end
 
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :events
-
 
   get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'

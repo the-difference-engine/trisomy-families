@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def index
     if current_user
       if current_user.children.empty?
@@ -18,5 +17,9 @@ class UsersController < ApplicationController
 
   def calendar
     render 'calendar.html.erb'
+  end
+
+  def query_table
+    redirect_to 'queries.html.erb'
   end
 end
