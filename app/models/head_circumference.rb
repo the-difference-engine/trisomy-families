@@ -1,3 +1,4 @@
 class HeadCircumference < ApplicationRecord
-  belongs_to :backgorund_history
+  belongs_to :background_history
+  validates :one_month, presence: true
 end

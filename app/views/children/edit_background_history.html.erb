@@ -1,8 +1,30 @@
 <h2>Background History:</h2>
+  <% if @background_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@background_history.errors.count, "error") %> prohibited this background_history from being updated:</h2>
+   
+      <ul>
+      <% @background_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 <%= form_tag "/profile/#{@child.id}/background", method: :patch do %>
   <h3>Participant Measurements</h3>
     <h4>Weight Info:</h4>
+      <% if @weight.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@weight.errors.count, "error") %> prohibited this weight from being updated:</h2>
+     
+        <ul>
+        <% @weight.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
       <div>
         <%= label_tag :weight_at_birth %>
         <%= number_field_tag(:weight_at_birth, @background_history.weight_at_birth, in: 1.0..20, step: 0.5)  %> 
@@ -24,6 +46,17 @@
         <%= number_field_tag(:four_month, @weight.four_month, in: 1.0..20, step: 0.5)  %> 
       </div>
     <h4>Height Info:</h4>
+      <% if @height.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@height.errors.count, "error") %> prohibited this height from being updated:</h2>
+     
+        <ul>
+        <% @height.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
       <div>
         <%= label_tag :height_at_birth %>
         <%= number_field_tag(:height_at_birth, @background_history.height_at_birth, in: 10.0..30, step: 0.5)  %> 
@@ -45,6 +78,17 @@
         <%= number_field_tag(:height_four_month, @height.four_month, in: 10..30, step: 0.5)  %> 
       </div>
     <h4>Head Circumference Info:</h4>
+      <% if @head_circumference.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@head_circumference.errors.count, "error") %> prohibited this head_circumference from being updated:</h2>
+     
+        <ul>
+        <% @head_circumference.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
       <div>
         <%= label_tag :head_circumference_at_birth %>
         <%= number_field_tag(:head_circumference_at_birth, @background_history.head_circumference_at_birth, in: 10.0..30, step: 0.5)  %> 

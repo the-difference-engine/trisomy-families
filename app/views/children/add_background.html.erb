@@ -1,15 +1,36 @@
 <h2>Background History:</h2>
-
+  <% if @background_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@background_history.errors.count, "error") %> prohibited this background_history from being updated:</h2>
+   
+      <ul>
+      <% @background_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 <%= form_tag "/profile/#{@child.id}/background", method: :post do %>
   <h3>Participant Measurements</h3>
     <h4>Weight Info:</h4>
+      <% if @weight.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@weight.errors.count, "error") %> prohibited this weight from being updated:</h2>
+     
+        <ul>
+        <% @weight.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
       <div>
         <%= label_tag :weight_at_birth %>
-        <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:weight_at_birth, @background_history.weight_at_birth, in: 1.0..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :one_month %>
-        <%= number_field_tag(:one_month, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:one_month, @weight.one_month, in: 1.0..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :two_month %>
@@ -24,13 +45,24 @@
         <%= number_field_tag(:four_month, nil, in: 1.0..20, step: 0.5)  %> 
       </div>
     <h4>Height Info:</h4>
+      <% if @height.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@height.errors.count, "error") %> prohibited this height from being updated:</h2>
+     
+        <ul>
+        <% @height.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
       <div>
         <%= label_tag :height_at_birth %>
-        <%= number_field_tag(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_at_birth, @background_history.height_at_birth, in: 10.0..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :one_month %>
-        <%= number_field_tag(:height_one_month, nil, in: 10..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_one_month, @height.one_month, in: 10..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :two_month %>
@@ -45,13 +77,24 @@
         <%= number_field_tag(:height_four_month, nil, in: 10..30, step: 0.5)  %> 
       </div>
     <h4>Head Circumference Info:</h4>
+      <% if @head_circumference.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@head_circumference.errors.count, "error") %> prohibited this head_circumference from being updated:</h2>
+     
+        <ul>
+        <% @head_circumference.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
       <div>
         <%= label_tag :head_circumference_at_birth %>
-        <%= number_field_tag(:head_circumference_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+        <%= number_field_tag(:head_circumference_at_birth, @background_history.head_circumference_at_birth, in: 10.0..30, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :one_month %>
-        <%= number_field_tag(:hc_one_month, nil, in: 10..20, step: 0.5)  %> 
+        <%= number_field_tag(:hc_one_month, @head_circumference.one_month, in: 10..20, step: 0.5)  %> 
       </div>
       <div>
         <%= label_tag :two_month %>
@@ -69,91 +112,91 @@
     <p>Mother Complications:</p>
       <div>
         <%= label_tag :gestational_diabetes %>
-        <%= check_box_tag :gestational_diabetes %>
+        <%= check_box_tag :gestational_diabetes, nil, @mother_complications.gestational_diabetes %>
         <br>
         <%= label_tag 'pre-eclampsia' %>
-        <%= check_box_tag :preeclampsia %>
+        <%= check_box_tag :preeclampsia, nil, @mother_complications.preeclampsia %>
         <br>
         <%= label_tag :clampsia %>
-        <%= check_box_tag :clampsia %>
+        <%= check_box_tag :clampsia, nil, @mother_complications.clampsia %>
         <br>
         <%= label_tag :rh_factor %>
-        <%= check_box_tag :rh_factor %>
+        <%= check_box_tag :rh_factor, nil, @mother_complications.rh_factor %>
         <br>
         <%= label_tag :separated_placenta %>
-        <%= check_box_tag :separated_placenta %>
+        <%= check_box_tag :separated_placenta, nil, @mother_complications.separated_placenta %>
         <br>
         <%= label_tag :unsure %>
-        <%= check_box_tag :unsure %>
+        <%= check_box_tag :unsure, nil, @mother_complications.unsure %>
         <br>
         <%= label_tag :extra_fluid %>
-        <%= check_box_tag :extra_fluid %>
+        <%= check_box_tag :extra_fluid, nil, @mother_complications.extra_fluid %>
         <br>
         <%= label_tag :other_complications %>
-        <%= text_field_tag :other_complications %>
+        <%= text_field_tag :other_complications, @mother_complications.other %>
       </div>
     <br>
       <div>
         <%= label_tag 'Delivery Method:' %>
-        <%= select_tag( :delivery_method, options_for_select(delivery_method, " ")) %>
+        <%= select_tag( :delivery_method, options_for_select(delivery_method, @background_history.delivery_method)) %>
       </div>
     <br>
       <div>
       <p>Offered a c-section?</p>
         <%= label_tag :yes %>
-        <%= radio_button_tag :offered_c_section, 'yes' %>
+        <%= radio_button_tag :offered_c_section, 'yes', (@background_history.offered_c_section == 'yes') %>
         <br>
         <%= label_tag :no %>
-        <%= radio_button_tag :offered_c_section, 'no' %>
+        <%= radio_button_tag :offered_c_section, 'no', (@background_history.offered_c_section == 'no') %>
         <br>
         <%= label_tag :unsure %>
-        <%= radio_button_tag :offered_c_section, 'unsure' %>
+        <%= radio_button_tag :offered_c_section, 'unsure', (@background_history.offered_c_section == 'unsure') %>
       </div>
     <br>
       <div>
         <p>Did the child have complications at birth?</p>
         <%= label_tag :yes %>
-        <%= radio_button_tag :child_complications, 'yes' %>
+        <%= radio_button_tag :child_complications, 'yes', (@background_history.child_complication == 'yes') %>
         <br>
         <%= label_tag :no %>
-        <%= radio_button_tag :child_complications, 'no' %>
+        <%= radio_button_tag :child_complications, 'no', (@background_history.child_complication == 'no') %>
         <br>
         <%= label_tag :unsure %>
-        <%= radio_button_tag :child_complications, 'unsure' %>
+        <%= radio_button_tag :child_complications, 'unsure', (@background_history.child_complication == 'unsure') %>
       </div>
     <br>
       <div>
         <%= label_tag :apgar_scores %>
-        <%= text_field_tag :apgar_scores %>
+        <%= text_field_tag :apgar_scores, @background_history.apgar_score %>
       </div>
       <div>
         <%= label_tag :gestation_age %>
-        <%= number_field_tag :gestation_age, nil, in: 0..50, step: 1 %>
+        <%= number_field_tag :gestation_age, @background_history.gestation_age, in: 0..50, step: 1 %>
       </div>
       <div>
         <%= label_tag :mother_age_at_birth %>
-        <%= number_field_tag :mother_age_at_birth, nil, in: 14..50, step: 1 %>
+        <%= number_field_tag :mother_age_at_birth, @background_history.mother_age_at_birth, in: 14..50, step: 1 %>
       </div>
       <div>
         <%= label_tag :father_age_at_birth %>
-        <%= number_field_tag :father_age_at_birth, nil, in: 14..50, step: 1 %>
+        <%= number_field_tag :father_age_at_birth, @background_history.father_age_at_birth, in: 14..50, step: 1 %>
       </div>
       <div>
         <%= label_tag :multiple_birth %>
-        <%= check_box_tag :multiple_birth %>
+        <%= check_box_tag :multiple_birth, nil, @background_history.multiple_birth %>
       </div>
       <div>
         <%= label_tag :multiple_birth_trisomy %>
-        <%= check_box_tag :multiple_birth_trisomy %>
+        <%= check_box_tag :multiple_birth_trisomy, nil, @background_history.multiple_birth_trisomy %>
       </div>
       <h3>Participant Genetic History</h3>
       <div>
         <%= label_tag :siblings_with_trisomy %>
-        <%= check_box_tag :siblings_with_trisomy %>
+        <%= check_box_tag :siblings_with_trisomy, nil, @background_history.siblings_with_trisomy %>
       </div>
       <div>
         <%= label_tag :trisomy_relative %>
-        <%= check_box_tag :trisomy_relative %>
+        <%= check_box_tag :trisomy_relative, nil, @background_history.trisomy_relative %>
       </div>
   <%= submit_tag %>
 <% end %>

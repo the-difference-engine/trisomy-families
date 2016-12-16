@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20161208183424) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -462,6 +460,22 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "physicians", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "website"
+    t.string   "speciality"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.decimal  "latitude",     precision: 13, scale: 10
+    t.decimal  "longitude",    precision: 13, scale: 10
+  end
+
   create_table "primary_diagnoses", force: :cascade do |t|
     t.boolean  "full"
     t.boolean  "partial"
@@ -529,9 +543,7 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.string   "last_name"
     t.string   "relationship"
     t.string   "phone_number"
-    t.boolean  "admin",                  default: false
-<<<<<<< HEAD
-=======
+    t.boolean  "admin",                                            default: false
     t.string   "family_name"
     t.string   "address"
     t.string   "state"
@@ -539,7 +551,6 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.string   "zip_code"
     t.decimal  "latitude",               precision: 13, scale: 10
     t.decimal  "longitude",              precision: 13, scale: 10
->>>>>>> 74c58ec69c26ac01e7ecde35bf32d481ed682756
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
