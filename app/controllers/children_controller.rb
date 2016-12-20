@@ -26,7 +26,7 @@ class ChildrenController < ApplicationController
       private: params[:private],
       user_id: current_user.id
     )
-    if @child.save 
+    if @child.save
       flash[:success] = "Created profile!"
       redirect_to "/profile/#{@child.id}"
     else
@@ -52,9 +52,19 @@ class ChildrenController < ApplicationController
 
   def update_photo
     @child = Child.find_by(id: params[:id])
-    @child.update(
-      user_params
-    )
+
+    obj = S3_BUCKET.object(params[:child][:avatar].original_filename)
+
+    obj.upload_file(params[:child][:avatar].tempfile.path)
+
+    @child.update(avatar_file_name: obj.public_url)
+
+    if @child.save
+      flash[:message] = "Uploaded succesfully"
+    else
+      flash[:error] = "Did not upload"
+    end
+
     redirect_to "/profile/#{@child.id}"
   end
 
@@ -171,7 +181,7 @@ class ChildrenController < ApplicationController
     @child = Child.find_by(id: params[:id])
     @user = User.find_by(id: @child.user_id)
     @parent = Parent.find_by(child_id: @child.id)
-    if 
+    if
       @parent.update(
         first_name: params[:parent_1_first_name],
         last_name: params[:parent_1_last_name],
