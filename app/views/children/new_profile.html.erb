@@ -1,7 +1,7 @@
 <% if @child.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@child.errors.count, "error") %> prohibited this child from being saved:</h2>
- 
+
     <ul>
     <% @child.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -25,6 +25,9 @@
     <%= text_field_tag :last_name, @child.last_name, class: "form-control", placeholder: 'Last Name' %>
   </div>
   <div class="form-group">
+    <%= text_field_tag :nickname, @child.nickname, class: "form-control", placeholder: 'Nickname' %>
+  </div>
+  <div class="form-group">
     <%= label_tag :date_of_birth, "Date of Birth" %>
     <%= date_field_tag :date_of_birth, @child.birth_date, class: "form-control"%>
   </div>
@@ -32,6 +35,10 @@
   <!-- Make optional -->
     <%= label_tag :date_of_death, "Date of Death" %>
     <%= date_field_tag :date_of_death, @child.death_date, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :birth_order, "Birth Order" %>
+    <%= text_area_tag :birth_order, @child.birth_order, class: "form-control", row: "3" %>
   </div>
   <hr>
   <h5 style="color:gray">Location</h5>
@@ -48,6 +55,10 @@
   <div class="form-group">
     <%= label_tag :trisomy_type, "Type of Trisomy" %>
     <%= select_tag(:trisomy_type, options_for_select(trisomy_type, @child.trisomy_type)) %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :primary_diagnosis, "Primary Diagnosis" %>
+    <%= text_area_tag :primary_diagnosis, @child.primary_diagnosis, class: "form-control", row: "3" %>
   </div>
   <div class="form-group">
     <%= label_tag :trisomy_story, "Trisomy Story" %>
