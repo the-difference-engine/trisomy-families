@@ -20,6 +20,6 @@ class UsersController < ApplicationController
   end
 
   def query_table
-    redirect_to 'queries.html.erb'
+    render 'queries.html.erb'
   end
 end
