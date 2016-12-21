@@ -10,7 +10,6 @@ class Child < ApplicationRecord
   validates :city, presence: true
   validates :trisomy_story, presence: true
   validates :private, inclusion: [true, false]
-  validates :nickname, presence: true, on: :update
   validates :birth_order, presence: true, on: :update
   validates :primary_diagnosis, presence: true, on: :update
 
