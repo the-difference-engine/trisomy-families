@@ -53,16 +53,20 @@ class ChildrenController < ApplicationController
   def update_photo
     @child = Child.find_by(id: params[:id])
 
-    obj = S3_BUCKET.object(params[:child][:avatar].original_filename)
+    # Generate random string to file_name for uniqueness
+    charset = Array('A'..'Z') + Array('a'..'z')
+    random_string = Array.new(20) { charset.sample }.join
+    object_name = random_string + '_' + params[:child][:avatar].original_filename
 
+    obj = S3_BUCKET.object(object_name)
     obj.upload_file(params[:child][:avatar].tempfile.path)
 
-    @child.update(avatar_file_name: obj.public_url)
+    @child.update_columns(avatar_file_name: obj.public_url)
 
     if @child.save
-      flash[:message] = "Uploaded succesfully"
+      flash[:message] = "Uploaded succesfully."
     else
-      flash[:error] = "Did not upload"
+      flash[:error] = "Error occured in uploading file."
     end
 
     redirect_to "/profile/#{@child.id}"
