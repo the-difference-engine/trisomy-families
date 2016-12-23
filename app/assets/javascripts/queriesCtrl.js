@@ -5,20 +5,13 @@ angular.module("app").controller('queriesCtrl', function($scope, $http) {
   var children = $http.get('/api/v1/children.json');
   $scope.myDataSource = {
     chart: {
-      caption: "Harry's SuperMart",
-      subCaption: "Top 5 stores in last month by revenue",
+      caption: "Trisomy Tables",
       numberPrefix: "$",
       theme: "fint"
     },
 
-    for (var i = 0; i < children.length; i++) {
-    label: children['state'];
-    value: children['trisomy_type'];
-    
-    }
-
     data:[{
-      label: "Bakersfield Central",
+      label: children['state'],
       value: "880000"
     },
     {
