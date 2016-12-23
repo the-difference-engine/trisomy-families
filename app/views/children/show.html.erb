@@ -4,7 +4,9 @@
       <h1><%= @child.first_name + " " + @child.last_name%></h1>
     </div>
     <div class="col-md-6">
-      <%= image_tag @child.avatar.url, :class => "img-thumbnail"%>
+      <% if @child.avatar_file_name %>
+      <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
+      <% end %>
     </div>
     <div class="col-md-6 bg-info">
       <br>
