@@ -26,7 +26,7 @@ class ChildrenController < ApplicationController
       private: params[:private],
       user_id: current_user.id
     )
-    if @child.save 
+    if @child.save
       flash[:success] = "Created profile!"
       redirect_to "/profile/#{@child.id}"
     else
@@ -52,9 +52,23 @@ class ChildrenController < ApplicationController
 
   def update_photo
     @child = Child.find_by(id: params[:id])
-    @child.update(
-      user_params
-    )
+
+    # Generate random string to file_name for uniqueness
+    charset = Array('A'..'Z') + Array('a'..'z')
+    random_string = Array.new(20) { charset.sample }.join
+    object_name = random_string + '_' + params[:child][:avatar].original_filename
+
+    obj = S3_BUCKET.object(object_name)
+    obj.upload_file(params[:child][:avatar].tempfile.path)
+
+    @child.update_columns(avatar_file_name: obj.public_url)
+
+    if @child.save
+      flash[:message] = "Uploaded succesfully."
+    else
+      flash[:error] = "Error occured in uploading file."
+    end
+
     redirect_to "/profile/#{@child.id}"
   end
 
@@ -73,7 +87,10 @@ class ChildrenController < ApplicationController
       state: params[:state] || @child.state,
       city: params[:city] || @child.city,
       trisomy_story: params[:trisomy_story] || @child.trisomy_story,
-      private: params[:private] || @child.private
+      private: params[:private] || @child.private,
+      primary_diagnosis: params[:child_primary_diagnosis],
+      other_primary_diagnosis: params[:other_primary_diagnosis],
+      birth_order: params[:child_birth_order]
     )
     if @child.save
       flash[:notice] = 'New Event Created.'
@@ -171,7 +188,7 @@ class ChildrenController < ApplicationController
     @child = Child.find_by(id: params[:id])
     @user = User.find_by(id: @child.user_id)
     @parent = Parent.find_by(child_id: @child.id)
-    if 
+    if
       @parent.update(
         first_name: params[:parent_1_first_name],
         last_name: params[:parent_1_last_name],

@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20161208183424) do
 
   # These are extensions that must be enabled in order to support this database
@@ -102,11 +101,11 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.boolean  "private",                   default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.string   "primary_diagnosis"
@@ -544,7 +543,7 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.string   "last_name"
     t.string   "relationship"
     t.string   "phone_number"
-    t.boolean  "admin",                  default: false
+    t.boolean  "admin",                                            default: false
     t.string   "family_name"
     t.string   "address"
     t.string   "state"

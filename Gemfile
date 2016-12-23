@@ -36,6 +36,7 @@ gem 'momentjs-rails'
 gem 'angular-ui-calendar-rails'
 
 gem 'devise'
+
 gem 'seed_dump'
 
 gem 'geocoder'
@@ -45,6 +46,11 @@ gem 'rails_12factor', group: :production
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'active_model_serializers', '~> 0.10.0'
+
+gem 'faker', '~> 1.6.6'
+
+gem 'aws-sdk', '~> 2.3'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -63,13 +69,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry'
-  gem 'faker', '~> 1.6.6'
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1', require: false
   gem 'database_cleaner', '~> 1.5'
-  gem 'faker', '~> 1.6.6'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
