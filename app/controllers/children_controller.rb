@@ -87,7 +87,10 @@ class ChildrenController < ApplicationController
       state: params[:state] || @child.state,
       city: params[:city] || @child.city,
       trisomy_story: params[:trisomy_story] || @child.trisomy_story,
-      private: params[:private] || @child.private
+      private: params[:private] || @child.private,
+      primary_diagnosis: params[:child_primary_diagnosis],
+      other_primary_diagnosis: params[:other_primary_diagnosis],
+      birth_order: params[:child_birth_order]
     )
     if @child.save
       flash[:notice] = 'New Event Created.'
