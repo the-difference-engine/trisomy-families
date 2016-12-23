@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :events
       resources :search
+      get '/children' => 'children#index'
     end
   end
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :events
 
-
+  get '/queries' => 'users#query_table'
   get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'
   get '/profile/:id' => 'children#show'
