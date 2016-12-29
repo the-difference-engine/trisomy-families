@@ -8,8 +8,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 require 'geocoder'
+require 'as-duration'
 
-addresses = [
+# Clear database
+Physician.delete_all
+User.delete_all
+Child.delete_all
+Parent.delete_all
+Event.delete_all
+
+
+physician_addresses = [
   ['805 Bay Meadows St.', 'Fort Wayne', 'IN', '46804', -85.0814343000, 41.0906369000],
   ['411 Kirkland Street', 'Miami', 'FL', '33125', -80.2480685000, 26.0605644000],
   ['870 Iroquois Drive','Marlborough', 'MA', '01752', -71.6529375000, 42.3371190000],
@@ -62,42 +71,203 @@ addresses = [
   ['953 West Plumb Branch Drive', 'Quakertown', 'PA', '18951', -75.3415667000, 40.4417682000]
 ]
 
+family_addresses = [
+  ['625 St Louis Ave.', 'West Bloomfield', 'MI', '48322', 42.554825, -83.42573310000002],
+  ['4 Jefferson St.', 'Tewksbury', 'MA', '01876', 42.5973665, -71.2613648 ],
+  ['9253 Circle Avenue', 'Skokie', 'IL', '60076', 42.0495459, -87.746708],
+  ['8364 Green St.', 'Kaukauna', 'WI', '54130', 44.2879207, -88.272988],
+  ['8867 Brickell St.', 'Minot', 'CA', '58701', 34.05930960, -117.5459288],
+  ['611 Atlantic St.', 'Beltsville', 'SC', '20705', 32.785998, -79.867668],
+  ['254 Greystone Drive', 'Ocean Springs', 'TX', '39564', 31.4548593, -97.2075222],
+  ['59 Tanglewood Dr.', 'North Ridgeville', 'NV', '44039', 36.024956, -115.0697536],
+  ['75 Brook Street ', 'Harrisonburg', 'RI', '22801', 41.8188935, -71.3978478],
+  ['8996 Purple Finch Road', 'Saratoga Springs', 'MD', '12866', 47.4185956, -94.7348196],
+  ['7102 North Pawnee Drive', 'Goodlettsville', 'AZ', '37072', 34.6258594, -112.3094519],
+  ['93 Redwood Ave.', 'Mcdonough', 'CA', '30252', 36.715926, -119.548161],
+  ['8 Purple Finch Dr.', 'Kokomo', 'MD', '46901', 39.4101842, -77.98199509],
+  ['8129 Park Ave.', 'Ormond Beach', 'TX', '32174', 28.0292417, -97.53056819],
+  ['775 E. Hudson St.', 'Vista', 'OH', '92083', 40.0146517, -82.9897045],
+  ['485 Third Avenue', 'Atlanta', 'GA', '30303', 40.7446712, -73.9784684],
+  ['9441 Fairground Ave.', 'Scotch Plains', 'WI', '07076', 44.7376812, -90.5777019],
+  ['625 Sheffield Street', 'Collierville', 'CA', '38017', 34.3480549, -119.0881152],
+  ['26 Griffin Street', 'Littleton', 'RI', '80123', 41.5530951, -70.6110434],
+  ['375 Grand Street', 'Roy', 'NY', '84067', 40.7163027, -73.9885619]
+]
+
+
 50.times do |i|
-
-  puts i
-  puts "****"
-
   @physician = Physician.new(
               first_name: Faker::Name.first_name,
               last_name: Faker::Name.last_name,
               phone_number: Faker::Company.duns_number,
-              address: addresses[i][0],
-              city: addresses[i][1],
-              state: addresses[i][2],
-              zip_code: addresses[i][3],
+              address: physician_addresses[i][0],
+              city: physician_addresses[i][1],
+              state: physician_addresses[i][2],
+              zip_code: physician_addresses[i][3],
               website: Faker::Internet.url,
               speciality: Faker::Lorem.word,
-              longitude: addresses[i][5],
-              latitude: addresses[i][4]
+              longitude: physician_addresses[i][5],
+              latitude: physician_addresses[i][4]
               )
   @physician.save
-
 end
 
+puts  "************************"
+puts  "************************"
+puts  "** Physicians created **"
+puts  "************************"
 
-u1 = User.new({email: "joe@gmail.com", encrypted_password: "$2a$11$g8QE4NANYYMjxmfx3e/jZOABkXrQUcH6GEDXSYn1ZyrO7NqE0xAte", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 5, current_sign_in_at: "2016-12-02 02:17:54", last_sign_in_at: "2016-11-29 02:57:02", current_sign_in_ip: "::1", last_sign_in_ip: "::1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, avatar_file_name: nil, avatar_content_type: nil, avatar_file_size: nil, avatar_updated_at: nil, first_name: nil, last_name: nil, relationship: nil, phone_number: nil, admin: false})
-u1.save!(validate: false)
-u2 = User.new({email: "nathanmacaso@gmail.com", encrypted_password: "$2a$11$OD5e9j4b8iLnymufmt3hTOaEUENa7p5R.phbkzm4E6PDaWo1WD4fO", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 10, current_sign_in_at: "2016-12-02 02:18:08", last_sign_in_at: "2016-12-02 02:17:15", current_sign_in_ip: "::1", last_sign_in_ip: "::1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, avatar_file_name: nil, avatar_content_type: nil, avatar_file_size: nil, avatar_updated_at: nil, first_name: nil, last_name: nil, relationship: nil, phone_number: nil, admin: true})
-u2.save!(validate: false)
 
-User.create!([
-  {email: "joe@gmail.com", encrypted_password: "$2a$11$g8QE4NANYYMjxmfx3e/jZOABkXrQUcH6GEDXSYn1ZyrO7NqE0xAte", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 5, current_sign_in_at: "2016-12-02 02:17:54", last_sign_in_at: "2016-11-29 02:57:02", current_sign_in_ip: "::1", last_sign_in_ip: "::1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, avatar_file_name: nil, avatar_content_type: nil, avatar_file_size: nil, avatar_updated_at: nil, first_name: nil, last_name: nil, relationship: nil, phone_number: nil, admin: false},
-  {email: "nathanmacaso@gmail.com", encrypted_password: "$2a$11$OD5e9j4b8iLnymufmt3hTOaEUENa7p5R.phbkzm4E6PDaWo1WD4fO", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 10, current_sign_in_at: "2016-12-02 02:18:08", last_sign_in_at: "2016-12-02 02:17:15", current_sign_in_ip: "::1", last_sign_in_ip: "::1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, avatar_file_name: nil, avatar_content_type: nil, avatar_file_size: nil, avatar_updated_at: nil, first_name: nil, last_name: nil, relationship: nil, phone_number: nil, admin: true}
-])
+20.times do |i|
+    # Create User 1
+    last_name  = Faker::Name.last_name
+    u1 = User.new(
+      {email: Faker::Internet.email,
+      encrypted_password: "$2a$11$g8QE4NANYYMjxmfx3e/jZOABkXrQUcH6GEDXSYn1ZyrO7NqE0xAte",
+      reset_password_token: nil,
+      reset_password_sent_at: nil,
+      remember_created_at: nil,
+      sign_in_count: 5,
+      current_sign_in_at: "2016-12-02 02:17:54",
+      last_sign_in_at: "2016-11-29 02:57:02",
+      current_sign_in_ip: "::1",
+      last_sign_in_ip: "::1",
+      confirmation_token: nil,
+      confirmed_at: nil,
+      confirmation_sent_at: nil,
+      unconfirmed_email: nil,
+      avatar_file_name: "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png",
+      avatar_content_type: nil,
+      avatar_file_size: nil,
+      avatar_updated_at: nil,
+      first_name: Faker::Name.first_name,
+      last_name: last_name,
+      relationship: "Father",
+      phone_number: Faker::PhoneNumber.phone_number,
+      address: family_addresses[i][0],
+      state: family_addresses[i][2],
+      city: family_addresses[i][1],
+      zip_code: Faker::Address.postcode,
+      latitude: family_addresses[i][5],
+      longitude: family_addresses[i][4],
+      family_name: last_name,
+      admin: true})
+    u1.save!(validate: false)
 
-Child.create!([
-  {first_name: "Nathan", last_name: "Macaso", trisomy_type: "1", birth_date: "1982-06-19 00:00:00", death_date: nil, city: "Chicago", state: "IL", trisomy_story: "asdfasdfasdfasdf", avatar_file_name: nil, avatar_content_type: nil, avatar_file_size: nil, avatar_updated_at: nil, user_id: 2, private: false, nickname: nil, birth_order: nil, other_chrom_affected: nil, mosaic_percentage: nil, health_history_id: nil, background_history_id: nil, primary_diagnosis: nil, secondary_diagnosis: nil, partial_trisomy: nil, parent_id: nil, other_primary_diagnosis: nil, other_secondary_diagnosis: nil}
-])
-Event.create!([
-  {title: "Event", description: "This is an event.", start: "2016-12-16 19:00:00", end: "2016-12-16 20:00:00", event_type: "personal", allDay: false, location: "1 N Michigan Ave. Chicago, IL"}
-])
+    @child = nil
+    1.times do |value|
+      @child =  Child.new(
+              {first_name: Faker::Name.first_name,
+                last_name: last_name,
+                trisomy_type: Random.new.rand(0..3),
+                birth_date: "2009-06-19 00:00:00",
+                death_date: nil,
+                city: u1.city,
+                state: u1.state,
+                trisomy_story: Faker::Lorem.paragraph(3) ,
+                avatar_file_name: "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png",
+                avatar_content_type: nil,
+                avatar_file_size: nil,
+                avatar_updated_at: nil,
+                user_id: u1.id,
+                private: false,
+                nickname: Faker::Name.first_name,
+                birth_order: value,
+                other_chrom_affected: nil,
+                mosaic_percentage: nil,
+                health_history_id: nil,
+                background_history_id: nil,
+                primary_diagnosis: nil,
+                secondary_diagnosis: nil,
+                partial_trisomy: nil,
+                parent_id: u1.id,
+                other_primary_diagnosis: nil,
+                other_secondary_diagnosis: nil
+                })
+          @child.save
+    end
+
+
+    2.times do
+      @father = Parent.new(
+        {first_name: u1.first_name,
+         last_name: u1.last_name,
+         city: u1.city,
+         state: u1.state,
+         phone_number: u1.phone_number,
+         email: u1.email,
+         relationship: "Father",
+         created_at: "2016-12-02 02:17:54",
+         updated_at: "2016-12-02 02:17:54",
+         avatar_file_name: "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png",
+         avatar_content_type: nil,
+         avatar_file_size: nil,
+         avatar_updated_at: nil,
+         child_id: @child.id,
+         first_name_2: Faker::Name.first_name,
+         last_name_2: Faker::Name.last_name,
+         city_2: Faker::Address.city,
+         state_2: Faker::Address.state,
+         email_2: Faker::Internet.email,
+         relationship_2: "Father"
+        })
+        @father.save
+
+        @mother = Parent.new(
+          {first_name: Faker::Name.first_name,
+           last_name: Faker::Name.last_name,
+           city: Faker::Address.city,
+           state: Faker::Address.state,
+           phone_number: Faker::PhoneNumber.phone_number,
+           email: Faker::Internet.email,
+           relationship: "Mother",
+           created_at: "2016-12-02 02:17:54",
+           updated_at: "2016-12-02 02:17:54",
+           avatar_file_name: "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png",
+           avatar_content_type: nil,
+           avatar_file_size: nil,
+           avatar_updated_at: nil,
+           child_id: @child.id,
+           first_name_2: Faker::Name.first_name,
+           last_name_2: Faker::Name.last_name,
+           city_2: Faker::Address.city,
+           state_2: Faker::Address.state,
+           email_2: Faker::Address.state,
+           relationship_2: "Mother"
+          }
+          )
+        @mother.save
+    end
+end
+
+puts  "************************"
+puts  "*** Families created ***"
+puts  "************************"
+
+
+# Create events
+7.times do
+  num = Random.new.rand(1..20)
+  @event = Event.new(
+    {title: Faker::Lorem.word,
+    description: Faker::Lorem.paragraph(1) ,
+    start: Faker::Time.between(num.days.ago, Date.today, :morning),
+    end: Faker::Time.between(num.days.ago, Date.today, :night),
+    event_type: "personal",
+    allDay: false,
+    location: Faker::Address.street_address}
+    )
+  @event.save
+end
+
+savedUser = User.last
+
+puts  "************************"
+puts  "**** Events created ****"
+puts  "************************"
+puts  "******** Done! *********"
+puts  "************************"
+puts  "************************"
+puts  "Login with credentials provided below, if needed."
+puts  "Email: #{savedUser.email}"
+puts  "Password: password"
