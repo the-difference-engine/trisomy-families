@@ -51,6 +51,8 @@ gem 'faker', '~> 1.6.6'
 
 gem 'aws-sdk', '~> 2.3'
 
+gem 'as-duration'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

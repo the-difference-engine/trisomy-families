@@ -57,6 +57,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     angular-ui-calendar-rails (0.8.1)
     arel (7.1.2)
+    as-duration (0.1.1)
     aws-sdk (2.6.38)
       aws-sdk-resources (= 2.6.38)
     aws-sdk-core (2.6.38)
@@ -268,6 +269,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   angular-ui-calendar-rails
+  as-duration
   aws-sdk (~> 2.3)
   byebug
   capybara (~> 2.10)
