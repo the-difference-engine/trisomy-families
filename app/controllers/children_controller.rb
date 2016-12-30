@@ -93,9 +93,8 @@ class ChildrenController < ApplicationController
       birth_order: params[:child_birth_order]
     )
     if @child.save
-      flash[:notice] = 'New Event Created.'
+      flash[:success] = 'Updated!'
     end
-
     redirect_to "/profile/#{@child.id}"
   end
 
