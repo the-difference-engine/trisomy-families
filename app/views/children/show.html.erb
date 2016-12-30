@@ -20,15 +20,17 @@
       <p>City: <%= @child.city %></p>
       <p>State: <%= @child.state %></p>
     </div>
-</div>
-<hr>
-<div class="row">
-  <div class="md-col-8">
-    <h2>Trisomy Story </h2>
-    <p><%= @child.trisomy_story %></p>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="md-col-8">
+      <h2>Trisomy Story </h2>
+      <p><%= @child.trisomy_story %></p>
+    </div>
   </div>
   <hr>
   <div>
+    <p>Update photo: </p>
     <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
         <%= form.file_field :avatar, :class => "form-group" %>
         <%= label_tag 'Story is private:' %>
@@ -36,23 +38,21 @@
         <%= form.radio_button :private, false %> No
         <%= submit_tag nil, class: "btn btn-success"%>
         <% end %>
-
-    <div>
-      <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default" %><br>
-      <%= link_to 'Register Basic Profile',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
-      <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
-      <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
-      <% if @child.nickname && @child.birth_order && @child.primary_diagnosis %>
-        <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
-      <% end %>
-      <% if @child.background_history_id %>
-        <%= link_to 'Edit Background History',"/profile/#{@child.id}/edit_background_history", :class => "btn btn-default" %><br>
-      <% end %>
-      <% if @child.health_history_id %>
-        <%= link_to 'Edit Health History',"/profile/#{@child.id}/edit_health_history", :class => "btn btn-default" %><br>
-      <% end %>
-      <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"}, :class => "btn btn-danger" %>
-    </div>
   </div>
-</div>
+  <div>
+    <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default" %><br>
+    <%= link_to 'Register Basic Profile',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
+    <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
+    <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
+    <% if @child.nickname && @child.birth_order && @child.primary_diagnosis %>
+      <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
+    <% end %>
+    <% if @child.background_history_id %>
+      <%= link_to 'Edit Background History',"/profile/#{@child.id}/edit_background_history", :class => "btn btn-default" %><br>
+    <% end %>
+    <% if @child.health_history_id %>
+      <%= link_to 'Edit Health History',"/profile/#{@child.id}/edit_health_history", :class => "btn btn-default" %><br>
+    <% end %>
+    <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"}, :class => "btn btn-danger" %>
+  </div>
 </div>
