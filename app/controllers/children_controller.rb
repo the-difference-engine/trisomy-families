@@ -93,11 +93,8 @@ class ChildrenController < ApplicationController
       birth_order: params[:child_birth_order]
     )
     if @child.save
-      puts @child.errors.full_messages
-      flash[:notice] = 'Profile updated.'
+      flash[:success] = 'Updated!'
     end
-
-    byebug
     redirect_to "/profile/#{@child.id}"
   end
 
