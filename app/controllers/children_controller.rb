@@ -93,9 +93,11 @@ class ChildrenController < ApplicationController
       birth_order: params[:child_birth_order]
     )
     if @child.save
-      flash[:notice] = 'New Event Created.'
+      puts @child.errors.full_messages
+      flash[:notice] = 'Profile updated.'
     end
 
+    byebug
     redirect_to "/profile/#{@child.id}"
   end
 
@@ -130,7 +132,8 @@ class ChildrenController < ApplicationController
       state_2: params[:parent_2_state],
       phone_number_2: params[:parent_2_phone_number],
       email_2: params[:parent_2_email],
-      relationship_2: params[:parent_2_relationship]
+      relationship_2: params[:parent_2_relationship],
+      registered: true
     )
     @child.update(
       nickname: params[:child_nickname],
