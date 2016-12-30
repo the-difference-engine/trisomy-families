@@ -11,7 +11,7 @@ class Child < ApplicationRecord
   validates :trisomy_story, presence: true
   validates :private, inclusion: [true, false]
   validates :birth_order, presence: true, on: :confirm_register
+  validates :parent_id, presence: true, on: :confirm_register
   validates :primary_diagnosis, presence: true, on: :confirm_register
-
   belongs_to :user
 end
