@@ -7,7 +7,9 @@ class FamiliesController < ApplicationController
     # Get children
     if current_user 
       @children = Child.where(user_id: current_user.id)
-      # @parents = Parent.where(id: @children.parent_id)
+      @children.each do |child|
+        @parents = Parent.where(id: child.parent_id)
+      end
       render 'index.html.erb'
     else
       flash[:warning] = 'You must be logged in to view this page.'

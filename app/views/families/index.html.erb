@@ -1,6 +1,30 @@
 <h1>Stories</h1>
 <hr>
 <h1>Parents</h1>
+<div class="row">
+  <% @parents.each do |parent| %>
+  <div class="col-md-6">
+    <div class="media">
+      <div class="media-left">
+        <h2><%= parent.relationship %></h2>
+      </div>
+      <h3 class="media-heading"><%= parent.first_name %> <%= parent.last_name %></h3>
+      <br>
+      <h4>Contact Info:</h4>
+      <p><%= parent.city %>, <%= parent.state %></p>
+      <p>Email: <%= parent.email %></p>
+      <p>Phone Number: <%= parent.phone_number %></p>
+      <h2><%= parent.relationship_2 %></h2>
+      <h3 class="media-heading"><%= parent.first_name_2 %> <%= parent.last_name_2 %></h3>
+      <br>
+      <h4>Contact Info:</h4>
+      <p><%= parent.city_2 %>, <%= parent.state_2 %></p>
+      <p>Email: <%= parent.email_2 %></p>
+      <p>Phone Number: <%= parent.phone_number_2 %></p>
+    </div>
+  </div>
+  <% end %>
+</div>
 <hr>
 <h1>Participants</h1>
 <div class="row">
@@ -22,3 +46,4 @@
 </div>
 <% end %>
 </div>
+
