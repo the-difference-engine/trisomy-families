@@ -40,9 +40,7 @@
         <% end %>
   </div>
   <div>
-    <% if @child.parent_id == false %>
-      <%= link_to 'Register Basic Profile',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
-    <% end %>
+    <%= link_to 'Register Basic Profile',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
     <% if @child.background_history_id == false %>
       <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
     <% end %>
