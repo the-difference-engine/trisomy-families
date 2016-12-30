@@ -132,8 +132,7 @@ class ChildrenController < ApplicationController
       state_2: params[:parent_2_state],
       phone_number_2: params[:parent_2_phone_number],
       email_2: params[:parent_2_email],
-      relationship_2: params[:parent_2_relationship],
-      registered: true
+      relationship_2: params[:parent_2_relationship]
     )
     @child.update(
       nickname: params[:child_nickname],
@@ -145,7 +144,8 @@ class ChildrenController < ApplicationController
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
       partial_trisomy: params[:child_partial_trisomy],
-      parent_id: @parent.id
+      parent_id: @parent.id,
+      registered: true
     )
     @user.update(
       first_name: params[:user_first_name],
