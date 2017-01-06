@@ -93,9 +93,8 @@ class ChildrenController < ApplicationController
       birth_order: params[:child_birth_order]
     )
     if @child.save
-      flash[:notice] = 'New Event Created.'
+      flash[:success] = 'Updated!'
     end
-
     redirect_to "/profile/#{@child.id}"
   end
 
@@ -142,7 +141,8 @@ class ChildrenController < ApplicationController
       other_chrom_affected: params[:child_other_chrom_affected],
       mosaic_percentage: params[:child_mosaic_trisomy_percentage],
       partial_trisomy: params[:child_partial_trisomy],
-      parent_id: @parent.id
+      parent_id: @parent.id,
+      registered: true
     )
     @user.update(
       first_name: params[:user_first_name],
