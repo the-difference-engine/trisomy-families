@@ -15,16 +15,6 @@
  *= require fullcalendar
  */
 
-.navbar .navbar-nav {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
-
-.navbar .navbar-collapse {
-  text-align: center;
-}
-
 .top-nav-menu li {
   display:inline-block;
   padding-left:25px;
