@@ -8,6 +8,14 @@
         <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
       <% end %>
     </div>
+
+    <div class="buttons">
+      <p>Update photo: </p>
+      <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
+          <%= form.file_field :avatar, :class => "form-group" %>
+          <%= submit_tag nil, class: "btn btn-success"%>
+      <% end %>
+     </div>
     
     <div class="col-md-6 bg-info">
       <br>

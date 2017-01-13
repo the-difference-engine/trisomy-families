@@ -54,6 +54,12 @@ class ChildrenController < ApplicationController
     @child = Child.find_by(id: params[:id])
 
     # Generate random string to file_name for uniqueness
+    charset = Array('A'..'Z') + Array('a'..'z')
+    random_string = Array.new(20) { charset.sample }.join
+    object_name = random_string + '_' + params[:child][:avatar].original_filename
+
+    obj = S3_BUCKET.object(object_name)
+    obj.upload_file(params[:child][:avatar].tempfile.path)
 
     @child.update_columns(avatar_file_name: obj.public_url)
 
@@ -72,13 +78,6 @@ class ChildrenController < ApplicationController
     calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
     calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
 
-    charset = Array('A'..'Z') + Array('a'..'z')
-    random_string = Array.new(20) { charset.sample }.join
-    object_name = random_string + '_' + params[:avatar]
-
-    obj = S3_BUCKET.object(object_name)
-    obj.upload_file(params[:child][:avatar].tempfile.path)
-
     @child.update(
       first_name: params[:first_name] || @child.first_name,
       last_name: params[:last_name] || @child.last_name,
@@ -91,8 +90,7 @@ class ChildrenController < ApplicationController
       private: params[:private] || @child.private,
       primary_diagnosis: params[:child_primary_diagnosis],
       other_primary_diagnosis: params[:other_primary_diagnosis],
-      birth_order: params[:child_birth_order],
-      avatar_file_name: obj.public_url
+      birth_order: params[:child_birth_order]
     )
     if @child.save
       flash[:success] = 'Updated!'
