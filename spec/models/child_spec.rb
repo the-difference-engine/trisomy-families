@@ -20,6 +20,8 @@ RSpec.describe Child, type: :model do
     end
   end
 
+  
+
   context "Creates an invalid child" do
     child = Child.new(
       first_name: "", 
