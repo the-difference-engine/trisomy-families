@@ -15,4 +15,5 @@ class Child < ApplicationRecord
   validates :primary_diagnosis, presence: true, on: :update
 
   belongs_to :user
+  belongs_to :background_history
 end
