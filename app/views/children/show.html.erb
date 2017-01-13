@@ -5,9 +5,19 @@
     </div>
     <div class="col-md-6">
       <% if @child.avatar_file_name %>
-      <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
+        <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
       <% end %>
     </div>
+    <div class="buttons">
+      <p>Update photo: </p>
+      <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
+          <%= form.file_field :avatar, :class => "form-group" %>
+          <%= label_tag 'Story is private:' %>
+          <%= form.radio_button :private, true %> Yes
+          <%= form.radio_button :private, false %> No
+          <%= submit_tag nil, class: "btn btn-success"%>
+      <% end %>
+     </div>
     <div class="col-md-6 bg-info">
       <br>
       <p>Birthday: <%= @child.birth_date.strftime("%B %d") %></p>
@@ -29,16 +39,7 @@
     </div>
   </div>
   <hr>
-  <div>
-    <p>Update photo: </p>
-    <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
-        <%= form.file_field :avatar, :class => "form-group" %>
-        <%= label_tag 'Story is private:' %>
-        <%= form.radio_button :private, true %> Yes
-        <%= form.radio_button :private, false %> No
-        <%= submit_tag nil, class: "btn btn-success"%>
-        <% end %>
-   </div>
+
     <div>
     <% if @child.background_history_id == false %>
       <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>

@@ -22,12 +22,10 @@ Rails.application.configure do
   config.assets.js_compressor = Uglifier.new(mangle: false)
   # config.assets.css_compressor = :sass
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  # Fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = true
 
   config.action_controller.include_all_helpers = true
-
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -95,15 +93,15 @@ Rails.application.configure do
 
 # environment variables are still missing, need to add them at a later date.
 
-  config.paperclip_defaults = {
-  storage: :s3,
-  s3_credentials: {
-    bucket: ENV['S3_BUCKET_NAME'],
-    access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-    secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-    s3_region: ENV['AWS_REGION']
-  }
-}
+  # config.paperclip_defaults = {
+  # storage: :s3,
+  # s3_credentials: {
+  #   bucket: ENV['S3_BUCKET_NAME'],
+  #   access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+  #   s3_region: ENV['AWS_REGION']
+  # }
+# }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
