@@ -14,4 +14,6 @@ class Child < ApplicationRecord
   validates :parent_id, presence: true, on: :confirm_register
   validates :primary_diagnosis, presence: true, on: :confirm_register
   belongs_to :user
+  belongs_to :background_history
+  belongs_to :health_history
 end
