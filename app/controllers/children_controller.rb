@@ -101,7 +101,7 @@ class ChildrenController < ApplicationController
   def destroy
     @child = Child.find_by(id: params[:id])
     @child.destroy
-    redirect_to '/'
+    redirect_to '/family-dashboard'
   end
 
   def register
