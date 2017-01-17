@@ -47,6 +47,7 @@ class ChildrenController < ApplicationController
 
   def edit
     @child = Child.find_by(id: params[:id])
+    @privacy = Privacy.find_by(children_id: @child.id)
     render 'edit.html.erb'
   end
 
@@ -74,6 +75,7 @@ class ChildrenController < ApplicationController
 
   def update
     @child = Child.find_by(id: params[:id])
+    @privacy = Privacy.find_by(children_id: @child.id)
 
     calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
     calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
@@ -92,6 +94,15 @@ class ChildrenController < ApplicationController
       other_primary_diagnosis: params[:other_primary_diagnosis],
       birth_order: params[:child_birth_order]
     )
+
+    @privacy.update(
+      story: params[:story] || @privacy.story,
+      avatar: params[:avatar] || @privacy.avatar,
+      location: params[:location] || @privacy.location,
+      birthday: params[:birthday] || @privacy.birthday,
+      trisomy_type: params[:trisomy_type] || @privacy.trisomy_type
+    )
+
     if @child.save
       flash[:success] = 'Updated!'
     end
