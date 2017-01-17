@@ -1,0 +1,76 @@
+
+<form name="editEventForm">
+  <div class="form-group">
+    <label><h4>Event Name:</h4></label>
+    <span ng-show="showError(editEventForm.title, 'required')">
+      <label>
+       <strong>This field is required</strong>
+     </label>
+    </span>
+      <input type="text" name="title" class="form-control" ng-model=event.title ng-minlength="3" required>
+      <br>
+
+    <label><h4>Start Date:</h4></label>
+    <span ng-show="showError(editEventForm.startDate, 'required')">
+      <label>
+       <strong>This field is required</strong>
+     </label>
+    </span>
+      <input type="date" name="startDate" class="form-control" id="exampleInput" name="input" ng-model="event.startDateForm"
+    placeholder="event.start"/ required>
+      <br>
+
+    <label><h4>End Date:</h4></label>
+    <span ng-show="showError(editEventForm.endDate, 'required')">
+      <label>
+       <strong>This field is required</strong>
+     </label>
+    </span>
+      <input type="date" name="endDate" class="form-control" id="exampleInput" name="input" ng-model="event.endDateForm"
+    placeholder="event.end"/ required>
+      <br>
+
+
+    <label><h4>Start Time:</h4></label>
+    <span ng-show="showError(editEventForm.startTime, 'required')">
+      <label>
+       <strong>This field is required</strong>
+     </label>
+    </span>
+      <input type="time" name="startTime" class="form-control" ng-model=event.startTimeForm required>
+      <br>
+
+    <label><h4>End Time:</h4></label>
+    <span ng-show="showError(editEventForm.endTime, 'required')">
+      <label>
+       <strong>This field is required</strong>
+     </label>
+    </span>
+      <input type="time" name="endTime" class="form-control" ng-model=event.endTimeForm required>
+      <br>
+
+    <label><h4>Location:</h4></label>
+    <span ng-show="showError(editEventForm.location, 'required')">
+      <label>
+       <strong>This field is required</strong>
+     </label>
+    </span>
+      <input type="text" name="location" class="form-control" ng-model=event.location required>
+      <br>
+
+    <label><h4>Type:</h4></label>
+      <select class="form-control" name="eventType" ng-model=event.event_type ng-options="x for x in typeOptions" required>
+    </select>
+      <br>
+
+    <label><h4>Description:</h4></label>
+      <textarea class="form-control" name="description" ng-model=event.description></textarea>
+      <br>
+
+
+    <label class="radio"><h4>All Day:</h4></label>
+      <label ><input type="radio" name="allDay" ng-model="event.allDay" ng-value="true" required> Yes</label>
+      <label ><input type="radio" name="allDay" ng-model="event.allDay" ng-value="false" required> No</label>
+
+  </div>
+</form>

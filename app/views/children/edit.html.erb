@@ -46,8 +46,10 @@
     <%= radio_button_tag :private, true, @child.private %> Yes
     <%= radio_button_tag :private, false, !@child.private %> No
   </div>
+  <hr>
   <%= submit_tag 'Save', class: "btn btn-success btn-lg btn-block" %>
-<% end %>
+  <% end %>
+  <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"}, :class => "btn btn-danger btn-lg btn-block" %>
    <a class="btn btn-default btn-lg btn-block" href="/profile/<%= @child.id %>" role="button">Cancel</a>
 </div>
-</div>
+

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161208183424) do
+ActiveRecord::Schema.define(version: 20170110022407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,11 +101,11 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.boolean  "private",                   default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.string   "primary_diagnosis"
@@ -115,6 +114,7 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.integer  "parent_id"
     t.string   "other_primary_diagnosis"
     t.string   "other_secondary_diagnosis"
+    t.boolean  "registered",                default: false
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
@@ -489,6 +489,17 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "privacies", force: :cascade do |t|
+    t.integer  "children_id"
+    t.boolean  "story"
+    t.boolean  "avatar"
+    t.boolean  "location"
+    t.boolean  "birthday"
+    t.boolean  "trisomy_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "received_therapies", force: :cascade do |t|
     t.boolean  "ot"
     t.boolean  "pt"
@@ -544,7 +555,7 @@ ActiveRecord::Schema.define(version: 20161208183424) do
     t.string   "last_name"
     t.string   "relationship"
     t.string   "phone_number"
-    t.boolean  "admin",                  default: false
+    t.boolean  "admin",                                            default: false
     t.string   "family_name"
     t.string   "address"
     t.string   "state"

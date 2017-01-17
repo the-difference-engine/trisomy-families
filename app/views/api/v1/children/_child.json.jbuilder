@@ -14,6 +14,7 @@ json.other_secondary_diagnosis child.other_secondary_diagnosis
 json.other_primary_diagnosis child.other_primary_diagnosis
 json.other_chrom_affected child.other_chrom_affected
 json.chd child.health_history.chd
+# json.something child.background_history.delivery_method
 # json.offered_cardiac_surgery child.health_history.offered_cardiac_surgery
 # json.first_cardiac_surgery_age child.health_history.first_cardiac_surgery_age
 # json.first_cardiac_surgery_successful child.health_history.first_cardiac_surgery_successful
