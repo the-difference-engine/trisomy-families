@@ -40,10 +40,10 @@
   <hr>
 
     <div>
-    <% if @child.background_history_id == false %>
+    <% if @child.background_history_id == nil %>
       <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
     <% end %>
-    <% if @child.health_history_id %>
+    <% if @child.health_history_id == nil %>
       <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
       <% end %>
       <% if @child.nickname && @child.birth_order && @child.primary_diagnosis && @child.registered %>

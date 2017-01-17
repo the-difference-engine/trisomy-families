@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170117004713) do
     t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
+    t.boolean  "private",                   default: false
     t.string   "primary_diagnosis"
     t.string   "secondary_diagnosis"
     t.string   "partial_trisomy"
