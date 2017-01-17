@@ -1,1 +1,1 @@
-json.array! @children, @background_history, partial: 'child', as: :child
+json.array! @children, partial: 'child', as: :child

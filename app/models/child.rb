@@ -16,4 +16,5 @@ class Child < ApplicationRecord
 
   belongs_to :user
   belongs_to :background_history
+  belongs_to :health_history
 end
