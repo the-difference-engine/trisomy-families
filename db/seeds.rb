@@ -245,7 +245,7 @@ puts  "************************"
       latitude: family_addresses[i][5],
       longitude: family_addresses[i][4],
       family_name: last_name,
-      admin: true})
+      user_type: "admin"})
     u1.save!(validate: false)
 
     @child = nil
