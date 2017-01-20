@@ -279,6 +279,9 @@ puts  "************************"
                 other_secondary_diagnosis: nil
                 })
           @child.save
+
+          @privacy = Privacy.new(children_id: @child.id)
+          @privacy.save
     end
 
 
