@@ -2,379 +2,417 @@
   <div ng-controller="queriesCtrl" ng-init=setUp()>
     <h1>Filter By:</h1>
       <div>
-        <h2>Treatments:</h2>  
+        <h2>Treatments:</h2>
+          OT: <input type="checkbox" ng-model="selectedOt">
+          <br>
+          PT: <input type="checkbox" ng-model="selectedPt">
+          <br> 
+          DT: <input type="checkbox" ng-model="selectedDt">
+          <br> 
+          ST: <input type="checkbox" ng-model="selectedSt">
+          <br> 
+          DTV: <input type="checkbox" ng-model="selectedDtv">
+          <br> 
+          DTH: <input type="checkbox" ng-model="selectedDth">
+          <br> 
+          Vital Stim: <input type="checkbox" ng-model="selectedVitalStim">
+          <br> 
+          Aquatic: <input type="checkbox" ng-model="selectedAquatic">
+          <br> 
+          Reflex Integration: <input type="checkbox" ng-model="selectedReflexIntegration">
+          <br> 
+          Hippotherapy Equine: <input type="checkbox" ng-model="selectedHippotherapyEquine">
+          <br>   
+          Hyperbaric: <input type="checkbox" ng-model="selectedHyperbaric">
+          <br>
       </div>
       <div>
         <h2>Surgeries:</h2>
-          Repair of duodenal atresia stenosis web: <input type="checkbox" ng-model="selectedOdd">
-          <br>
-          Repair of anal stenosis atresia: <input type="checkbox" ng-model="selectedSchizophrenia">
-          <br>
-          Gastrostomy tube placement: <input type="checkbox" ng-model="selectedAddictions">
-          <br>
-          Surgery for hirschsprung disease: <input type="checkbox" ng-model="selectedEatingDisorder">
-          <br>
-          Fundoplication nissen wrap: <input type="checkbox" ng-model="selectedPersonalityDisorder">
-          <br>
-          None: <input type="checkbox" ng-model="selectedConductDisorder">
-          <br>
-          <!-- list -->
-          First cardiac surgery age: <input type="checkbox" ng-model="selectedFirstCardiacSurgeryAge">
-          <br>
-          First cardiac surgery successful: <input type="checkbox" ng-model="selectedFirstCardaicSurgerySuccessful">
-          <br>
-          Multiple cardiac surgeries: <input type="checkbox" ng-model="selectedMultipleCardiacSurgeries">
-          <br>
-          Atlanto axial instability surgery: <input type="checkbox" ng-model="selectedAtlantoAxialInstabilitySurgery">
-          <br>
-          Cervical spine degeneration surgery: <input type="checkbox" ng-model="selectedCervicalSpineDegenerationSurgery">
-          <br>
-          Osteopenia surgery: <input type="checkbox" ng-model="selectedOsteopeniaSurgery">
-          <br>
-          Osteoporosis surgery: <input type="checkbox" ng-model="selectedOsteoporosisSurgery">
-          <br>
-          Fractures surgery: <input type="checkbox" ng-model="selectedFracturesSurgery">
-          <br>
-          Scoliosis surgery: <input type="checkbox" ng-model="selectedAuditoryScoliosisSurgery">
-          <br>
-          Lordosis surgery: <input type="checkbox" ng-model="selectedLordosisSurgery">
-          <br>
-          Kyphosis surgery: <input type="checkbox" ng-model="selectedKyphosisSurgery">
-          <br>
-          Hand bone missing surgery: <input type="checkbox" ng-model="selectedHandBoneMissingSurgery">
-          <br>
-          Leg bone missing surgery: <input type="checkbox" ng-model="selectedLegBoneMissingSurgery">
-          <br>
-          Rib deformities surgery: <input type="checkbox" ng-model="selectedRibDeformitiesSurgery">
-          <br>
-          Club foot surgery: <input type="checkbox" ng-model="selectedClubFootSurgery">
-          <br>
-          Rocker bottom feet surgery: <input type="checkbox" ng-model="selectedRockerBottomFeetSurgery">
-          <br>
-          Brain malformation surgery: <input type="checkbox" ng-model="selectedBrainMalformationSurgery">
-          <br>
-          Cyst surgery: <input type="checkbox" ng-model="selectedCystSurgery">
-          <br>
-          Cp surgery: <input type="checkbox" ng-model="selectedCpSurgery">
-          <br>
-          Stroke surgery: <input type="checkbox" ng-model="selectedStrokeSurgery">
+          <h4>Gastric:</h4>
+               Repair of duodenal atresia stenosis web: <input type="checkbox" ng-model="selectedOdd">
+               <br>
+               Repair of anal stenosis atresia: <input type="checkbox" ng-model="selectedSchizophrenia">
+               <br>
+               Gastrostomy tube placement: <input type="checkbox" ng-model="selectedAddictions">
+               <br>
+               Surgery for hirschsprung disease: <input type="checkbox" ng-model="selectedEatingDisorder">
+               <br>
+               Fundoplication nissen wrap: <input type="checkbox" ng-model="selectedPersonalityDisorder">
+               <br>
+               None: <input type="checkbox" ng-model="selectedNoGastricSurgery">
+               <br>
+          <h4>Cardiac:</h4>
+               <!-- list -->
+               First cardiac surgery age: <input type="checkbox" ng-model="selectedFirstCardiacSurgeryAge">
+               <br>
+               First cardiac surgery successful: <input type="checkbox" ng-model="selectedFirstCardaicSurgerySuccessful">
+               <br>
+               Multiple cardiac surgeries: <input type="checkbox" ng-model="selectedMultipleCardiacSurgeries">
+               <br>
+          <h4>Muscular/Skeletal:</h4>
+               Atlanto axial instability surgery: <input type="checkbox" ng-model="selectedAtlantoAxialInstabilitySurgery">
+               <br>
+               Cervical spine degeneration surgery: <input type="checkbox" ng-model="selectedCervicalSpineDegenerationSurgery">
+               <br>
+               Osteopenia surgery: <input type="checkbox" ng-model="selectedOsteopeniaSurgery">
+               <br>
+               Osteoporosis surgery: <input type="checkbox" ng-model="selectedOsteoporosisSurgery">
+               <br>
+               Fractures surgery: <input type="checkbox" ng-model="selectedFracturesSurgery">
+               <br>
+               Scoliosis surgery: <input type="checkbox" ng-model="selectedAuditoryScoliosisSurgery">
+               <br>
+               Lordosis surgery: <input type="checkbox" ng-model="selectedLordosisSurgery">
+               <br>
+               Kyphosis surgery: <input type="checkbox" ng-model="selectedKyphosisSurgery">
+               <br>
+               Hand bone missing surgery: <input type="checkbox" ng-model="selectedHandBoneMissingSurgery">
+               <br>
+               Leg bone missing surgery: <input type="checkbox" ng-model="selectedLegBoneMissingSurgery">
+               <br>
+               Rib deformities surgery: <input type="checkbox" ng-model="selectedRibDeformitiesSurgery">
+               <br>
+               Club foot surgery: <input type="checkbox" ng-model="selectedClubFootSurgery">
+               <br>
+               Rocker bottom feet surgery: <input type="checkbox" ng-model="selectedRockerBottomFeetSurgery">
+               <br>
+          <h4>Nuerological:</h4>
+               Brain malformation surgery: <input type="checkbox" ng-model="selectedBrainMalformationSurgery">
+               <br>
+               Cyst surgery: <input type="checkbox" ng-model="selectedCystSurgery">
+               <br>
+               Cp surgery: <input type="checkbox" ng-model="selectedCpSurgery">
+               <br>
+               Stroke surgery: <input type="checkbox" ng-model="selectedStrokeSurgery">
       </div> 
       <div>
         <h2>Characteristics:</h2>
-          <!-- list -->
-          Weight at birth: <input type="checkbox" ng-model="selectedWeight">
-          <br>
-          <!-- list -->
-          Height at birth: <input type="checkbox" ng-model="selectedHeight">
-          <br>
-          <!-- list -->
-          Head Circumference at birth: <input type="checkbox" ng-model="selectedHeadCircumference">
-          <br>
-          Relatives with trisomy: <input type="checkbox" ng-model="selectedTrisomyRelative">
-          <br>
-          <!-- list -->
-          Delivery Method: <input type="checkbox" ng-model="selectedDeliveryMethod">
-          <br>
-          Apgar Score: <input type="checkbox" ng-model="selectedApgarScore">
-          <br>
-          <!-- list -->
-          Gestation age: <input type="checkbox" ng-model="selectedGestationAge">
-          <br>
-          <!-- list -->
-          Mother age at birth: <input type="checkbox" ng-model="selectedMotherAgeAtBirth">
-          <br>
-          <!-- list -->
-          Father age at birth: <input type="checkbox" ng-model="selectedFatherAgeAtBirth">
-          <br>
-          Multiple birth: <input type="checkbox" ng-model="selectedMultipleBirth">
-          <br>
-          Multiple birth trisomy: <input type="checkbox" ng-model="selectedMultipleBirthTrisomy">
-          <br>
-          Siblings with trisomy: <input type="checkbox" ng-model="selectedSiblingsWithTrisomy">
-          <br>
-          ADD: <input type="checkbox" ng-model="selectedAdd">
-          <br>
-          ADHD: <input type="checkbox" ng-model="selectedAdhd">
-          <br>
-          Bipolar: <input type="checkbox" ng-model="selectedBipolar">
-          <br>
-          Autism spectrum: <input type="checkbox" ng-model="selectedAustismSpectrum">
-          <br>
-          Depression: <input type="checkbox" ng-model="selectedDepression">
-          <br>
-          Anxiety disorder: <input type="checkbox" ng-model="selectedAnxietyDisorder">
-          <br>
-          OCD: <input type="checkbox" ng-model="selectedOcd">
-          <br>
-          ODD: <input type="checkbox" ng-model="selectedOdd">
-          <br>
-          Schizophrenia: <input type="checkbox" ng-model="selectedSchizophrenia">
-          <br>
-          Addictions: <input type="checkbox" ng-model="selectedAddictions">
-          <br>
-          Eating disorder: <input type="checkbox" ng-model="selectedEatingDisorder">
-          <br>
-          Personality disorder: <input type="checkbox" ng-model="selectedPersonalityDisorder">
-          <br>
-          Conduct disorder: <input type="checkbox" ng-model="selectedConductDisorder">
-          <br>
-          Learning disability: <input type="checkbox" ng-model="selectedLearningDisabilty">
-          <br>
-          Gloabal developmental delay: <input type="checkbox" ng-model="selectedGlobalDevelopmentalDelay">
-          <br>
-          Intellectual disability: <input type="checkbox" ng-model="selectedIntellectualDisability">
-          <br>
-          Speech delay: <input type="checkbox" ng-model="selectedSpeechDelay">
-          <br>
-          Receptive delay: <input type="checkbox" ng-model="selectedReceptiveDelay">
-          <br>
-          Expressive delay: <input type="checkbox" ng-model="selectedExpressiveDelay">
-          <br>
-          Auditory processing disorder: <input type="checkbox" ng-model="selectedAuditoryProcessingDisorder">
-          <br>
-          Apraxia dyspraxia: <input type="checkbox" ng-model="selectedApraxiaDyspraxia">
-          <br>
-          Visual processing: <input type="checkbox" ng-model="selectedVisualProcessing">
-          <br>
-          <!-- list -->
-          Trisomy type: <input type="checkbox" ng-model="selectedTrisomyType">
-          <br>
-          <!-- list -->
-          Birth order: <input type="checkbox" ng-model="selectedBirthOrder">
-          <br>
-          Other chromosomes affected: <input type="checkbox" ng-model="selectedOtherChromAffected">
-          <br>
-          <!-- list -->
-          Mosaic percentage: <input type="checkbox" ng-model="selectedMosaicPercentage">
-          <br>
-          <!-- list -->
-          Primary diagnosis<input type="checkbox" ng-model="selectedPrimaryDiagnosis">
-          <br>
-          <!-- list -->
-          Secondary diagnosis<input type="checkbox" ng-model="selectedSecondaryDiagnosis">
-          <br>
-          <!-- list -->
-          Partial trisomy: <input type="checkbox" ng-model="selectedPartialTrisomy">
-          <br>
-          ASD: <input type="checkbox" ng-model="selectedAsd">
-          <br>
-          VSD: <input type="checkbox" ng-model="selectedVsd">
-          <br>
-          PDA: <input type="checkbox" ng-model="selectedPda">
-          <br>
-          DORV: <input type="checkbox" ng-model="selectedConductDorv">
-          <br>
-          AV Canal Defect: <input type="checkbox" ng-model="selectedAvCanalDefect">
-          <br>
-          TOF: <input type="checkbox" ng-model="selectedTof">
-          <br>
-          PFO: <input type="checkbox" ng-model="selectedPfo">
-          <br>
-          Cranial deformities: <input type="checkbox" ng-model="selectedCranialDeformities">
-          <br>
-          Cleft palate: <input type="checkbox" ng-model="selectedCleftPalate">
-          <br>
-          Cleft lip: <input type="checkbox" ng-model="selectedCleftLip">
-          <br>
-          High arc: <input type="checkbox" ng-model="selectedHighArc">
-          <br>
-          Low set ears: <input type="checkbox" ng-model="selectedLowSetEars">
-          <br>
-          Wide spaced eyes: <input type="checkbox" ng-model="selectedWideSpacedEyes">
-          <br>
-          Wild eyebrows: <input type="checkbox" ng-model="selectedWildEyebrows">
-          <br>
-          Extraordinarily long eyelashes: <input type="checkbox" ng-model="selectedExtraordinarilyLongEyelashes">
-          <br>
-          Overgrowth of gums: <input type="checkbox" ng-model="selectedOvergrowthOfGums">
-          <br>
-          Delayed teething: <input type="checkbox" ng-model="selectedDelayedTeething">
-          <br>
-          Hyperthyroidism: <input type="checkbox" ng-model="selectedHyperthyroidism">
-          <br>
-          Hypothyroidism: <input type="checkbox" ng-model="selectedHypothyroidism">
-          <br>
-          Early onset pubic hair: <input type="checkbox" ng-model="selectedEarlyOnsetPubicHair">
-          <br>
-          Early onset puberty: <input type="checkbox" ng-model="selectedEarlyOnsetPuberty">
-          <br>
-          Growth hormone deficiency: <input type="checkbox" ng-model="selectedGrowthHormoneDeficiency">
-          <br>
-          Calcium deficiency: <input type="checkbox" ng-model="selectedCalciumDeficiency">
-          <br>
-          High cortisol: <input type="checkbox" ng-model="selectedHighCortisol">
-          <br>
-          Diabetes: <input type="checkbox" ng-model="selectedDiabetes">
-          <br>
-          Hypoglycemia: <input type="checkbox" ng-model="selectedHypoglycemia">
-          <br>
-          Cushing's disease: <input type="checkbox" ng-model="selectedCushingsDisease">
-          <br>
-          Vitamin D deficiency: <input type="checkbox" ng-model="selectedVitaminDDeficiency">
-          <br>
-          Anemia: <input type="checkbox" ng-model="selectedAnemia">
-          <br>
-          Failure to thrive: <input type="checkbox" ng-model="selectedFailureToThrive">
-          <br>
-          High blood pressure: <input type="checkbox" ng-model="selectedHighBloodPressure">
-          <br>
-          Low blood pressure: <input type="checkbox" ng-model="selectedLowBloodPressure">
-          <br>
-          Delayed or late puberty: <input type="checkbox" ng-model="selectedDelayedOrLatePuberty">
-          <br>
-          High blood sugar: <input type="checkbox" ng-model="selectedHighBloodSugar">
-          <br>
-          Unhealthy cholesterol levels: <input type="checkbox" ng-model="selectedUnhealthyCholesterolLevels">
-          <br>
-          Increased abdominal fat: <input type="checkbox" ng-model="selectedIncreasedAbdominalFat">
-          <br>
-          Congenital heart disease: <input type="checkbox" ng-model="selectedCongenitalHeartDisease">
-          <br>
-          Seizure or epilepsy: <input type="checkbox" ng-model="selectedSeizureOrEpilepsy">
-          <br>
-          Sleep apnea: <input type="checkbox" ng-model="selectedSleepApnea">
-          <br>
-          <!-- could be a list -->
-          Cancer: <input type="checkbox" ng-model="selectedCancer">
-          <br>
-          Metabolic syndrome: <input type="checkbox" ng-model="selectedMetabolicSyndrome">
-          <br>
-          Hearing loss or deaf: <input type="checkbox" ng-model="selectedHearingLossOrDeaf">
-          <br>
-          Failed eye exam: <input type="checkbox" ng-model="selectedFailedEyeExam">
-          <br>
-          Home schooled bound: <input type="checkbox" ng-model="selectedHomeSchooledBound">
-          <br>
-          <!-- list -->
-          Highest education: <input type="checkbox" ng-model="selectedHighestEducation">
-          <br>
-          Participated in clinical trial: <input type="checkbox" ng-model="selectedParticipatedInClinicalTrial">
-          <br>
-          Transient: <input type="checkbox" ng-model="selectedTransient">
-          <br>
-          Conductive: <input type="checkbox" ng-model="selectedConductive">
-          <br>
-          Nerve loss: <input type="checkbox" ng-model="selectedNerveLoss">
-          <br>
-          Unknown: <input type="checkbox" ng-model="selectedUnknown">
-          <br>
-          Duodenal atresia stenosis web: <input type="checkbox" ng-model="selectedDuodenalAtresiaStenosisWeb">
-          <br>
-          Anal stenosis atresia: <input type="checkbox" ng-model="selectedAnalStenosisAtresia">
-          <br>
-          Esophageal atresia: <input type="checkbox" ng-model="selectedEsophagealAtresia">
-          <br>
-          Hirschsprung disease: <input type="checkbox" ng-model="selectedHirschsprungDisease">
-          <br>
-          Chronic constipation: <input type="checkbox" ng-model="selectedChronicConstipation">
-          <br>
-          Dysphagia: <input type="checkbox" ng-model="selectedDysphagia">
-          <br>
-          Aspiration: <input type="checkbox" ng-model="selectedAspiration">
-          <br>
-          Chronic diarrhea: <input type="checkbox" ng-model="selectedChronicDiarrhea">
-          <br>
-          Pyloric stenosis: <input type="checkbox" ng-model="selectedPyloricStenosis">
-          <br>
-          Gastroesophageal reflux: <input type="checkbox" ng-model="selectedGastroesophagealReflux">
-          <br>
-          Peptic ulcers or gallstones: <input type="checkbox" ng-model="selectedPepticUlcersOrGallstones">
-          <br>
-          Hemorrhoids: <input type="checkbox" ng-model="selectedHemorrhoids">
-          <br>
-          Diverticulitis or diverticulosis: <input type="checkbox" ng-model="selectedDod">
-          <br>
-          IBS: <input type="checkbox" ng-model="selectedIbs">
-          <br>
-          Mother had gestational diabetes: <input type="checkbox" ng-model="selectedGestationalDiabetes">
-          <br>
-          Mother had clampsia: <input type="checkbox" ng-model="selectedClampsia">
-          <br>
-          Mother had preeclampsia: <input type="checkbox" ng-model="selectedPreeclampsia">
-          <br>
-          Mother had separated placenta: <input type="checkbox" ng-model="selectedSeparatedPlacenta">
-          <br>
-          Mother had rh factor: <input type="checkbox" ng-model="selectedRhFactor">
-          <br>
-          Mother had extra fluid: <input type="checkbox" ng-model="selectedExtraFluid">
-          <br>
-          Atlanto axial instability: <input type="checkbox" ng-model="selectedAtlantoAxialInstability">
-          <br>
-          Cervical spine degeneration: <input type="checkbox" ng-model="selectedCervicalSpineDegeneration">
-          <br>
-          Osteopenia: <input type="checkbox" ng-model="selectedOsteopenia">
-          <br>
-          Osteoporosis: <input type="checkbox" ng-model="selectedOsteoporosis">
-          <br>
-          Fractures: <input type="checkbox" ng-model="selectedFractures">
-          <br>
-          Scoliosis: <input type="checkbox" ng-model="selectedScoliosis">
-          <br>
-          Lordosis: <input type="checkbox" ng-model="selectedLordosis">
-          <br>
-          Kyphosis: <input type="checkbox" ng-model="selectedKyphosis">
-          <br>
-          Hand bone missing: <input type="checkbox" ng-model="selectedHandBoneMissing">
-          <br>
-          Leg bone missing: <input type="checkbox" ng-model="selectedLegBoneMissing">
-          <br>
-          Rib deformities: <input type="checkbox" ng-model="selectedRibDeformities">
-          <br>
-          Club foot: <input type="checkbox" ng-model="selectedClubFoot">
-          <br>
-          Rocker bottom foot: <input type="checkbox" ng-model="selectedRockerBottomFoot">
-          <br>
-          Brain malformation: <input type="checkbox" ng-model="selectedBrainMalformation">
-          <br>
-          Cyst: <input type="checkbox" ng-model="selectedCyst">
-          <br>
-          CP: <input type="checkbox" ng-model="selectedCp">
-          <br>
-          Stroke: <input type="checkbox" ng-model="selectedStroke">
-          <br>
-          Cataract: <input type="checkbox" ng-model="selectedCataract">
-          <br>
-          Strabismus: <input type="checkbox" ng-model="selectedStrabismus">
-          <br>
-          Lazy eye: <input type="checkbox" ng-model="selectedLazyEye">
-          <br>
-          Near sighted: <input type="checkbox" ng-model="selectedNearSighted">
-          <br>
-          Far sighted: <input type="checkbox" ng-model="selectedFarSighted">
-          <br>
-          CVI: <input type="checkbox" ng-model="selectedCvi">
-          <br>
-          Astigmatism: <input type="checkbox" ng-model="selectedAstigmatism">
-          <br>
-          Ptosis: <input type="checkbox" ng-model="selectedPtosis">
-          <br>
-          Blockage of tear_duct: <input type="checkbox" ng-model="selectedBlockageOfTearDuct">
-          <br>
-          Depth perception problems: <input type="checkbox" ng-model="selectedDepthPerceptionProblems">
-          <br>
-          Blindness: <input type="checkbox" ng-model="selectedBlindness">
-          <br>
-          Glaucoma: <input type="checkbox" ng-model="selectedGlaucoma">
-          <br>
-          Torn retina: <input type="checkbox" ng-model="selectedTornRetina">
-          <br>
-          Detached retina: <input type="checkbox" ng-model="selectedDetachedRetina">
-          <br>
-          Undeveloped eyes: <input type="checkbox" ng-model="selectedUndevelopedEyes">
-          <br>
-          Underdeveloped eyes: <input type="checkbox" ng-model="selectedUnderdevelopedEyes">
-          <br>
-          Undeveloped eye-socket: <input type="checkbox" ng-model="selectedUndevelopedEyeSocet">
-          <br>
-          Underdeveloped eye-socket: <input type="checkbox" ng-model="selectedUnderdevelopedEyeSocket">
-          <br>
-          Dry eyes: <input type="checkbox" ng-model="selectedDryEyes">
-          <br>
-          Doesn't blink well: <input type="checkbox" ng-model="selectedDoesntBlinkWell">
-          <br>
-          Doesn't close eyes when sleeping: <input type="checkbox" ng-model="selectedDoesntCloseEyesWhenSleeping">
-          <br>
-          Colorectal carcinoma: <input type="checkbox" ng-model="selectedDoesntColorectalCarcinoma">
+          <h4>Birth Info:</h4>
+               <!-- list -->
+               Weight at birth: <input type="checkbox" ng-model="selectedWeight">
+               <br>
+               <!-- list -->
+               Height at birth: <input type="checkbox" ng-model="selectedHeight">
+               <br>
+               <!-- list -->
+               Head Circumference at birth: <input type="checkbox" ng-model="selectedHeadCircumference">
+               <br>
+               Relatives with trisomy: <input type="checkbox" ng-model="selectedTrisomyRelative">
+               <br>
+               <!-- list -->
+               Delivery Method: <input type="checkbox" ng-model="selectedDeliveryMethod">
+               <br>
+               Apgar Score: <input type="checkbox" ng-model="selectedApgarScore">
+               <br>
+               <!-- list -->
+               Gestation age: <input type="checkbox" ng-model="selectedGestationAge">
+               <br>
+               <!-- list -->
+               Mother age at birth: <input type="checkbox" ng-model="selectedMotherAgeAtBirth">
+               <br>
+               <!-- list -->
+               Father age at birth: <input type="checkbox" ng-model="selectedFatherAgeAtBirth">
+               <br>
+               Multiple birth: <input type="checkbox" ng-model="selectedMultipleBirth">
+               <br>
+               Multiple birth trisomy: <input type="checkbox" ng-model="selectedMultipleBirthTrisomy">
+               <br>
+               Siblings with trisomy: <input type="checkbox" ng-model="selectedSiblingsWithTrisomy">
+               <br>
+               <!-- list -->
+               Trisomy type: <input type="checkbox" ng-model="selectedTrisomyType">
+               <br>
+               <!-- list -->
+               Birth order: <input type="checkbox" ng-model="selectedBirthOrder">
+               <br>
+               Other chromosomes affected: <input type="checkbox" ng-model="selectedOtherChromAffected">
+               <br>
+               <!-- list -->
+               Mosaic percentage: <input type="checkbox" ng-model="selectedMosaicPercentage">
+               <br>
+               <!-- list -->
+               Primary diagnosis<input type="checkbox" ng-model="selectedPrimaryDiagnosis">
+               <br>
+               <!-- list -->
+               Secondary diagnosis<input type="checkbox" ng-model="selectedSecondaryDiagnosis">
+               <br>
+               <!-- list -->
+               Partial trisomy: <input type="checkbox" ng-model="selectedPartialTrisomy">
+               <br>
+          <h4>Behavioral Info:</h4>
+               ADD: <input type="checkbox" ng-model="selectedAdd">
+               <br>
+               ADHD: <input type="checkbox" ng-model="selectedAdhd">
+               <br>
+               Bipolar: <input type="checkbox" ng-model="selectedBipolar">
+               <br>
+               Autism spectrum: <input type="checkbox" ng-model="selectedAustismSpectrum">
+               <br>
+               Depression: <input type="checkbox" ng-model="selectedDepression">
+               <br>
+               Anxiety disorder: <input type="checkbox" ng-model="selectedAnxietyDisorder">
+               <br>
+               OCD: <input type="checkbox" ng-model="selectedOcd">
+               <br>
+               ODD: <input type="checkbox" ng-model="selectedOdd">
+               <br>
+               Schizophrenia: <input type="checkbox" ng-model="selectedSchizophrenia">
+               <br>
+               Addictions: <input type="checkbox" ng-model="selectedAddictions">
+               <br>
+               Eating disorder: <input type="checkbox" ng-model="selectedEatingDisorder">
+               <br>
+               Personality disorder: <input type="checkbox" ng-model="selectedPersonalityDisorder">
+               <br>
+               Conduct disorder: <input type="checkbox" ng-model="selectedConductDisorder">
+               <br>
+               Learning disability: <input type="checkbox" ng-model="selectedLearningDisabilty">
+               <br>
+               Gloabal developmental delay: <input type="checkbox" ng-model="selectedGlobalDevelopmentalDelay">
+               <br>
+               Intellectual disability: <input type="checkbox" ng-model="selectedIntellectualDisability">
+               <br>
+               Speech delay: <input type="checkbox" ng-model="selectedSpeechDelay">
+               <br>
+               Receptive delay: <input type="checkbox" ng-model="selectedReceptiveDelay">
+               <br>
+               Expressive delay: <input type="checkbox" ng-model="selectedExpressiveDelay">
+               <br>
+               Auditory processing disorder: <input type="checkbox" ng-model="selectedAuditoryProcessingDisorder">
+               <br>
+               Apraxia dyspraxia: <input type="checkbox" ng-model="selectedApraxiaDyspraxia">
+               <br>
+               Visual processing: <input type="checkbox" ng-model="selectedVisualProcessing">
+               <br>
+          <h4>Congential Heart Defects:</h4>
+               ASD: <input type="checkbox" ng-model="selectedAsd">
+               <br>
+               VSD: <input type="checkbox" ng-model="selectedVsd">
+               <br>
+               PDA: <input type="checkbox" ng-model="selectedPda">
+               <br>
+               DORV: <input type="checkbox" ng-model="selectedConductDorv">
+               <br>
+               AV Canal Defect: <input type="checkbox" ng-model="selectedAvCanalDefect">
+               <br>
+               TOF: <input type="checkbox" ng-model="selectedTof">
+               <br>
+               PFO: <input type="checkbox" ng-model="selectedPfo">
+               <br>
+               Congenital heart disease: <input type="checkbox" ng-model="selectedCongenitalHeartDisease">
+               <br>
+          <h4>Cranial/Facial:</h4>
+               Cranial deformities: <input type="checkbox" ng-model="selectedCranialDeformities">
+               <br>
+               Cleft palate: <input type="checkbox" ng-model="selectedCleftPalate">
+               <br>
+               Cleft lip: <input type="checkbox" ng-model="selectedCleftLip">
+               <br>
+               High arc: <input type="checkbox" ng-model="selectedHighArc">
+               <br>
+               Low set ears: <input type="checkbox" ng-model="selectedLowSetEars">
+               <br>
+               Wide spaced eyes: <input type="checkbox" ng-model="selectedWideSpacedEyes">
+               <br>
+               Wild eyebrows: <input type="checkbox" ng-model="selectedWildEyebrows">
+               <br>
+               Extraordinarily long eyelashes: <input type="checkbox" ng-model="selectedExtraordinarilyLongEyelashes">
+               <br>
+               Overgrowth of gums: <input type="checkbox" ng-model="selectedOvergrowthOfGums">
+               <br>
+               Delayed teething: <input type="checkbox" ng-model="selectedDelayedTeething">
+               <br>
+          <h4>Endocrine:</h4>
+               Hyperthyroidism: <input type="checkbox" ng-model="selectedHyperthyroidism">
+               <br>
+               Hypothyroidism: <input type="checkbox" ng-model="selectedHypothyroidism">
+               <br>
+               Early onset pubic hair: <input type="checkbox" ng-model="selectedEarlyOnsetPubicHair">
+               <br>
+               Early onset puberty: <input type="checkbox" ng-model="selectedEarlyOnsetPuberty">
+               <br>
+               Growth hormone deficiency: <input type="checkbox" ng-model="selectedGrowthHormoneDeficiency">
+               <br>
+               Calcium deficiency: <input type="checkbox" ng-model="selectedCalciumDeficiency">
+               <br>
+               High cortisol: <input type="checkbox" ng-model="selectedHighCortisol">
+               <br>
+               Diabetes: <input type="checkbox" ng-model="selectedDiabetes">
+               <br>
+               Hypoglycemia: <input type="checkbox" ng-model="selectedHypoglycemia">
+               <br>
+               Cushing's disease: <input type="checkbox" ng-model="selectedCushingsDisease">
+               <br>
+               Vitamin D deficiency: <input type="checkbox" ng-model="selectedVitaminDDeficiency">
+               <br>
+               Anemia: <input type="checkbox" ng-model="selectedAnemia">
+               <br>
+               Failure to thrive: <input type="checkbox" ng-model="selectedFailureToThrive">
+               <br>
+               High blood pressure: <input type="checkbox" ng-model="selectedHighBloodPressure">
+               <br>
+               Low blood pressure: <input type="checkbox" ng-model="selectedLowBloodPressure">
+               <br>
+               Delayed or late puberty: <input type="checkbox" ng-model="selectedDelayedOrLatePuberty">
+               <br>
+               High blood sugar: <input type="checkbox" ng-model="selectedHighBloodSugar">
+               <br>
+               Unhealthy cholesterol levels: <input type="checkbox" ng-model="selectedUnhealthyCholesterolLevels">
+               <br>
+               Increased abdominal fat: <input type="checkbox" ng-model="selectedIncreasedAbdominalFat">
+               <br>
+          <h4>Hearing Info:</h4>
+               Transient: <input type="checkbox" ng-model="selectedTransient">
+               <br>
+               Conductive: <input type="checkbox" ng-model="selectedConductive">
+               <br>
+               Nerve loss: <input type="checkbox" ng-model="selectedNerveLoss">
+               <br>
+               Hearing loss or deaf: <input type="checkbox" ng-model="selectedHearingLossOrDeaf">
+               <br>
+               Unknown: <input type="checkbox" ng-model="selectedUnknown">
+          <h4>Education:</h4>
+               Home schooled bound: <input type="checkbox" ng-model="selectedHomeSchooledBound">
+               <br>
+               <!-- list -->
+               Highest education: <input type="checkbox" ng-model="selectedHighestEducation">
+               <br>
+          <h4>Intestinal Info:</h4>
+               Duodenal atresia stenosis web: <input type="checkbox" ng-model="selectedDuodenalAtresiaStenosisWeb">
+               <br>
+               Anal stenosis atresia: <input type="checkbox" ng-model="selectedAnalStenosisAtresia">
+               <br>
+               Esophageal atresia: <input type="checkbox" ng-model="selectedEsophagealAtresia">
+               <br>
+               Hirschsprung disease: <input type="checkbox" ng-model="selectedHirschsprungDisease">
+               <br>
+               Chronic constipation: <input type="checkbox" ng-model="selectedChronicConstipation">
+               <br>
+               Dysphagia: <input type="checkbox" ng-model="selectedDysphagia">
+               <br>
+               Aspiration: <input type="checkbox" ng-model="selectedAspiration">
+               <br>
+               Chronic diarrhea: <input type="checkbox" ng-model="selectedChronicDiarrhea">
+               <br>
+               Pyloric stenosis: <input type="checkbox" ng-model="selectedPyloricStenosis">
+               <br>
+               Gastroesophageal reflux: <input type="checkbox" ng-model="selectedGastroesophagealReflux">
+               <br>
+               Peptic ulcers or gallstones: <input type="checkbox" ng-model="selectedPepticUlcersOrGallstones">
+               <br>
+               Hemorrhoids: <input type="checkbox" ng-model="selectedHemorrhoids">
+               <br>
+               Diverticulitis or diverticulosis: <input type="checkbox" ng-model="selectedDod">
+               <br>
+               IBS: <input type="checkbox" ng-model="selectedIbs">
+               <br>
+          <h4>Mother Complications:</h4>
+               Mother had gestational diabetes: <input type="checkbox" ng-model="selectedGestationalDiabetes">
+               <br>
+               Mother had clampsia: <input type="checkbox" ng-model="selectedClampsia">
+               <br>
+               Mother had preeclampsia: <input type="checkbox" ng-model="selectedPreeclampsia">
+               <br>
+               Mother had separated placenta: <input type="checkbox" ng-model="selectedSeparatedPlacenta">
+               <br>
+               Mother had rh factor: <input type="checkbox" ng-model="selectedRhFactor">
+               <br>
+               Mother had extra fluid: <input type="checkbox" ng-model="selectedExtraFluid">
+               <br>
+          <h4>Muscular/Skeletal:</h4>
+               Atlanto axial instability: <input type="checkbox" ng-model="selectedAtlantoAxialInstability">
+               <br>
+               Cervical spine degeneration: <input type="checkbox" ng-model="selectedCervicalSpineDegeneration">
+               <br>
+               Osteopenia: <input type="checkbox" ng-model="selectedOsteopenia">
+               <br>
+               Osteoporosis: <input type="checkbox" ng-model="selectedOsteoporosis">
+               <br>
+               Fractures: <input type="checkbox" ng-model="selectedFractures">
+               <br>
+               Scoliosis: <input type="checkbox" ng-model="selectedScoliosis">
+               <br>
+               Lordosis: <input type="checkbox" ng-model="selectedLordosis">
+               <br>
+               Kyphosis: <input type="checkbox" ng-model="selectedKyphosis">
+               <br>
+               Hand bone missing: <input type="checkbox" ng-model="selectedHandBoneMissing">
+               <br>
+               Leg bone missing: <input type="checkbox" ng-model="selectedLegBoneMissing">
+               <br>
+               Rib deformities: <input type="checkbox" ng-model="selectedRibDeformities">
+               <br>
+               Club foot: <input type="checkbox" ng-model="selectedClubFoot">
+               <br>
+               Rocker bottom foot: <input type="checkbox" ng-model="selectedRockerBottomFoot">
+               <br>
+          <h4>Nuerological:</h4>
+               Seizure or epilepsy: <input type="checkbox" ng-model="selectedSeizureOrEpilepsy">
+               <br>
+               Brain malformation: <input type="checkbox" ng-model="selectedBrainMalformation">
+               <br>
+               Cyst: <input type="checkbox" ng-model="selectedCyst">
+               <br>
+               CP: <input type="checkbox" ng-model="selectedCp">
+               <br>
+               Stroke: <input type="checkbox" ng-model="selectedStroke">
+               <br>
+          <h4>Vision:</h4>
+               Failed eye exam: <input type="checkbox" ng-model="selectedFailedEyeExam">
+               <br>
+               Cataract: <input type="checkbox" ng-model="selectedCataract">
+               <br>
+               Strabismus: <input type="checkbox" ng-model="selectedStrabismus">
+               <br>
+               Lazy eye: <input type="checkbox" ng-model="selectedLazyEye">
+               <br>
+               Near sighted: <input type="checkbox" ng-model="selectedNearSighted">
+               <br>
+               Far sighted: <input type="checkbox" ng-model="selectedFarSighted">
+               <br>
+               CVI: <input type="checkbox" ng-model="selectedCvi">
+               <br>
+               Astigmatism: <input type="checkbox" ng-model="selectedAstigmatism">
+               <br>
+               Ptosis: <input type="checkbox" ng-model="selectedPtosis">
+               <br>
+               Blockage of tear_duct: <input type="checkbox" ng-model="selectedBlockageOfTearDuct">
+               <br>
+               Depth perception problems: <input type="checkbox" ng-model="selectedDepthPerceptionProblems">
+               <br>
+               Blindness: <input type="checkbox" ng-model="selectedBlindness">
+               <br>
+               Glaucoma: <input type="checkbox" ng-model="selectedGlaucoma">
+               <br>
+               Torn retina: <input type="checkbox" ng-model="selectedTornRetina">
+               <br>
+               Detached retina: <input type="checkbox" ng-model="selectedDetachedRetina">
+               <br>
+               Undeveloped eyes: <input type="checkbox" ng-model="selectedUndevelopedEyes">
+               <br>
+               Underdeveloped eyes: <input type="checkbox" ng-model="selectedUnderdevelopedEyes">
+               <br>
+               Undeveloped eye-socket: <input type="checkbox" ng-model="selectedUndevelopedEyeSocet">
+               <br>
+               Underdeveloped eye-socket: <input type="checkbox" ng-model="selectedUnderdevelopedEyeSocket">
+               <br>
+               Dry eyes: <input type="checkbox" ng-model="selectedDryEyes">
+               <br>
+               Doesn't blink well: <input type="checkbox" ng-model="selectedDoesntBlinkWell">
+               <br>
+               Doesn't close eyes when sleeping: <input type="checkbox" ng-model="selectedDoesntCloseEyesWhenSleeping">
+               <br>
+          <h4>Other:</h4>
+               Sleep apnea: <input type="checkbox" ng-model="selectedSleepApnea">
+               <br>
+               <!-- could be a list -->
+               Cancer: <input type="checkbox" ng-model="selectedCancer">
+               <br>
+               Metabolic syndrome: <input type="checkbox" ng-model="selectedMetabolicSyndrome">
+               <br>
+               Participated in clinical trial: <input type="checkbox" ng-model="selectedParticipatedInClinicalTrial">
+               <br>
+               Colorectal carcinoma: <input type="checkbox" ng-model="selectedDoesntColorectalCarcinoma">
       </div>
       <div>
         <h2>State:</h2>
