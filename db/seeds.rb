@@ -13,6 +13,7 @@ require 'as-duration'
 # Clear database
 Physician.delete_all
 User.where.not(user_type: "admin").delete_all
+User.where(user_type: nil).delete_all
 Child.delete_all
 Parent.delete_all
 Event.delete_all
@@ -274,8 +275,6 @@ puts  "************************"
     )
   @event.save
 end
-
-savedUser = User.last
 
 puts  "************************"
 puts  "**** Events created ****"
