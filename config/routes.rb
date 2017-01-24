@@ -42,4 +42,6 @@ Rails.application.routes.draw do
   get '/family-center' => 'family_center#index'
 
   get 'professional-center' => 'professional_center#index'
+
+  get 'admin-dashboard' => 'admins#index'
 end
