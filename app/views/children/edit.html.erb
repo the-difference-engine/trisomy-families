@@ -41,13 +41,35 @@
     <%= select_tag(:trisomy_type, options_for_select(trisomy_type, @child.trisomy_type)) %>
     <%#= select_tag(:trisomy_type, @child.trisomy_type) %>
   </div>
+  <hr>
+  <h5 style="color:gray">Privacy Settings</h5>
   <div class="form-group">
-    <%= label_tag 'Story is private:' %>
-    <%= radio_button_tag :private, true, @child.private %> Yes
-    <%= radio_button_tag :private, false, !@child.private %> No
+    <%= label_tag 'Profile Image:' %>
+    <%= radio_button_tag :avatar, false, @privacy.avatar, :checked => (!@privacy.avatar) %> Public
+    <%= radio_button_tag :avatar, true, @privacy.avatar, :checked => (@privacy.avatar) %> Private
+  </div>
+  <div class="form-group">
+    <%= label_tag 'Address:' %>
+    <%= radio_button_tag :location, false, @privacy.location, :checked => (!@privacy.location) %> Public
+    <%= radio_button_tag :location, true, @privacy.location, :checked => (@privacy.location) %> Private
+  </div>
+  <div class="form-group">
+    <%= label_tag 'Birthday:' %>
+    <%= radio_button_tag :birthday, false, @privacy.birthday, :checked => (!@privacy.birthday) %> Public
+    <%= radio_button_tag :birthday, true, @privacy.birthday, :checked => (@privacy.birthday) %> Private
+  </div>
+  <div class="form-group">
+    <%= label_tag 'Trisomy Type:' %>
+    <%= radio_button_tag :trisomy_type, false, @privacy.trisomy_type, :checked => (!@privacy.trisomy_type) %> Public
+    <%= radio_button_tag :trisomy_type, true, @privacy.trisomy_type, :checked => (@privacy.trisomy_type) %> Private
+  </div>
+  <div class="form-group">
+    <%= label_tag 'Story:' %>
+    <%= radio_button_tag :story, false, @privacy.story, :checked => (!@privacy.story) %> Public
+    <%= radio_button_tag :story, true, @privacy.story, :checked => (@privacy.story) %> Private
   </div>
   <%= submit_tag 'Save', class: "btn btn-success btn-lg btn-block" %>
-<% end %>
+  <% end %>
+  <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"}, :class => "btn btn-danger btn-lg btn-block" %>
    <a class="btn btn-default btn-lg btn-block" href="/profile/<%= @child.id %>" role="button">Cancel</a>
-</div>
 </div>

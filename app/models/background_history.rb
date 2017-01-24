@@ -1,5 +1,9 @@
 class BackgroundHistory < ApplicationRecord
-  belongs_to :user
+  has_many :children
+  belongs_to :weight, foreign_key: "weight_id"
+  belongs_to :height, foreign_key: "height_id"
+  belongs_to :head_circumference, foreign_key: "head_circumference_id"
+  belongs_to :mother_complication, foreign_key: "mother_complication_id"
   validates :weight_at_birth, presence: true
   validates :height_at_birth, presence: true
   validates :head_circumference_at_birth, presence: true
