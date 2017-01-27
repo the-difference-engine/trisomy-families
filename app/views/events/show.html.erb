@@ -15,7 +15,7 @@
 
         <div class="col-md-6 text-right">
           <input class="btn btn-default" type="button" value="Upload Photo">
-          <% if current_user.admin? %>
+          <% if current_user.user_type == "admin" %>
             <input class="btn btn-default" type="button" value="Edit" ng-hide="editEnabled" ng-click="toggleEditMode()">
             <input class="btn btn-success" type="button" value="Save" ng-show="editEnabled" ng-disabled="modelHasChanged()" ng-click="saveEdit()">
             <input class="btn btn-danger" type="button" value="Cancel" ng-show="editEnabled" ng-click="resetModel(); toggleEditMode()">

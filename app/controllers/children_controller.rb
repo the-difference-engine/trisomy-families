@@ -1,36 +1,29 @@
 class ChildrenController < ApplicationController
   def new_profile
     unless user_signed_in?
+      # @child.user_id = current_user.id
       flash[:warning] = 'You must be logged in to use this feature.'
       redirect_to '/'
     else
       @child = Child.new
+      @child.user_id = current_user.id
+      @child.build_privacy
       render 'new_profile.html.erb'
     end
   end
 
   def create_profile
-    calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
-    calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
+    @child = Child.new(child_params)
+    @child.birth_date = calculate_date(params[:child][:birth_date])
+    @child.death_date = calculate_date(params[:child][:death_date])
+    @child.user_id = current_user.id
+    @child.build_privacy(privacy_params)
 
-    @child = Child.new(
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      trisomy_type: params[:trisomy_type],
-      birth_date: calculated_birth_date,
-      death_date: calculated_death_date,
-      state: params[:state],
-      city: params[:city],
-      trisomy_story: params[:trisomy_story],
-      avatar: params[:avatar],
-      private: params[:private],
-      user_id: current_user.id
-    )
+    # byebug
     if @child.save
-      flash[:success] = "Created profile!"
+      flash[:success] = 'Profile created!'
       redirect_to "/profile/#{@child.id}"
     else
-      flash[:warning] = "Profile couldn't save"
       render 'new_profile.html.erb'
     end
   end
@@ -935,5 +928,37 @@ class ChildrenController < ApplicationController
 
   def user_params
     params.require(:child).permit(:avatar, :private)
+  end
+
+  def child_params
+    params.require(:child).permit(:first_name,
+                                  :last_name,
+                                  :trisomy_type,
+                                  :state, :city,
+                                  :trisomy_story,
+                                  :nickname,
+                                  :birth_order,
+                                  :primary_diagnosis,
+                                  :other_primary_diagnosis)
+  end
+
+  def privacy_params
+    if params[:child][:privacy_attributes] != nil
+      return { avatar: params[:child][:privacy_attributes][:avatar],
+              location: params[:child][:privacy_attributes][:location],
+              birthday: params[:child][:privacy_attributes][:birthday],
+              trisomy_type: params[:child][:privacy_attributes][:trisomy_type],
+              story: params[:child][:privacy_attributes][:story] }
+    else
+      return { avatar: nil,
+              location: nil,
+              birthday: nil,
+              trisomy_type: nil,
+              story: nil }
+    end
+  end
+
+  def calculate_date(date_param)
+    date_param.blank? ? nil : Date.parse(date_param)
   end
 end
