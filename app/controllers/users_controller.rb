@@ -12,6 +12,8 @@ class UsersController < ApplicationController
     if current_user
       if current_user.children.empty?
         redirect_to '/profile/new'
+      elsif current_user.user_type == 'admin'
+        redirect_to '/admin-dashboard'
       else
         render 'home.html.erb'
       end
