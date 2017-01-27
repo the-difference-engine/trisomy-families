@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   get '/queries' => 'users#query_table'
   get '/profile/new' => 'children#new_profile'
-  post '/profile' => 'children#create_profile'
+  post '/profile' => 'children#i_profile'
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
   patch '/profile/:id' => 'children#update'
