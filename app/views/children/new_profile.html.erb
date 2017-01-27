@@ -1,88 +1,109 @@
-<% if @child.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@child.errors.count, "error") %> prohibited this child from being saved:</h2>
-
-    <ul>
-    <% @child.errors.full_messages.each do |msg| %>
+<% if @child.errors.any?%>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+   <%= pluralize(@child.errors.count, "Error") %>
+   <ul>
+      <% @child.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
+      <% end %>
+   </ul>
+</div>
 <% end %>
 <div class="container">
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h1 class="text-center">Family Member Profile</h1>
-    <p class="text-center">Add a member to your family dashboard.</p>
-    <hr>
-<%= form_tag '/profile', method: :post do %>
-<h5 style="color:gray">Basic Info</h5>
-  <div class="form-group">
-    <%= label_tag :child_first_name, "Full Name" %>
-    <%= text_field_tag :first_name, @child.first_name, class: "form-control", placeholder: 'First Name' %>
-  </div>
-  <div class="form-group">
-    <%= text_field_tag :last_name, @child.last_name, class: "form-control", placeholder: 'Last Name' %>
-  </div>
-  <div class="form-group">
-    <div>
-      <%= label_tag :child_nickname %>
-      <%= text_field_tag :child_nickname, @child.nickname, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= label_tag :date_of_birth, "Date of Birth" %>
-    <%= date_field_tag :date_of_birth, @child.birth_date, class: "form-control"%>
-  </div>
-  <div class="form-group">
-  <!-- Make optional -->
-    <%= label_tag :date_of_death, "Date of Death" %>
-    <%= date_field_tag :date_of_death, @child.death_date, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :child_birth_order %>
-    <%= number_field_tag :child_birth_order, @child.birth_order, in: 1..15, step: 1 , class: "form-control"%>
-  </div>
-  <hr>
-  <h5 style="color:gray">Location</h5>
-  <div class="form-group">
-    <%= label_tag :state, 'State' %>
-    <%= select_tag(:state, options_for_select(us_states, @child.state), class: "form-control") %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :city, 'City' %>
-    <%= text_field_tag :city, @child.city, class: "form-control" %>
-  </div>
-  <hr>
-  <h5 style="color:gray">Trisomy</h5>
-  <div class="form-group">
-    <%= label_tag :trisomy_type, "Type of Trisomy" %>
-    <%= select_tag(:trisomy_type, options_for_select(trisomy_type, @child.trisomy_type)) %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :child_primary_diagnosis %>
-    <%= select_tag(:child_primary_diagnosis, options_for_select(primary_trisomy_diagnosis, @child.primary_diagnosis)) %>
-  </div>
-  <div class="form-group">
-      <%= label_tag :other_primary_diagnosis %>
-      <%= text_field_tag :other_primary_diagnosis, @child.other_primary_diagnosis %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :trisomy_story, "Trisomy Story" %>
-    <%= text_area_tag :trisomy_story, @child.trisomy_story, class: "form-control", row: "3" %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :story_privacy, 'Story is private:' %>
-    <%= radio_button_tag :private, true %>Yes
-    <%= radio_button_tag :private, false %>No
-  </div>
-  <hr>
-  <div>
-    <%= hidden_field_tag :user_id, current_user.id %>
-  </div>
-
-  <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
-</div> <!-- col-md-6 -->
-</div> <!-- row -->
-</div> <!-- container -->
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <h1 class="text-center">Family Member Profile</h1>
+         <p class="text-center">Add a member to your family dashboard.</p>
+         <hr>
+         <%= form_for @child, url: {action: "create_profile"} do |f| %>
+         <h5 style="color:gray">Basic Info</h5>
+         <div class="form-group">
+            <%= f.label :child_first_name, "* Full Name" %>
+            <%= f.text_field(:first_name, class: "form-control", placeholder: 'First Name') %>
+         </div>
+         <div class="form-group">
+            <%= f.text_field(:last_name, class: "form-control", placeholder: 'Last Name') %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_nickname %>
+            <%= f.text_field(:nickname, class: "form-control") %>
+         </div>
+         <div class="form-group">
+            <%= f.label :date_of_birth, "* Date of Birth" %>
+            <%= f.date_field(:birth_date, class: "form-control")%>
+         </div>
+         <div class="form-group">
+            <!-- Make optional -->
+            <%= f.label :date_of_death, "Date of Death" %>
+            <%= f.date_field(:death_date, class: "form-control") %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_birth_order %>
+            <%= f.number_field(:birth_order, in: 1..15, step: 1 , class: "form-control")%>
+         </div>
+         <hr>
+         <h5 style="color:gray">Location</h5>
+         <div class="form-group">
+            <%= f.label :state, 'State' %>
+            <%= f.select("state", options_for_select(us_states, @child.state), class: "form-control") %>
+         </div>
+         <div class="form-group">
+            <%= f.label :city, '* City' %>
+            <%= f.text_field(:city, class: "form-control")%>
+         </div>
+         <hr>
+         <h5 style="color:gray">Trisomy</h5>
+         <div class="form-group">
+            <%= f.label :trisomy_type, "Type of Trisomy" %>
+            <%= f.select("trisomy_type", options_for_select(trisomy_type, @child.trisomy_type)) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_primary_diagnosis %>
+            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis, @child.primary_diagnosis)) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :other_primary_diagnosis %>
+            <%= f.text_field(:other_primary_diagnosis) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :trisomy_story, "* Trisomy Story" %>
+            <%= f.text_area( :trisomy_story, class: "form-control", row: "3")%>
+         </div>
+         <hr>
+         <h5 style="color:gray">Privacy Settings</h5>
+         <%= f.fields_for :privacy do |privacy_form| %>
+         <div class="form-group">
+            <%= privacy_form.label 'Profile Image:' %>
+            <%= privacy_form.radio_button(:avatar, false) %> Public
+            <%= privacy_form.radio_button(:avatar, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Birthday:' %>
+            <%= privacy_form.radio_button(:birthday, false) %> Public
+            <%= privacy_form.radio_button(:birthday, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Trisomy Type:' %>
+            <%= privacy_form.radio_button(:trisomy_type, false)%> Public
+            <%= privacy_form.radio_button(:trisomy_type, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Story:' %>
+            <%= privacy_form.radio_button(:story, false) %> Public
+            <%= privacy_form.radio_button(:story, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Address:' %>
+            <%= privacy_form.radio_button(:location, false) %> Public
+            <%= privacy_form.radio_button(:location, true) %> Private
+         </div>
+         <% end %>
+         <div>
+         </div>
+         <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
+      </div>
+      <!-- col-md-6 -->
+   </div>
+   <!-- row -->
+</div>
+<!-- container -->
 <% end %>
