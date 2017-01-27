@@ -9,10 +9,12 @@ class UsersController < ApplicationController
   end
 
   def home
-    if current_user.children.empty?
-      redirect_to '/profile/new'
-    else
-      render 'home.html.erb'
+    if current_user
+      if current_user.children.empty?
+        redirect_to '/profile/new'
+      else
+        render 'home.html.erb'
+      end
     end
   end
 
