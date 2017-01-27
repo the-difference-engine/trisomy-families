@@ -1,39 +1,45 @@
 require 'rails_helper'
 
 RSpec.describe Child, type: :model do
-  
+
   context "Creates valid child" do
     child = Child.new(
-      first_name: "George", 
-      last_name: "Clooney", 
-      trisomy_type: "2", 
-      birth_date: "12/08/1983", 
+      first_name: "George",
+      last_name: "Clooney",
+      trisomy_type: "2",
+      birth_date: "12/08/1983",
       state: "Illinois",
       city: "Chicago",
       trisomy_story: "hello",
       private: "false"
     )
-    
-    it "is valid with a first name, last name, trisomy type, 
-    date of birth, state, city story and display preference" do
+    child.save
+
+    it 'is valid on save' do
       expect(child).to be_valid
+    end
+
+    it 'avatar_file_name field is populated if left nil' do
+      expect(child.avatar_file_name).to eq("https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png")
+    end
+
+    it 'builds a privacy instance' do
+      expect(child.build_privacy.present?).to eq(true)
     end
   end
 
-  
-
   context "Creates an invalid child" do
     child = Child.new(
-      first_name: "", 
-      last_name: "", 
+      first_name: "",
+      last_name: "",
       trisomy_type: "",
-      birth_date: "", 
+      birth_date: "",
       state: "",
       city: "",
       trisomy_story: "",
       private: nil
     )
-    
+
     it "is invalid without a first name" do
       child.valid?
       expect(child.errors[:first_name]).to include("can't be blank")
