@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  root 'users#index'
+  root 'users#home'
 
   resources :events
 
@@ -43,5 +43,5 @@ Rails.application.routes.draw do
 
   get 'professional-center' => 'professional_center#index'
 
-  get 'admin-dashboard' => 'admins#index'
+  get 'admin-dashboard' => 'users#index'
 end
