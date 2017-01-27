@@ -64,8 +64,10 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  # Injects the request.env['warden'] object in controller rspec tests
+  # Provides helpers for controller tests that require authentication
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
+  # Injects the request.env['warden'] object in controller rspec tests
   config.include Warden::Test::Helpers
   config.after :each do
     Warden.test_reset!
