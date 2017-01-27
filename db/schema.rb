@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120012821) do
+ActiveRecord::Schema.define(version: 20170122063744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,9 +105,9 @@ ActiveRecord::Schema.define(version: 20170120012821) do
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
+    t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
-    t.boolean  "private",                   default: false
     t.string   "primary_diagnosis"
     t.string   "secondary_diagnosis"
     t.string   "partial_trisomy"
@@ -490,7 +490,7 @@ ActiveRecord::Schema.define(version: 20170120012821) do
   end
 
   create_table "privacies", force: :cascade do |t|
-    t.integer  "children_id"
+    t.integer  "child_id"
     t.boolean  "story"
     t.boolean  "avatar"
     t.boolean  "location"
