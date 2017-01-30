@@ -88,6 +88,11 @@
                   <li>
                     <a href="/professional-center">Professional Center</a>
                   </li>
+                  <li>
+                    <% if current_user %>
+                      <%= link_to('Administrator Dashboard', '/admin-dashboard') %>
+                    <% end %>
+                  </li>
                 </ul>
                 <!-- main-menu end -->
 
