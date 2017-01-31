@@ -1,21 +1,27 @@
 <div ng-app="app">
   <div ng-controller="adminCtrl" ng-init="setup()">
-    <% @users.each_slice(3) do |three_users| %>
-    <div class="row">
-      <% three_users.each do |user| %>
-        <div class="col-md-4">
-          <div class="well">
-            <div class="user_single">
-              <h3 class="user_header"><%= user.first_name %> <%= user.last_name %></h3>
-              <hr>
-              <p>Email: <%= user.email %></p>
-              <%= label_tag :user_type %>
-              <%= text_field_tag :user, user.user_type %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+    <h2>Users:</h2>
+    <div>
+      <label>Filter email:</label>
+      <input ng-model="emailFilter" list="emails">
+
+      <datalist id="emails">
+        <option ng-repeat="user in users">{{ user.email }}</option>
+      </datalist>
     </div>
-    <% end %> 
+    <br>
+    <div ng-repeat="user in users | filter: {email: emailFilter}">
+      <p>Name: {{user.first_name}} {{user.last_name}}</p>
+      <p>Email: {{user.email}}</p>
+      <form>
+        <div>
+          <label>Type: </label>
+          <input ng-model="user.user_type" >
+        </div>
+        <br>
+        <input type="submit" ng-click="createType(user.user_type)">
+      </form>
+      <br>
+    </div>
   </div>
 </div>
