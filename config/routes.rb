@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :events
       resources :search
       get '/children' => 'children#index'
+      get '/users' => 'users#index'
     end
   end
 
