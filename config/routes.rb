@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get '/calendar' => 'users#calendar'
 
   get '/family-dashboard' => 'families#index'
+  get '/families/:id' => 'families#show'
 
   get '/family-center' => 'family_center#index'
 

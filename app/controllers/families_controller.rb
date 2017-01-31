@@ -11,18 +11,23 @@ class FamiliesController < ApplicationController
         flash[:warning] = 'You must have registered family members to view the family dashboard.'
         redirect_to '/profile/new'
 
-      else  
+      else
         @children.each do |child|
           @parents = Parent.where(id: child.parent_id)
-         end 
+         end
          render 'index.html.erb'
       end
 
-    else 
+    else
       flash[:warning] = 'You must be logged in to view this page.'
 
       redirect_to '/users/sign_in'
 
-    end 
+    end
   end
-end 
+
+  def show
+    @user = User.find_by(id: params[:id])
+    render 'show.html.erb'
+  end
+end
