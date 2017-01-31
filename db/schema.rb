@@ -101,14 +101,13 @@ ActiveRecord::Schema.define(version: 20170122063744) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
-    t.boolean  "private",                   default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
+    t.boolean  "private",                   default: false
     t.string   "primary_diagnosis"
     t.string   "secondary_diagnosis"
     t.string   "partial_trisomy"
