@@ -40,7 +40,7 @@ class ChildrenController < ApplicationController
 
   def edit
     @child = Child.find_by(id: params[:id])
-    @privacy = Privacy.find_by(children_id: @child.id)
+    @privacy = Privacy.find_by(child_id: @child.id)
     render 'edit.html.erb'
   end
 
