@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :search
       get '/children' => 'children#index'
       get '/users' => 'users#index'
-      post '/users' => 'meetings#create'
+      patch '/users' => 'users#update'
     end
   end
 
