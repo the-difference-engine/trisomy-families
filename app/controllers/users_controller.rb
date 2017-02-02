@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.all 
     if current_user && current_user.user_type == 'admin'
       render 'index.html.erb'
     else
