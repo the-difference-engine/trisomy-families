@@ -28,6 +28,8 @@
       location: ""
     };
 
+    $scope.alerts = [];
+
     $scope.createEvent = function() {
       $http({
         method: 'POST',
@@ -36,11 +38,15 @@
 
       }).then(function successCallback(response) {
         $scope.events.push($scope.event);
-        console.log("Sucessfully saved to database.");
+        $scope.alerts.push({ type: 'success', msg: 'Well done! You successfully added an event.' });
 
       }, function errorCallback(response) {
-        console.log("Post failed.");
+        $scope.alerts.push({ type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' });
       });
+    };
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
     };
 
     $scope.uiConfig = {
