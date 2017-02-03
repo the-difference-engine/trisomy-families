@@ -286,7 +286,7 @@ DEPENDENCIES
   capybara (~> 2.10)
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.5)
-  devise
+  devise (~> 4.0)
   dotenv-rails
   factory_girl_rails (~> 4.7.0)
   faker (~> 1.6.6)
