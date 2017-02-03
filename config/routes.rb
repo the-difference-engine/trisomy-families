@@ -47,4 +47,5 @@ Rails.application.routes.draw do
   get 'professional-center' => 'professional_center#index'
 
   get 'admin-dashboard' => 'users#index'
+  patch 'admin-dashboard' => 'users#update'
 end

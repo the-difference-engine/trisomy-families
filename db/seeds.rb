@@ -201,7 +201,7 @@ puts  "************************"
                 })
           @child.save
 
-          @privacy = Privacy.new(children_id: @child.id)
+          @privacy = Privacy.new(child_id: @child.id)
           @privacy.save
     end
 

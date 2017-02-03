@@ -27,6 +27,9 @@ class UsersController < ApplicationController
   def create_profile
   end
 
+  def update
+  end
+
   def calendar
     render 'calendar.html.erb'
   end
