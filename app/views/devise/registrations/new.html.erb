@@ -22,7 +22,16 @@
      <%= f.label :state %> <br />
      <%= f.select("state", options_for_select(us_states, @user.state)) %>
   </div>
+
+  <div class="field">
+    <%= f.label :phone_number %> <br />
+    <%= f.telephone_field :phone_number %>
+  </div>
+
+  <br>
+
   <hr id="sign-up-line">
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email %>
