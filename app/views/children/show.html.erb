@@ -49,7 +49,7 @@
       <% if @child.nickname && @child.birth_order && @child.primary_diagnosis && @child.registered %>
         <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
       <% else %>
-        <%= link_to 'Register Basic Profile',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
+        <%= link_to 'Begin Registration',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
       <% end %>
     <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default" %><br>
     <% if @child.background_history_id %>
