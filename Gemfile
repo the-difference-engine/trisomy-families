@@ -35,7 +35,7 @@ gem 'momentjs-rails'
 
 gem 'angular-ui-calendar-rails'
 
-gem 'devise', '~>4.1.0'
+gem 'devise', '~> 4.0'
 
 gem 'seed_dump'
 
