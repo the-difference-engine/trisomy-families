@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :privacy do
-    children_id 1
-    story false
-    avatar false
-    location false
-    birthday false
-    trisomy_type false
+    story true
+    avatar true
+    location true
+    birthday true
+    trisomy_type true
+    child
   end
 end
