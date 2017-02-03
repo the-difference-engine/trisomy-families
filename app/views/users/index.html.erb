@@ -1,12 +1,15 @@
 <div ng-app="app">
   <div ng-controller="adminCtrl" ng-init="setup()">
+
+    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
+
     <h2>Users:</h2>
     <div>
       <label>Filter by email:</label>
       <input ng-model="emailFilter" list="emails">
 
       <datalist id="emails">
-        <option ng-repeat="user in users">{{ user.email }}</option>
+        <option ng-repeat="user in users track by $index">{{ user.email }}</option>
       </datalist>
     </div>
     <br>

@@ -15,6 +15,8 @@
         $scope.orderAttribute = inputAttribute;
       };
 
+      $scope.alerts = [];
+
       $scope.updateType = function(type, id) {
         var params = {
           id: id,
@@ -23,7 +25,12 @@
 
         $http.patch('api/v1/users.json', params).then(function(response) {
           $scope.users.push(response.data);
+          $scope.alerts.push({ type: 'success', msg: 'Well done! You successfully changed the user type.' });
         });
+      };
+
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
       };
 
       window.$scope = $scope;
