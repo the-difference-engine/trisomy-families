@@ -8,8 +8,8 @@ class ProfessionalCenterController < ApplicationController
         render 'index.html.erb'
       else
         flash[:error] = "You do not have access to this page. Please contact an admin."
-        redirect_to "/"  
-      end  
-    end  
+        redirect_to "/"
+      end
+    end
   end
 end
