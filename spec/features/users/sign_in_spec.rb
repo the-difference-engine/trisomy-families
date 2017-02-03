@@ -15,7 +15,7 @@ RSpec.feature "User signs in", :type => :feature do
     fill_in "user_password", :with => user.password
     find('input[name="commit"]').click
 
-    expect(page).to have_text("Admin Page!")
+    expect(page).to have_text("Filter by")
   end
 
   scenario "User is not an admin" do 
@@ -27,6 +27,6 @@ RSpec.feature "User signs in", :type => :feature do
     fill_in "user_password", :with => user.password
     find('input[name="commit"]').click
 
-    expect(page).not_to have_text('Admin Page!')
+    expect(page).not_to have_text('Filter by')
   end
 end
