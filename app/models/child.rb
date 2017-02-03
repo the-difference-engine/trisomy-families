@@ -13,7 +13,20 @@ class Child < ApplicationRecord
   validates :birth_order, presence: true, on: :confirm_register
   validates :parent_id, presence: true, on: :confirm_register
   validates :primary_diagnosis, presence: true, on: :confirm_register
+  validates :avatar_file_name, presence: true
   belongs_to :user
   belongs_to :background_history
   belongs_to :health_history
+  has_one :privacy
+  accepts_nested_attributes_for :privacy
+
+  before_validation :ensure_avatar_file_name_has_a_value, on: :create
+
+  protected
+
+  def ensure_avatar_file_name_has_a_value
+    if avatar_file_name.nil?
+      self.avatar_file_name = "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png"
+    end
+  end
 end
