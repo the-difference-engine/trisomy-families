@@ -218,7 +218,10 @@ puts  "************************"
                 })
           @child.save
 
+
           @privacy = @child.build_privacy
+
+          @privacy = Privacy.new(child_id: @child.id)
           @privacy.save
 
           @mother_complications = MotherComplication.new(

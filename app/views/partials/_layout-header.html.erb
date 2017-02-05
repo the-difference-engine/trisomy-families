@@ -86,11 +86,19 @@
                     <a href="/family-center">Family Center</a>
                   </li>
                   <li>
-                    <a href="/professional-center">Professional Center</a>
+                  <% if current_user %>
+                    <% if current_user.user_type == 'admin' %>
+                      <a href="/professional-center">Professional Center</a>
+                    <% elsif current_user.user_type == 'doctor' %>
+                      <a href="/professional-center">Professional Center</a>
+                    <% end %>
+                  <% end %>
                   </li>
                   <li>
                     <% if current_user %>
-                      <%= link_to('Administrator Dashboard', '/admin-dashboard') %>
+                      <% if current_user.user_type == 'admin' %>
+                        <%= link_to('Administrator Dashboard', '/admin-dashboard') %>
+                      <% end %>
                     <% end %>
                   </li>
                 </ul>

@@ -40,7 +40,7 @@ class ChildrenController < ApplicationController
 
   def edit
     @child = Child.find_by(id: params[:id])
-    @privacy = Privacy.find_by(children_id: @child.id)
+    @privacy = @child.privacy
     render 'edit.html.erb'
   end
 
@@ -68,24 +68,17 @@ class ChildrenController < ApplicationController
 
   def update
     @child = Child.find_by(id: params[:id])
-    @privacy = Privacy.find_by(children_id: @child.id)
-
-    calculated_birth_date = params[:date_of_birth].blank? ? nil : Date.parse(params[:date_of_birth])
-    calculated_death_date = params[:date_of_death].blank? ? nil : Date.parse(params[:date_of_death])
+    @privacy = @child.privacy
 
     @child.update(
       first_name: params[:first_name] || @child.first_name,
       last_name: params[:last_name] || @child.last_name,
       trisomy_type: params[:trisomy_type] || @child.trisomy_type,
-      birth_date: calculated_birth_date || @child.birth_date,
-      death_date: calculated_death_date || @child.death_date,
+      birth_date: calculate_date(params[:date_of_birth]) || @child.birth_date,
+      death_date: calculate_date(params[:date_of_death]) || @child.death_date,
       state: params[:state] || @child.state,
       city: params[:city] || @child.city,
-      trisomy_story: params[:trisomy_story] || @child.trisomy_story,
-      private: params[:private] || @child.private,
-      primary_diagnosis: params[:child_primary_diagnosis],
-      other_primary_diagnosis: params[:other_primary_diagnosis],
-      birth_order: params[:child_birth_order]
+      trisomy_story: params[:trisomy_story] || @child.trisomy_story
     )
 
     @privacy.update(
@@ -97,7 +90,7 @@ class ChildrenController < ApplicationController
     )
 
     if @child.save
-      flash[:success] = 'Updated!'
+      flash[:success] = 'Profile Updated!'
     end
     redirect_to "/profile/#{@child.id}"
   end

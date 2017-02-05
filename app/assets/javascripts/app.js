@@ -2,7 +2,7 @@
 (function() {
   "use strict";
 
-  var app = angular.module("app", ['ui.calendar', 'angular-directive-select-usstates', 'ng-fusioncharts', 'angularUtils.directives.dirPagination']);
+  var app = angular.module("app", ['ui.calendar', 'angular-directive-select-usstates', 'ng-fusioncharts', 'ui.bootstrap', 'angularUtils.directives.dirPagination']);
 
   app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.headers.post = {'Content-Type' : 'application/x-www-form-urlencoded'};

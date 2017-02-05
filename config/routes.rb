@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       resources :events
       resources :search
       get '/children' => 'children#index'
+      get '/users' => 'users#index'
+      patch '/users' => 'users#update'
     end
   end
 
@@ -45,4 +47,5 @@ Rails.application.routes.draw do
   get 'professional-center' => 'professional_center#index'
 
   get 'admin-dashboard' => 'users#index'
+  patch 'admin-dashboard' => 'users#update'
 end

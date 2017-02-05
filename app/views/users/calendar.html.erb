@@ -1,14 +1,18 @@
 <div ng-app="app">
   <div ng-controller="calendarCtrl" ng-init="setUp()">
+
     <div class="row">
       <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
     </div>
 
     <hr>
     <% if user_signed_in? && current_user.user_type == "admin" %>
+
       <div class="row">
         <div class="col-md-8">
           <h2>Create Event</h2>
+
+          <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
 
           <form>
             <div class="form-group">
