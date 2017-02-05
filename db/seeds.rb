@@ -136,13 +136,13 @@ primary_diagnosis = ['Full', 'Ring', 'Partial', 'Mosaic', 'Balanced Translocatio
 secondary_diagnosis = ['Deletion', 'Ring', 'Partial', 'Mosaic', 'Balanced Translocation', 'Unbalanced Translocation']
 counter = 1
 
-10.times do
-  Child.create([{first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, trisomy_type: rand(1..23), birth_date: Faker::Date.between(12.years.ago, 3.years.ago), death_date: Faker::Date.between(3.years.ago, Date.today), city: Faker::Address.city, state: Faker::Address.state, trisomy_story: Faker::Hipster.paragraph, user_id: User.first, nickname: Faker::Name.first_name, birth_order: rand(1..3), other_chrom_affected: rand(1..23).to_s, mosaic_percentage: rand(1..100), private: true, primary_diagnosis: primary_diagnosis.sample, secondary_diagnosis: secondary_diagnosis.sample, health_history_id: counter}])
-  counter += 1
-end
-10.times do
-  HealthHistory.create([{chd: [true, false].sample, multiple_cardiac_surgeries: [true, false].sample, seizure_epilepsy: [true, false].sample, metabolic_syndrome: [true, false].sample, had_an_abr: [true, false].sample }])
-end
+# 10.times do
+#   Child.create([{first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, trisomy_type: rand(1..23), birth_date: Faker::Date.between(12.years.ago, 3.years.ago), death_date: Faker::Date.between(3.years.ago, Date.today), city: Faker::Address.city, state: Faker::Address.state, trisomy_story: Faker::Hipster.paragraph, user_id: User.first, nickname: Faker::Name.first_name, birth_order: rand(1..3), other_chrom_affected: rand(1..23).to_s, mosaic_percentage: rand(1..100), private: true, primary_diagnosis: primary_diagnosis.sample, secondary_diagnosis: secondary_diagnosis.sample, health_history_id: counter}])
+#   counter += 1
+# end
+# 10.times do
+#   HealthHistory.create([{chd: [true, false].sample, multiple_cardiac_surgeries: [true, false].sample, seizure_epilepsy: [true, false].sample, metabolic_syndrome: [true, false].sample, had_an_abr: [true, false].sample }])
+# end
 
 puts  "************************"
 puts  "************************"
@@ -276,12 +276,7 @@ puts  "************************"
                 siblings_with_trisomy: true
           )
 
-          if @background_history.save
-            puts "background history did save"
-          else
-            puts "background history did not save"
-          end
-          @child.background_history_id = @background_history.id
+          @background_history.save
 
           @congenital_heart_defect = CongenitalHeartDefect.new(
           asd: nil,
@@ -403,11 +398,7 @@ puts  "************************"
             other_cancer: ""
           )
           @health_history.save
-          @child.health_history_id = @health_history.id
-
-          @child.save
       end
-
 
     2.times do
       @father = Parent.new(
@@ -486,3 +477,14 @@ puts  "************************"
 puts  "******** Done! *********"
 puts  "************************"
 puts  "************************"
+
+@children = Child.all
+@health_history = HealthHistory.all
+@background_history = BackgroundHistory.all
+
+20.times do |i|
+  child = @children[i]
+  child.health_history_id = @health_history[i].id
+  child.background_history_id = @background_history[i].id
+  child.save
+end
