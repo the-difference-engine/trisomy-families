@@ -13,7 +13,7 @@
       <p>Update photo: </p>
       <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
           <%= form.file_field :avatar, :class => "form-group" %>
-          <%= submit_tag nil, class: "btn btn-success"%>
+          <%= submit_tag nil, class: "btn btn-success", id: "image-submit"%>
       <% end %>
      </div>
     
