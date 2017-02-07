@@ -75,4 +75,24 @@ RSpec.describe Child, type: :model do
 
   end
 
+  context "Uploads a valid image" do
+    child = Child.new(
+      first_name: "George",
+      last_name: "Clooney",
+      trisomy_type: "2",
+      birth_date: "12/08/1983",
+      state: "Illinois",
+      city: "Chicago",
+      trisomy_story: "hello",
+      private: "false"
+    )
+    child.save
+
+    child.avatar_file_name = "https://upload.wikimedia.org/wikipedia/en/c/c7/Michael_Jordan_crying.jpg"
+
+    it 'avatar_file_name field is saved' do
+      expect(child.avatar_file_name).to eq("https://upload.wikimedia.org/wikipedia/en/c/c7/Michael_Jordan_crying.jpg")
+    end
+  end
+
 end
