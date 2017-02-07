@@ -7,10 +7,4 @@ class Parent < ApplicationRecord
   validates :state, presence: true
   validates :email, presence: true
   validates :relationship, presence: true
-  validates :first_name_2, presence: true
-  validates :last_name_2, presence: true
-  validates :city_2, presence: true
-  validates :state_2, presence: true
-  validates :email_2, presence: true
-  validates :relationship_2, presence: true
 end
