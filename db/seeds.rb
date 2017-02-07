@@ -18,6 +18,23 @@ Child.delete_all
 Parent.delete_all
 Event.delete_all
 
+Endocrine.delete_all
+Height.delete_all
+Weight.delete_all
+BackgroundHistory.delete_all
+BehavioralHealth.delete_all
+CongenitalHeartDefect.delete_all
+CranialFacial.delete_all
+GastricSurgery.delete_all
+HeadCircumference.delete_all
+MotherComplication.delete_all
+IntestinalIssue.delete_all
+NuerologicalCondition.delete_all
+ReceivedTherapy.delete_all
+Hearing.delete_all
+Vision.delete_all
+HealthHistory.delete_all
+
 # Create address arrays for physicians and families
 physician_addresses = [
   ['805 Bay Meadows St.', 'Fort Wayne', 'IN', '46804', -85.0814343000, 41.0906369000],
@@ -119,13 +136,13 @@ primary_diagnosis = ['Full', 'Ring', 'Partial', 'Mosaic', 'Balanced Translocatio
 secondary_diagnosis = ['Deletion', 'Ring', 'Partial', 'Mosaic', 'Balanced Translocation', 'Unbalanced Translocation']
 counter = 1
 
-10.times do
-  Child.create([{first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, trisomy_type: rand(1..23), birth_date: Faker::Date.between(12.years.ago, 3.years.ago), death_date: Faker::Date.between(3.years.ago, Date.today), city: Faker::Address.city, state: Faker::Address.state, trisomy_story: Faker::Hipster.paragraph, user_id: User.first, nickname: Faker::Name.first_name, birth_order: rand(1..3), other_chrom_affected: rand(1..23).to_s, mosaic_percentage: rand(1..100), private: true, primary_diagnosis: primary_diagnosis.sample, secondary_diagnosis: secondary_diagnosis.sample, health_history_id: counter}])
-  counter += 1
-end
-10.times do 
-  HealthHistory.create([{chd: [true, false].sample, multiple_cardiac_surgeries: [true, false].sample, seizure_epilepsy: [true, false].sample, metabolic_syndrome: [true, false].sample, had_an_abr: [true, false].sample }])
-end
+# 10.times do
+#   Child.create([{first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, trisomy_type: rand(1..23), birth_date: Faker::Date.between(12.years.ago, 3.years.ago), death_date: Faker::Date.between(3.years.ago, Date.today), city: Faker::Address.city, state: Faker::Address.state, trisomy_story: Faker::Hipster.paragraph, user_id: User.first, nickname: Faker::Name.first_name, birth_order: rand(1..3), other_chrom_affected: rand(1..23).to_s, mosaic_percentage: rand(1..100), private: true, primary_diagnosis: primary_diagnosis.sample, secondary_diagnosis: secondary_diagnosis.sample, health_history_id: counter}])
+#   counter += 1
+# end
+# 10.times do
+#   HealthHistory.create([{chd: [true, false].sample, multiple_cardiac_surgeries: [true, false].sample, seizure_epilepsy: [true, false].sample, metabolic_syndrome: [true, false].sample, had_an_abr: [true, false].sample }])
+# end
 
 puts  "************************"
 puts  "************************"
@@ -201,9 +218,190 @@ puts  "************************"
                 })
           @child.save
 
+
+          @privacy = @child.build_privacy
+
           @privacy = Privacy.new(child_id: @child.id)
           @privacy.save
-    end
+
+          @mother_complications = MotherComplication.new(
+          none: nil,
+          gestational_diabetes: true,
+          preeclampsia: nil,
+          rh_factor: true,
+          unsure: true,
+          other: "afdsfdsfd"
+          )
+          @mother_complications.save
+
+          @height = Height.new(
+          one_month: "11.5",
+          two_month: "11.5",
+          three_month: "10.0",
+          four_month: "10.0"
+          )
+          @height.save
+
+          @weight = Weight.new(
+          one_month: "1.5",
+          two_month: "1.0",
+          three_month: "3.0",
+          four_month: "3.0"
+          )
+          @weight.save
+
+          @head_circumference = HeadCircumference.new(
+          one_month: "11.5",
+          two_month: "10.5",
+          three_month: "10.5",
+          four_month: "10.5"
+          )
+          @head_circumference.save
+
+          @background_history = BackgroundHistory.new(
+                weight_at_birth: "1.5",
+                height_at_birth: 10,
+                head_circumference_at_birth: 11,
+                trisomy_relative: true,
+                delivery_method: "Planned C-section",
+                weight_id: @weight.id,
+                height_id: @height.id,
+                head_circumference_id: @head_circumference.id,
+                mother_complication_id: @mother_complications.id,
+                offered_c_section: "no",
+                child_complication: "no",
+                apgar_score: "dsafdsf",
+                gestation_age: 6,
+                mother_age_at_birth: 22,
+                father_age_at_birth: 25,
+                multiple_birth: nil,
+                multiple_birth_trisomy: true,
+                siblings_with_trisomy: true
+          )
+
+          @background_history.save
+
+          @congenital_heart_defect = CongenitalHeartDefect.new(
+          asd: nil,
+          vsd: true,
+          pda: true,
+          av_canal_defect: nil,
+          dorv: true,
+          tof: true,
+          pfo: nil,
+          other: nil,
+          not_applicable: nil
+          )
+          @congenital_heart_defect.save
+
+          @intestinal_issue = IntestinalIssue.new()
+          @intestinal_issue.save
+
+          @gastric_surgery = GastricSurgery.new(
+            repair_of_duodenal_atresia_stenosis_web: nil,
+            repair_of_anal_stenosis_atresia: true,
+            gastrostomy_tube_placement: nil,
+            surgery_for_hirschsprung_disease: nil,
+            fundoplication_nissen_wrap: nil,
+            none: nil,
+            other: ""
+            )
+          @gastric_surgery.save
+
+          @nuerological_condition = NuerologicalCondition.new(
+          unsure: true,
+          brain_malformation_surgery: nil,
+          cyst_surgery: nil,
+          cp_surgery: nil,
+          stroke_surgery: nil,
+          other: "")
+          @nuerological_condition.save
+
+          @muscular_skeletal = MuscularSkeletal.new(
+          atlanto_axial_instability: nil,
+          cervical_spine_degeneration: nil,
+          osteopenia: true,
+          osteoporosis: true,
+          osteopenia_surgery: true,
+          osteoporosis_surgery: true
+          )
+          @muscular_skeletal.save
+
+          @cranial_facial = CranialFacial.new(
+          cranial_deformities: true,
+          cleft_palate: true,
+          cleft_lip: true
+          )
+          @cranial_facial.save
+
+          @endocrine = Endocrine.new(
+            hyperthyroidism: nil,
+            hypothyroidism: true,
+            unsure: true,
+            other: ""
+          )
+          @endocrine.save
+
+          @hearing = Hearing.new(
+          transient: true,
+          other: ""
+          )
+          @hearing.save
+
+          @vision = Vision.new(
+          cataract: nil,
+          strabismus: true,
+          )
+          @vision.save
+
+          @behavioral_health = BehavioralHealth.new(
+          depression: true,
+          other_diagnosis: "",
+          visual_processing: true
+          )
+          @behavioral_health.save
+
+          @received_therapy = ReceivedTherapy.new(
+          other: ""
+          )
+          @received_therapy.save
+
+          @health_history = HealthHistory.new(
+            chd: true,
+            chd_id: @congenital_heart_defect.id,
+            offered_cardiac_surgery: "yes",
+            first_cardiac_surgery_age: 6,
+            first_cardiac_surgery_successful: "yes",
+            multiple_cardiac_surgeries: true,
+            intestinal_issues_id: @intestinal_issue.id,
+            gastric_surgery_id: @gastric_surgery.id,
+            seizure_epilepsy: nil,
+            nuerological_condition_id: @nuerological_condition.id,
+            muscular_skeletal_id: @muscular_skeletal.id,
+            sleep_apnea: "no",
+            cranial_facial_id: @cranial_facial.id,
+            cancer: "None",
+            endocrine_id: @endocrine.id,
+            metabolic_syndrome: nil,
+            hearing_test: "yes",
+            had_an_abr: true,
+            hearing_loss_or_deaf: "None",
+            hearing_loss_treatment: "None",
+            failed_eye_exam: "yes",
+            vision_id: @vision.id,
+            behavioral_health_id: @behavioral_health.id,
+            in_ei: "no",
+            attend_school: nil,
+            home_schooled_bound: nil,
+            highest_education: "Kindergarten",
+            received_therapy_id: @received_therapy.id,
+            clinical_trial: true,
+            clinical_trial_participation: nil,
+            hearing_id: @hearing.id,
+            other_cancer: ""
+          )
+          @health_history.save
+      end
 
     2.times do
       @father = Parent.new(
@@ -255,7 +453,7 @@ puts  "************************"
           )
         @mother.save
     end
-end
+  end
 
 puts  "************************"
 puts  "*** Families created ***"
@@ -282,3 +480,14 @@ puts  "************************"
 puts  "******** Done! *********"
 puts  "************************"
 puts  "************************"
+
+@children = Child.all
+@health_history = HealthHistory.all
+@background_history = BackgroundHistory.all
+
+20.times do |i|
+  child = @children[i]
+  child.health_history_id = @health_history[i].id
+  child.background_history_id = @background_history[i].id
+  child.save
+end
