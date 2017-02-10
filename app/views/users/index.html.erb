@@ -15,13 +15,14 @@
     <br>
     <div>
       <label>Filter by type:</label>
-      <input ng-model="user_typeFilter" list="user_types">
+      <select ng-model="user_typeFilter" list="user_types">
 
       <datalist id="user_types">
         <option>admin</option>
         <option>doctor</option>
         <option>family</option>
       </datalist>
+      </select>
     </div>
     <br>
     <button ng-click="setOrderAttribute('id')">Order by creation time</button>
@@ -37,12 +38,13 @@
           <form>
             <div>
               <label>Update User Type: </label>
-              <input ng-model="user.user_type" list="types" >
+              <select ng-model="user.user_type" list="types" disableEntry: true >
               <datalist id="types">
                 <option>admin</option>
                 <option>doctor</option>
                 <option>family</option>
               </datalist>
+              </select>
               <input type="hidden" ng-model="user.id">
             </div>
             <br>
