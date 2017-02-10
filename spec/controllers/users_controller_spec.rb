@@ -20,5 +20,17 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template('index.html.erb')
     end
   end
-  
+
+  describe 'users#home' do 
+    before(:example) {
+      user = FactoryGirl.build(:user)
+      user.user_type = 'admin'
+      user.save
+      sign_in user
+    }
+    it 'renders the home page' do
+      get :home
+      expect(response).to render_template('home.html.erb')
+    end
+  end
 end
