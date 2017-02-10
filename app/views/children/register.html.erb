@@ -22,6 +22,14 @@
       <%= select_tag( :user_relationship, options_for_select(user_relationship, @user.relationship)) %> 
     </div>
     <div>
+      <%= label_tag :city, "City" %>
+      <%= select_tag( :user_city, @user.city, placeholder: 'City' %>
+    </div>
+    <div>
+      <%= label_tag :state, "State" %>
+      <%= select_tag( :user_state, @user.state, placeholder: 'State' %>
+    </div>
+    <div>
       <%= label_tag :phone_number %>
       <%= text_field_tag :user_phone_number, @user.phone_number%>
     </div>
