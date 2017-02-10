@@ -46,7 +46,7 @@
     <% if @child.health_history_id == nil %>
       <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
       <% end %>
-      <% if @child.nickname && @child.birth_order && @child.primary_diagnosis && @child.registered %>
+      <% if @child.registered %>
         <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
       <% else %>
         <%= link_to 'Begin Registration',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
