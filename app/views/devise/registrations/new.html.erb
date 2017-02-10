@@ -7,7 +7,7 @@
     <%= f.label :first_name %> <br />
     <%= f.text_field :first_name, autofocus: true %>
   </div>
-
+  
   <div class="field">
     <%= f.label :last_name %> <br />
     <%= f.text_field :last_name %>
@@ -26,6 +26,11 @@
   <div class="field">
     <%= f.label :phone_number %> <br />
     <%= f.telephone_field :phone_number %>
+  </div>
+  
+  <div class="radio-buttons">
+    <%= f.radio_button :user_type, "family" %> Family
+    <%= f.radio_button :user_type, "doctor" %> Doctor
   </div>
 
   <br>

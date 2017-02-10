@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :last_name, presence: true, on: :update
   validates :relationship, presence: true, on: :update
   validates :phone_number, presence: true, on: :update
+  validates :user_type, presence: true, on: :update
 end
