@@ -2,7 +2,7 @@
   <div ng-controller="adminCtrl" ng-init="setup()">
 
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-
+    <a href="/children-index">Children Index</a>
     <h2>Users:</h2>
     <div>
       <label>Filter by email:</label>
