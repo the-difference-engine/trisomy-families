@@ -5,9 +5,12 @@ RSpec.describe User, type: :model do
     user = User.new(
       first_name: "George",
       last_name: "Clooney",
-      email: "batman@gmail.com",
+      email: "#{rand(1000)}@gmail.com",
       state: "Illinois",
-      city: "Chicago"
+      city: "Chicago",
+      phone_number: '6306408224',
+      password: 'password',
+      relationship: 'father'
     )
     user.save
 
