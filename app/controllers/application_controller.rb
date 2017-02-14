@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     if current_user.user_type == "doctor"
       "/profile_doctor"
     elsif current_user.user_type == "family"
-      "/profile"
+      "/profile/new"
     end
   end
 end
