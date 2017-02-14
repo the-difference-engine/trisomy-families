@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get '/children' => 'children#index'
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
+      patch '/children' => 'children#update'
     end
   end
 
