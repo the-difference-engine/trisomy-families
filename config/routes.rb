@@ -51,5 +51,7 @@ Rails.application.routes.draw do
   get 'admin-dashboard' => 'users#index'
   patch 'admin-dashboard' => 'users#update'
 
-  get '/profile_doctor' => 'physicians#create_profile'
+  get '/profile_doctor' => 'physicians#new_profile'
+  post '/profile_doctor' => 'physicians#create_profile'
+  get '/profile_doctor/:id' => 'physicians#show'
 end
