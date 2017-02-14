@@ -1,4 +1,6 @@
 json.id child.id
+json.first_name child.first_name
+json.last_name child.last_name
 json.trisomy_type child.trisomy_type
 json.birth_date child.birth_date
 json.death_date child.death_date
@@ -29,3 +31,5 @@ json.weights child.background_history.weight
 json.heights child.background_history.height
 json.head_circumferences child.background_history.head_circumference
 json.mother_complications child.background_history.mother_complication
+json.accepted child.accepted
+json.registered child.registered
