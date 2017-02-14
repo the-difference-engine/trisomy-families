@@ -5,8 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :children
   validates :email, uniqueness: true
-  validates :first_name, presence: true, on: :update
-  validates :last_name, presence: true, on: :update
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :relationship, presence: true, on: :update
   validates :phone_number, presence: true, on: :update
+  validates :user_type, presence: true, on: :update
+  validates :phone_number, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
 end

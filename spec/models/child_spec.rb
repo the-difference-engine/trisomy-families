@@ -72,7 +72,6 @@ RSpec.describe Child, type: :model do
       child.valid?
       expect(child.errors[:private]).to include("is not included in the list")
     end
-
+    
   end
-
 end
