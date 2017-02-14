@@ -29,6 +29,7 @@
       <p>City: <%= @child.city %></p>
       <p>State: <%= @child.state %></p>
     </div>
+    <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
   </div>
   <hr>
   <div class="row">
@@ -51,7 +52,6 @@
       <% else %>
         <%= link_to 'Begin Registration',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
       <% end %>
-    <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default" %><br>
     <% if @child.background_history_id %>
       <%= link_to 'Edit Background History',"/profile/#{@child.id}/edit_background_history", :class => "btn btn-default" %><br>
     <% end %>
