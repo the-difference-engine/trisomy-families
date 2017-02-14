@@ -78,7 +78,6 @@ RSpec.describe ChildrenController, type: :controller do
         birth_date: "2017-01-01",
         avatar: true,
         birthday: false,
-        trisomy_type: true,
         story: false,
         location: true
       }
