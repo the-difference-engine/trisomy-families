@@ -32,9 +32,11 @@ class UsersController < ApplicationController
   end
 
   def new_profile
+
   end
 
   def create_profile
+
   end
 
   def update
