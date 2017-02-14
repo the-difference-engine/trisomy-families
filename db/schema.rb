@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122063744) do
+ActiveRecord::Schema.define(version: 20170214002444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,13 +101,13 @@ ActiveRecord::Schema.define(version: 20170122063744) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
-    t.boolean  "private",                   default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
     t.integer  "health_history_id"
     t.integer  "background_history_id"
+    t.boolean  "private",                   default: false
     t.string   "primary_diagnosis"
     t.string   "secondary_diagnosis"
     t.string   "partial_trisomy"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20170122063744) do
     t.string   "other_primary_diagnosis"
     t.string   "other_secondary_diagnosis"
     t.boolean  "registered",                default: false
+    t.boolean  "accepted"
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
