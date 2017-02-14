@@ -11,7 +11,5 @@ class Api::V1::UsersController < ApplicationController
       user_type: params[:user_type]
     )
     @user.save(validate: false)
-    flash[:success] = 'User has been updated!'
-    redirect_to '/admin-dashboard'
   end
 end
