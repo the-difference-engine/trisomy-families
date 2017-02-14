@@ -21,6 +21,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def children_index
+    @children = Child.all
+    if current_user && current_user.user_type == 'admin'
+      render 'children_index.html.erb'
+    else
+      flash[:warning] = 'You must be an administrator to view this page!'
+      redirect_to '/'
+    end
+  end
+
   def new_profile
   end
 

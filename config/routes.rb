@@ -48,4 +48,5 @@ Rails.application.routes.draw do
 
   get 'admin-dashboard' => 'users#index'
   patch 'admin-dashboard' => 'users#update'
+  get 'children-index' => 'users#children_index'
 end
