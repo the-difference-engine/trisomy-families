@@ -21,6 +21,13 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'users#home' do 
+    it 'renders the home page' do
+      get :home
+      expect(response).to render_template('home.html.erb')
+    end
+  end
+    
   describe 'users#children_index' do 
     before(:example) {
       user = FactoryGirl.build(:user)
@@ -28,6 +35,7 @@ RSpec.describe UsersController, type: :controller do
       user.save
       sign_in user
     }
+
     it 'renders the children index page' do
       get :children_index
       expect(response).to render_template('children_index.html.erb')
@@ -40,5 +48,4 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to root_url
     end
   end
-  
 end

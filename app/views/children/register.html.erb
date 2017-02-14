@@ -23,15 +23,15 @@
     </div>
     <div>
       <%= label_tag :city, "City" %>
-      <%= select_tag( :user_city, @user.city, placeholder: 'City' %>
+      <%= text_field_tag :user_city, @user.city, placeholder: 'City' %>
     </div>
     <div>
       <%= label_tag :state, "State" %>
-      <%= select_tag( :user_state, @user.state, placeholder: 'State' %>
+      <%= select_tag :user_state, options_for_select(us_states, @user.state) %>
     </div>
     <div>
       <%= label_tag :phone_number %>
-      <%= text_field_tag :user_phone_number, @user.phone_number%>
+      <%= text_field_tag :user_phone_number, @user.phone_number %>
     </div>
   <h3>Parent/Guardian 1:</h3>
     <% if @parent.errors.any? %>
