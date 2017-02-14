@@ -54,4 +54,7 @@ Rails.application.routes.draw do
   get '/profile_doctor' => 'physicians#new_profile'
   post '/profile_doctor' => 'physicians#create_profile'
   get '/profile_doctor/:id' => 'physicians#show'
+
+  get 'children-index' => 'users#children_index'
+
 end
