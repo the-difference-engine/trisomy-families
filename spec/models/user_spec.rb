@@ -10,7 +10,8 @@ RSpec.describe User, type: :model do
       city: "Chicago",
       phone_number: '6306408224',
       password: 'password',
-      relationship: 'father'
+      relationship: 'father',
+      user_type: 'family'
     )
     user.save
 
@@ -47,6 +48,10 @@ RSpec.describe User, type: :model do
     it "is invalid without a city" do
       user.valid?
       expect(user.errors[:city]).to include("can't be blank")
+    end
+    it "is invalid without a user_type" do
+      user.valid?
+      expect(user.errors[:user_type]).to include("can't be blank")
     end
   end
 end

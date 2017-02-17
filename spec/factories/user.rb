@@ -8,6 +8,7 @@ FactoryGirl.define do
     phone_number '6306408224'
     city 'chicago'
     state 'Illinois'
+    user_type 'family'
   end
 
   factory :admin do
