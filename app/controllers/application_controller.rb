@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
       "/profile_doctor"
     elsif current_user.user_type == "family"
       "/profile/new"
+    elsif current_user.user_type == "admin"
+      "/admin-dashboard"
     end
   end
 end
