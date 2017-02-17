@@ -314,6 +314,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unirest
   web-console
-
-BUNDLED WITH
-   1.13.6
