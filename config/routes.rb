@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get '/queries' => 'users#query_table'
   get '/profile/new' => 'children#new_profile'
 
-
   post '/profile' => 'children#create_profile'
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
