@@ -34,6 +34,8 @@
         <% elsif user_signed_in? && current_user.user_type == "family" %>
           <h3 align="center"><%= link_to('Create Profile', profile_new_path) %></h3>
           <h3 align="center"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>
+        <% elsif user_signed_in? && current_user.user_type == "admin" %>
+          <h3 align="center"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>
         <% else %>
           <h3 align="center"><%= link_to('Login', new_user_session_path)  %></h3>
           <h3 align="center"><%= link_to('Sign up', new_user_registration_path ) %></h3>
