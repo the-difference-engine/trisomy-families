@@ -1,0 +1,68 @@
+<% if @physician.errors.any?%>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+   <%= pluralize(@physician.errors.count, "Error") %>
+   <ul>
+      <% @physician.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+   </ul>
+</div>
+<% end %>
+<div class="container">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <h1 class="text-center">Physician Profile</h1>
+         <p class="text-center">Edit Your Profile:</p>
+         <hr>
+         <%= form_tag "/profile_doctor/#{@physician.id}", method: :patch do %>
+         <h5 style="color:gray">Basic Info</h5>
+         <div class="form-group">
+            <%= label_tag :first_name, "First name:" %>
+            <%= text_field_tag :first_name, @physician.first_name %>
+         </div>
+         <div class="form-group">
+            <%= label_tag :last_name, "Last name:" %>
+            <%= text_field_tag :last_name, @physician.last_name %>
+         </div>
+         <div class="form-group">
+            <%= label_tag :phone_number %>
+            <%= text_field_tag :phone_number, @physician.phone_number %>
+         </div>
+
+
+
+         <hr>
+         <h5 style="color:gray">Location</h5>
+                  <div class="form-group">
+            <%= label_tag :address, "* Address" %>
+            <%= text_field_tag :address, @physician.address %>
+         </div>
+         <div class="form-group">
+            <%= label_tag :state, 'State' %>
+            <%= select_tag("state", options_for_select(us_states, @physician.state), class: "form-control") %>
+         </div>
+         <div class="form-group">
+            <%= label_tag :city, '* City' %>
+            <%= text_field_tag :city, @physician.city %>
+         </div>
+         <hr>
+         <div class="form-group">
+            <%= label_tag :zip_code, '* Zip Code' %>
+            <%= text_field_tag :zip_code, @physician.zip_code %>
+         </div>
+         <div class="form-group">
+            <%= label_tag :website, '* Website' %>
+            <%= text_field_tag :website, @physician.website %>
+         </div>
+         <div class="form-group">
+            <%= label_tag :speciality, '* Specialty' %>
+            <%= text_field_tag :speciality, @physician.speciality%>
+         </div>
+         <%= submit_tag 'Update', class: "btn btn-success btn-lg btn-block"%>
+      <% end %>
+      </div>
+      <!-- col-md-6 -->
+   </div>
+   <!-- row -->
+</div>
+<!-- container -->
