@@ -43,6 +43,10 @@
          <hr>
          <h5 style="color:gray">Location</h5>
          <div class="form-group">
+            <%= f.label :address, "* Address" %>
+            <%= f.text_field(:address, class: "form-control")%>
+         </div>
+         <div class="form-group">
             <%= f.label :state, 'State' %>
             <%= f.select("state", options_for_select(us_states, @child.state), class: "form-control") %>
          </div>
