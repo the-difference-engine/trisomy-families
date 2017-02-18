@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214002444) do
+ActiveRecord::Schema.define(version: 20170217003539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170214002444) do
     t.string   "other_secondary_diagnosis"
     t.boolean  "registered",                default: false
     t.boolean  "accepted"
+    t.string   "address"
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
