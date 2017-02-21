@@ -83,7 +83,8 @@
         // loop through data array
         if ($scope.query.type === "physician") {
         for(var i = 0; i < $scope.data["data"].length; i++) {
-            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["longitude"], $scope.data["data"][i]["attributes"]["latitude"] )
+            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["latitude"], $scope.data["data"][i]["attributes"]["longitude"] );
+            console.log(latlng);
             var firstname = $scope.data["data"][i]["attributes"]["first-name"];
             var lastname = $scope.data["data"][i]["attributes"]["last-name"];
             var address = $scope.data["data"][i]["attributes"]["address"];
