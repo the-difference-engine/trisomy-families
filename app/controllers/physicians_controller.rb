@@ -10,7 +10,7 @@ class PhysiciansController < ApplicationController
       flash[:success] = 'Profile created!'
       redirect_to "/profile_doctor/#{@physician.id}"
     else
-      render 'new_profile.html.erb'
+      render 'physician_create_profile_page.html.erb'
     end
   end
 
