@@ -14,26 +14,15 @@
   </div>
 
   <div class="field">
-    <%= f.label :city %> <br />
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-     <%= f.label :state %> <br />
-     <%= f.select("state", options_for_select(us_states, @user.state)) %>
-  </div>
-
-  <div class="field">
     <%= f.label :phone_number %> <br />
     <%= f.telephone_field :phone_number %>
   </div>
+  <br />
   
   <div class="radio-buttons">
     <%= f.radio_button :user_type, "family" %> Family
     <%= f.radio_button :user_type, "doctor" %> Doctor
   </div>
-
-  <br>
 
   <hr id="sign-up-line">
 
