@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get '/profile_doctor/:id' => 'physicians#show'
   get '/profile_doctor/:id/edit' => 'physicians#edit'
   patch '/profile_doctor/:id' => 'physicians#update'
+  get '/doctors/:id' => 'physicians#show'
 
   get 'children-index' => 'users#children_index'
 end
