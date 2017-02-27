@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+layout :logged_in?
   def index
-    @users = User.all 
+    @users = User.all
     if current_user && current_user.user_type == 'admin'
       render 'index.html.erb'
     else
@@ -36,5 +37,14 @@ class UsersController < ApplicationController
 
   def query_table
     render 'queries.html.erb'
+  end
+
+  private
+  def logged_in?
+    if user_signed_in?
+      "application"
+    else
+      "homepage"
+    end
   end
 end
