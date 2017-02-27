@@ -1,4 +1,75 @@
-<h2>Log in</h2>
+<div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
+
+<!-- page wrapper start -->
+<!-- ================ -->
+<div class="page-wrapper">
+
+  <!-- background image -->
+  <!-- <div class="fullscreen-bg"></div> -->
+
+  <!-- banner start -->
+  <!-- ================ -->
+  <div class="pv-40 dark-translucent-bg">
+    <div class="container">
+      <div class="object-non-visible text-center" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+        <!-- logo -->
+        <div id="logo" class="logo">
+          <h3 class="margin-clear"><a href="/" class="logo-font link-light">Trisomy <span class="text-default">Families </span></a></h3>
+        </div>
+        <br>
+        <!-- name-and-slogan -->
+        <div class="form-block center-block p-30 light-gray-bg border-clear">
+          <h2 class="title text-left">Login</h2>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal text-left" }) do |f| %>
+          <!-- <form class="form-horizontal text-left"> -->
+            <div class="form-group has-feedback">
+              <!-- <label for="inputUserName" class="col-sm-3 control-label">User Name</label> -->
+              <%= f.label :email, 'Email', class: 'col-sm-3 control-label', for: 'inputEmail'%>
+              <div class="col-sm-8">
+                <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', required: true, id: 'inputEmail' %>
+                <!-- <input type="text" class="form-control" id="inputUserName" placeholder="User Name" required> -->
+                <i class="fa fa-user form-control-feedback"></i>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <%= f.label :password, 'Password', class: 'col-sm-3 control-label', for: 'inputPassword' %>
+              <!-- <label for="inputPassword" class="col-sm-3 control-label">Password</label> -->
+              <div class="col-sm-8">
+                <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', id: 'inputPassword', placeholder: 'Password', required: true%>
+                <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password" required> -->
+                <i class="fa fa-lock form-control-feedback"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-8">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" required> Remember me.
+                  </label>
+                </div>
+                <button type="submit" name="commit" class="btn btn-group btn-default btn-animated">Log In <i class="fa fa-user"></i></button>
+                <ul class="space-top">
+                  <%= render "devise/shared/links" %>
+                  <!-- <li><a href="#">Forgot your password?</a></li> -->
+                </ul>
+              </div>
+            </div>
+          <% end %>
+          <!-- </form> -->
+          <!-- <p>Don't have an account yet?  -->
+          <!-- <%= render "devise/shared/links" %> -->
+            <!-- <a href="/users/sign_up">Sign up</a> now.</p> -->
+        </div>
+        <!-- .subfooter start -->
+        <!-- ================ -->
+        <p class="mt-20">Copyright © 2017 Trisomy Families. All Rights Reserved</p>
+        <!-- .subfooter end -->
+      </div>
+    </div>
+  </div>
+
+
+<!-- <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -23,4 +94,4 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "devise/shared/links" %> -->
