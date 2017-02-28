@@ -14,11 +14,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :address %> <br />
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="field">
     <%= f.label :city %> <br />
     <%= f.text_field :city %>
   </div>
@@ -32,6 +27,8 @@
     <%= f.label :phone_number %> <br />
     <%= f.telephone_field :phone_number %>
   </div>
+
+  <br />
   
   <div class="radio-buttons">
     <%= f.radio_button :user_type, "family" %> Family
