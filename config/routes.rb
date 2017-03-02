@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get '/children' => 'children#index'
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
+      patch '/children' => 'children#update'
     end
   end
 
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
 
   get '/queries' => 'users#query_table'
   get '/profile/new' => 'children#new_profile'
+
   post '/profile' => 'children#create_profile'
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
@@ -48,4 +50,13 @@ Rails.application.routes.draw do
 
   get 'admin-dashboard' => 'users#index'
   patch 'admin-dashboard' => 'users#update'
+
+  get '/profile_doctor' => 'physicians#new_profile'
+  post '/profile_doctor' => 'physicians#create_profile'
+  get '/profile_doctor/:id' => 'physicians#show'
+  get '/profile_doctor/:id/edit' => 'physicians#edit'
+  patch '/profile_doctor/:id' => 'physicians#update'
+  get '/doctors/:id' => 'physicians#show'
+
+  get 'children-index' => 'users#children_index'
 end

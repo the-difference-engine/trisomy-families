@@ -145,7 +145,9 @@ class ChildrenController < ApplicationController
       first_name: params[:user_first_name],
       last_name: params[:user_last_name],
       relationship: params[:user_relationship],
-      phone_number: params[:user_phone_number]
+      phone_number: params[:user_phone_number],
+      city: params[:user_city],
+      state: params[:user_state]
     )
     if @parent.save &&
        @child.update(
@@ -927,7 +929,9 @@ class ChildrenController < ApplicationController
     params.require(:child).permit(:first_name,
                                   :last_name,
                                   :trisomy_type,
-                                  :state, :city,
+                                  :address,
+                                  :city,
+                                  :state,
                                   :trisomy_story,
                                   :nickname,
                                   :birth_order,
