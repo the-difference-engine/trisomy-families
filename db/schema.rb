@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217003539) do
+ActiveRecord::Schema.define(version: 20170303021214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,11 +101,11 @@ ActiveRecord::Schema.define(version: 20170217003539) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.boolean  "private",                   default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.string   "primary_diagnosis"
@@ -184,6 +184,19 @@ ActiveRecord::Schema.define(version: 20170217003539) do
     t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
+  end
+
+  create_table "families", force: :cascade do |t|
+    t.string   "family_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "story"
+    t.string   "photo"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "gastric_surgeries", force: :cascade do |t|
