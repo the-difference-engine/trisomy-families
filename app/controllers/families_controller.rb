@@ -37,6 +37,16 @@ class FamiliesController < ApplicationController
   end
 
   def create
-    render 'create.html.erb'
+    @family = Family.new(
+      family_name: params["family"]["family_name"],
+      street_address: params["family"]["street_address"],
+      city: params["family"]["city"],
+      state: params["family"]["state"],
+      story: params["family"]["story"]
+    )
+
+      @family.save
+      flash[:success] = "Family Successfully Added!"
+      redirect_to '/'
   end
 end
