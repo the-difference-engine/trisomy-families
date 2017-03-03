@@ -30,4 +30,23 @@ class FamiliesController < ApplicationController
     @user = User.find_by(id: params[:id])
     render 'show.html.erb'
   end
+
+  def new
+    @family = Family.new
+    render 'new.html.erb'
+  end
+
+  def create
+    @family = Family.new(
+      family_name: params["family"]["family_name"],
+      street_address: params["family"]["street_address"],
+      city: params["family"]["city"],
+      state: params["family"]["state"],
+      story: params["family"]["story"]
+    )
+
+      @family.save
+      flash[:success] = "Family Successfully Added!"
+      redirect_to '/'
+  end
 end
