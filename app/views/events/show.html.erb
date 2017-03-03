@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-md-6">
           <div ng-hide=editEnabled>
-            <h1> 
-              <strong> {{ event.title }} </strong>
+            <h1>
+              <strong ng-bind="event.title"> </strong>
             </h1>
           </div>
 
@@ -39,13 +39,13 @@
       <h3>
         <div ng-hide=editEnabled>
           <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-            {{ formatDate() }}
+            {{ event.start | date }}
         </div>
       </h3>
 
       <h4>
         <div ng-hide=editEnabled>
-          <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>  
+          <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
           <strong>
             {{ formatTime(event.start) }} - {{ formatTime(event.end) }}
           </strong>

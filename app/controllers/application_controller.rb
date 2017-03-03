@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  layout :logged_in?
   protect_from_forgery with: :null_session
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -16,6 +17,15 @@ class ApplicationController < ActionController::Base
       "/profile/new"
     elsif current_user.user_type == "admin"
       "/admin-dashboard"
+    end
+  end
+
+  private
+  def logged_in?
+    if user_signed_in?
+      "application"
+    else
+      "fullscreen"
     end
   end
 end

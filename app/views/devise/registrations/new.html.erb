@@ -1,55 +1,110 @@
-<h2>Register</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :first_name %> <br />
-    <%= f.text_field :first_name, autofocus: true %>
+<!-- banner start -->
+<!-- ================ -->
+<div class="pv-40 dark-translucent-bg">
+  <div class="container">
+    <div class="object-non-visible text-center" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+      <!-- logo -->
+      <div id="logo" class="logo">
+        <h3 class="margin-clear"><a href="/" class="logo-font link-light">Trisomy <span class="text-default">Families </span></a></h3>
+      </div>
+      <!-- name-and-slogan -->
+      <br>
+      <div class="form-block center-block p-30 light-gray-bg border-clear text-left">
+        <h2 class="title">Sign Up</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal", role: "form" } ) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-group has-feedback">
+            <%= f.label :first_name, "First Name*", class: "col-sm-3 control-label", for: "inputName"  %>
+            <div class="col-sm-8">
+              <%= f.text_field :first_name, autofocus: true, class: "form-control", id: "first_name", placeholder: "First Name", required: true %>
+              <i class="fa fa-pencil form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :last_name, "Last Name*", class: "col-sm-3 control-label", for: "inputLastName" %>
+            <div class="col-sm-8">
+              <%= f.text_field :last_name, autofocus: true, class: "form-control", id: "last_name", placeholder: "Last Name", required: true %>
+              <i class="fa fa-pencil form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :email, "Email*", class: "col-sm-3 control-label", for: "inputEmail" %>
+            <div class="col-sm-8">
+              <%= f.text_field :email, autofocus: true, class: "form-control", id: "email", placeholder: "Email", required: true %>
+              <i class="fa fa-envelope form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :city, "City*", class: "col-sm-3 control-label", for: "inputCity" %>
+            <div class="col-sm-8">
+              <%= f.text_field :city, autocomplete: "off", autofocus: true, class: "form-control", id: "city", placeholder: "City", required: true %>
+              <i class="fa fa-map-marker form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :state, "State*", class: "col-sm-3 control-label", for: "inputState" %>
+            <div class="col-sm-8">
+              <%= f.select :state, options_for_select(us_states, @user.state), {}, { autocomplete: "off", autofocus: true, class: "form-control", id: "state", required: true }%>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :phone_number, "Phone Number", class: "col-sm-3 control-label", for: "inputPhoneNumber" %>
+            <div class="col-sm-8">
+              <%= f.telephone_field :phone_number, autocomplete: "off", autofocus: true, class: "form-control", id: "phone_number", placeholder: "Phone Number" %>
+              <i class="fa fa-phone form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <div class="radio">
+              <%= f.label :state, "User Type*", class: "col-sm-3 control-label", for: "inputUserType" %>
+              <div class="col-sm-8">
+                <label>
+                  <%= f.radio_button :user_type, "family" %> Family
+                </label>
+                <label>
+                  <%= f.radio_button :user_type, "doctor" %> Doctor
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :password, "Password*", class: "col-sm-3 control-label", for: "inputPassword" %>
+            <div class="col-sm-8">
+              <%= f.password_field :password, autocomplete: "off", autofocus: true, class: "form-control", id: "password", placeholder:"Password", required: true %>
+              <i class="fa fa-lock form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <%= f.label :password_confirmation, "Confirm Password*", class: "col-sm-3 control-label", for: "inputConfirmationPassword" %>
+            <div class="col-sm-8">
+              <%= f.password_field :password_confirmation, autocomplete: "off", autofocus: true, class: "form-control", id: "password_confirmation", placeholder:"Confirm Password", required: true %>
+              <i class="fa fa-lock form-control-feedback"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-8">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" required> Accept our <a href="#">privacy policy</a> and <a href="#">customer agreement</a>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-8">
+                <%= f.submit "Sign up", class: "btn btn-group btn-default" %>
+            </div>
+            <div class="col-sm-offset-3 col-sm-8">
+              <%= render "devise/shared/links" %>
+            </div>
+          </div>
+        <!-- </form> -->
+        <% end %>
+      </div>
+      <!-- .subfooter start -->
+      <!-- ================ -->
+      <p class="mt-20">Copyright © 2017 Trisomy Families. All Rights Reserved</p>
+      <!-- .subfooter end -->
+    </div>
   </div>
-  
-  <div class="field">
-    <%= f.label :last_name %> <br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <br />
-  
-  <div class="radio-buttons">
-    <%= f.radio_button :user_type, "family" %> Family
-    <%= f.radio_button :user_type, "doctor" %> Doctor
-  </div>
-
-  <br>
-
-  <hr id="sign-up-line">
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
