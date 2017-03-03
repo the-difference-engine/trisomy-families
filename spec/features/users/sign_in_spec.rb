@@ -24,9 +24,6 @@ RSpec.feature "User signs in", :type => :feature do
 
     fill_in "first_name", :with => "Michael"
     fill_in "last_name", :with => "Jordan"
-    fill_in "city", :with => "Chicago"
-    select "Illinois", :from => "state"
-    fill_in "phone_number", :with => "(312)312-7773"
     choose 'user_user_type_family'
     fill_in "email", :with => "mj@gmail.com"
     fill_in "password", :with => "password"
@@ -41,9 +38,6 @@ RSpec.feature "User signs in", :type => :feature do
 
     fill_in "first_name", :with => "Scottie"
     fill_in "last_name", :with => "Pippen"
-    fill_in "city", :with => "Chicago"
-    select "Illinois", :from => "state"
-    fill_in "phone_number", :with => "(312)312-7773"
     choose 'user_user_type_doctor'
     fill_in "email", :with => "sp@gmail.com"
     fill_in "password", :with => "password"
