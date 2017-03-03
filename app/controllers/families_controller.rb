@@ -30,4 +30,13 @@ class FamiliesController < ApplicationController
     @user = User.find_by(id: params[:id])
     render 'show.html.erb'
   end
+
+  def new
+    @family = Family.new
+    render 'new.html.erb'
+  end
+
+  def create
+    render 'create.html.erb'
+  end
 end
