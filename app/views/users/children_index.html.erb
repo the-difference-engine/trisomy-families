@@ -2,6 +2,7 @@
   <div ng-controller="adminchildrenCtrl" ng-init="setup()">
 
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
+
     <a href="/admin-dashboard">Users Index</a>
     <h2>Children:</h2>
     <div>
@@ -13,11 +14,22 @@
       </datalist>
     </div>
     <br>
+    <div>
+      <label>Sort by Registration:</label>
+      <select ng-model="sortBy">
+        <option value="-registered">Registered</option>
+        <option value="registered">Not registered</option>
+        <option value="accepted">Accepted</option>
+        <option value="-accepted">Not Accepted</option>
+      </select>
+    </div>
+    <br>
+
     <button ng-click="setOrderAttribute('id')">Order by creation time</button>
     <br>
     <br>
     <div class="row">
-      <div class="col-md-4" ng-repeat="child in children | filter: {last_name: last_nameFilter} | orderBy:orderAttribute:isOrderDescending ">
+      <div class="col-md-4" ng-repeat="child in children | filter: {last_name: last_nameFilter} | orderBy: sortBy | orderBy:orderAttribute:isOrderDescending ">
         <div class="well">
           <h4>{{child.first_name}} {{child.last_name}}</h4>
           <hr>
