@@ -39,15 +39,15 @@ RSpec.feature "User signs in", :type => :feature do
   scenario "User is a physician" do
     visit "/users/sign_up"
 
-    fill_in "user_first_name", :with => "Scottie"
-    fill_in "user_last_name", :with => "Pippen"
-    fill_in "user_city", :with => "Chicago"
-    select "Illinois", :from => "user_state"
-    fill_in "user_phone_number", :with => "(312)312-7773"
+    fill_in "first_name", :with => "Scottie"
+    fill_in "last_name", :with => "Pippen"
+    fill_in "city", :with => "Chicago"
+    select "Illinois", :from => "state"
+    fill_in "phone_number", :with => "(312)312-7773"
     choose 'user_user_type_doctor'
-    fill_in "user_email", :with => "sp@gmail.com"
-    fill_in "user_password", :with => "password"
-    fill_in "user_password_confirmation", :with => "password"
+    fill_in "email", :with => "sp@gmail.com"
+    fill_in "password", :with => "password"
+    fill_in "password_confirmation", :with => "password"
     find('input[name="commit"]').click
 
     expect(page.current_path).to eq '/profile_doctor'

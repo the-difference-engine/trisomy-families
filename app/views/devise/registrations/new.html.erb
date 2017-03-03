@@ -13,57 +13,44 @@
         <h2 class="title">Sign Up</h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal", role: "form" } ) do |f| %>
           <%= devise_error_messages! %>
-        <!-- <form class="form-horizontal" role="form"> -->
           <div class="form-group has-feedback">
-            <%= f.label :first_name, "First Name*", class: "col-sm-3 control-label", for: "inputName" %>
-            <!-- <label for="inputName" class="col-sm-3 control-label">First Name <span class="text-danger small">*</span></label> -->
+            <%= f.label :first_name, "First Name*", class: "col-sm-3 control-label", for: "inputName"  %>
             <div class="col-sm-8">
-              <%= f.text_field :first_name, autofocus: true, class: "form-control", id: "inputName", placeholder: "First Name", required: true %>
-              <!-- <input type="text" class="form-control" id="inputName" placeholder="First Name" required> -->
+              <%= f.text_field :first_name, autofocus: true, class: "form-control", id: "first_name", placeholder: "First Name", required: true %>
               <i class="fa fa-pencil form-control-feedback"></i>
             </div>
           </div>
           <div class="form-group has-feedback">
             <%= f.label :last_name, "Last Name*", class: "col-sm-3 control-label", for: "inputLastName" %>
-            <!-- <label for="inputLastName" class="col-sm-3 control-label">Last Name <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.text_field :last_name, autofocus: true, class: "form-control", id: "inputLastName", placeholder: "Last Name", required: true %>
-              <!-- <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" required> -->
+              <%= f.text_field :last_name, autofocus: true, class: "form-control", id: "last_name", placeholder: "Last Name", required: true %>
               <i class="fa fa-pencil form-control-feedback"></i>
             </div>
           </div>
           <div class="form-group has-feedback">
             <%= f.label :email, "Email*", class: "col-sm-3 control-label", for: "inputEmail" %>
-            <!-- <label for="inputEmail" class="col-sm-3 control-label">Email <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.text_field :email, autofocus: true, class: "form-control", id: "inputEmail", placeholder: "Email", required: true %>
-              <!-- <input type="email" class="form-control" id="inputEmail" placeholder="Email" required> -->
+              <%= f.text_field :email, autofocus: true, class: "form-control", id: "email", placeholder: "Email", required: true %>
               <i class="fa fa-envelope form-control-feedback"></i>
             </div>
           </div>
           <div class="form-group has-feedback">
             <%= f.label :city, "City*", class: "col-sm-3 control-label", for: "inputCity" %>
-            <!-- <label for="inputPassword" class="col-sm-3 control-label">Password <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.text_field :city, autocomplete: "off", autofocus: true, class: "form-control", id: "inputCity", placeholder: "City", required: true %>
-              <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password" required> -->
+              <%= f.text_field :city, autocomplete: "off", autofocus: true, class: "form-control", id: "city", placeholder: "City", required: true %>
               <i class="fa fa-map-marker form-control-feedback"></i>
             </div>
           </div>
           <div class="form-group has-feedback">
             <%= f.label :state, "State*", class: "col-sm-3 control-label", for: "inputState" %>
-            <!-- <label for="inputPassword" class="col-sm-3 control-label">Password <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.select :state, options_for_select(us_states, @user.state), {}, { autocomplete: "off", autofocus: true, class: "form-control", id: "inputState", required: true }%>
-              <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password" required> -->
+              <%= f.select :state, options_for_select(us_states, @user.state), {}, { autocomplete: "off", autofocus: true, class: "form-control", id: "state", required: true }%>
             </div>
           </div>
           <div class="form-group has-feedback">
             <%= f.label :phone_number, "Phone Number", class: "col-sm-3 control-label", for: "inputPhoneNumber" %>
-            <!-- <label for="inputPassword" class="col-sm-3 control-label">Password <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.telephone_field :phone_number, autocomplete: "off", autofocus: true, class: "form-control", id: "inputPhoneNumber", placeholder: "Phone Number" %>
-              <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password" required> -->
+              <%= f.telephone_field :phone_number, autocomplete: "off", autofocus: true, class: "form-control", id: "phone_number", placeholder: "Phone Number" %>
               <i class="fa fa-phone form-control-feedback"></i>
             </div>
           </div>
@@ -82,19 +69,15 @@
           </div>
           <div class="form-group has-feedback">
             <%= f.label :password, "Password*", class: "col-sm-3 control-label", for: "inputPassword" %>
-            <!-- <label for="inputPassword" class="col-sm-3 control-label">Password <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.password_field :password, autocomplete: "off", autofocus: true, class: "form-control", id: "inputPassword", placeholder:"Password", required: true %>
-              <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password" required> -->
+              <%= f.password_field :password, autocomplete: "off", autofocus: true, class: "form-control", id: "password", placeholder:"Password", required: true %>
               <i class="fa fa-lock form-control-feedback"></i>
             </div>
           </div>
           <div class="form-group has-feedback">
             <%= f.label :password_confirmation, "Confirm Password*", class: "col-sm-3 control-label", for: "inputConfirmationPassword" %>
-            <!-- <label for="inputPassword" class="col-sm-3 control-label">Password <span class="text-danger small">*</span></label> -->
             <div class="col-sm-8">
-              <%= f.password_field :password_confirmation, autocomplete: "off", autofocus: true, class: "form-control", id: "inputPasswordConfirmation", placeholder:"Confirm Password", required: true %>
-              <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password" required> -->
+              <%= f.password_field :password_confirmation, autocomplete: "off", autofocus: true, class: "form-control", id: "password_confirmation", placeholder:"Confirm Password", required: true %>
               <i class="fa fa-lock form-control-feedback"></i>
             </div>
           </div>
@@ -109,11 +92,9 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
-              <!-- <button type="submit" class="btn btn-group btn-default btn-animated">Sign Up <i class="fa fa-check"></i></button> -->
                 <%= f.submit "Sign up", class: "btn btn-group btn-default" %>
             </div>
             <div class="col-sm-offset-3 col-sm-8">
-              <!-- <button type="submit" class="btn btn-group btn-default btn-animated">Sign Up <i class="fa fa-check"></i></button> -->
               <%= render "devise/shared/links" %>
             </div>
           </div>
