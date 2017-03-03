@@ -3,37 +3,24 @@
 <!--[if !IE]><!-->
 <html lang="en">
   <!--<![endif]-->
-
-  <%= render '/partials/layout-head' %>
-
-  <!-- body classes:  -->
-  <!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
-  <!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
-  <!-- "transparent-header": makes the header transparent and pulls the banner to top -->
-  <!-- "gradient-background-header": applies gradient background to header -->
-  <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
+  <head>
+    <title>Trisomy Families</title>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= render '/partials/layout-head' %>
+  </head>
   <body class="no-trans  transparent-header">
-
     <div class="scrollToTop circle">
       <i class="icon-up-open-big"></i>
     </div>
     <div class="page-wrapper">
       <div class="header-container">
-        <!-- classes:  -->
-        <!-- "dark": dark version of header top e.g. class="header-top dark" -->
-        <!-- "colored": colored version of header top e.g. class="header-top colored" -->
-        <%= render '/partials/layout-header-top' %>
-        <!-- classes:  -->
-        <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
-        <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
-        <!-- "full-width": mandatory class for the full-width menu layout -->
-        <!-- "centered": mandatory class for the centered logo layout -->
-        <%= render '/partials/layout-header' %>
+        <%= render '/partials/layout-header-navbar' %>
       </div>
-      <!-- <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p> -->
       <div class="container">
-
         <% flash.each do |name, message| %>
           <div class="alert alert-<%= name %> alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -41,74 +28,10 @@
             <%= message.html_safe %>
           </div>
         <% end %>
-
         <%= yield %>
       </div>
-
-      <!-- .subfooter start -->
-      <!-- ================ -->
-
-      <div class="subfooter">
-        <div class="container">
-          <div class="subfooter-inner">
-            <div class="row">
-              <div class="col-md-12">
-                <!-- <p class="text-center">Created by <a target="_blank" href="http://thedifferenceengine.io">The Difference Engine</a>. All Rights Reserved</p> -->
-                <p class="text-center social-icons">
-                  <a href="#"><i class="fa fa-facebook" aria-hidden="true" title="Follow us on Facebook"></i></a>
-                  <a href="#"><i class="fa fa-twitter" aria-hidden="true" title="Follow us on Twitter"></i></a>
-                  <a href="#"><i class="fa fa-youtube" aria-hidden="true" title="See our channel on YouTube"></i></a>
-                  <a href="#"><i class="fa fa-money" aria-hidden="true" title="Make a donation!"></i></a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- .subfooter end -->
-
     </div>
-
-    <!-- JavaScript files placed at the end of the document so the pages load faster -->
-    <!-- ================================================== -->
-    <!-- Jquery and Bootstap core js files -->
-    <script type="text/javascript" src="/template/plugins/jquery.min.js"></script>
-    <script type="text/javascript" src="/template/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Modernizr javascript -->
-    <script type="text/javascript" src="/template/plugins/modernizr.js"></script>
-    <!-- jQuery Revolution Slider  -->
-    <script type="text/javascript" src="/template/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-    <script type="text/javascript" src="/template/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-    <!-- Isotope javascript -->
-    <script type="text/javascript" src="/template/plugins/isotope/isotope.pkgd.min.js"></script>
-    <!-- Magnific Popup javascript -->
-    <script type="text/javascript" src="/template/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <!-- Appear javascript -->
-    <script type="text/javascript" src="/template/plugins/waypoints/jquery.waypoints.min.js"></script>
-    <!-- Count To javascript -->
-    <script type="text/javascript" src="/template/plugins/jquery.countTo.js"></script>
-    <!-- Parallax javascript -->
-    <script src="/template/plugins/jquery.parallax-1.1.3.js"></script>
-    <!-- Contact form -->
-    <script src="/template/plugins/jquery.validate.js"></script>
-    <script type="text/javascript" src="/template/js/fusioncharts.js"></script>
-    <script type="text/javascript" src="/template/js/angular-fusioncharts.min.js"></script>
-    <!-- Google Maps javascript -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;signed_in=true"></script>
-    <script type="text/javascript" src="js/google.map.config.js"></script> -->
-    <!-- Background Video -->
-    <script src="/template/plugins/vide/jquery.vide.js"></script>
-    <!-- Owl carousel javascript -->
-    <script type="text/javascript" src="/template/plugins/owl-carousel/owl.carousel.js"></script>
-    <!-- SmoothScroll javascript -->
-    <script type="text/javascript" src="/template/plugins/jquery.browser.js"></script>
-    <script type="text/javascript" src="/template/plugins/SmoothScroll.js"></script>
-    <!-- Initialization of Plugins -->
-    <script type="text/javascript" src="/template/js/template.js"></script>
-    <!-- Custom Scripts -->
-    <script type="text/javascript" src="/template/js/custom.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+    <%= render '/partials/app-javascript' %>
   </body>
+
 </html>

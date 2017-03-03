@@ -1,6 +1,9 @@
 <h1>Physician Page</h1>
 <br>
-<img width='300px' src='http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg'/>
+<img width='300px' src='http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg'/><br>
+
+<%= link_to 'Edit Profile',"/profile_doctor/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+
 <h2>Name: <i><%= @physician.first_name %> <%= @physician.last_name %></i></h2>
 <br>
 <h2>Address: <i><%= @physician.address %></i></h2>
@@ -10,3 +13,6 @@
 <h2>Phone Number: <i><%= @physician.phone_number %></i> </h2>
 <br>
 <h2>Speciality: <i><%= @physician.speciality %> </i></h2>
+
+<h2>Latitude: <%= @physician.latitude %> </h2>
+<h2>LongitudeL <%= @physician.longitude %> </h2>

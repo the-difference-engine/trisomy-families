@@ -7,7 +7,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-require 'geocoder'
 require 'as-duration'
 
 # Clear database
@@ -126,8 +125,8 @@ family_addresses = [
               zip_code: physician_addresses[i][3],
               website: Faker::Internet.url,
               speciality: Faker::Lorem.word,
-              longitude: physician_addresses[i][5],
-              latitude: physician_addresses[i][4]
+              longitude: physician_addresses[i][4],
+              latitude: physician_addresses[i][5]
               )
   @physician.save
 end

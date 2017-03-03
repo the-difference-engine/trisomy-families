@@ -1,26 +1,57 @@
-<h2>Log in</h2>
+<div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<!-- page wrapper start -->
+<!-- ================ -->
+<div class="page-wrapper">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <!-- banner start -->
+  <!-- ================ -->
+  <div class="pv-40 dark-translucent-bg">
+    <div class="container">
+      <div class="object-non-visible text-center" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+        <!-- logo -->
+        <div id="logo" class="logo">
+          <h3 class="margin-clear"><a href="/" class="logo-font link-light">Trisomy <span class="text-default">Families </span></a></h3>
+        </div>
+        <br>
+        <!-- name-and-slogan -->
+        <div class="form-block center-block p-30 light-gray-bg border-clear">
+          <h2 class="title text-left">Login</h2>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal text-left" }) do |f| %>
+            <div class="form-group has-feedback">
+              <%= f.label :email, 'Email', class: 'col-sm-3 control-label', for: 'inputEmail'%>
+              <div class="col-sm-8">
+                <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', required: true, id: 'inputEmail' %>
+                <i class="fa fa-user form-control-feedback"></i>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <%= f.label :password, 'Password', class: 'col-sm-3 control-label', for: 'inputPassword' %>
+              <div class="col-sm-8">
+                <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', id: 'inputPassword', placeholder: 'Password', required: true%>
+                <i class="fa fa-lock form-control-feedback"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-8">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" required> Remember me.
+                  </label>
+                </div>
+                <button type="submit" name="commit" class="btn btn-group btn-default btn-animated">Log In <i class="fa fa-user"></i></button>
+                <ul class="space-top">
+                  <%= render "devise/shared/links" %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+          <!-- </form> -->
+        </div>
+        <!-- .subfooter start -->
+        <!-- ================ -->
+        <p class="mt-20">Copyright © 2017 Trisomy Families. All Rights Reserved</p>
+        <!-- .subfooter end -->
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
