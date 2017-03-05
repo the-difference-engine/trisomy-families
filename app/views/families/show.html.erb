@@ -5,3 +5,5 @@
   <li>City: <%= @family.city %> </li>
   <li>State: <%= @family.state %> </li>
 </ul>
+
+<li class="account-link"><%= button_to 'Add child', new_user_registration_path, :class => "btn btn-default navbar-btn btn-success", :method => :get %></li>
