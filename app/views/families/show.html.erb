@@ -1,8 +1,7 @@
-<h1>The <%= @user.last_name %> Family </h1>
+<h1><%= @family.family_name %></h1>
 
-<h3>Things to show on this page</h3>
 <ul>
-  <li>Stories</li>
-  <li>Family Members</li>
-  <li>Message / Contact Form</li>
+  <li>Story: <%= @family.story %></li>
+  <li>City: <%= @family.city %> </li>
+  <li>State: <%= @family.state %> </li>
 </ul>
