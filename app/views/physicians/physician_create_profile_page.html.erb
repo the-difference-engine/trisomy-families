@@ -15,7 +15,7 @@
          <p class="text-center">Create a profile:</p>
          <hr>
          <%= form_for @physician, url: {action: "create_profile"} do |f| %>
-         <h5 style="color:gray">Basic Info</h5>
+         <h5 style="color:gray">Personal Info</h5>
          <div class="form-group">
             <span class="required">* </span><%= f.label :first_name, " Full Name" %>
             <%= f.text_field(:first_name, class: "form-control", placeholder: "#{current_user.first_name}") %>
@@ -24,18 +24,23 @@
             <%= f.text_field(:last_name, class: "form-control", placeholder: "#{current_user.last_name}") %>
          </div>
          <div class="form-group">
-            <span class="required">* </span><%= f.label :phone_number %>
-            <%= f.text_field(:phone_number, class: "form-control") %>
+            <%= f.label :personal_number %>
+            <%= f.text_field(:personal_number, class: "form-control") %>
          </div>
 
 
 
          <hr>
-         <h5 style="color:gray">Location</h5>
+         <h5 style="color:gray">Practice Info</h5>
          <div class="form-group">
             <span class="required">* </span><%= f.label :address, "Address" %>
             <%= f.text_field(:address, class: "form-control")%>
 
+         </div>
+
+         <div class="form-group">
+            <span class="required">* </span>Practice Number
+            <%= f.text_field(:phone_number, class: "form-control") %>
          </div>
          <div class="form-group">
          <span class="required">* </span><%= f.label :state, "State" %><br>
@@ -49,14 +54,6 @@
          <div class="form-group">
             <span class="required">* </span><%= f.label :zip_code, 'Zip Code' %>
             <%= f.text_field(:zip_code, class: "form-control")%>
-           
-            <%= f.label :state, 'State' %>
-            <%= f.select("state", options_for_select(us_states, @physician.state), class: "form-control") %>
-         </div>
-
-         <div class="form-group">
-            <%= f.label :zip_code, 'Zip Code' %>
-            <%= f.text_field(:zip_code, class: "form-control") %>
          </div>
 
          <hr>
