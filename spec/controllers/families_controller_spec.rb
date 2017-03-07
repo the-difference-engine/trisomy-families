@@ -12,4 +12,25 @@ RSpec.describe FamiliesController, type: :controller do
       expect(response).to render_template('show.html.erb')
     end
   end
+  describe '#create' do
+    hash = { family: {
+                  family_name: "Abc",
+                  state: "IL",
+                  city: "Chicago",
+                  story: "this is a story",
+                  street_address: "2148 golf court"
+                  }
+      }
+    before(:example) {
+      user = FactoryGirl.create(:user)
+      sign_in user
+    }
+    before(:example) { post(:create, params: hash, family: { :family_name => "Fool" }) }
+
+    it 'redirects to profile page' do
+      # if you leave assert_template, it will raise an error 'NoMethodError: undefined method `matches?` for true:TrueClass
+      expect(response).to redirect_to("/families/#{assigns(:family).id}")
+    end
+  end
+ 
 end
