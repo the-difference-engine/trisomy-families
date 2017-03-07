@@ -1,6 +1,6 @@
 class Api::V1::FamilySerializer < ActiveModel::Serializer
   type 'family'
-  attributes :id, :last_name, :address, :city, :state, :zip_code
+  attributes :id, :family_name, :street_address, :city, :state
 
   attribute :latitude do
     if !object.latitude.nil?

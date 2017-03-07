@@ -14,5 +14,15 @@ module TrisomyFamilies
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
     }
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_region => ENV['AWS_REGION'],
+    :s3_credentials => {
+    :bucket => ENV['S3_BUCKET'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  }
+}
   end
 end
+
