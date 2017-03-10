@@ -12,13 +12,7 @@ layout :logged_in?
 
   def home
     if current_user
-      if current_user.children.empty? && current_user.user_type.nil?
-        redirect_to '/profile/new'
-      # elsif current_user.user_type == 'admin'
-      #   redirect_to '/admin-dashboard'
-      else
-        render 'home.html.erb'
-      end
+      render 'home.html.erb'
     end
   end
 
