@@ -8,7 +8,6 @@ class FamiliesController < ApplicationController
     if current_user
       @children = Child.where(user_id: current_user.id)
       if @children.count == 0
-        flash[:warning] = 'You must have registered family members to view the family dashboard.'
         redirect_to '/profile/new'
 
       else
