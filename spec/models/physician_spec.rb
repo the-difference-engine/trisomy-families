@@ -5,8 +5,10 @@ RSpec.describe Physician, type: :model do
     physician = Physician.new(
       first_name: "Doctor",
       last_name: "Suess",
-      phone_number: "555-5555",
+      personal_number: "555-5555",
+      primary_phone_public: true,
       address:  "1871 Merch Mart",
+      phone_number: "333-3333",
       city: "Chicago",
       state: "Illinois",
       zip_code: "60618",
