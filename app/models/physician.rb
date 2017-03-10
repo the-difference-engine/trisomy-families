@@ -9,8 +9,8 @@ class Physician < ApplicationRecord
   validates :phone_number, presence: true
   validates :state, presence: true
   validates :city, presence: true
-  validates :zipcode, presence: true
-  validates :specialty, presence: true
+  validates :zip_code, presence: true
+  validates :speciality, presence: true
 
   def full_address
     [address, city, state].compact.join(', ')
