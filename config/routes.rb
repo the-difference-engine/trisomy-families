@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/families/new' => 'families#new'
   post '/family' => 'families#create'
 
+  get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
