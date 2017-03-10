@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.user_type == "doctor"
       "/profile_doctor"
     elsif current_user.user_type == "family" && current_user.family_id.nil?
-      "/profile/new"
+      "/families/new"
     elsif current_user.user_type == "admin"
       "/admin-dashboard"
     end
