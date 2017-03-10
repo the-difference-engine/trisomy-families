@@ -26,6 +26,10 @@
          <div class="form-group">
             <%= f.label :personal_number %>
             <%= f.text_field(:personal_number, class: "form-control") %>
+
+
+            <%= f.radio_button(:primary_phone_public, true) %> Public
+            <%= f.radio_button(:primary_phone_public, false) %> Private
          </div>
 
 
