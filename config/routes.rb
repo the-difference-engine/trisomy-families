@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :events
 
   get '/queries' => 'users#query_table'
-  get '/profile/new' => 'families#new'
+  get '/families/new' => 'families#new'
   post '/family' => 'families#create'
 
   post '/profile' => 'children#create_profile'
