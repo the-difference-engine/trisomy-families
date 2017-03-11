@@ -52,7 +52,7 @@
       }
 
 
-      function createFamilyMarker(latlng, lastname, address, state, city, zipcode, showPage) {
+      function createFamilyMarker(latlng, lastname, address, state, city, showPage) {
         var marker = new google.maps.Marker({
           map: $scope.map,
           position: latlng,
@@ -63,13 +63,12 @@
             var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h2 id="firstHeading" class="firstHeading">Family '+lastname+'</h2>'+
+            '<h2 id="firstHeading" class="firstHeading"> '+lastname+'</h2>'+
             '<div id="bodyContent">'+
             '<p><b>Address: </b><br>'+
             address+'<br>'+
             city+', '+
             state+' '+
-            zipcode+'</p><br>'+
             '<a href='+showPage+'>More info</a>'+
             '</div>'+
             '</div>';
@@ -98,14 +97,13 @@
       }
       else if ($scope.query.type === "family") {
         for(var i = 0; i < $scope.data["data"].length; i++) {
-            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["longitude"], $scope.data["data"][i]["attributes"]["latitude"] )
-            var lastname = $scope.data["data"][i]["attributes"]["last-name"];
-            var address = $scope.data["data"][i]["attributes"]["address"];
+            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["latitude"], $scope.data["data"][i]["attributes"]["longitude"] )
+            var lastname = $scope.data["data"][i]["attributes"]["family-name"];
+            var address = $scope.data["data"][i]["attributes"]["street-address"];
             var state = $scope.data["data"][i]["attributes"]["state"];
             var city = $scope.data["data"][i]["attributes"]["city"];
-            var zipcode = $scope.data["data"][i]["attributes"]["zip-code"];
             var showPage = $scope.data["data"][i]["attributes"]["self-url"];
-            createFamilyMarker(latlng, lastname, address, state, city, zipcode, showPage);
+            createFamilyMarker(latlng, lastname, address, state, city, showPage);
         }
       }
     }

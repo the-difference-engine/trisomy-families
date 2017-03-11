@@ -15,7 +15,12 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+              
+            <% unless current_user.family_id.nil? %>
               <li><a href="/family-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; My Family</a></li>
+            <% end %>
+
+
               <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families</a></li>
               <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
               <li><a href="#"><i class="fa fa-shopping-bag fa-fw" aria-hidden="true"></i>&nbsp; Store</a></li>

@@ -19,7 +19,7 @@ class Api::V1::SearchController < ApplicationController
       end
 
     elsif params[:type] == 'family'
-      rows = User.where(hash_params)
+      rows = Family.where(hash_params)
       if !params[:limit].nil?
         rows = rows.limit(params[:limit].to_i)
       end

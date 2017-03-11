@@ -8,7 +8,6 @@ class FamiliesController < ApplicationController
     if current_user
       @children = Child.where(user_id: current_user.id)
       if @children.count == 0
-        flash[:warning] = 'You must have registered family members to view the family dashboard.'
         redirect_to '/profile/new'
 
       else
@@ -27,7 +26,26 @@ class FamiliesController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    @family = Family.find_by(id: params[:id])
     render 'show.html.erb'
+  end
+
+  def new
+    @family = Family.new
+    render 'new.html.erb'
+  end
+
+  def create
+    @family = Family.new(
+      family_name: params["family"]["family_name"],
+      street_address: params["family"]["street_address"],
+      city: params["family"]["city"],
+      state: params["family"]["state"],
+      story: params["family"]["story"]
+    )
+
+      @family.save
+      flash[:success] = "Family Successfully Added!"
+      redirect_to "/families/#{@family.id}"
   end
 end

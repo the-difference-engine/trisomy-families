@@ -185,6 +185,15 @@ puts  "************************"
       user_type: "family"})
     u1.save!(validate: false)
 
+    u1_family = Family.new(
+      family_name: Faker::Name.last_name,
+      latitude: family_addresses[i][4],
+      longitude: family_addresses[i][5],
+      street_address: family_addresses[i][0],
+      city: family_addresses[i][1],
+      state: family_addresses[i][2])
+    u1_family.save
+
     @child = nil
     1.times do |value|
       @child =  Child.new(

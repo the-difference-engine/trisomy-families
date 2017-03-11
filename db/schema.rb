@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307003739) do
+ActiveRecord::Schema.define(version: 20170310022313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20170307003739) do
     t.boolean  "registered",                default: false
     t.boolean  "accepted"
     t.string   "address"
+    t.integer  "family_id"
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
@@ -184,6 +185,19 @@ ActiveRecord::Schema.define(version: 20170307003739) do
     t.string   "event_type"
     t.boolean  "allDay"
     t.string   "location"
+  end
+
+  create_table "families", force: :cascade do |t|
+    t.string   "family_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "story"
+    t.string   "photo"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "gastric_surgeries", force: :cascade do |t|
@@ -473,11 +487,12 @@ ActiveRecord::Schema.define(version: 20170307003739) do
     t.string   "zip_code"
     t.string   "website"
     t.string   "speciality"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.decimal  "latitude",        precision: 13, scale: 10
-    t.decimal  "longitude",       precision: 13, scale: 10
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.decimal  "latitude",             precision: 13, scale: 10
+    t.decimal  "longitude",            precision: 13, scale: 10
     t.string   "personal_number"
+    t.boolean  "primary_phone_public"
   end
 
   create_table "primary_diagnoses", force: :cascade do |t|
@@ -566,6 +581,7 @@ ActiveRecord::Schema.define(version: 20170307003739) do
     t.decimal  "latitude",               precision: 13, scale: 10
     t.decimal  "longitude",              precision: 13, scale: 10
     t.string   "user_type"
+    t.integer  "family_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

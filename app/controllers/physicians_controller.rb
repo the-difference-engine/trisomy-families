@@ -18,8 +18,10 @@ class PhysiciansController < ApplicationController
     params.require(:physician).permit(
       :first_name,
       :last_name,
-      :phone_number,
+      :personal_number,
+      :primary_phone_public,
       :address,
+      :phone_number,
       :state, :city,
       :zip_code,
       :website,
