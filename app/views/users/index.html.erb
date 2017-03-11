@@ -7,7 +7,6 @@
     <div>
       <label>Filter by email:</label>
       <input ng-model="emailFilter" list="emails">
-
       <datalist id="emails">
         <option ng-repeat="user in users track by $index">{{ user.email }}</option>
       </datalist>
@@ -20,16 +19,21 @@
       <datalist id="user_types">
         <option>admin</option>
         <option>doctor</option>
-        <option>family</option>
+        <option>family</option>````
       </datalist>
       </select>
+    </div>
+    <br>
+    <div>
+      <label>Filter by last name:</label>
+      <input ng-model="lastName">
     </div>
     <br>
     <button ng-click="setOrderAttribute('id')">Order by creation time</button>
     <br>
     <br>
     <div class="row">
-      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | orderBy:orderAttribute:isOrderDescending ">
+      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending ">
         <div class="well">
           <h4>{{user.email}}</h4>
           <hr>
