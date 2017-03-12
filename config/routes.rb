@@ -1,15 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  namespace :api do
-    namespace :v1 do
-      resources :events
-      resources :search
-      get '/children' => 'children#index'
-      get '/users' => 'users#index'
-      patch '/users' => 'users#update'
-      patch '/children' => 'children#update'
-    end
-  end
+  
 
   devise_for :users
 
