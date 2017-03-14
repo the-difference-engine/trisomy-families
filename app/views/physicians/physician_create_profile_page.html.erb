@@ -43,13 +43,13 @@
          </div>
 
          <div class="form-group">
-            <span class="required">* </span>Practice Number
+            <span class="required">* </span>Office Phone Number
             <%= f.text_field(:phone_number, class: "form-control") %>
          </div>
          <div class="form-group">
          <span class="required">* </span><%= f.label :state, "State" %><br>
             <%= f.select("state", options_for_select(us_states, @physician.state), class: "form-control") %>
-         </div>     
+         </div>
 
          <div class="form-group">
             <span class="required">* </span><%= f.label :city, 'City' %>
@@ -67,7 +67,7 @@
          </div>
          <div class="form-group">
             <span class="required">* </span><%= f.label :speciality, 'Specialty' %>
-            <%= f.text_field(:speciality, class: "form-control")%>
+            <%= f.text_field(:specialty, class: "form-control")%>
          </div>
          <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
       <% end %>
