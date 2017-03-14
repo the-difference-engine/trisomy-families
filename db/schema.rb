@@ -486,7 +486,7 @@ ActiveRecord::Schema.define(version: 20170310022313) do
     t.string   "state"
     t.string   "zip_code"
     t.string   "website"
-    t.string   "speciality"
+    t.string   "specialty"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.decimal  "latitude",             precision: 13, scale: 10
