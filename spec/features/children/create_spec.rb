@@ -2,7 +2,7 @@ require "rails_helper"
 require 'pp'
 
 RSpec.feature "User creates a profile", :type => :feature do
-  scenario "User creates a profile" do  
+  scenario "for child" do  
     user = FactoryGirl.create(:user)
 
     login_as(user, :scope => :user)
@@ -13,7 +13,6 @@ RSpec.feature "User creates a profile", :type => :feature do
     fill_in "child_last_name", :with => "Rocket"
     fill_in "child_birth_date", :with => "12/08/1983"
     fill_in "child_death_date", :with => "12/08/2015"
-    fill_in "child_city", :with => "Chicago"
     fill_in "child_trisomy_story", :with => "hello"
     page.choose("child_privacy_attributes_avatar_true")
     page.choose("child_privacy_attributes_birthday_true")
