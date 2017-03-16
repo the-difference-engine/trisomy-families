@@ -3,6 +3,20 @@
 
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
     <a href="/children-index">Children Index</a>
+
+    <div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add Profile <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="/families/new">Family</a></li>
+          <li><a href="/profile_doctor">Doctor</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+
     <h2>Users:</h2>
     <div>
       <label>Filter by email:</label>
@@ -39,6 +53,7 @@
           <hr>
           <p>Name: {{user.first_name}} {{user.last_name}}</p>
           <p>Type: {{user.user_type}}</p>
+          <p>Signed up: {{user.created_at | date:format:'M'}}</p>
           <form>
             <div>
               <label>Update User Type: </label>

@@ -6,9 +6,6 @@ RSpec.describe User, type: :model do
       first_name: "George",
       last_name: "Clooney",
       email: "#{rand(1000)}@gmail.com",
-      state: "Illinois",
-      city: "Chicago",
-      phone_number: '6306408224',
       password: 'password',
       relationship: 'father',
       user_type: 'family'
@@ -24,9 +21,7 @@ RSpec.describe User, type: :model do
     user = User.new(
       first_name: "",
       last_name: "",
-      email: "",
-      state: "",
-      city: ""
+      email: ""
     )
 
     it "is invalid without a first name" do
