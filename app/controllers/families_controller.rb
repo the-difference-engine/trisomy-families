@@ -41,10 +41,12 @@ class FamiliesController < ApplicationController
       street_address: params["family"]["street_address"],
       city: params["family"]["city"],
       state: params["family"]["state"],
-      story: params["family"]["story"]
+      story: params["family"]["story"],
+      user_id: current_user.id
     )
 
       @family.save
+      current_user.update(family_id: @family.id)
       flash[:success] = "Family Successfully Added!"
       redirect_to "/families/#{@family.id}"
   end

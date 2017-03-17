@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310022313) do
+
+ActiveRecord::Schema.define(version: 20170317004211) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,11 +103,11 @@ ActiveRecord::Schema.define(version: 20170310022313) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.boolean  "private",                   default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
     t.integer  "mosaic_percentage"
-    t.boolean  "private",                   default: false
     t.integer  "health_history_id"
     t.integer  "background_history_id"
     t.string   "primary_diagnosis"
@@ -198,6 +200,7 @@ ActiveRecord::Schema.define(version: 20170310022313) do
     t.string   "photo"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
 
   create_table "gastric_surgeries", force: :cascade do |t|
@@ -581,7 +584,6 @@ ActiveRecord::Schema.define(version: 20170310022313) do
     t.decimal  "latitude",               precision: 13, scale: 10
     t.decimal  "longitude",              precision: 13, scale: 10
     t.string   "user_type"
-    t.integer  "family_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

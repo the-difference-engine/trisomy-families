@@ -19,7 +19,7 @@
     <div ng-app="app">
       <div ng-controller="MapSearchController">
       <h3>{{ searchResults }}</h3>
-    <div id="map"></div>
+      <div id="map"></div>
 
 <!-- #####################################################################
     Search form does not behave properly, however this will not affect demo.
@@ -29,7 +29,7 @@
     2. Select state button is not active if selected first.
     ###################################################################### !-->
 
-    <form name="search_form" class="form-inline">
+      <form name="search_form" class="form-inline">
       <h4>Search For:</h4>
       <div class="form-group">
         <label for="searchQueryType"></label>
@@ -52,7 +52,7 @@
       <input type="button" class="btn btn-success" value="Search" ng-click="performSearch()">
     </form>
   </div>
-  </div>
+</div>
 
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzNgVwahZQ63o16EMv8eU4XFvdkgdr2XM">
