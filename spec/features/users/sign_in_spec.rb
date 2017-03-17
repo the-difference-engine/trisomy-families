@@ -17,7 +17,7 @@ RSpec.feature "User signs in", :type => :feature do
     expect(page.current_path).to eq "/admin-dashboard"
   end
 
-  scenario "User is a physician" do
+  scenario "as a physician" do
     visit "/users/sign_up"
 
     fill_in "first_name", :with => "Scottie"
