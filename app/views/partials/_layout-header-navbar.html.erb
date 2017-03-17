@@ -16,7 +16,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               
-            <% unless current_user.family_id.nil? %>
+            <% unless current_user.user_type == "physician" %>
               <li><a href="/family-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; My Family</a></li>
             <% end %>
 
@@ -39,8 +39,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
-                <% if current_user.user_type == "family" %>
-                <li><%= link_to('Create Profile', profile_new_path) %></li>
+                <% if current_user.user_type == "family" && current_user.family_ids != [] %>
+                <li><%= link_to('Add Child', profile_new_path) %></li>
                 <% end %>
               <% end %>
               <li class="dropdown">
