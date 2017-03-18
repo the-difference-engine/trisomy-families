@@ -6,3 +6,6 @@
   <li>State: <%= @family.state %> </li>
 </ul>
 <button><a href = '/profile/new'>Add Child</a></button>
+<% @family.children.each do |child| %>
+  <h4><%= child.first_name %></h4>
+<% end %>
