@@ -16,7 +16,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               
-            <% unless current_user.user_type == "physician" %>
+            <% unless current_user.user_type == "physician" || current_user.family_ids == [] %>
               <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Family</a></li>
             <% end %>
 
