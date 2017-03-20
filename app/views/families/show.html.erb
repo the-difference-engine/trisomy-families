@@ -1,8 +1,17 @@
 <h1><%= @family.family_name %></h1>
-
 <ul>
   <li>Story: <%= @family.story %></li>
   <li>City: <%= @family.city %> </li>
   <li>State: <%= @family.state %> </li>
 </ul>
-<button><a href = '/profile/new'>Add Child</a></button>
+<% if @family.children.count == 1 %>
+  <h2>Child:</h2>
+  <% @family.children.each do |child| %>
+    <h4><a href = "/profile/<%=child.id %>"><%= child.nickname %></a></h4>
+  <% end %>
+<% elsif @family.children.count > 1 %>
+  <h2>Children:</h2>
+  <% @family.children.each do |child| %>
+    <h4><a href = "/profile/<%= child.id %>"><%= child.nickname %></a></h4>
+  <% end %>
+<% end %>
