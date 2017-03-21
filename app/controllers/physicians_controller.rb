@@ -25,7 +25,7 @@ class PhysiciansController < ApplicationController
       :state, :city,
       :zip_code,
       :website,
-      :speciality
+      :specialty
     )
   end
 
@@ -63,6 +63,28 @@ class PhysiciansController < ApplicationController
     else
       flash[:warning] = 'Error!'
     end
+    redirect_to "/profile_doctor/#{@physician.id}"
+  end
+
+  def update_photo
+    @physician = Physician.find_by(id: params[:id])
+
+    # Generate random string to file_name for uniqueness
+    charset = Array('A'..'Z') + Array('a'..'z')
+    random_string = Array.new(20) { charset.sample }.join
+    object_name = random_string + '_' + params[:physician][:avatar].original_filename
+
+    obj = S3_BUCKET.object(object_name)
+    obj.upload_file(params[:physician][:avatar].tempfile.path)
+
+    @physician.update_columns(avatar_file_name: obj.public_url)
+
+    if @physician.save
+      flash[:message] = "Uploaded succesfully."
+    else
+      flash[:error] = "Error occured in uploading file."
+    end
+
     redirect_to "/profile_doctor/#{@physician.id}"
   end
 end
