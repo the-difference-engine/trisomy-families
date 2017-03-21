@@ -1,4 +1,63 @@
 
+<h1 style="text-align: center;">Physician Profile</h1>
+
+<section class="main-container">
+
+  <div class="container">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-md-12">
+
+        <!-- page-title start -->
+        <!-- ================ -->
+        <h1 class="page-title"></h1>
+        <div class="separator-2"></div>
+        <!-- page-title end -->
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="image-box team-member shadow mb-20">
+              <div class="overlay-container overlay-visible">
+                <img src="http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg" alt="">
+                <a href="http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg" class="popup-img overlay-link" title="Jane Doe - CEO"><i class="icon-plus-1"></i></a>
+                <div class="overlay-bottom">
+                  <div class="text">
+                    <h3 class="title margin-clear"><%= @physician.first_name %> <%= @physician.last_name %></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%= link_to 'Edit Profile',"/profile_doctor/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+          </div>
+          <div class="col-lg-4 col-sm-5">
+            <h2>Address: <br> <i><%= @physician.address %>,<br> <%= @physician.city %>, <%= @physician.state %>, <%= @physician.zip_code %></i></h2>
+            <h2>Specialty: <i><%= @physician.specialty %> </i></h2>
+            <h2>Website: </h2><i><a href = '<%= @physician.website %>'><%= @physician.website %></a></i>
+          </div>
+          <div class="col-sm-3 col-lg-offset-1">
+            <h3 class="title">Contact Me</h3>
+            <ul class="list-icons">
+              <li><i class="fa fa-phone pr-10 text-default"></i> <%= @physician.phone_number %></li>
+              <li><i class="fa fa-mobile pr-10 text-default"></i> <%= @physician.personal_number %></li>
+              <li><a href="mailto:info@janedoe.com"><i class="fa fa-envelope-o pr-10"></i>info@janedoe.com</a></li>
+            </ul>
+            <h3>Follow Me</h3>
+            <div class="separator-2"></div>
+            <a target="_blank" href="https://www.linkedin.com" class="btn btn-animated linkedin btn-sm">Linkedin<i class="pl-10 fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://www.xing.com/" class="btn btn-animated xing btn-sm">Xing<i class="fa fa-xing"></i></a>
+            <h3>See My Portfolio</h3>
+            <a class="btn btn-gray collapsed btn-animated" data-toggle="collapse" href="#collapseContent" aria-expanded="false" aria-controls="collapseContent">Click Me <i class="fa fa-plus"></i></a>
+          </div>
+        </div>
+
+      </div>
+      <!-- main end -->
+
+    </div>
+  </div>
+</section>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
