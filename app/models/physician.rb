@@ -1,5 +1,5 @@
 class Physician < ApplicationRecord
-  
+
   geocoded_by :full_address
   after_validation :geocode
 
@@ -10,7 +10,7 @@ class Physician < ApplicationRecord
   validates :state, presence: true
   validates :city, presence: true
   validates :zip_code, presence: true
-  validates :speciality, presence: true
+  validates :specialty, presence: true
 
   def full_address
     [address, city, state].compact.join(', ')
