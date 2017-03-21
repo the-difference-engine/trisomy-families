@@ -1,3 +1,4 @@
+
 <h1 style="text-align: center;">Physician Profile</h1>
 
 <section class="main-container">
@@ -11,7 +12,7 @@
 
         <!-- page-title start -->
         <!-- ================ -->
-        <h1 class="page-title"></i></h1>
+        <h1 class="page-title"></h1>
         <div class="separator-2"></div>
         <!-- page-title end -->
         <div class="row">
@@ -22,7 +23,7 @@
                 <a href="http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg" class="popup-img overlay-link" title="Jane Doe - CEO"><i class="icon-plus-1"></i></a>
                 <div class="overlay-bottom">
                   <div class="text">
-                    <h3 class="title margin-clear"><i><%= @physician.first_name %> <%= @physician.last_name %></h3>
+                    <h3 class="title margin-clear"><%= @physician.first_name %> <%= @physician.last_name %></h3>
                   </div>
                 </div>
               </div>
@@ -56,3 +57,50 @@
     </div>
   </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Profile Picture</h4>
+      </div>
+      <div class="modal-body">
+              <%= form_for @physician, url: "/profile_doctor/#{@physician.id}/photo", html: { multipart: true } do |form| %>
+                  <%= form.file_field :avatar, :class => "form-group" %>
+      </div>
+      <div class="modal-footer">
+        <%= submit_tag nil, class: "btn btn-success"%>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<h1>Physician Page</h1>
+<br>
+<div> <!-- class container !-->
+  <div class="parent">
+    <img width='300px' class="img-thumbnail" src="<%= @physician.avatar_file_name %>"/>
+  </div>
+</div>
+
+
+<%= link_to 'Edit Profile',"/profile_doctor/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
+</button>
+
+<h2>Name: <i><%= @physician.first_name %> <%= @physician.last_name %></i></h2>
+<br>
+<h2>Address: <i><%= @physician.address %></i></h2>
+<br>
+<h2>Website: </h2><i><a href = '<%= @physician.website %>'><%= @physician.website %></a></i>
+<br>
+<h2>Phone Number: <i><%= @physician.phone_number %></i> </h2>
+<br>
+<h2>Speciality: <i><%= @physician.specialty %> </i></h2>
+
+<h2>Latitude: <%= @physician.latitude %> </h2>
+<h2>LongitudeL <%= @physician.longitude %> </h2>

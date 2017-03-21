@@ -3,7 +3,7 @@ class Api::V1::PhysicianSerializer < ActiveModel::Serializer
 
   attributes :id, :first_name, :last_name, :phone_number, :address, :city, :state, :zip_code
   attribute :website, key: :link
-  attribute :speciality
+  attribute :specialty
 
   attribute :latitude do
     object.latitude.to_f

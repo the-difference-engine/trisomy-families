@@ -1,0 +1,47 @@
+<% if @family.errors.any?%>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+   <%= pluralize(@child.errors.count, "Error") %>
+   <ul>
+      <% @family.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+   </ul>
+</div>
+<% end %>
+<div class="container">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <h1 class="text-center">Edit</h1>
+         <p class="text-center">Edit your family dashboard.</p>
+         <hr>
+         <%= form_tag "/family/#{@family.id}", method: :patch do %>
+         <h5 style="color:gray">Basic Info</h5>
+         <div class="form-group">
+            <%= label_tag :family_name, "* Family Name" %>
+            <%= text_field_tag(:family_name, @family.family_name) %>
+         </div>
+         <hr>
+         <h5 style="color:gray">Location</h5>
+         <div class="form-group">
+            <%= label_tag :story, "* Story" %>
+            <%= text_field_tag(:story, @family.story)%>
+         </div>         
+         <div class="form-group">
+            <%= label_tag :city, '* City' %>
+            <%= text_field_tag(:city, @family.city)%>
+         </div>
+         <div class="form-group">
+            <%= label_tag :state, 'State' %>
+            <%= select_tag("state", options_for_select(us_states, @family.state), class: "form-control") %>
+         </div>
+         <hr>
+         <div>
+         </div>
+         <%= submit_tag 'Update', class: "btn btn-success btn-lg btn-block"%>
+      </div>
+      <!-- col-md-6 -->
+   </div>
+   <!-- row -->
+</div>
+<!-- container -->
+<% end %>
