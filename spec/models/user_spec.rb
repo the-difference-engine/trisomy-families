@@ -35,15 +35,7 @@ RSpec.describe User, type: :model do
     it "is invalid without an email" do
       user.valid?
       expect(user.errors[:email]).to include("can't be blank")
-    end
-    it "is invalid without a state" do
-      user.valid?
-      expect(user.errors[:state]).to include("can't be blank")
-    end
-    it "is invalid without a city" do
-      user.valid?
-      expect(user.errors[:city]).to include("can't be blank")
-    end
+    end  
     it "is invalid without a user_type" do
       user.valid?
       expect(user.errors[:user_type]).to include("can't be blank")

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get '/queries' => 'users#query_table'
   get '/families/new' => 'families#new'
   post '/family' => 'families#create'
+  get '/family/:id/edit' => 'families#edit'
+  patch '/family/:id' => 'families#update'
 
   get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'

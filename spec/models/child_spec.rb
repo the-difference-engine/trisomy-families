@@ -56,14 +56,6 @@ RSpec.describe Child, type: :model do
       child.valid?
       expect(child.errors[:birth_date]).to include("can't be blank")
     end
-    it "is invalid without a state" do
-      child.valid?
-      expect(child.errors[:state]).to include("can't be blank")
-    end
-    it "is invalid without a city" do
-      child.valid?
-      expect(child.errors[:city]).to include("can't be blank")
-    end
     it "is invalid without a story" do
       child.valid?
       expect(child.errors[:trisomy_story]).to include("can't be blank")

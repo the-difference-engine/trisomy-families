@@ -18,6 +18,7 @@ class ChildrenController < ApplicationController
     @child.death_date = calculate_date(params[:child][:death_date])
     @child.user_id = current_user.id
     @child.build_privacy(privacy_params)
+    @child.family_id = current_user.family_ids[0]
 
     # byebug
     if @child.save
