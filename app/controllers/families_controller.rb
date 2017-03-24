@@ -41,8 +41,7 @@ class FamiliesController < ApplicationController
       user_id: current_user.id
       )
 
-      @family.save
-      current_user.update(family_id: @family.id)
+      @family.save    
 
       if params["family"]["photo"]
         charset = Array('A'..'Z') + Array('a'..'z')
