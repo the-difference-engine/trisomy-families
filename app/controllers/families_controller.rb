@@ -38,20 +38,23 @@ class FamiliesController < ApplicationController
       city: params["family"]["city"],
       state: params["family"]["state"],
       story: params["family"]["story"],
-      user_id: current_user.id,
+      user_id: current_user.id
       )
 
       @family.save
       current_user.update(family_id: @family.id)
 
-      charset = Array('A'..'Z') + Array('a'..'z')
-      random_string = Array.new(20) { charset.sample }.join
-      object_name = random_string + '_' + params["family"]["photo"].original_filename
-      obj = S3_BUCKET.object(object_name)
-      obj.upload_file(params["family"]["photo"].tempfile.path)
-      puts "********"
-      puts @family
-      @family.update(photo: obj.public_url)
+      if params["family"]["photo"]
+        charset = Array('A'..'Z') + Array('a'..'z')
+        random_string = Array.new(20) { charset.sample }.join
+        object_name = random_string + '_' + params["family"]["photo"].original_filename
+        obj = S3_BUCKET.object(object_name)
+        obj.upload_file(params["family"]["photo"].tempfile.path)
+        puts "********"
+        puts @family
+        @family.update(photo: obj.public_url)
+      end
+
       @family.save
 
       flash[:success] = "Family Successfully Added!"
