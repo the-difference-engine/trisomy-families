@@ -14,25 +14,30 @@
          <h1 class="text-center">Edit</h1>
          <p class="text-center">Edit your family dashboard.</p>
          <hr>
-         <%= form_tag "/family/#{@family.id}", method: :patch do %>
+
+         <%= form_for @family, url: {action: "update"}, html: { multipart: true } do |f| %>
          <h5 style="color:gray">Basic Info</h5>
          <div class="form-group">
-            <%= label_tag :family_name, "* Family Name" %>
-            <%= text_field_tag(:family_name, @family.family_name) %>
+            <%= f.label :family_name, "* Family Name" %>
+            <%= f.text_field :family_name, :value => @family.family_name %>
+         </div>
+         <div>
+            <h3>Upload a New Image</h3>
+            <%= f.file_field :photo %>
          </div>
          <hr>
          <h5 style="color:gray">Location</h5>
          <div class="form-group">
-            <%= label_tag :story, "* Story" %>
-            <%= text_field_tag(:story, @family.story)%>
+            <%= f.label :story, "* Story" %>
+            <%= f.text_field :story, :value => @family.story%>
          </div>         
          <div class="form-group">
-            <%= label_tag :city, '* City' %>
-            <%= text_field_tag(:city, @family.city)%>
+            <%= f.label :city, '* City' %>
+            <%= f.text_field :city, :value => @family.city%>
          </div>
          <div class="form-group">
-            <%= label_tag :state, 'State' %>
-            <%= select_tag("state", options_for_select(us_states, @family.state), class: "form-control") %>
+            <%= f.label :state, 'State' %>
+            <%= f.select("state", options_for_select(us_states, @family.state), class: "form-control") %>
          </div>
          <hr>
          <div>

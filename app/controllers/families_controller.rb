@@ -70,12 +70,21 @@ class FamiliesController < ApplicationController
   def update
     @family = Family.find_by(id: params[:id])
 
-    @family.family_name = params[:family_name]
-    @family.story = params[:story]
-    @family.city = params[:city]
-    @family.state = params[:state]
-
+    @family.family_name = params[:family][:family_name]
+    @family.story = params[:family][:story]
+    @family.city = params[:family][:city]
+    @family.state = params[:family][:state]
     @family.save
+    if params["family"]["photo"] != nil
+      charset = Array('A'..'Z') + Array('a'..'z')
+      random_string = Array.new(20) { charset.sample }.join
+      object_name = random_string + '_' + params["family"]["photo"].original_filename
+      obj = S3_BUCKET.object(object_name)
+      obj.upload_file(params["family"]["photo"].tempfile.path)
+      puts "********"
+      puts @family
+      @family.update(photo: obj.public_url)
+    end
 
     redirect_to "/families/#{@family.id}"
   end
