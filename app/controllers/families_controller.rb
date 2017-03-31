@@ -26,8 +26,13 @@ class FamiliesController < ApplicationController
   end
 
   def new
-    @family = Family.new
-    render 'new.html.erb'
+    if current_user.families != nil
+      @family = current_user.families[0]
+      render 'show.html.erb'
+    else
+      @family = Family.new
+      render 'new.html.erb'
+    end
   end
 
   def create
