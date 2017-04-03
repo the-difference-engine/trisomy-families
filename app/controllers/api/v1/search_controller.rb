@@ -52,8 +52,8 @@ class Api::V1::SearchController < ApplicationController
     end
 
     if params[:type] == 'physician'
-      if !params[:speciality].nil?
-        h[:speciality] = params[:speciality]
+      if !params[:specialty].nil?
+        h[:specialty] = params[:specialty]
       end
     end
     h

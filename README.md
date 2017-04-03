@@ -47,7 +47,7 @@ Search for physicians or trisomy families.
 | state | *Optional.* Only accepts abbr. state names. Example: IL |
 | city | *Optional.* Example: Chicago |
 | last_name | *Optional.* |
-| speciality | *Optional.* Only valid for physician search types. Accepts max. one speciality value.|
+| specialty | *Optional.* Only valid for physician search types. Accepts max. one specialty value.|
 | fields | *Optional.* Comma-separated list of fields to include. |
 | limit | *Optional.* The number of results to return. |
 
@@ -71,7 +71,7 @@ Example:
                 "latitude": -82.0282001,
                 "longitude": 41.5053178,
                 "phone-number": "14-236-5824",
-                "speciality": "pediatrician",
+                "specialty": "pediatrician",
                 "state": "OH",
                 "zip-code": "44012",
                 "link": "http://emard.co/josephine.adams",

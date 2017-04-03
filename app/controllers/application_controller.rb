@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
+    if current_user.user_type == 'family' && current_user.family_id
+      '/family-dashboard'
+    # elsif current_user.user_type == 'doctor'
+    #   redirect_to '/professional-center'
+    elsif current_user.user_type == "doctor" &&  current_user.doctor_id
+      "/profile_doctor/#{current_user.doctor_id}"
     if current_user.user_type == 'family' && current_user.families[0].id != nil
       "/families/#{current_user.families[0].id}"
     elsif current_user.user_type == "doctor"

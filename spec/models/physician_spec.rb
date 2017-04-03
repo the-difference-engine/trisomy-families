@@ -64,7 +64,7 @@ RSpec.describe Physician, type: :model do
       physician.valid?
       expect(physician.errors[:zip_code]).to include("can't be blank")
     end
-    it "is invalid without a speciality" do
+    it "is invalid without a specialty" do
       physician.valid?
       expect(physician.errors[:specialty]).to include("can't be blank")
     end
