@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     #   redirect_to '/professional-center'
     elsif current_user.user_type == "doctor" &&  current_user.doctor_id
       "/profile_doctor/#{current_user.doctor_id}"
-    if current_user.user_type == 'family' && current_user.families[0].id != nil
+    elsif current_user.user_type == 'family' && current_user.families[0].id != nil
       "/families/#{current_user.families[0].id}"
     elsif current_user.user_type == "doctor"
       "/profile_doctor"
