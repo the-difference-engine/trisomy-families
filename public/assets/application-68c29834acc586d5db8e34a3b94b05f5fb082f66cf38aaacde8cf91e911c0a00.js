@@ -62700,7 +62700,7 @@ angular.module('ui.calendar', [])
     }, 100)
 
 
-    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, speciality, showPage) {
+    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage) {
           var marker = new google.maps.Marker({
             map: $scope.map,
             position: latlng,
@@ -62718,7 +62718,7 @@ angular.module('ui.calendar', [])
               city+', '+
               state+' '+
               zipcode+'</p>'+
-              '<p><b>Speciality:</b> '+speciality+'<br>'+
+              '<p><b>Specialty:</b> '+specialty+'<br>'+
               '<a href='+showPage+'>More info</a></p>'+
               '</div>'+
               '</div>';
@@ -62767,8 +62767,8 @@ angular.module('ui.calendar', [])
             var city = $scope.data["data"][i]["attributes"]["city"];
             var zipcode = $scope.data["data"][i]["attributes"]["zip-code"];
             var showPage = $scope.data["data"][i]["attributes"]["self-url"];
-            var speciality = $scope.data["data"][i]["attributes"]["speciality"]
-            createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, speciality, showPage);
+            var specialty = $scope.data["data"][i]["attributes"]["specialty"]
+            createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage);
         }
       }
       else if ($scope.query.type === "family") {

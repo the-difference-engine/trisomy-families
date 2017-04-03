@@ -8,6 +8,6 @@ FactoryGirl.define do
     state "MyString"
     zip_code "MyString"
     website "MyString"
-    speciality "MyString"
+    specialty "MyString"
   end
 end

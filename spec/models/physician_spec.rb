@@ -13,7 +13,7 @@ RSpec.describe Physician, type: :model do
       state: "Illinois",
       zip_code: "60618",
       website: "www.google.com",
-      speciality: "Heart Surgery"
+      specialty: "Heart Surgery"
     )
     physician.save
 
@@ -32,7 +32,7 @@ RSpec.describe Physician, type: :model do
       state: "",
       zip_code: "",
       website: "",
-      speciality: ""
+      specialty: ""
     )
     physician.save
 
@@ -64,9 +64,9 @@ RSpec.describe Physician, type: :model do
       physician.valid?
       expect(physician.errors[:zip_code]).to include("can't be blank")
     end
-    it "is invalid without a speciality" do
+    it "is invalid without a specialty" do
       physician.valid?
-      expect(physician.errors[:speciality]).to include("can't be blank")
+      expect(physician.errors[:specialty]).to include("can't be blank")
     end
   end
 end
