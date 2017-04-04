@@ -17,4 +17,18 @@ RSpec.feature "User signs up", :type => :feature do
     expect(page.current_path).to eq '/families/new'
   end
 
+  scenario "as a physician" do
+        visit "/users/sign_up"
+
+        fill_in "first_name", :with => "Scottie"
+        fill_in "last_name", :with => "Pippen"
+        choose 'user_user_type_doctor'
+        fill_in "email", :with => "sp@gmail.com"
+        fill_in "password", :with => "password"
+        fill_in "password_confirmation", :with => "password"
+        find('input[name="commit"]').click
+
+        expect(page.current_path).to eq '/profile_doctor'
+    end
+
 end

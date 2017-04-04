@@ -11,32 +11,26 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    if current_user.user_type == 'family' && current_user.family_id
-      '/family-dashboard'
-    # elsif current_user.user_type == 'doctor'
-    #   redirect_to '/professional-center'
-    elsif current_user.user_type == "doctor" &&  current_user.doctor_id
-      "/profile_doctor/#{current_user.doctor_id}"
-    elsif current_user.user_type == 'family' && current_user.families[0].id != nil
-      "/families/#{current_user.families[0].id}"
-    elsif current_user.user_type == "doctor"
-      "/profile_doctor"
-    elsif current_user.user_type == "family" && my_family.ids[0] == nil
-      "/families/new"
+
+    if current_user.user_type == 'family'
+      family = Family.find_by(user_id: current_user.id)
+      if family
+        "/families/#{family.id}"
+      else
+        @family = Family.new
+        "/families/new"
+      end
+    elsif current_user.user_type == 'doctor'
+        doctor = Physician.find_by(user_id: current_user.id)
+        if doctor
+          "/profile_doctor/#{doctor.id}"
+        else
+          "/profile_doctor"
+        end
     elsif current_user.user_type == "admin"
       "/admin-dashboard"
     end
 
-    # my_family = Family.where(user_id: current_user.id)
-    # if current_user.user_type == 'family' && my_family.ids[0] != nil
-    #   "/families/#{my_family.ids[0]}"
-    # elsif current_user.user_type == "doctor"
-    #   "/profile_doctor"
-    # elsif current_user.user_type == "family" && my_family.ids[0] == nil
-    #   "/families/new"
-    # elsif current_user.user_type == "admin"
-    #   "/admin-dashboard"
-    # end
   end
 
   private
