@@ -26,7 +26,7 @@ class FamiliesController < ApplicationController
   end
 
   def new
-    if current_user.families != nil
+    if current_user.families != []
       @family = current_user.families[0]
       render 'show.html.erb'
     else
