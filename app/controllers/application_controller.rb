@@ -31,6 +31,42 @@ class ApplicationController < ActionController::Base
       "/admin-dashboard"
     end
 
+    if current_user.user_type == 'family'
+      if current_user.families != []
+        family = current_user.families[0].id
+        "/families/#{family}"
+      else
+        "family/new"
+      end
+
+    end
+
+
+
+
+
+
+    # if current_user.user_type == 'family' && current_user.families[0] != nil
+    #   "/families/#{current_user.families[0].id}"
+    # elsif current_user.user_type == "doctor"
+    #   "/profile_doctor"
+    # elsif current_user.user_type == "family" && my_family.ids[0] == nil
+    #   "/families/new"
+    # elsif current_user.user_type == "admin"
+    #   "/admin-dashboard"
+    # end
+
+    # my_family = Family.where(user_id: current_user.id)
+    # if current_user.user_type == 'family' && my_family.ids[0] != nil
+    #   "/families/#{my_family.ids[0]}"
+    # elsif current_user.user_type == "doctor"
+    #   "/profile_doctor"
+    # elsif current_user.user_type == "family" && my_family.ids[0] == nil
+    #   "/families/new"
+    # elsif current_user.user_type == "admin"
+    #   "/admin-dashboard"
+    # end
+>>>>>>> f0f6569fba504396e970d8a01b3dc84ee42b7200
   end
 
   private

@@ -1,4 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Trisomy Families</title>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="col-md-8">
-  <h1>Users Index Page</h1>
-</div>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/template/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/template/css/homepage/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/template/css/homepage/style-desktop.css" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="/template/js/homepage/jquery.min.js"></script>
+    <script src="/template/js/homepage/jquery.dropotron.min.js"></script>
+    <script src="/template/js/homepage/skel.min.js"></script>
+    <script src="/template/js/homepage/skel-layers.min.js"></script>
+    <script src="/template/js/homepage/init.js"></script>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <noscript>
+      <link rel="stylesheet" href="/template/css/homepage/skel.css" />
+      <link rel="stylesheet" href="/template/css/homepage/style-desktop.css" />
+      <link rel="stylesheet" href="/template/css/homepage/style.css" />
+    </noscript>
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+  </head>
+  <body class="homepage">
+    <nav class="navbar navbar-default navbar-fixed-top" id="nav">
+      <div id="header"class="container-fluid" style="background-color:white;">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+         <!--  <a class="navbar-brand" href="#">Brand</a> -->
+          <ul class="nav navbar-nav">
+            <li><a href="/"><img id="logo_img" class="img-responsive" src="/template/images/TrisomyFamilies_Logo.jpg" href="/" alt="The Project" height="75px" width="75px" style="padding: 5px;"></a></li>
+            <li class="first"><a href="#">Get Involved</a></li>
+            <li class="dropdown second">
+              <a href="#" aria-haspopup="true" aria-expanded="false">What is Trisomy</span></a>
+            </li>
+            <li class="dropdown third">
+              <a href="#" aria-haspopup="true" aria-expanded="false">About</span></a>
+            </li>
+            <li class="last"><a href="#">Shop</a></li>
+          <% if current_user %>     
+            <% unless current_user.user_type == "physician" || current_user.family_ids == [] %>
+              <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Your Family</a></li>
+            <% end %>
+          <% end %>
+        <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
+        <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
+        <li><a href="#"><i class="fa fa-shopping-bag fa-fw" aria-hidden="true"></i>&nbsp; Store</a></li>
+        <% if current_user %>
+          <% if current_user.user_type == 'admin' %>
+            <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
+          <% elsif current_user.user_type == 'doctor' %>
+            <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
+          <% end %>
+        <% end %>
+        <% if current_user %>
+          <% if current_user.user_type == 'admin' %>
+            <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
+          <% end %>
+        <% end %>
+      </ul>
+          </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li class="account-link"><button type="button" class="btn btn-default navbar-btn btn-success">Join Our Community</button></li> -->
+          <% if current_user == nil%>
+            <li class="account-link"><%= button_to 'Join Our Community', new_user_registration_path, :class => "btn btn-default navbar-btn btn-success", :method => :get %></li>
+            <li class="account-link"><%= button_to 'Log In', new_user_session_path, :class => "btn navbar-btn btn-default", :method => :get %></li>
+          <% end %>
+          <% if current_user %>
+            <% if current_user.user_type == "family" && current_user.family_ids != [] %>
+            <li><%= link_to('Add Child', profile_new_path) %></li>
+            <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+          <% end %>
+          <% end %>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+    <!-- Banner -->
+    <section id="banner">
+              <!-- can add the header tag to wrap inside code !-->
+              <header>
+                <span>
+                  <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
+                  <p>Vivamus condimentum leo eu turpis</p>
+              </span>
+            </header>
+          </section>
+
+    <!-- mission box !-->
+    <div class="container-fluid content-row">
+      <div class="container">
+        <!-- include padding top and bottom using the css box model!-->
+        <div class="row">
+          <!-- include margin-left and margin-right !-->
+          <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-3">
+              <h1 class="row-header">
+                Our Mission
+              </h1>
+            </div>
+            <div class="col-md-12">
+              <p>Lhello!!!!m dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet. </p>
+            </div>
+            <div class="col-md-12">
+              <footer>
+                <ul class="actions">
+                  <li>
+                    <a href="#" class="button big btn-warning">Find out more</a>
+                  </li>
+                  <li>
+                    <a href="#" class="button big btn-danger">Donate</a>
+                  </li>
+                </ul>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid odd-row content-row">
+      <div class="container">
+        <!-- include padding top and bottom using the css box model!-->
+        <div class="row">
+          <!-- include margin-left and margin-right !-->
+          <!-- this page will introduce the stories behind Trisomy Families !-->
+          <div class="col-md-6">
+            <h1 class="row-header" style="color:white">Why We Do It</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet ante. </p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
+            <!-- <p>
+              <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas. Pellentesque varius sodales mauris ac efficitur.
+              </span>
+            </p> -->
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <a href="#" class="button big btn-success">Read Stories</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid content-row">
+      <div class="container">
+        <!-- include padding top and bottom using the css box model!-->
+        <div class="row">
+          <!-- include margin-left and margin-right !-->
+          <div class="col-md-6">
+            <h1>Supporting Network of Families</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet.</p>
+            <a href="#" class="button big btn-danger">Join Us</a>
+          </div>
+          <div class="col-md-6">
+            <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid content-row odd-row">
+      <ul class="dates">
+        <section>
+          <h1>Upcoming Events</h1>
+                  <li>
+                    <span class="date">Jan <strong>27</strong></span>
+                    <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+                    <p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+                  </li>
+                  <li>
+                    <span class="date">Jan <strong>23</strong></span>
+                    <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+                    <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+                  </li>
+                  <li>
+                    <span class="date">Jan <strong>15</strong></span>
+                    <h3><a href="#">Magna tempus lorem feugiat</a></h3>
+                    <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+                  </li>
+                </ul>
+                <a href="#" class="button big btn-success">More Events</a>
+          </section>
+    </div>
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="container">
+          <!-- include padding top and bottom using the css box model!-->
+          <div class="row">
+            <div class="col-md-6">
+            <address>
+              <h2>Trisomy Families<br></h2>
+              Street Address<br>
+              Cary, IL, 56425<br>
+            </address>
+            </div>
+            <div class="col-md-2">
+              <h6>About Us</h6>
+              <ul>
+                <li><a href="">Our Mission</a></li>
+                <li><a href="">Our Team</a></li>
+                <li><a href="">Our Research</a></li>
+                <li><a href="">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2">
+              <h6>Quick Links</h6>
+              <ul>
+                <li><a href="">Trisomy Support</a></li>
+                <li><a href="">Shop</a></li>
+                <li><a href="">Events</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2">
+              <h6>Social</h6>
+              <ol class="social">
+                  <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
+                  <li><a class="icon fa-twitter" href="#"><span class="label">Twitter</span></a></li>
+                  <li><a class="icon fa-linkedin" href="#"><span class="label">LinkedIn</span></a></li>
+                  <li><a class="icon fa-google-plus" href="#"><span class="label">Google+</span></a></li>
+                </ol>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center copyright">
+          <p>2017 © Trisomy Families. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>

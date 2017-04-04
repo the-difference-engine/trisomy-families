@@ -13,9 +13,6 @@ layout :logged_in?
   end
 
   def home
-    if current_user
-      render 'home.html.erb'
-    end
   end
 
   def children_index
