@@ -6,6 +6,9 @@ class PhysiciansController < ApplicationController
 
   def create_profile
     @physician = Physician.new(physician_params)
+
+    current_user.update(doctor_id: @physician.id)
+
     if @physician.save
       flash[:success] = 'Profile created!'
       redirect_to "/profile_doctor/#{@physician.id}"
@@ -56,7 +59,7 @@ class PhysiciansController < ApplicationController
       city: params[:city] || @physician.city,
       zip_code: params[:zip_code] || @physician.zip_code,
       website: params[:website] || @physician.website,
-      speciality: params[:speciality] || @physician.speciality
+      specialty: params[:specialty] || @physician.specialty
     )
     if @physician.save
       flash[:success] = 'Profile Updated!'

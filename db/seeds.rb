@@ -124,7 +124,7 @@ family_addresses = [
               state: physician_addresses[i][2],
               zip_code: physician_addresses[i][3],
               website: Faker::Internet.url,
-              speciality: Faker::Lorem.word,
+              specialty: Faker::Lorem.word,
               longitude: physician_addresses[i][4],
               latitude: physician_addresses[i][5]
               )

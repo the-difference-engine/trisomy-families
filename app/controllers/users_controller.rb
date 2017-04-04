@@ -4,6 +4,8 @@ layout :logged_in?
     @users = User.all
     if current_user && current_user.user_type == 'admin'
       render 'index.html.erb'
+    elsif current_user && current_user.user_type == 'doctor'
+      redirect_to "/profile_doctor/#{current_user.id}"
     else
       flash[:warning] = 'You must be an administrator to view this page!'
       redirect_to '/'
@@ -32,6 +34,7 @@ layout :logged_in?
   end
 
   def update
+    
   end
 
   def calendar
