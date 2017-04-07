@@ -4,6 +4,8 @@ RSpec.describe FamiliesController, type: :controller do
   describe '#show' do
     before(:example) {
       user = FactoryGirl.create(:user)
+      family = FactoryGirl.create(:family)
+      family.user_id = user.id
       sign_in user
       get(:show, params: { id: user.id })
     }
@@ -21,16 +23,6 @@ RSpec.describe FamiliesController, type: :controller do
     }
     it 'renders the new family page' do
       expect(response).to render_template('new.html.erb')
-    end
-    before(:example) {
-      user = FactoryGirl.create(:user)
-      family = FactoryGirl.create(:family)
-      family.user_id = user.id
-      sign_in user
-      get(:new)
-    }
-    it 'renders the family show page' do
-      expect(response).to render_template('show.html.erb')
     end
   end
 

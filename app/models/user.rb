@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :children
   has_many :families
+  has_many :physicians
+  
   validates :email, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true

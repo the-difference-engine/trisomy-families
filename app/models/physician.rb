@@ -3,6 +3,8 @@ class Physician < ApplicationRecord
   geocoded_by :full_address
   after_validation :geocode
 
+  belongs_to :user
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :address, presence: true

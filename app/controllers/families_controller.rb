@@ -26,9 +26,9 @@ class FamiliesController < ApplicationController
   end
 
   def new
-    if current_user.families != []
-      @family = current_user.families[0]
-      render 'show.html.erb'
+    @family = Family.find_by(user_id: current_user.id)
+    if @family      
+      redirect_to "/families/#{@family.id}"
     else
       @family = Family.new
       render 'new.html.erb'

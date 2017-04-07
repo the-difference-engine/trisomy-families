@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331021124) do
+ActiveRecord::Schema.define(version: 20170404020635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -495,6 +495,7 @@ ActiveRecord::Schema.define(version: 20170331021124) do
     t.string   "personal_number"
     t.boolean  "primary_phone_public"
     t.string   "avatar_file_name"
+    t.integer  "user_id"
   end
 
   create_table "primary_diagnoses", force: :cascade do |t|
