@@ -14,14 +14,30 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'users#home'
+  get 'children-index' => 'users#children_index'
+  get 'admin-dashboard' => 'users#index'
+  patch 'admin-dashboard' => 'users#update'
+
 
   resources :events
 
   get '/queries' => 'users#query_table'
-  get '/families/new' => 'families#new'
+
+  get '/family-dashboard' => 'families#index'
   post '/family' => 'families#create'
+  get '/families/new' => 'families#new'
+  get '/families/:id' => 'families#show'  
   get '/family/:id/edit' => 'families#edit'
   patch '/family/:id' => 'families#update'
+
+  post '/profile_doctor' => 'physicians#create_profile'
+  get '/profile_doctor' => 'physicians#new_profile'
+  get '/profile_doctor/:id' => 'physicians#show'
+  get '/profile_doctor/:id/edit' => 'physicians#edit'
+  patch '/profile_doctor/:id' => 'physicians#update'
+  
+  get '/doctors/:id' => 'physicians#show'
+  patch '/profile_doctor/:id/photo' => 'physicians#update_photo'
 
   get '/profile/new' => 'children#new_profile'
   post '/profile' => 'children#create_profile'
@@ -45,23 +61,8 @@ Rails.application.routes.draw do
 
   get '/calendar' => 'users#calendar'
 
-  get '/family-dashboard' => 'families#index'
-  get '/families/:id' => 'families#show'
-
   get '/family-center' => 'family_center#index'
 
   get 'professional-center' => 'professional_center#index'
 
-  get 'admin-dashboard' => 'users#index'
-  patch 'admin-dashboard' => 'users#update'
-
-  get '/profile_doctor' => 'physicians#new_profile'
-  post '/profile_doctor' => 'physicians#create_profile'
-  get '/profile_doctor/:id' => 'physicians#show'
-  get '/profile_doctor/:id/edit' => 'physicians#edit'
-  patch '/profile_doctor/:id' => 'physicians#update'
-  get '/doctors/:id' => 'physicians#show'
-  patch '/profile_doctor/:id/photo' => 'physicians#update_photo'
-
-  get 'children-index' => 'users#children_index'
 end

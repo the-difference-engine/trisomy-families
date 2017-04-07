@@ -31,16 +31,6 @@ class ApplicationController < ActionController::Base
       "/admin-dashboard"
     end
 
-    if current_user.user_type == 'family'
-      if current_user.families != []
-        family = current_user.families[0].id
-        "/families/#{family}"
-      else
-        "family/new"
-      end
-
-    end
-
   end
 
   private
