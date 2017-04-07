@@ -43,10 +43,13 @@ Rails.application.routes.draw do
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
   patch '/profile/:id' => 'children#update'
+
   patch '/profile/:id/photo' => 'children#update_photo'
+
   get 'profile/:id/register' => 'children#register'
   post 'profile/:id/register' => 'children#confirm_register'
   get 'profile/:id/edit_registration' => 'children#edit_registration'
+  
   get 'profile/:id/edit_background_history' => 'children#edit_background_history'
   get 'profile/:id/edit_health_history' => 'children#edit_health_history'
   delete '/profile/:id' => 'children#destroy'
