@@ -1,19 +1,18 @@
 class PhysiciansController < ApplicationController
-  def new_profile
+  def new
     @physician = Physician.new
-    render 'physician_create_profile_page.html.erb'
   end
 
-  def create_profile
+  def create
     @physician = Physician.new(physician_params)
 
     current_user.update(doctor_id: @physician.id)
 
     if @physician.save
       flash[:success] = 'Profile created!'
-      redirect_to "/profile_doctor/#{@physician.id}"
+      redirect_to "/physicians/#{@physician.id}"
     else
-      render 'physician_create_profile_page.html.erb'
+      redirect_to '/physicians/new'
     end
   end
 
@@ -66,7 +65,7 @@ class PhysiciansController < ApplicationController
     else
       flash[:warning] = 'Error!'
     end
-    redirect_to "/profile_doctor/#{@physician.id}"
+    redirect_to "/physicians/#{@physician.id}"
   end
 
   def update_photo
@@ -88,6 +87,6 @@ class PhysiciansController < ApplicationController
       flash[:error] = "Error occured in uploading file."
     end
 
-    redirect_to "/profile_doctor/#{@physician.id}"
+    redirect_to "/physicians/#{@physician.id}"
   end
 end

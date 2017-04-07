@@ -14,7 +14,7 @@
          <h1 class="text-center">Physician Profile</h1>
          <p class="text-center">Create a profile:</p>
          <hr>
-         <%= form_for @physician, url: {action: "create_profile"} do |f| %>
+         <%= form_for @physician, url: {action: "create"} do |f| %>
          <h5 style="color:gray">Personal Info</h5>
          <div class="form-group">
             <span class="required">* </span><%= f.label :first_name, " Full Name" %>

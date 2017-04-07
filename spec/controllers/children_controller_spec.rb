@@ -1,20 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe ChildrenController, type: :controller do
-  describe '#new_profile' do
+  describe '#new' do
     before(:example) {
       user = FactoryGirl.create(:user)
       sign_in user
     }
-    before(:example) { get(:new_profile) }
+    before(:example) { get(:new) }
 
     it 'renders the template, if logged in' do
-      expect(response).to render_template('children/new_profile.html.erb')
+      expect(response).to render_template('children/new.html.erb')
     end
 
   end
 
-  describe '#create_profile' do
+  describe '#create' do
     hash = { child: {
                   first_name: "Abc",
                   last_name: "Def",
@@ -41,7 +41,7 @@ RSpec.describe ChildrenController, type: :controller do
       user = FactoryGirl.create(:user)
       sign_in user
     }
-    before(:example) { post(:create_profile, params: hash, child: { :first_name => "Foo" }) }
+    before(:example) { post(:create, params: hash, child: { :first_name => "Foo" }) }
 
     it 'redirects to profile page' do
       # if you leave assert_template, it will raise an error 'NoMethodError: undefined method `matches?` for true:TrueClass

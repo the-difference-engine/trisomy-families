@@ -1,5 +1,5 @@
 class ChildrenController < ApplicationController
-  def new_profile
+  def new
     unless user_signed_in?
       # @child.user_id = current_user.id
       flash[:warning] = 'You must be logged in to use this feature.'
@@ -8,11 +8,11 @@ class ChildrenController < ApplicationController
       @child = Child.new
       @child.user_id = current_user.id
       @child.build_privacy
-      render 'new_profile.html.erb'
+      render 'new.html.erb'
     end
   end
 
-  def create_profile
+  def create
     @child = Child.new(child_params)
     @child.birth_date = calculate_date(params[:child][:birth_date])
     @child.death_date = calculate_date(params[:child][:death_date])
@@ -25,7 +25,7 @@ class ChildrenController < ApplicationController
       flash[:success] = 'Profile created!'
       redirect_to "/profile/#{@child.id}"
     else
-      render 'new_profile.html.erb'
+      render 'new.html.erb'
     end
   end
 

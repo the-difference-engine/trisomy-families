@@ -5,7 +5,7 @@ layout :logged_in?
     if current_user && current_user.user_type == 'admin'
       render 'index.html.erb'
     elsif current_user && current_user.user_type == 'doctor'
-      redirect_to "/profile_doctor/#{current_user.id}"
+      redirect_to "/physicians/#{current_user.id}"
     else
       flash[:warning] = 'You must be an administrator to view this page!'
       redirect_to '/'
@@ -25,16 +25,7 @@ layout :logged_in?
     end
   end
 
-  def new_profile
-
-  end
-
-  def create_profile
-
-  end
-
-  def update
-    
+  def update 
   end
 
   def calendar

@@ -14,7 +14,7 @@
          <h1 class="text-center">Physician Profile</h1>
          <p class="text-center">Edit Your Profile:</p>
          <hr>
-         <%= form_tag "/profile_doctor/#{@physician.id}", method: :patch do %>
+         <%= form_tag "/physicians/#{@physician.id}", method: :patch do %>
          <h5 style="color:gray">Basic Info</h5>
          <div class="form-group">
             <%= label_tag :first_name, "First name:" %>

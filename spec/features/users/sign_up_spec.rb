@@ -28,7 +28,7 @@ RSpec.feature "User signs up", :type => :feature do
         fill_in "password_confirmation", :with => "password"
         find('input[name="commit"]').click
 
-        expect(page.current_path).to eq '/profile_doctor'
+        expect(page.current_path).to eq '/physicians/new'
     end
 
 end

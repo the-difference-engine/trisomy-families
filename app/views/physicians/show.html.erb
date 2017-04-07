@@ -8,7 +8,7 @@
         <h4 class="modal-title" id="myModalLabel">Upload Profile Picture</h4>
       </div>
       <div class="modal-body">
-              <%= form_for @physician, url: "/profile_doctor/#{@physician.id}/photo", html: { multipart: true } do |form| %>
+              <%= form_for @physician, url: "/physicians/#{@physician.id}/photo", html: { multipart: true } do |form| %>
                   <%= form.file_field :avatar, :class => "form-group" %>
       </div>
       <div class="modal-footer">
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </div>
-            <%= link_to 'Edit Profile',"/profile_doctor/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+            <%= link_to 'Edit Profile',"/physicians/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
           </div>
           <div class="col-lg-4 col-sm-5">
             <h2>Address: <br> <i><%= @physician.address %>,<br> <%= @physician.city %>, <%= @physician.state %>, <%= @physician.zip_code %></i></h2>

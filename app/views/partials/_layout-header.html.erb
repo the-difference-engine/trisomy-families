@@ -29,7 +29,7 @@
         <div style="padding-top:30px;" class="header-right clearfix">
         <!-- Devise logout / login links !-->
         <% if user_signed_in? && current_user.user_type == "doctor" %>
-          <h3 align="center"><%= link_to('Create Profile', "/profile_doctor") %></h3>
+          <h3 align="center"><%= link_to('Create Profile', "/physicians") %></h3>
           <h3 align="center"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>
         <% elsif user_signed_in? && current_user.user_type == "family" %>
           <h3 align="center"><%= link_to('Create Profile', profile_new_path) %></h3>

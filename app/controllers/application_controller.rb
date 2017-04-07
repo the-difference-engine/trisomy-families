@@ -23,9 +23,9 @@ class ApplicationController < ActionController::Base
     elsif current_user.user_type == 'doctor'
         doctor = Physician.find_by(user_id: current_user.id)
         if doctor
-          "/profile_doctor/#{doctor.id}"
+          "/physicians/#{doctor.id}"
         else
-          "/profile_doctor"
+          "/physicians/new"
         end
     elsif current_user.user_type == "admin"
       "/admin-dashboard"
