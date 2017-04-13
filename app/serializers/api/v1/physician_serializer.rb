@@ -14,6 +14,6 @@ class Api::V1::PhysicianSerializer < ActiveModel::Serializer
 
   attributes :self_url
   def self_url
-    "/doctors/#{object.id}"
+    "/physicians/#{object.id}"
   end
 end

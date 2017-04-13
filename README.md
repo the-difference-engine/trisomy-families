@@ -75,7 +75,7 @@ Example:
                 "state": "OH",
                 "zip-code": "44012",
                 "link": "http://emard.co/josephine.adams",
-                "self-url": "/doctors/297"
+                "self-url": "/physicians/297"
             },
             "id": "253",
             "type": "physician"
