@@ -18,10 +18,10 @@
          <h5 style="color:gray">Personal Info</h5>
          <div class="form-group">
             <span class="required">* </span><%= f.label :first_name, " Full Name" %>
-            <%= f.text_field(:first_name, class: "form-control", placeholder: "#{current_user.first_name}") %>
+            <%= f.text_field(:first_name, class: "form-control", value: current_user.first_name) %>
          </div>
          <div class="form-group">
-            <%= f.text_field(:last_name, class: "form-control", placeholder: "#{current_user.last_name}") %>
+            <%= f.text_field(:last_name, class: "form-control", value: current_user.last_name) %>
          </div>
          <div class="form-group">
             <%= f.label :personal_number %>
@@ -68,6 +68,9 @@
          <div class="form-group">
             <span class="required">* </span><%= f.label :specialty, 'Specialty' %>
             <%= f.text_field(:specialty, class: "form-control")%>
+         </div>
+         <div class="form-group">
+            <%= f.hidden_field(:user_id, value: current_user.id, class: "form-control")%>
          </div>
          <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
       <% end %>
