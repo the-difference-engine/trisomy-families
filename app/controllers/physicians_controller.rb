@@ -1,6 +1,11 @@
 class PhysiciansController < ApplicationController
   def new
-    @physician = Physician.new
+    if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
+      @physician = Physician.new
+    else
+      flash[:warning] = 'You need to be an admin or doctor to see this page!'
+      redirect_to '/'
+    end
   end
 
   def create
@@ -32,12 +37,17 @@ class PhysiciansController < ApplicationController
 
   def show
     @physician = Physician.find_by(id: params[:id])
-    render 'show.html.erb'
+    if current_user.user_type == 'admin' || current_user.doctor_id == @physician.id || current_user.family_id
+      render 'show.html.erb'
+    else
+      flash[:warning] = 'You need to be an admin, the actual physician, or have registered your family to see this page!'
+      redirect_to '/'
+    end
   end
 
   def edit
-    if current_user.user_type == 'doctor' || current_user.user_type == 'admin'
-      @physician = Physician.find_by(id: params[:id])
+    @physician = Physician.find_by(id: params[:id])
+    if current_user.doctor_id == @physician.id || current_user.user_type == 'admin'
       render 'edit.html.erb'
     else
       flash[:warning] = 'You must be a doctor to edit this page!'

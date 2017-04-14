@@ -48,7 +48,11 @@
                 </div>
               </div>
             </div>
-            <%= link_to 'Edit Profile',"/physicians/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+            <% if current_user.doctor_id == @physician.id || current_user.user_type == 'admin' %>
+              <div>
+                <%= link_to 'Edit Profile',"/physicians/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+              </div>
+            <% end %>
           </div>
           <div class="col-lg-4 col-sm-5">
             <h2>Address: <br> <i><%= @physician.address %>,<br> <%= @physician.city %>, <%= @physician.state %>, <%= @physician.zip_code %></i></h2>
@@ -72,6 +76,9 @@
 </section>
 
 <br>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
-</button>
+
+<% if current_user.doctor_id == @physician.id || current_user.user_type == 'admin' %>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
+  </button>
+<% end %>
