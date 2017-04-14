@@ -82,8 +82,8 @@
           <% if current_user %>
             <% if current_user.user_type == "family" && current_user.family_ids != [] %>
             <li><%= link_to('Add Child', profile_new_path) %></li>
-            <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
           <% end %>
+            <li><%= link_to('Signout', destroy_user_session_path, :method => :delete) %></li>
           <% end %>
 
         </ul>
