@@ -34,13 +34,15 @@
       <div class="form-group">
         <label for="searchQueryType"></label>
         <select class="form-control" id="searchQueryType" ng-model="query.type">
-          <option value="">----Select----</option>
+          <option value="">--User Type--</option>
           <option value="family">Family</option>
           <option value="physician">Physician</option>
         </select>
+      </div>
 
-        <select class="form-control" id="searchQueryType" ng-model="query.type">
-          <option value="">Trisomy Type</option>
+      <div class="form-group">
+        <select class="form-control" id="searchQueryTrisomyType" ng-model="query.trisomy_type">
+          <option value="">--Trisomy Type--</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -65,7 +67,6 @@
           <option value="22">22</option>
           <option value="23">23</option>
           <option value="24">24</option>
-
         </select>
       </div>
 
