@@ -1,5 +1,6 @@
 class ChildrenController < ApplicationController
   def new
+    @family = Family.find_by(id: current_user.family_id)
     unless user_signed_in?
       # @child.user_id = current_user.id
       flash[:warning] = 'You must be logged in to use this feature.'
@@ -104,7 +105,6 @@ class ChildrenController < ApplicationController
 
   def register
     @user = current_user
-    @parent = Parent.new
     @child = Child.find_by(id: params[:id])
     render 'register.html.erb'
   end
