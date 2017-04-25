@@ -30,6 +30,7 @@ class Api::V1::SearchController < ApplicationController
         end
         render json: rows, fields: { family: fields_array }, each_serializer: Api::V1::FamilySerializer, adapter: :json_api, root: false
       else
+        @families = rows
         render 'families.json.jbuilder'
       end
     else
