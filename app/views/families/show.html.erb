@@ -13,11 +13,13 @@
 <% if @family.children.count == 1 %>
   <h2>Child:</h2>
   <% @family.children.each do |child| %>
+    <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
     <h4><a href = "/profile/<%=child.id %>"><%= child.nickname %></a></h4>
   <% end %>
 <% elsif @family.children.count > 1 %>
   <h2>Children:</h2>
   <% @family.children.each do |child| %>
+    <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
     <h4><a href = "/profile/<%= child.id %>"><%= child.nickname %></a></h4>
   <% end %>
 <% end %>
