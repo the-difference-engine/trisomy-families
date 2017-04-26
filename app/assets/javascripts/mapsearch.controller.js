@@ -52,7 +52,7 @@
       }
 
 
-      function createFamilyMarker(latlng, lastname, address, state, city, showPage) {
+      function createFamilyMarker(latlng, lastname, address, state, city, trisomy, showPage) {
         var marker = new google.maps.Marker({
           map: $scope.map,
           position: latlng,
@@ -63,13 +63,14 @@
             var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h2 id="firstHeading" class="firstHeading"> '+lastname+'</h2>'+
+            '<h2 id="firstHeading" class="firstHeading"> '+ lastname +'</h2>'+
             '<div id="bodyContent">'+
             '<p><b>Address: </b><br>'+
             address+'<br>'+
             city+', '+
-            state+' '+
-            '<a href='+showPage+'>More info</a>'+
+            state+' '+ '<br>'+
+            "trisomy type: "+ trisomy+ '<br>'+
+            '<a href='+showPage+'>View Family Page</a>'+
             '</div>'+
             '</div>';
             $scope.infoWindow.setContent(contentString);
@@ -103,7 +104,9 @@
             var address = $scope.data[i]["street_address"];
             var state = $scope.data[i]["state"];
             var city = $scope.data[i]["city"];
-            createFamilyMarker(latlng, lastname, address, state, city, showPage);
+            var trisomy = $scope.data[i]["trisomy_type"];
+            var showPage = "/families/" + $scope.data[i]["id"];
+            createFamilyMarker(latlng, lastname, address, state, city, trisomy, showPage);
         }
       }
     }
