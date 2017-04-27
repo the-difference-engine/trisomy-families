@@ -7,7 +7,6 @@
       ['$scope','$http', '$httpParamSerializerJQLike', '$timeout',
 
   function($scope, $http, $httpParamSerializerJQLike, $timeout) {
-
     $scope.query = {};
     $scope.data = [];
     $scope.map;
@@ -154,4 +153,5 @@
     window.$scope = $scope;
 
   }]);
+
 })();
