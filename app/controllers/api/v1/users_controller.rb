@@ -14,9 +14,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    @users = User.all
     @user = User.find_by(id: params[:id])
     @user.destroy
+
   end
 
 
