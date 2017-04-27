@@ -15,6 +15,17 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user = User.find_by(id: params[:id])
+    if @user.user_type == 'family'
+      @profile = Family.find_by(user_id: @user.id)
+      if @profile != nil
+        @profile.destroy
+      end
+    elsif @user.user_type == 'doctor'
+      @profile = Physician.find_by(user_id: @user.id) 
+      if @profile != nil
+        @profile.destroy
+      end
+    end
     @user.destroy
 
   end
