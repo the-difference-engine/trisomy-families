@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
       patch '/children' => 'children#update'
+      delete '/users/:id' => 'users#destroy'
     end
   end
 
