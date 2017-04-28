@@ -48,7 +48,7 @@
                 </div>
               </div>
             </div>
-            <% if current_user.doctor_id == @physician.id || current_user.user_type == 'admin' %>
+            <% if current_user.id == @physician.user_id || current_user.user_type == 'admin' %>
               <div>
                 <%= link_to 'Edit Profile',"/physicians/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
               </div>

@@ -49,7 +49,7 @@ class PhysiciansController < ApplicationController
 
   def edit
     @physician = Physician.find_by(id: params[:id])
-    if current_user.doctor_id == @physician.id || current_user.user_type == 'admin'
+    if current_user.id == @physician.user_id || current_user.user_type == 'admin'
       render 'edit.html.erb'
     else
       flash[:warning] = 'You must be a doctor to edit this page!'
