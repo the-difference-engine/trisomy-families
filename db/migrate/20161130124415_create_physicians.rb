@@ -9,7 +9,7 @@ class CreatePhysicians < ActiveRecord::Migration[5.0]
       t.string :state
       t.string :zip_code
       t.string :website
-      t.string :speciality
+      t.string :specialty
 
       t.timestamps
     end
