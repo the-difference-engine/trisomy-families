@@ -35,6 +35,7 @@ Vision.delete_all
 HealthHistory.delete_all
 
 # Create address arrays for physicians and families
+trisomy_strings = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
 physician_addresses = [
   ['805 Bay Meadows St.', 'Fort Wayne', 'IN', '46804', -85.0814343000, 41.0906369000],
   ['411 Kirkland Street', 'Miami', 'FL', '33125', -80.2480685000, 26.0605644000],
@@ -191,7 +192,8 @@ puts  "************************"
       longitude: family_addresses[i][5],
       street_address: family_addresses[i][0],
       city: family_addresses[i][1],
-      state: family_addresses[i][2])
+      state: family_addresses[i][2],
+      trisomy_type: trisomy_strings[rand(0...23)])
     u1_family.save
 
     @child = nil

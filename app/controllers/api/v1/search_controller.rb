@@ -30,7 +30,8 @@ class Api::V1::SearchController < ApplicationController
         end
         render json: rows, fields: { family: fields_array }, each_serializer: Api::V1::FamilySerializer, adapter: :json_api, root: false
       else
-        render json: rows, each_serializer: Api::V1::FamilySerializer, adapter: :json_api, root: false
+        @families = rows
+        render 'families.json.jbuilder'
       end
     else
       render json: { status: 404, error: "Not found"}, status: 404
@@ -41,6 +42,9 @@ class Api::V1::SearchController < ApplicationController
 
   def hash_params
     h = {}
+    if !params[:trisomy_type].nil?
+      h[:trisomy_type] = params[:trisomy_type]
+    end
     if !params[:state].nil?
       h[:state] = params[:state]
     end
