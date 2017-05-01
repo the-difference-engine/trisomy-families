@@ -1,3 +1,5 @@
 json.array! @users.each do |user|
-  json.partial! 'user.json.jbuilder', user: user
+  if user.id != current_user.id
+    json.partial! 'user.json.jbuilder', user: user
+  end
 end 

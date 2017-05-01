@@ -29,6 +29,14 @@
         });
       };
 
+      $scope.deleteUser = function(id) {
+
+        $http.delete('api/v1/users/'+ id +'.json').then(function(response) {
+
+          $scope.alerts.push({type: 'success', msg: 'Well done! You successfully deleted the user.'});
+        });
+      };
+
       $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
       };

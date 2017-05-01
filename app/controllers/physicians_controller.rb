@@ -12,6 +12,7 @@ class PhysiciansController < ApplicationController
     @physician = Physician.new(physician_params)
 
     if @physician.save
+
       flash[:success] = 'Profile created!'
       redirect_to "/physicians/#{@physician.id}"
     else
@@ -37,7 +38,8 @@ class PhysiciansController < ApplicationController
 
   def show
     @physician = Physician.find_by(id: params[:id])
-    if current_user.user_type == 'admin' || current_user.doctor_id == @physician.id || current_user.family_id
+
+    if current_user.user_type == 'admin' || current_user.id == @physician.user_id || current_user.family_id
       render 'show.html.erb'
     else
       flash[:warning] = 'You need to be an admin, the actual physician, or have registered your family to see this page!'
@@ -47,7 +49,7 @@ class PhysiciansController < ApplicationController
 
   def edit
     @physician = Physician.find_by(id: params[:id])
-    if current_user.doctor_id == @physician.id || current_user.user_type == 'admin'
+    if current_user.id == @physician.user_id || current_user.user_type == 'admin'
       render 'edit.html.erb'
     else
       flash[:warning] = 'You must be a doctor to edit this page!'
