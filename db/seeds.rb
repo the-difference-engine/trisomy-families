@@ -192,8 +192,8 @@ puts  "************************"
       longitude: family_addresses[i][5],
       street_address: family_addresses[i][0],
       city: family_addresses[i][1],
-      state: family_addresses[i][2],
-      trisomy_type: trisomy_strings[rand(0...23)])
+      state: family_addresses[i][2]
+    )
     u1_family.save
 
     @child = nil
@@ -201,7 +201,7 @@ puts  "************************"
       @child =  Child.new(
               {first_name: Faker::Name.first_name,
                 last_name: last_name,
-                trisomy_type: Random.new.rand(0..3),
+                trisomy_type: Random.new.rand(1..24),
                 birth_date: "2009-06-19 00:00:00",
                 death_date: nil,
                 city: u1.city,
@@ -224,7 +224,8 @@ puts  "************************"
                 partial_trisomy: nil,
                 parent_id: u1.id,
                 other_primary_diagnosis: nil,
-                other_secondary_diagnosis: nil
+                other_secondary_diagnosis: nil,
+                family_id: Random.new.rand(1..20)
                 })
           @child.save
 
