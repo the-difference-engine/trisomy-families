@@ -39,8 +39,6 @@
             <%= f.select("state", options_for_select(us_states, @family.state), class: "form-control") %>
          </div>
          <hr>
-
-
          <div class="form-group">
             <%= f.label :story, "* Family Story" %>
             <%= f.text_area( :story, class: "form-control", row: "3")%>

@@ -7,7 +7,6 @@
       ['$scope','$http', '$httpParamSerializerJQLike', '$timeout',
 
   function($scope, $http, $httpParamSerializerJQLike, $timeout) {
-
     $scope.query = {};
     $scope.data = [];
     $scope.map;
@@ -52,7 +51,7 @@
       }
 
 
-      function createFamilyMarker(latlng, lastname, address, state, city, showPage) {
+      function createFamilyMarker(latlng, lastname, address, state, city, trisomy, showPage) {
         var marker = new google.maps.Marker({
           map: $scope.map,
           position: latlng,
@@ -63,13 +62,14 @@
             var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h2 id="firstHeading" class="firstHeading"> '+lastname+'</h2>'+
+            '<h2 id="firstHeading" class="firstHeading"> '+ lastname +'</h2>'+
             '<div id="bodyContent">'+
             '<p><b>Address: </b><br>'+
             address+'<br>'+
             city+', '+
-            state+' '+
-            '<a href='+showPage+'>More info</a>'+
+            state+' '+ '<br>'+
+            "trisomy type: "+ trisomy+ '<br>'+
+            '<a href='+showPage+'>View Family Page</a>'+
             '</div>'+
             '</div>';
             $scope.infoWindow.setContent(contentString);
@@ -96,14 +96,16 @@
         }
       }
       else if ($scope.query.type === "family") {
-        for(var i = 0; i < $scope.data["data"].length; i++) {
-            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["latitude"], $scope.data["data"][i]["attributes"]["longitude"] )
-            var lastname = $scope.data["data"][i]["attributes"]["family-name"];
-            var address = $scope.data["data"][i]["attributes"]["street-address"];
-            var state = $scope.data["data"][i]["attributes"]["state"];
-            var city = $scope.data["data"][i]["attributes"]["city"];
-            var showPage = $scope.data["data"][i]["attributes"]["self-url"];
-            createFamilyMarker(latlng, lastname, address, state, city, showPage);
+        console.log($scope.data[0].state)
+        for(var i = 0; i < $scope.data.length; i++) {
+            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] )
+            var lastname = $scope.data[i]["family_name"];
+            var address = $scope.data[i]["street_address"];
+            var state = $scope.data[i]["state"];
+            var city = $scope.data[i]["city"];
+            var trisomy = $scope.data[i]["trisomy_type"];
+            var showPage = "/families/" + $scope.data[i]["id"];
+            createFamilyMarker(latlng, lastname, address, state, city, trisomy, showPage);
         }
       }
     }
@@ -117,18 +119,6 @@
         displayMarkers();
     }
 
-
-    function printResultNum() {
-        var num  = $scope.data["data"].length;
-
-        if (num === 1) {
-            return num + ' result';
-        } else if (num === 0) {
-            return '0 results';
-        } else {
-            return num + ' results';
-        }
-    }
 
 
     function removeMarkers() {
@@ -150,7 +140,6 @@
                 url: url
             }).then(function successCallback(response) {
                   $scope.data = response.data;
-                  $scope.searchResults = printResultNum();
                   removeMarkers(); // for future searches
                   $scope.search_form.$setPristine(); // set to false
                   $scope.initializeMap();
@@ -164,4 +153,5 @@
     window.$scope = $scope;
 
   }]);
+
 })();
