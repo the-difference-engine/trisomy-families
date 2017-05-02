@@ -46,11 +46,16 @@ class Api::V1::SearchController < ApplicationController
   def hash_params
     h = {}
 <<<<<<< HEAD
+<<<<<<< HEAD
     if !params[:trisomy_type].nil?
       h[:children][0].trisomy_type = params[:trisomy_type]
 =======
     if !params[:id].nil?
       h[:id] = params[:id]
+>>>>>>> qa
+=======
+    if !params[:trisomy_type].nil?
+      h[:children][0].trisomy_type = params[:trisomy_type]
 >>>>>>> qa
     end
     if !params[:state].nil?
