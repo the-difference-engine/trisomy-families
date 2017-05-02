@@ -36,61 +36,6 @@
 
   </head>
   <body class="homepage">
-    <nav class="navbar navbar-default navbar-fixed-top" id="nav">
-      <div id="header"class="container-fluid" style="background-color:white;">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-         <!--  <a class="navbar-brand" href="#">Brand</a> -->
-          <ul class="nav navbar-nav">
-            <li><a href="/"><img id="logo_img" class="img-responsive" src="/template/images/TrisomyFamilies_Logo.jpg" href="/" alt="The Project" height="75px" width="75px" style="padding: 5px;"></a></li>
-            <li class="first"><a href="#">Get Involved</a></li>
-            <li class="dropdown second">
-              <a href="#" aria-haspopup="true" aria-expanded="false">What is Trisomy</span></a>
-            </li>
-            <li class="dropdown third">
-              <a href="#" aria-haspopup="true" aria-expanded="false">About</span></a>
-            </li>
-            <li class="last"><a href="#">Shop</a></li>
-          <% if current_user %>     
-            <% unless current_user.user_type == "physician" || current_user.family_ids == [] %>
-              <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Your Family</a></li>
-            <% end %>
-          <% end %>
-        <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
-        <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
-        <% if current_user %>
-          <% if current_user.user_type == 'admin' %>
-            <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
-          <% elsif current_user.user_type == 'doctor' %>
-            <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
-          <% end %>
-        <% end %>
-        <% if current_user %>
-          <% if current_user.user_type == 'admin' %>
-            <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
-          <% end %>
-        <% end %>
-      </ul>
-          </ul>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <!-- <li class="account-link"><button type="button" class="btn btn-default navbar-btn btn-success">Join Our Community</button></li> -->
-          <% if current_user == nil%>
-            <li class="account-link"><%= button_to 'Join Our Community', new_user_registration_path, :class => "btn btn-default navbar-btn btn-success", :method => :get %></li>
-            <li class="account-link"><%= button_to 'Log In', new_user_session_path, :class => "btn navbar-btn btn-default", :method => :get %></li>
-          <% end %>
-          <% if current_user %>
-            <% if current_user.user_type == "family" && current_user.family_ids != [] %>
-            <li><%= link_to('Add Child', profile_new_path) %></li>
-          <% end %>
-            <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
-          <% end %>
-
-        </ul>
-      </div>
-    </nav>
-  </div>
-
 
     <!-- Banner -->
     <section id="banner">
@@ -264,7 +209,6 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
   </body>
 </html>

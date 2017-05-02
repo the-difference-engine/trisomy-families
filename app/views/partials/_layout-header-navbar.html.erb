@@ -11,42 +11,44 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href = '/'><p class="navbar-brand">Trisomy Families</p></a>
+            <a href="/"><img id="logo_img" class="img-responsive" src="/template/images/TrisomyFamilies_Logo.jpg" href="/" alt="The Project" height="75px" width="75px" style="padding: 5px;"></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              
-            <% unless current_user.user_type == "physician" || current_user.family_ids == [] %>
-              <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Family</a></li>
-            <% end %>
-
-
-              <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
-              <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
+              <% if current_page?('/') %>
+                <li><a href="#">Get Involved</a></li>
+                <li><a href="#" aria-haspopup="true" aria-expanded="false">What is Trisomy</a></li>
+                <li><a href="#" aria-haspopup="true" aria-expanded="false">About</span></a></li>
+                <li><a href="#">Shop</a></li>
+              <% end %>
+              <% if current_user && current_user.user_type != 'admin' %>
+                <% if current_user.user_type == 'family' && !current_page?('/families/'+ current_user.family_ids[0].to_s) %>
+                  <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
+                <% elsif current_user.user_type == 'doctor' && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
+                  <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
+                <% end %>
+              <% end %>
+            
+              <% if !current_page?('/family-center') %>
+                <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
+              <% end %>
+              <% if !current_page?('/calendar') %>
+                <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
+              <% end %>
               <% if current_user %>
-                <% if current_user.user_type == 'admin' %>
-                  <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
-                <% elsif current_user.user_type == 'doctor' %>
+                <% if current_user.user_type != 'family' && !current_page?('/professional-center') %>
                   <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
                 <% end %>
               <% end %>
               <% if current_user %>
-                <% if current_user.user_type == 'admin' %>
+                <% if current_user.user_type == 'admin' && !current_page?('/admin-dashboard') %>
                   <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
                 <% end %>
               <% end %>
+              <% if user_signed_in? %>
+                <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
+              <% end %>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <%= current_user.first_name %></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">Settings</a></li>
-                <li role="separator" class="divider"></li>
-                <% if user_signed_in? %>
-                <li><%= link_to('Signout', destroy_user_session_path, :method => :delete) %></li>
-                <% end %>
-              </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
