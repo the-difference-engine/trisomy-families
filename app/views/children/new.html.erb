@@ -21,10 +21,6 @@
          <div class="form-group">
             <%= f.text_field(:last_name, class: "form-control", placeholder: 'Last Name') %>
          </div>
-         <div>
-            <h3>Upload an Image</h3>
-            <%= f.file_field :photo %>
-         </div>
          <div class="form-group">
             <%= f.label :child_nickname %>
             <%= f.text_field(:nickname, class: "form-control") %>
@@ -41,6 +37,10 @@
          <div class="form-group">
             <%= f.label :child_birth_order %>
             <%= f.number_field(:birth_order, in: 1..15, step: 1 , class: "form-control")%>
+         </div>
+         <div class="form-group">
+            <%= f.label :photo, "Add a Photo" %>
+            <%= f.file_field :photo %>
          </div>
          <hr>
          <h5 style="color:gray">Trisomy</h5>
