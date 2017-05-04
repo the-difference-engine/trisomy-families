@@ -29,10 +29,10 @@
                 <% end %>
               <% end %>
             
-              <% if !current_page?('/family-center') %>
+              <% if current_user && !current_page?('/family-center') %>
                 <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
               <% end %>
-              <% if !current_page?('/calendar') %>
+              <% if current_user && !current_page?('/calendar') %>
                 <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
               <% end %>
               <% if current_user %>
@@ -47,6 +47,9 @@
               <% end %>
               <% if user_signed_in? %>
                 <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
+              <% else %>
+                <li class="account-link"><%= button_to 'Join Our Community', new_user_registration_path, :class => "btn btn-default navbar-btn btn-success", :method => :get %></li>
+                <li class="account-link"><%= button_to 'Log In', new_user_session_path, :class => "btn navbar-btn btn-default", :method => :get %></li>
               <% end %>
             </ul>
           </div><!--/.nav-collapse -->

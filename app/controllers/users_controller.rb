@@ -41,7 +41,7 @@ layout :logged_in?
     if user_signed_in?
       "application"
     else
-      "homepage"
+      "application"
     end
   end
 end
