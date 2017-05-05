@@ -8,6 +8,12 @@
         <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
       <% end %>
     </div>
+  <div class="row">
+    <div class="md-col-6">
+      <h2>My Story </h2>
+      <p><%= @child.trisomy_story %></p>
+    </div>
+  </div>
     
     <div class="col-md-6 bg-info">
       <br>
@@ -24,12 +30,6 @@
     <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
   </div>
   <hr>
-  <div class="row">
-    <div class="md-col-8">
-      <h2>Trisomy Story </h2>
-      <p><%= @child.trisomy_story %></p>
-    </div>
-  </div>
   <hr>
 
     <div>
