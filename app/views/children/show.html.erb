@@ -14,8 +14,9 @@
       <p><%= @child.trisomy_story %></p>
     </div>
   </div>
+  <hr>
     
-    <div class="col-md-6 bg-info">
+    <div class="col-md-6 col-md-offset-3 bg-info">
       <br>
       <p>Birthday: <%= @child.birth_date.strftime("%B %d") %></p>
       <p>Age: </p>
@@ -27,9 +28,10 @@
       <p>City: <%= @child.city %></p>
       <p>State: <%= @child.state %></p>
     </div>
+    <div class="col-md-6 col-md-offset-3">
     <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+    </div>
   </div>
-  <hr>
   <hr>
 
     <div>
