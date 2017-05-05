@@ -1,4 +1,4 @@
-hclass ChildrenController < ApplicationController
+class ChildrenController < ApplicationController
   def new
     @family = Family.find_by(id: current_user.family_id)
     unless user_signed_in?
