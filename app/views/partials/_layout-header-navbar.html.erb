@@ -5,7 +5,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" style="width:auto;white-space: nowrap;">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -47,7 +47,7 @@
               <% end %>
               <% if user_signed_in? %>
                 <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
-              <% else %>
+              <% elsif !current_page?('/users/sign_in') %>
                 <li class="account-link"><%= button_to 'Join Our Community', new_user_registration_path, :class => "btn btn-default navbar-btn btn-success", :method => :get %></li>
                 <li class="account-link"><%= button_to 'Log In', new_user_session_path, :class => "btn navbar-btn btn-default", :method => :get %></li>
               <% end %>
