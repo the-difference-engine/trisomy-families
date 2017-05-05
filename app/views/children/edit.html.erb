@@ -2,6 +2,13 @@
   <div class="col-md-6 col-md-offset-3">
     <h1 class="text-center">Edit Profile</h1>
     <hr>
+  <div class="buttons">
+    <p>Update photo: </p>
+    <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
+        <%= form.file_field :avatar, :class => "form-group" %>
+        <%= submit_tag nil, class: "btn btn-success", id: "image-submit"%>
+    <% end %>
+   </div>
 <%= form_tag "/profile/#{@child.id}", method: :patch do %>
 <h5 style="color:gray">Basic Info</h5>
   <div class="form-group">
@@ -41,6 +48,7 @@
     <%= select_tag(:trisomy_type, options_for_select(trisomy_type, @child.trisomy_type)) %>
     <%#= select_tag(:trisomy_type, @child.trisomy_type) %>
   </div>
+
   <hr>
   <h5 style="color:gray">Privacy Settings</h5>
   <div class="form-group">
