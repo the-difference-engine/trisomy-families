@@ -39,8 +39,8 @@
             <%= f.number_field(:birth_order, in: 1..15, step: 1 , class: "form-control")%>
          </div>
          <div class="form-group">
-            <%= f.label :photo, "Add a Photo" %>
-            <%= f.file_field :photo %>
+            <%= f.label :avatar_file_name, "Add a Photo" %>
+            <%= f.file_field( :avatar_file_name) %>
          </div>
          <hr>
          <h5 style="color:gray">Trisomy</h5>
