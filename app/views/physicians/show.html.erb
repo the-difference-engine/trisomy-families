@@ -39,8 +39,10 @@
           <div class="col-sm-4">
             <div class="image-box team-member shadow mb-20">
               <div class="overlay-container overlay-visible">
-                <img src="http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg" alt="">
-                <a href="http://www.texila.us/blog/wp-content/uploads/2015/09/Doctor-Background.jpg" class="popup-img overlay-link" title="Jane Doe - CEO"><i class="icon-plus-1"></i></a>
+                <img src="<%= @physician.avatar_file_name %>" alt="">
+                <% if current_user.id == @physician.user_id || current_user.user_type == 'admin' %>
+                  <a data-toggle="modal" data-target="#myModal" class="overlay-link" title="Change Picture"><i class="icon-plus-1"></i></a>
+                <% end %>
                 <div class="overlay-bottom">
                   <div class="text">
                     <h3 class="title margin-clear"><i><%= @physician.first_name %> <%= @physician.last_name %></h3>
@@ -76,9 +78,3 @@
 </section>
 
 <br>
-
-<% if current_user.doctor_id == @physician.id || current_user.user_type == 'admin' %>
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
-  </button>
-<% end %>
