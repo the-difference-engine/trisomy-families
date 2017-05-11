@@ -25,11 +25,11 @@ Rails.application.routes.draw do
   get '/queries' => 'users#query_table'
 
   get '/family-dashboard' => 'families#index'
-  post '/family' => 'families#create'
+  post '/families' => 'families#create'
   get '/families/new' => 'families#new'
   get '/families/:id' => 'families#show'  
-  get '/family/:id/edit' => 'families#edit'
-  patch '/family/:id' => 'families#update'
+  get '/families/:id/edit' => 'families#edit'
+  patch '/families/:id' => 'families#update'
 
   post '/physicians' => 'physicians#create'
   get '/physicians/new' => 'physicians#new'
