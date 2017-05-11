@@ -72,6 +72,13 @@ class FamiliesController < ApplicationController
 
   def edit
     @family = Family.find_by(id: params[:id])
+
+    if @family.user_id != current_user.id
+     @family = Family.find_by(user_id: current_user.id)
+     flash[:danger] = "You do not have authorization to view that page"
+     redirect_to "/families/#{@family.id}"
+    end 
+  
   end
 
   def update
