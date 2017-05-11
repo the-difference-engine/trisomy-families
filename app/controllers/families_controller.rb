@@ -43,7 +43,6 @@ class FamiliesController < ApplicationController
       city: params["family"]["city"],
       state: params["family"]["state"],
       story: params["family"]["story"],
-      trisomy_type: params["family"]["trisomy_type"],
       user_id: current_user.id
       )
 
@@ -73,6 +72,13 @@ class FamiliesController < ApplicationController
 
   def edit
     @family = Family.find_by(id: params[:id])
+
+    if @family.user_id != current_user.id
+     @family = Family.find_by(user_id: current_user.id)
+     flash[:danger] = "You do not have authorization to view that page"
+     redirect_to "/families/#{@family.id}"
+    end 
+  
   end
 
   def update
