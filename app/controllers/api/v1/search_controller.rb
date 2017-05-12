@@ -51,8 +51,8 @@ class Api::V1::SearchController < ApplicationController
     if !params[:city].nil?
       h[:city] = params[:city]
     end
-    if !params[:last_name].nil?
-      h[:last_name] = params[:last_name]
+    if !params[:family_name].nil?
+      h[:family_name] = params[:family_name]
     end
     if params[:type] == 'physician'
       if !params[:specialty].nil?
