@@ -1,27 +1,33 @@
-<h1><%= @family.family_name %></h1>
-<img src = "<%= @family.photo %>"/>
-<ul>
-  <li>Family Story: <%= @family.story %></li>
-  <li>City: <%= @family.city %> </li>
-  <li>State: <%= @family.state %> </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1><%= @family.family_name %></h1>
+    </div>
+    <div class="col-md-6">
+      <img src = "<%= @family.photo %>"/>
+    </div>
+    <div class="row">
+      <h4>Location: <%= @family.city %>, <%= @family.state %></h4>
+      <h4>Our Story: <%= @family.story %></h4>
+    </div>
+    <hr>
+    <% if @family.user_id == current_user.id %>
+    <button><a href="/families/<%= @family.id %>/edit">Edit</a></button>
+    <button><%= link_to('Add Child', profile_new_path) %></button>
+    <% end %>
 
-<% if @family.user_id == current_user.id %>
-<button><a href="/families/<%= @family.id %>/edit">Edit</a></button>
-<button><%= link_to('Add Child', profile_new_path) %></button>
-<% end %>
-
-
-<% if @family.children.count == 1 %>
-  <h2>Child:</h2>
-  <% @family.children.each do |child| %>
-    <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
-    <h4><a href = "/profile/<%=child.id %>"><%= child.nickname %></a></h4>
-  <% end %>
-<% elsif @family.children.count > 1 %>
-  <h2>Children:</h2>
-  <% @family.children.each do |child| %>
-    <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
-    <h4><a href = "/profile/<%= child.id %>"><%= child.nickname %></a></h4>
-  <% end %>
-<% end %>
+    <% if @family.children.count == 1 %>
+      <h2>Child:</h2>
+      <% @family.children.each do |child| %>
+        <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
+        <h4><a href = "/profile/<%=child.id %>"><%= child.nickname %></a></h4>
+      <% end %>
+    <% elsif @family.children.count > 1 %>
+      <h2>Children:</h2>
+      <% @family.children.each do |child| %>
+        <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
+        <h4><a href = "/profile/<%= child.id %>"><%= child.nickname %></a></h4>
+      <% end %>
+    <% end %>
+  </div>
+</div>
