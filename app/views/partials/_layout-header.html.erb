@@ -91,19 +91,14 @@
                     <a href="/family-center">Family Center</a>
                   </li>
                   <li>
-                  <% if current_user %>
-                    <% if current_user.user_type == 'admin' %>
-                      <a href="/professional-center">Professional Center</a>
-                    <% elsif current_user.user_type == 'doctor' %>
+                    <% if current_user && current_user.user_type != 'family' %>
                       <a href="/professional-center">Professional Center</a>
                     <% end %>
                   <% end %>
                   </li>
                   <li>
-                    <% if current_user %>
-                      <% if current_user.user_type == 'admin' %>
-                        <%= link_to('Administrator Dashboard', '/admin-dashboard') %>
-                      <% end %>
+                    <% if current_user && current_user.user_type == 'admin' %>
+                      <%= link_to('Administrator Dashboard', '/admin-dashboard') %>
                     <% end %>
                   </li>
                 </ul>
