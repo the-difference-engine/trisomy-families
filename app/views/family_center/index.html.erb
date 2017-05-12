@@ -60,6 +60,11 @@
       </div>
 
       <div class="form-group">
+        <label for="name"></label>
+        <input type="text" class="form-control" id="name" placeholder="Last Name" ng-model="query.last_name" ng-minlength="1"></input>
+      </div>
+
+      <div class="form-group">
         <ang-select-usstates ng-model="query.state" name="State" id="selectState" class="form-control"></ang-select-usstates>
       </div>
 
