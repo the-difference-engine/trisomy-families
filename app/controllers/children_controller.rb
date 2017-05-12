@@ -21,6 +21,10 @@ class ChildrenController < ApplicationController
     @child.build_privacy(privacy_params)
     @child.family_id = current_user.family_ids[0]
 
+    #using add_photo method to allow initial photo upload
+    #if no photo uploaded, default image will be set
+    add_photo
+
     # byebug
     if @child.save
       flash[:success] = 'Profile created!'
@@ -44,6 +48,20 @@ class ChildrenController < ApplicationController
     @child = Child.find_by(id: params[:id])
     @privacy = @child.privacy
     render 'edit.html.erb'
+  end
+
+  def add_photo
+    if params[:child][:avatar_file_name]
+      charset = Array('A'..'Z') + Array('a'..'z')
+      random_string = Array.new(20) { charset.sample }.join
+      object_name = random_string + '_' + params[:child][:avatar_file_name].original_filename
+
+
+      obj = S3_BUCKET.object(object_name)
+      obj.upload_file(params[:child][:avatar_file_name].tempfile.path)
+
+      @child.avatar_file_name = obj.public_url
+    end
   end
 
   def update_photo
