@@ -3,13 +3,16 @@
     <tr>
         <th>Trisomy Type</th>
         <th>Registered Children</th>
+        <th>Common Name</th>
     </tr>
     
         <% trisomy_number = 1 %>
+        <% common_names = ["-", "-", "-", "-", "-", "-", "-", "-", "Warkay Syndrome", "-", "-", "-", "-", "Patau Syndrome", "-", "-", "-", "-", "Edwards Syndrome", "-", "-", "Down Syndrome", "-", "-"] %>
         <% 23.times do %>
     <tr>
         <td><%= trisomy_number %></td>
         <td><%= Child.where(trisomy_type: trisomy_number).count %></td>
+        <td><%= common_names[trisomy_number] %> </td>
     </tr>
     <% trisomy_number += 1 %>
     <% end %>
