@@ -1,6 +1,20 @@
 <h4>Registered children by Trisomy type:</h4>
-<table>
-<p>1: <%= Child.where(trisomy_type: 1).count %></p> 
+<table style = "width: 50%">
+    <tr>
+        <th>Trisomy Type</th>
+        <th>Registered Children</th>
+    </tr>
+    
+        <% trisomy_number = 1 %>
+        <% 23.times do %>
+    <tr>
+        <td><%= trisomy_number %></td>
+        <td><%= Child.where(trisomy_type: trisomy_number).count %></td>
+    </tr>
+    <% trisomy_number += 1 %>
+    <% end %>
+</table>
+<!-- <p>1: <%= Child.where(trisomy_type: 1).count %></p> 
 <p>2: <%= Child.where(trisomy_type: 2).count %></p> 
 <p>3: <%= Child.where(trisomy_type: 3).count %></p> 
 <p>4: <%= Child.where(trisomy_type: 4).count %></p> 
@@ -23,9 +37,18 @@
 <p>21: <%= Child.where(trisomy_type: 21).count %></p> 
 <p>22: <%= Child.where(trisomy_type: 22).count %></p> 
 <p>23: <%= Child.where(trisomy_type: 23).count %></p> 
+</table>
 
 
-
-
+<table>
+  <tr>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+</table> -->
 
             
