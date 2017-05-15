@@ -1,4 +1,5 @@
 var trisomy_type = [];
+var trisomy_type_count = {};
 var birthdate = [];
 var age = [];
  
@@ -7,11 +8,17 @@ $.getJSON('/api/v1/children', function(data) {
         trisomy_type.push (child.trisomy_type);
         birthdate.push (child.birth_date);
     });
+    trisomy_type.forEach(function(i) { 
+        trisomy_type_count[i] = (trisomy_type_count[i]||0)+1;  
+    });
+
+
 
     // console.log(Object.prototype.toString.call(years));
     console.log(trisomy_type);
     console.log(birthdate);
-    console.log("fuckoff")
+    console.log("fuckoff");
+    console.log(trisomy_type_count);
 
 
 $(function () { 
@@ -20,10 +27,7 @@ Highcharts.chart('container', {
         type: 'bar'
     },
     title: {
-        text: 'Historic World Population by Region'
-    },
-    subtitle: {
-        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+        text: 'Trisomy Type of Registered Children'
     },
     xAxis: {
         categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
