@@ -6,13 +6,11 @@
 
     <div>
       <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Add Profile <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="/families/new">Family</a></li>
-          <li><a href="/physicians">Doctor</a></li>
-        </ul>
+        <% if !current_user.family_id %>
+          <a href ="/families/new" class="btn btn-primary">Add My Family</a>
+        <% else %>
+          <a href ="/families/<%= current_user.family_id %>/edit" class="btn btn-warning">Edit My Family</a>
+        <% end %>           
       </div>
     </div>
     <hr />
@@ -47,12 +45,7 @@
     <br>
     <br>
     <div class="row">
-
-<<<<<<< HEAD
-      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending ">
-=======
       <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending">
->>>>>>> qa
         <div class="well">
           <div>{{user.user_type}}</div>
           <h4>{{user.email}}</h4>
@@ -68,7 +61,7 @@
           <p>Signed up: {{user.created_at | date:format:'M'}}</p>
           <div ></div>
           <form>
-            <div ng-if='::user.user_type === "family"'>
+            <div ng-if='::user.user_type === "family" || user.user_type === "admin"'>
               <label>Update User Type: </label>
               <select ng-model="user.user_type" list="types" disableEntry: true >
                 <datalist id="types">
@@ -79,16 +72,10 @@
             </div>
               <input type="hidden" ng-model="user.id">
             <br>
-            <div ng-if='::user.user_type === "family"' class="submit">
+            <div ng-if='::user.user_type === "family" || user.user_type === "admin"' class="submit">
               <input class="btn btn-info" value="Update" ng-click="updateType(user.user_type, user.id)">
             </div>
             <div class="submit">
-<<<<<<< HEAD
-              <input class="btn btn-info" value="Update" ng-click="updateType(user.user_type, user.id)">
-            </div>
-            <div class="submit">
-=======
->>>>>>> qa
               <input class="btn btn-danger" value="Delete" ng-click="deleteUser(user.id)">
             </div>
           </form>
