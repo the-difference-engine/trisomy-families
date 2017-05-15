@@ -1,5 +1,7 @@
 var trisomy_type = [];
-var trisomy_type_count = {};
+var trisomy_type_hash = {};
+var trisomy_type_hash_keys = [];
+var trisomy_type_hash_values = [];
 var birthdate = [];
 var age = [];
  
@@ -9,8 +11,18 @@ $.getJSON('/api/v1/children', function(data) {
         birthdate.push (child.birth_date);
     });
     trisomy_type.forEach(function(i) { 
-        trisomy_type_count[i] = (trisomy_type_count[i]||0)+1;  
+        trisomy_type_hash[i] = (trisomy_type_hash[i]||0)+1;  
     });
+
+    for (var property in trisomy_type_hash) {
+        if ( ! data.hasOwnProperty(property)) {
+            continue;
+        }
+        trisomy_type_hash_keys.push(property);
+        trisomy_type_hash_values.push(trisomy_type_hash[property]);
+    }
+
+
 
 
 
@@ -18,7 +30,9 @@ $.getJSON('/api/v1/children', function(data) {
     console.log(trisomy_type);
     console.log(birthdate);
     console.log("fuckoff");
-    console.log(trisomy_type_count);
+    console.log(trisomy_type_hash);
+    console.log(trisomy_type_hash_keys);
+    console.log(trisomy_type_hash_values);
 
 
 $(function () { 
