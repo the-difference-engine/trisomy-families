@@ -1,4 +1,18 @@
-    $(function () { 
+var years = [];
+var count = [];
+ 
+$.getJSON('http://localhost:3000/json/spills_by_year', function(data) {
+    data.forEach(function(spill) {
+        years.push (spill.year);
+        count.push (spill.count);
+    });
+
+    // console.log(Object.prototype.toString.call(years));
+    console.log(years);
+    console.log(count);
+
+
+$(function () { 
 Highcharts.chart('container', {
     chart: {
         type: 'bar'
