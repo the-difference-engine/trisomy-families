@@ -52,7 +52,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Population (millions)',
+            text: 'Number of Registerd Children',
             align: 'high'
         },
         labels: {
