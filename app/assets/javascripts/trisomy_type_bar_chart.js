@@ -1,15 +1,17 @@
-var years = [];
-var count = [];
+var trisomy_type = [];
+var birthdate = [];
+var age = [];
  
-$.getJSON('http://localhost:3000/json/spills_by_year', function(data) {
-    data.forEach(function(spill) {
-        years.push (spill.year);
-        count.push (spill.count);
+$.getJSON('/api/v1/children', function(data) {
+    data.forEach(function(child) {
+        trisomy_type.push (child.trisomy_type);
+        birthdate.push (child.birth_date);
     });
 
     // console.log(Object.prototype.toString.call(years));
-    console.log(years);
-    console.log(count);
+    console.log(trisomy_type);
+    console.log(birthdate);
+    console.log("fuckoff")
 
 
 $(function () { 
@@ -74,4 +76,6 @@ Highcharts.chart('container', {
         data: [1052, 954, 4250, 740, 38]
     }]
 });
-});   
+}); 
+}); 
+
