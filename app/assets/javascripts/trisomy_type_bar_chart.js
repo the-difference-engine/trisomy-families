@@ -41,10 +41,10 @@ Highcharts.chart('container', {
         type: 'bar'
     },
     title: {
-        text: 'Trisomy Type of Registered Children'
+        text: ''
     },
     xAxis: {
-        categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+        categories: trisomy_type_hash_keys,
         title: {
             text: null
         }
@@ -84,14 +84,8 @@ Highcharts.chart('container', {
         enabled: false
     },
     series: [{
-        name: 'Year 1800',
-        data: [107, 31, 635, 203, 2]
-    }, {
-        name: 'Year 1900',
-        data: [133, 156, 947, 408, 6]
-    }, {
-        name: 'Year 2012',
-        data: [1052, 954, 4250, 740, 38]
+        name: 'Number of Registered Children by Trisomy Type',
+        data: trisomy_type_hash_values
     }]
 });
 }); 
