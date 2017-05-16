@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     if current_user && current_user.user_type == 'admin'
+      @family = Family.find_by(user_id: current_user.id)
       render 'index.html.erb'
     elsif current_user && current_user.user_type == 'doctor'
       redirect_to "/physicians/#{current_user.id}"

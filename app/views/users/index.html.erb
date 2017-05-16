@@ -1,15 +1,15 @@
 <div ng-app="app">
   <div ng-controller="adminCtrl" ng-init="setup()">
-
+  
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
     <a href="/children-index">Children Index</a>
 
     <div>
       <div class="btn-group">
-        <% if !current_user.family_id %>
-          <a href ="/families/new" class="btn btn-primary">Add My Family</a>
+        <% if @family %>
+          <a href ="/families/<%= @family.id %>/edit" class="btn btn-warning">Edit My Family</a>
         <% else %>
-          <a href ="/families/<%= current_user.family_id %>/edit" class="btn btn-warning">Edit My Family</a>
+          <a href ="/families/new" class="btn btn-primary">Add My Family</a>          
         <% end %>           
       </div>
     </div>
