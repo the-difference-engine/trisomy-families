@@ -4,6 +4,7 @@
         <th>Trisomy Type</th>
         <th>Registered Children</th>
         <th>Common Name</th>
+        <th>Percent (%)</th>
     </tr>
     
         <% trisomy_number = 1 %>
@@ -13,6 +14,9 @@
         <td><%= trisomy_number %></td>
         <td><%= Child.where(trisomy_type: trisomy_number).count %></td>
         <td><%= common_names[trisomy_number] %> </td>
+        <% count = Child.where(trisomy_type: trisomy_number).count %>
+        <% percent = count 
+
     </tr>
     <% trisomy_number += 1 %>
     <% end %>
