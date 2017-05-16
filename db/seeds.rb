@@ -17,25 +17,8 @@ Child.delete_all
 Parent.delete_all
 Event.delete_all
 
-Endocrine.delete_all
-Height.delete_all
-Weight.delete_all
-BackgroundHistory.delete_all
-BehavioralHealth.delete_all
-CongenitalHeartDefect.delete_all
-CranialFacial.delete_all
-GastricSurgery.delete_all
-HeadCircumference.delete_all
-MotherComplication.delete_all
-IntestinalIssue.delete_all
-NuerologicalCondition.delete_all
-ReceivedTherapy.delete_all
-Hearing.delete_all
-Vision.delete_all
-HealthHistory.delete_all
-
 # Create address arrays for physicians and families
-trisomy_strings = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+trisomy_strings = ["8", "9", "13", "18", "21", "8", "9", "13", "18", "21", "11", "12", "13", "1", "13", "16", "17", "18", "19", "21", "21", "8", "23", "24"]
 physician_addresses = [
   ['805 Bay Meadows St.', 'Fort Wayne', 'IN', '46804', -85.0814343000, 41.0906369000],
   ['411 Kirkland Street', 'Miami', 'FL', '33125', -80.2480685000, 26.0605644000],
@@ -201,8 +184,8 @@ puts  "************************"
       @child =  Child.new(
               {first_name: Faker::Name.first_name,
                 last_name: last_name,
-                trisomy_type: Random.new.rand(1..24),
-                birth_date: "2009-06-19 00:00:00",
+                trisomy_type: trisomy_strings[rand(trisomy_strings.length)],
+                birth_date: ,
                 death_date: nil,
                 city: u1.city,
                 state: u1.state,
@@ -214,7 +197,7 @@ puts  "************************"
                 user_id: u1.id,
                 private: false,
                 nickname: Faker::Name.first_name,
-                birth_order: value,
+                birth_order: rand(1..5),
                 other_chrom_affected: nil,
                 mosaic_percentage: nil,
                 health_history_id: nil,
@@ -225,7 +208,7 @@ puts  "************************"
                 parent_id: u1.id,
                 other_primary_diagnosis: nil,
                 other_secondary_diagnosis: nil,
-                family_id: Random.new.rand(1..20)
+                family_id: u1_family.id
                 })
           @child.save
 
