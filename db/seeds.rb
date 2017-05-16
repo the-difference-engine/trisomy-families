@@ -17,6 +17,22 @@ Child.delete_all
 Family.delete_all
 Parent.delete_all
 Event.delete_all
+Endocrine.delete_all
+Height.delete_all
+Weight.delete_all
+BackgroundHistory.delete_all
+BehavioralHealth.delete_all
+CongenitalHeartDefect.delete_all
+CranialFacial.delete_all
+GastricSurgery.delete_all
+HeadCircumference.delete_all
+MotherComplication.delete_all
+IntestinalIssue.delete_all
+NuerologicalCondition.delete_all
+ReceivedTherapy.delete_all
+Hearing.delete_all
+Vision.delete_all
+HealthHistory.delete_all
 
 # Create address arrays for physicians and families
 trisomy_strings = ["8", "9", "13", "18", "21", "8", "9", "13", "18", "21", "11", "12", "13", "1", "13", "16", "17", "18", "19", "21", "21", "8", "23", "24"]
