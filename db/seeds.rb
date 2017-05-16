@@ -14,6 +14,7 @@ Physician.delete_all
 User.where.not(user_type: "admin").delete_all
 User.where(user_type: nil).delete_all
 Child.delete_all
+Family.delete_all
 Parent.delete_all
 Event.delete_all
 
@@ -185,8 +186,8 @@ puts  "************************"
               {first_name: Faker::Name.first_name,
                 last_name: last_name,
                 trisomy_type: trisomy_strings[rand(trisomy_strings.length)],
-                birth_date: ,
-                death_date: nil,
+                birth_date: rand(4..20).years.ago,
+                death_date: rand(1..5).years.ago,
                 city: u1.city,
                 state: u1.state,
                 trisomy_story: Faker::Lorem.paragraph(3),
