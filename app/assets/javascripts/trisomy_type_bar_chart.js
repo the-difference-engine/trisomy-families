@@ -54,7 +54,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Number of Registerd Children',
+            text: '',
             align: 'high'
         },
         labels: {
@@ -86,13 +86,16 @@ Highcharts.chart('container', {
         enabled: false
     },
     series: [{
-        name: 'Number of Registered Children by Trisomy Type',
+        name: 'Children by Trisomy Type',
         data: trisomy_type_hash_values
     }]
 });
 });
 
 $(function () { 
+        for (i = 0; i < trisomy_type_hash_keys.length; i++) { 
+    console.log("fuck you jennifer");
+}
 Highcharts.chart('container2', {
     chart: {
         plotBackgroundColor: null,
@@ -119,6 +122,8 @@ Highcharts.chart('container2', {
             }
         }
     },
+
+
     series: [{
         name: 'Brands',
         colorByPoint: true,
