@@ -17,7 +17,11 @@
         <% count = Child.where(trisomy_type: trisomy_number).count %>
         <% decimal = count.to_f / Child.all.count.to_f %>
         <% percent = decimal * 100 %>
-        <td><%= percent.to_i %></td> 
+        <% percent_integer = percent.to_i %>
+        <% if percent_integer == 0 %>
+            <% percent_integer = "-" %>
+        <% end %>
+        <td><%= percent_integer %></td> 
 
     </tr>
     <% trisomy_number += 1 %>
