@@ -16,10 +16,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left">
-          <div class="form-group">
-        </form>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-left">
         
           <% if current_page?('/') %>
             <li><a href="#">Get Involved</a></li>
@@ -81,14 +78,15 @@
                   <% end %>
                 <% end %>
               <% end %>
+             
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
               <% if current_user %>
                 <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
               <% elsif !current_page?('/users/sign_in') %>
-                <li class="account-link"><%= button_to 'Join Our Community', new_user_registration_path, :class => "btn btn-default navbar-btn btn-success", :method => :get %></li>
-                <li class="account-link"><%= button_to 'Log In', new_user_session_path, :class => "btn navbar-btn btn-default", :method => :get %></li>
+                <li class="account-link"><%= link_to 'Sign Up', new_user_registration_path, :method => :get %></li>
+                <li class="account-link"><%= link_to 'Log In', new_user_session_path, :method => :get %></li>
               <% end %>
-              
-             
             </ul>
           </li>
         </ul>
