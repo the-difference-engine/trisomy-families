@@ -31,7 +31,7 @@ class Api::V1::ChildrenController < ApplicationController
 
 
 
-    render 'trisomy_type.html.erb'
+    render 'trisomy_type.json.jbuilder'
   end
 
 
