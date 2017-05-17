@@ -9,9 +9,22 @@ class Api::V1::ChildrenController < ApplicationController
   def trisomy_type_totals
     all_children = Child.all
     @trisomy_types = []
+    @trisomy_types_hash = Hash.new
     all_children.each do |child|
       @trisomy_types << child.trisomy_type
     end
+
+    @trisomy_types.each do |trisomy_type|
+      @trisomy_types_hash[trisomy_type] =+ 1
+    end
+
+    @trisomy_types.each_with_object(@trisomy_types_hash) { |word,counts| counts[word] += 1 }
+
+    @trisomy_types_hash.each do |key, value|
+      @trisomy_types_hash[key] = value - 1
+    end
+
+
 
 
 
