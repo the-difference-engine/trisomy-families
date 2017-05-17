@@ -39,11 +39,15 @@
           <div class="col-sm-4">
             <div class="image-box team-member shadow mb-20">
               <div class="overlay-container overlay-visible">
+<<<<<<< HEAD
+                <img src="<%= @physician.avatar_file_name %>" alt="">
+=======
                 <% if @physician.avatar_file_name %>
                   <img src="<%= @physician.avatar_file_name%>" alt="">
                 <% else %>
                   <img src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg" alt="">
                 <% end %> 
+>>>>>>> qa
                 <% if current_user.id == @physician.user_id || current_user.user_type == 'admin' %>
                   <a data-toggle="modal" data-target="#myModal" class="overlay-link" title="Change Picture"><i class="icon-plus-1"></i></a>
                 <% end %>
