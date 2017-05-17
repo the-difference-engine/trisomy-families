@@ -31,7 +31,7 @@ class Api::V1::ChildrenController < ApplicationController
 
 
 
-    render 'trisomy_type.json.jbuilder'
+    render 'index2.json.jbuilder'
   end
 
 

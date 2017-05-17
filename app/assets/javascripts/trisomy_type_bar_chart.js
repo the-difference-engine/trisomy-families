@@ -92,22 +92,22 @@ Highcharts.chart('container', {
 });
 });
 
-$.getJSON('/api/v1/children/piechart', function(data) {
-    data.forEach(function(child) {
-        trisomy_type.push (child.trisomy_type);
-        birthdate.push (child.birth_date);
-    });
-    trisomy_type.forEach(function(i) { 
-        trisomy_type_hash[i] = (trisomy_type_hash[i]||0)+1;  
-    });
+// $.getJSON('/api/v1/children/piechart', function(data) {
+//     data.forEach(function(child) {
+//         trisomy_type.push (child.trisomy_type);
+//         birthdate.push (child.birth_date);
+//     });
+//     trisomy_type.forEach(function(i) { 
+//         trisomy_type_hash[i] = (trisomy_type_hash[i]||0)+1;  
+//     });
 
-    for (var property in trisomy_type_hash) {
-        if ( ! data.hasOwnProperty(property)) {
-            continue;
-        }
-        trisomy_type_hash_keys.push(property);
-        trisomy_type_hash_values.push(trisomy_type_hash[property]);
-    }
+//     for (var property in trisomy_type_hash) {
+//         if ( ! data.hasOwnProperty(property)) {
+//             continue;
+//         }
+//         trisomy_type_hash_keys.push(property);
+//         trisomy_type_hash_values.push(trisomy_type_hash[property]);
+//     }
 
 $(function () { 
     for (i = 0; i < trisomy_type_hash_keys.length; i++) { 
