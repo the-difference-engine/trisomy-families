@@ -21,6 +21,27 @@ class Child < ApplicationRecord
 
   before_validation :ensure_avatar_file_name_has_a_value, on: :create
 
+  def current_age
+    birthday = self.birth_date
+    current_date = Time.now
+    death = self.death_date
+    age = ((current_date.year - birthday.year) * 12) + (current_date.month - birthday.month)
+    if death
+      if death.year - birthday.year > 0
+        age = ((death.year - birthday.year) * 12) + (death.month - birthday.month)
+      else 
+        age = (death.month - birthday.month)
+      end
+    elsif (birthday.month > current_date.month || (birthday.month >= current_date.month and birthday.day > current_date.day))
+      age -= 12
+    end
+    if age == 0
+      age = (current_date.month - birthday.month)
+    end 
+    age
+    
+  end
+
   protected
 
   def ensure_avatar_file_name_has_a_value
