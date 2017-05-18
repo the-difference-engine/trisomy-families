@@ -23,6 +23,7 @@ $.getJSON('/api/v1/children', function(data) {
         trisomy_type_hash_keys.push(property);
         trisomy_type_hash_values.push(trisomy_type_hash[property]);
     }
+})
 
 
 
@@ -92,87 +93,62 @@ Highcharts.chart('container', {
 });
 });
 
-// $.getJSON('/api/v1/children/piechart', function(data) {
-//     data.forEach(function(child) {
-//         trisomy_type.push (child.trisomy_type);
-//         birthdate.push (child.birth_date);
-//     });
-//     trisomy_type.forEach(function(i) { 
-//         trisomy_type_hash[i] = (trisomy_type_hash[i]||0)+1;  
-//     });
+var trisomy_types_piechart_keys = [];
+var trisomy_types_values = []
 
-//     for (var property in trisomy_type_hash) {
-//         if ( ! data.hasOwnProperty(property)) {
-//             continue;
-//         }
-//         trisomy_type_hash_keys.push(property);
-//         trisomy_type_hash_values.push(trisomy_type_hash[property]);
-//     }
+// for (i = 0; i < 5; i++) {
+//     text += "The number is " + i + "<br>";
+// }
 
-$(function () { 
-    for (i = 0; i < trisomy_type_hash_keys.length; i++) { 
-        console.log("fuck you jennifer");
-    }
-Highcharts.chart('container2', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: ''
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+$.getJSON('/api/v1/children/trisomy_type_totals', function(data) {
+    var json = data; 
+
+    Highcharts.chart('container2', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 }
             }
-        }
-    },
+        },
 
 
-    series: [{
-        name: 'Brands',
+    series: 
+
+    [{
+        name: 'Trisomy Type of Registered Children',
         colorByPoint: true,
-        data: [
+        data: json
 
 
-        {
-            name: 'Microsoft Internet Explorer',
-            y: 56.33
-        }, {
-            name: 'Chrome',
-            y: 24.03,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Firefox',
-            y: 10.38
-        }, {
-            name: 'Safari',
-            y: 4.77
-        }, {
-            name: 'Opera',
-            y: 0.91
-        }, {
-            name: 'Proprietary or Undetectable',
-            y: 0.2
-        }]
+
+
+
     }]
 }); 
 }); 
-});
-console.log(trisomy_type_hash)
-var data = JSON.stringify(trisomy_type_hash);
-console.log(data);
+
+
+
+
+
+
 

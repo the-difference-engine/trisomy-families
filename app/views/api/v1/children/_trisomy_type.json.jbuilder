@@ -1,2 +1,2 @@
-json.type type
-json.number number
+json.name type
+json.y number
