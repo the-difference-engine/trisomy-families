@@ -275,14 +275,14 @@ class ChildrenController < ApplicationController
 
     if months
       
-      numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven']
+      numbers = ['one', 'two', 'three', 'four', 'five', 'six']
       @height = Height.new()
       @weight = Weight.new()
       @head_circumference = HeadCircumference.new()
 
       if months < 12
         i = 0
-        while i < months 
+        while i < 6
           key_name = (numbers[i] + '_month').to_sym
           height_name = ('height_' + numbers[i] + '_month').to_sym
           weight_name = (numbers[i] + '_month').to_sym
@@ -295,7 +295,7 @@ class ChildrenController < ApplicationController
         @height.save
       elsif months >= 12
         j = 0
-        while i < 12
+        while i < 6
           key_name = (numbers[i] + '_month').to_sym
           height_name = ('height_' + numbers[i] + '_month').to_sym
           weight_name = (numbers[i] + '_month').to_sym
