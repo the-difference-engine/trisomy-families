@@ -4,6 +4,8 @@ var trisomy_type_hash_keys = [];
 var trisomy_type_hash_values = [];
 var birthdate = [];
 var age = [];
+var piechart_data = [];
+
  
 $.getJSON('/api/v1/children', function(data) {
     data.forEach(function(child) {
@@ -21,6 +23,7 @@ $.getJSON('/api/v1/children', function(data) {
         trisomy_type_hash_keys.push(property);
         trisomy_type_hash_values.push(trisomy_type_hash[property]);
     }
+})
 
 
 
@@ -52,7 +55,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Number of Registerd Children',
+            text: '',
             align: 'high'
         },
         labels: {
@@ -84,10 +87,15 @@ Highcharts.chart('container', {
         enabled: false
     },
     series: [{
-        name: 'Number of Registered Children by Trisomy Type',
+        name: 'Children by Trisomy Type',
         data: trisomy_type_hash_values
     }]
 });
-}); 
-}); 
+});
+
+
+
+
+
+
 
