@@ -1,14 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="page-header">
-      <h1><%= @family.family_name %></h1>
+      <h1>The <%= @family.family_name %> Family</h1>
     </div>
     <div class="col-md-6">
       <img src = "<%= @family.photo %>"/>
     </div>
     <div class="row">
-      <h4>Location: <%= @family.city %>, <%= @family.state %></h4>
-      <h4>Our Story: <%= @family.story %></h4>
+      <h4>Location:</h4> <p><%= @family.city %>, <%= @family.state %></p>
+      <h4>Our Story:</h4> 
+      <p><%= @family.story %></p> 
     </div>
     <hr>
     <% if @family.user_id == current_user.id %>
