@@ -24,6 +24,7 @@
         </ul>
       </div>
       <% end %>
+      <%= @child.current_age %>
       <div>
         <%= label_tag :weight_at_birth %>
         <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
@@ -110,8 +111,8 @@
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteenth_month %>
-          <%= number_field_tag(:height_eighteenth_month, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= label_tag :eighteen_month %>
+          <%= number_field_tag(:height_eighteen_month, nil, in: 10.0..30, step: 0.5)  %> 
         </div>
       <% end %>
 
@@ -169,8 +170,8 @@
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteenth_month %>
-          <%= number_field_tag(:hc_eighteenth_month, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= label_tag :eighteen_month %>
+          <%= number_field_tag(:hc_eighteen_month, nil, in: 10.0..30, step: 0.5)  %> 
         </div>
       <% end %>
 

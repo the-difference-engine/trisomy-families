@@ -14,17 +14,7 @@
 <%= form_tag "/profile/#{@child.id}/background", method: :patch do %>
   <h3>Participant Measurements</h3>
     <h4>Weight Info:</h4>
-      <% if @weight.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@weight.errors.count, "error") %> prohibited this weight from being updated:</h2>
-     
-        <ul>
-        <% @weight.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-      <% end %>
+      
       <div>
         <%= label_tag :weight_at_birth %>
         <%= number_field_tag(:weight_at_birth, @background_history.weight_at_birth, in: 1.0..20, step: 0.5)  %> 

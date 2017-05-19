@@ -294,6 +294,7 @@ class ChildrenController < ApplicationController
         end
         @height.save
       elsif months >= 12
+        i = 0
         j = 0
         while i < 6
           key_name = (numbers[i] + '_month').to_sym
@@ -310,17 +311,19 @@ class ChildrenController < ApplicationController
           @weight.write_attribute(:eighteen_month, params[:eighteen_month])
           @head_circumference.write_attribute(:eighteen_month, params[:hc_eighteen_month])
         end
-        while j < (years - 1)
-          string_year = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty_year', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty']
+        while j < years
+          string_year = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty']
           key_name = (string_year[j] + '_year').to_sym
-          height_name = ('height_' + string_year[i] + '_month').to_sym
-          weight_name = (string_year[i] + '_month').to_sym
-          head_circumference_name = ('hc_' + string_year[i] + '_month').to_sym
+          height_name = ('height_' + string_year[j] + '_year').to_sym
+          weight_name = (string_year[j] + '_year').to_sym
+          head_circumference_name = ('hc_' + string_year[j] + '_year').to_sym
           @height.write_attribute(key_name, params[height_name])
           @weight.write_attribute(key_name, params[weight_name])
           @head_circumference.write_attribute(key_name, params[head_circumference_name])
+
           j += 1
         end
+        
         @height.save
         @weight.save
         @head_circumference.save
