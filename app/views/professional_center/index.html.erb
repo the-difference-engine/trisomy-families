@@ -1,9 +1,10 @@
-<h4>Registered children by Trisomy type:</h4>
-<table style = "width: 50%">
+<h1>Registered children by Trisomy type:</h1>
+<table style = "width: 100%">
     <tr>
         <th>Trisomy Type</th>
         <th>Registered Children</th>
         <th>Common Name</th>
+        <th>Percent (%)</th>
     </tr>
     
         <% trisomy_number = 1 %>
@@ -13,17 +14,27 @@
         <td><%= trisomy_number %></td>
         <td><%= Child.where(trisomy_type: trisomy_number).count %></td>
         <td><%= common_names[trisomy_number] %> </td>
+        <% count = Child.where(trisomy_type: trisomy_number).count %>
+        <% decimal = count.to_f / Child.all.count.to_f %>
+        <% percent = decimal * 100 %>
+        <% percent_integer = percent.to_i %>
+        <% if percent_integer == 0 %>
+            <% percent_integer = "-" %>
+        <% end %>
+        <td><%= percent_integer %></td> 
+
     </tr>
     <% trisomy_number += 1 %>
     <% end %>
 </table>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<div id="container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
 
 
