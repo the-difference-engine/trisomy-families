@@ -219,7 +219,7 @@ puts  "************************"
                 mosaic_percentage: nil,
                 health_history_id: nil,
                 background_history_id: nil,
-                primary_diagnosis: nil,
+                primary_diagnosis: primary_diagnosis[rand(0..5)],
                 secondary_diagnosis: nil,
                 partial_trisomy: nil,
                 parent_id: u1.id,
