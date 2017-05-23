@@ -275,14 +275,14 @@ class ChildrenController < ApplicationController
 
     if months
       
-      numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven']
+      numbers = ['one', 'two', 'three', 'four', 'five', 'six']
       @height = Height.new()
       @weight = Weight.new()
       @head_circumference = HeadCircumference.new()
 
       if months < 12
         i = 0
-        while i < months 
+        while i < 6
           key_name = (numbers[i] + '_month').to_sym
           height_name = ('height_' + numbers[i] + '_month').to_sym
           weight_name = (numbers[i] + '_month').to_sym
@@ -294,8 +294,9 @@ class ChildrenController < ApplicationController
         end
         @height.save
       elsif months >= 12
+        i = 0
         j = 0
-        while i < 12
+        while i < 6
           key_name = (numbers[i] + '_month').to_sym
           height_name = ('height_' + numbers[i] + '_month').to_sym
           weight_name = (numbers[i] + '_month').to_sym
@@ -310,17 +311,19 @@ class ChildrenController < ApplicationController
           @weight.write_attribute(:eighteen_month, params[:eighteen_month])
           @head_circumference.write_attribute(:eighteen_month, params[:hc_eighteen_month])
         end
-        while j < (years - 1)
-          string_year = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty_year', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty']
+        while j < years
+          string_year = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty']
           key_name = (string_year[j] + '_year').to_sym
-          height_name = ('height_' + string_year[i] + '_month').to_sym
-          weight_name = (string_year[i] + '_month').to_sym
-          head_circumference_name = ('hc_' + string_year[i] + '_month').to_sym
+          height_name = ('height_' + string_year[j] + '_year').to_sym
+          weight_name = (string_year[j] + '_year').to_sym
+          head_circumference_name = ('hc_' + string_year[j] + '_year').to_sym
           @height.write_attribute(key_name, params[height_name])
           @weight.write_attribute(key_name, params[weight_name])
           @head_circumference.write_attribute(key_name, params[head_circumference_name])
+
           j += 1
         end
+        
         @height.save
         @weight.save
         @head_circumference.save
@@ -333,8 +336,8 @@ class ChildrenController < ApplicationController
       head_circumference_at_birth: params[:head_circumference_at_birth],
       delivery_method: params[:delivery_method],
       offered_c_section: params[:offered_c_section],
-      child_complication: params[:child_complications],
-      apgar_score: params[:apgar_scores],
+      child_complication: params[:child_complication],
+      apgar_score: params[:apgar_score],
       gestation_age: params[:gestation_age],
       mother_age_at_birth: params[:mother_age_at_birth],
       father_age_at_birth: params[:father_age_at_birth],
@@ -381,6 +384,63 @@ class ChildrenController < ApplicationController
     @weight = Weight.find_by(id: @background_history.weight_id)
     @height = Height.find_by(id: @background_history.height_id)
     @head_circumference = HeadCircumference.find_by(id: @background_history.head_circumference_id)
+
+    months = @child.current_age
+    years = months / 12
+
+    if months
+      
+      numbers = ['one', 'two', 'three', 'four', 'five', 'six']
+      @height = Height.new()
+      @weight = Weight.new()
+      @head_circumference = HeadCircumference.new()
+
+      if months < 12
+        i = 0
+        while i < 6
+          key_name = (numbers[i] + '_month').to_sym
+          height_name = ('height_' + numbers[i] + '_month').to_sym
+          weight_name = (numbers[i] + '_month').to_sym
+          head_circumference_name = ('hc_' + numbers[i] + '_month').to_sym
+          @height.write_attribute(key_name, params[height_name])
+          @weight.write_attribute(key_name, params[weight_name])
+          @head_circumference.write_attribute(key_name, params[head_circumference_name])
+          i += 1
+        end
+        @height.save
+      elsif months >= 12
+        i = 0
+        j = 0
+        while i < 6
+          key_name = (numbers[i] + '_month').to_sym
+          height_name = ('height_' + numbers[i] + '_month').to_sym
+          weight_name = (numbers[i] + '_month').to_sym
+          head_circumference_name = ('hc_' + numbers[i] + '_month').to_sym
+          @height.write_attribute(key_name, params[height_name])
+          @weight.write_attribute(key_name, params[weight_name])
+          @head_circumference.write_attribute(key_name, params[head_circumference_name])
+          i += 1
+        end
+        if months > 18
+          @height.write_attribute(:eighteen_month, params[:height_eighteen_month])
+          @weight.write_attribute(:eighteen_month, params[:eighteen_month])
+          @head_circumference.write_attribute(:eighteen_month, params[:hc_eighteen_month])
+        end
+        while j < years
+          string_year = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty']
+          key_name = (string_year[j] + '_year').to_sym
+          height_name = ('height_' + string_year[j] + '_year').to_sym
+          weight_name = (string_year[j] + '_year').to_sym
+          head_circumference_name = ('hc_' + string_year[j] + '_year').to_sym
+          @height.write_attribute(key_name, params[height_name])
+          @weight.write_attribute(key_name, params[weight_name])
+          @head_circumference.write_attribute(key_name, params[head_circumference_name])
+          j += 1
+        end
+        
+      end
+    end
+    
     if
       @mother_complications.update(
         gestational_diabetes: params[:gestational_diabetes],
@@ -392,35 +452,20 @@ class ChildrenController < ApplicationController
         extra_fluid: params[:extra_fluid],
         other: params[:other_complications]
       ) &&
-      @weight.update(
-        one_month: params[:one_month],
-        two_month: params[:two_month],
-        three_month: params[:three_month],
-        four_month: params[:four_month]
-      ) &&
-      @height.update(
-        one_month: params[:height_one_month],
-        two_month: params[:height_two_month],
-        three_month: params[:height_three_month],
-        four_month: params[:height_four_month]
-      ) &&
-      @head_circumference.update(
-        one_month: params[:hc_one_month],
-        two_month: params[:hc_two_month],
-        three_month: params[:hc_three_month],
-        four_month: params[:hc_four_month]
-      ) &&
+      @weight.save &&
+      @height.save &&
+      @head_circumference.save &&
       @background_history.update(
-        weight_at_birth: params[:weight_at_birth][0],
-        height_at_birth: params[:height_at_birth][0],
-        head_circumference_at_birth: params[:head_circumference_at_birth][0],
+        weight_at_birth: params[:weight_at_birth],
+        height_at_birth: params[:height_at_birth],
+        head_circumference_at_birth: params[:head_circumference_at_birth],
         delivery_method: params[:delivery_method],
         offered_c_section: params[:offered_c_section],
         child_complication: params[:child_complication],
         apgar_score: params[:apgar_score],
-        gestation_age: params[:gestation_age][0],
-        mother_age_at_birth: params[:mother_age_at_birth][0],
-        father_age_at_birth: params[:father_age_at_birth][0],
+        gestation_age: params[:gestation_age],
+        mother_age_at_birth: params[:mother_age_at_birth],
+        father_age_at_birth: params[:father_age_at_birth],
         multiple_birth: params[:multiple_birth],
         multiple_birth_trisomy: params[:multiple_birth_trisomy],
         siblings_with_trisomy: params[:siblings_with_trisomy],
@@ -437,7 +482,7 @@ class ChildrenController < ApplicationController
       redirect_to "/profile/#{@child.id}"
     else
       flash[:warning] = "Background History Could Not Be Updated!"
-      render 'edit_background_history.html.erb'
+      render :edit_background_history
     end
   end
 
