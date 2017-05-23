@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       resources :events
       resources :search
       get '/children' => 'children#index'
+      get '/children/trisomy_type_totals' => 'children#trisomy_type_totals'
+      get '/children/birth_order_totals' => 'children#birth_order_totals'
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
       patch '/children' => 'children#update'
@@ -18,7 +20,6 @@ Rails.application.routes.draw do
   get 'children-index' => 'users#children_index'
   get 'admin-dashboard' => 'users#index'
   patch 'admin-dashboard' => 'users#update'
-
 
   resources :events
 
