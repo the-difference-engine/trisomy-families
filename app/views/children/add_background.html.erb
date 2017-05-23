@@ -24,7 +24,6 @@
         </ul>
       </div>
       <% end %>
-      <%= @child.current_age %>
       <div>
         <%= label_tag :weight_at_birth %>
         <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
@@ -238,18 +237,18 @@
       <div>
         <p>Did the child have complications at birth?</p>
         <%= label_tag :yes %>
-        <%= radio_button_tag :child_complications, 'yes', (@background_history.child_complication == 'yes') %>
+        <%= radio_button_tag :child_complication, 'yes', (@background_history.child_complication == 'yes') %>
         <br>
         <%= label_tag :no %>
-        <%= radio_button_tag :child_complications, 'no', (@background_history.child_complication == 'no') %>
+        <%= radio_button_tag :child_complication, 'no', (@background_history.child_complication == 'no') %>
         <br>
         <%= label_tag :unsure %>
-        <%= radio_button_tag :child_complications, 'unsure', (@background_history.child_complication == 'unsure') %>
+        <%= radio_button_tag :child_complication, 'unsure', (@background_history.child_complication == 'unsure') %>
       </div>
     <br>
       <div>
-        <%= label_tag :apgar_scores %>
-        <%= text_field_tag :apgar_scores, @background_history.apgar_score %>
+        <%= label_tag :apgar_score %>
+        <%= text_field_tag :apgar_score, @background_history.apgar_score %>
       </div>
       <div>
         <%= label_tag :gestation_age %>
