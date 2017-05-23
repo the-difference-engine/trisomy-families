@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       patch '/users' => 'users#update'
       patch '/children' => 'children#update'
       delete '/users/:id' => 'users#destroy'
+
+      get '/birthdays' => 'birthdays#index'
     end
   end
 
