@@ -25,10 +25,18 @@
             <li><a href="#">Shop</a></li>
           <% end %>
           <% if current_user && current_user.user_type != 'admin' %>
-            <% if current_user.user_type == 'family' && !current_page?('/families/'+ current_user.family_ids[0].to_s) %>
-              <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
-            <% elsif current_user.user_type == 'doctor' && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
+            <% if current_user.user_type == 'family' %>
+              <% if current_user.family_ids[0] && !current_page?('/families/'+ current_user.family_ids[0].to_s) %>
+                <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
+              <% elsif !current_page?('/families/'+ current_user.family_ids[0].to_s) && !current_page?('/families/new') %>
+                <li><a href="/families/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
+              <% end %>
+            <% elsif current_user.user_type == 'doctor' %> 
+              <% if current_user.physician_ids[0] && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
               <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
+              <% elsif !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) && !current_page?('/physicians/new') %>
+                <li><a href="/physicians/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
+              <% end %>
             <% end %>
           <% end %>
         
@@ -47,10 +55,8 @@
                     <% if current_user && !current_page?('/calendar') %>
                       <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
                     <% end %>
-                    <% if current_user %>
-                      <% if current_user.user_type != 'family' && !current_page?('/professional-center') %>
-                        <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
-                      <% end %>
+                    <% if current_user && !current_page?('/data-center') %>
+                        <li><a href="/data-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Data Center</a></li>
                     <% end %>
                     <% if current_user %>
                       <% if current_user.user_type == 'admin' && !current_page?('/admin-dashboard') %>
@@ -67,10 +73,8 @@
                 <% if current_user && !current_page?('/calendar') %>
                   <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
                 <% end %>
-                <% if current_user %>
-                  <% if current_user.user_type != 'family' && !current_page?('/professional-center') %>
-                    <li><a href="/professional-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Professional Center</a></li>
-                  <% end %>
+                <% if current_user && !current_page?('/data-center') %>
+                    <li><a href="/data-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Data Center</a></li>
                 <% end %>
                 <% if current_user %>
                   <% if current_user.user_type == 'admin' && !current_page?('/admin-dashboard') %>
@@ -84,7 +88,7 @@
               <% if current_user %>
                 <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
 
-              <% elsif !current_page?('/users/sign_in') %>
+              <% elsif current_page?('/') %>
                  <li class="account-link"><%= link_to 'Sign Up', new_user_registration_path, :method => :get %></li>
                  <li class="account-link"><%= link_to 'Log In', new_user_session_path, :method => :get %></li>
 
