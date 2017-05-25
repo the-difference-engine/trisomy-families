@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :search
       get '/children' => 'children#index'
       get '/children/trisomy_type_totals' => 'children#trisomy_type_totals'
+      get '/children/birth_order_totals' => 'children#birth_order_totals'
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
       patch '/children' => 'children#update'
@@ -66,6 +67,6 @@ Rails.application.routes.draw do
 
   get '/family-center' => 'family_center#index'
 
-  get 'professional-center' => 'professional_center#index'
+  get 'data-center' => 'professional_center#index'
 
 end

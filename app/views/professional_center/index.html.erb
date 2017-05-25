@@ -1,10 +1,18 @@
-<h1>Registered children by Trisomy type:</h1>
-<table style = "width: 100%">
+<h1 align = "center">Registered children by Trisomy type:</h1>
+<div style="width: 100%; height: 550px">
+<table style = "width: 90%; float: left">
     <tr>
         <th>Trisomy Type</th>
         <th>Registered Children</th>
         <th>Common Name</th>
-        <th>Percent (%)</th>
+        <th>Full</th>
+        <th>partial</th>
+        <th>mosaic</th>
+        <th>Balanced Translocation</th>
+        <th>Unbalanced Translocation</th>
+        <th>Ring</th>
+
+        
     </tr>
     
         <% trisomy_number = 1 %>
@@ -20,21 +28,64 @@
         <% percent_integer = percent.to_i %>
         <% if percent_integer == 0 %>
             <% percent_integer = "-" %>
-        <% end %>
-        <td><%= percent_integer %></td> 
+        <% end %> 
+        <td> <%= Child.where(trisomy_type: trisomy_number, primary_diagnosis: "Full").count %> </td>
+        <td> <%= Child.where(trisomy_type: trisomy_number, primary_diagnosis: "Partial").count %> </td>
+        <td> <%= Child.where(trisomy_type: trisomy_number, primary_diagnosis: "Mosaic").count %> </td>
+        <td> <%= Child.where(trisomy_type: trisomy_number, primary_diagnosis: "Balanced Translocation").count %> </td>
+        <td> <%= Child.where(trisomy_type: trisomy_number, primary_diagnosis: "Unbalanced Translocation").count %> </td>
+        <td> <%= Child.where(trisomy_type: trisomy_number, primary_diagnosis: "Ring").count %> </td>
 
     </tr>
     <% trisomy_number += 1 %>
     <% end %>
 </table>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<br>
+<div id="container2" style="height: 600px; max-width: 1200px; float: left"></div>
+</div>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/maps/highmaps.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-<div id="container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<br>
+<div style = "float: left">
+<h1 align = "center">Registered children by Birth Order</h1>
+<table style = "width: 40%; float: left">
+    <tr>
+        <th>Birth Order</th>
+        <th>Number of Registered Children</th>
+        <th>Percent (%)</th>
+    </tr>
+    <tr>
+        <td><%= "1" %></td>
+        <% number_of_children_birth_order_1 = Child.where(birth_order: 1).count %>
+        <td><%= number_of_children_birth_order_1 %></td>
+        <% decimal = number_of_children_birth_order_1.to_f / Child.all.count.to_f %>
+        <% percent = decimal * 100 %>
+        <td><%=  percent.to_i %> </td>
+    <tr>
+        <td><%= "2" %></td>
+        <% number_of_children_birth_order_2 = Child.where(birth_order: 2).count %>
+        <td><%= number_of_children_birth_order_2 %></td>
+        <% decimal = number_of_children_birth_order_2.to_f / Child.all.count.to_f %>
+        <% percent = decimal * 100 %>
+        <td><%=  percent.to_i %> </td>
+    </tr>
+    <tr>
+        <td><%= "3 or higher" %></td>
+        <% number_of_children_birth_order_greater_than_3 = Child.where("birth_order > ?", 2).count %>
+        <td><%= number_of_children_birth_order_greater_than_3 %></td>
+        <% decimal = number_of_children_birth_order_greater_than_3.to_f / Child.all.count.to_f %>
+        <% percent = decimal * 100 %>
+        <td><%=  percent.to_i %> </td>
+    </tr>
+</table>
+
+<br>
+<div id="container3" style="height: 400px; max-width: 600px; float: right"></div>
+</div>
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 
 
