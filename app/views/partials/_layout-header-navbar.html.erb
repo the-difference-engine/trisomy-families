@@ -25,10 +25,18 @@
             <li><a href="#">Shop</a></li>
           <% end %>
           <% if current_user && current_user.user_type != 'admin' %>
-            <% if current_user.user_type == 'family' && !current_page?('/families/'+ current_user.family_ids[0].to_s) %>
-              <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
-            <% elsif current_user.user_type == 'doctor' && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
+            <% if current_user.user_type == 'family' %>
+              <% if current_user.family_ids[0] && !current_page?('/families/'+ current_user.family_ids[0].to_s) %>
+                <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
+              <% elsif !current_page?('/families/'+ current_user.family_ids[0].to_s) && !current_page?('/families/new') %>
+                <li><a href="/families/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
+              <% end %>
+            <% elsif current_user.user_type == 'doctor' %> 
+              <% if current_user.physician_ids[0] && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
               <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
+              <% elsif !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) && !current_page?('/physicians/new') %>
+                <li><a href="/physicians/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
+              <% end %>
             <% end %>
           <% end %>
         
