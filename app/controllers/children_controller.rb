@@ -293,6 +293,8 @@ class ChildrenController < ApplicationController
           i += 1
         end
         @height.save
+        @weight.save
+        @head_circumference.save
       elsif months >= 12
         i = 0
         j = 0
