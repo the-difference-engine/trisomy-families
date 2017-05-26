@@ -4,7 +4,6 @@
         height: 600px;
         width: 100%;
        }
-
 /* Removes styles for active state - when user presses the submit button. */
        .btn:focus {
          outline: none;
@@ -22,7 +21,7 @@
       <h4>Search For:</h4>
       <div class="form-group">
         <label for="searchQueryType"></label>
-        <select class="form-control" id="searchQueryType" ng-model="query.type">
+        <select class="form-control" id="searchQueryType" ng-model="query.type" onchange="toggleTrisomyType()">
           <option value="">--User Type--</option>
           <option value="family">Family</option>
           <option value="physician">Physician</option>
@@ -75,7 +74,6 @@
 
 <!-- #####################################################################
     Search form does not behave properly, however this will not affect demo.
-
     1. If lastname is edited and then left empty, the form will submit an empty string
       and cause a crash.
     2. Select state button is not active if selected first.
@@ -89,3 +87,19 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzNgVwahZQ63o16EMv8eU4XFvdkgdr2XM">
     </script>
   </body>
+
+    <script>
+          $("#searchQuerytrisomy_type").hide();
+          function toggleTrisomyType(){
+            var user_type = $("#searchQueryType").val();
+            console.log(user_type);
+            if(user_type == "family"){
+              $("#searchQuerytrisomy_type").show();
+            }
+            else if(user_type == "physician"){
+             $("#searchQuerytrisomy_type").hide();
+            }
+          }
+    </script>
+
+
