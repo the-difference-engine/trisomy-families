@@ -102,7 +102,7 @@
             var address = $scope.data[i]["street_address"];
             var state = $scope.data[i]["state"];
             var city = $scope.data[i]["city"];
-            var trisomy = $scope.data[i]["trisomy_type"];
+            var trisomy = $scope.data[i]["children"];
             var showPage = "/families/" + $scope.data[i]["id"];
             createFamilyMarker(latlng, lastname, address, state, city, trisomy, showPage);
         }
