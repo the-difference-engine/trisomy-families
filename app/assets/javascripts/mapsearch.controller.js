@@ -22,7 +22,6 @@
         });
     }, 100)
 
-
     function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage) {
           var marker = new google.maps.Marker({
             map: $scope.map,
