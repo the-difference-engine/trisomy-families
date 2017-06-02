@@ -71,4 +71,6 @@ Rails.application.routes.draw do
 
   get 'data-center' => 'professional_center#index'
 
+  get '/about' => 'users#about'
+
 end

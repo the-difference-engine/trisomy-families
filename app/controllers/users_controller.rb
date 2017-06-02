@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def about
+    render 'about.html.erb'
+  end
+
   def home
   end
 
