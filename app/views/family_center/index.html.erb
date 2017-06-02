@@ -91,22 +91,28 @@
     <script>
           $("#searchQuerytrisomy_type").hide();
           $("#selectState").hide();
-          $("name").hide();
-          $("btnSubmit").hide();
+          $("#name").hide();
+          $("#btnSubmit").hide();
           function toggleTrisomyType(){
             var user_type = $("#searchQueryType").val();
             console.log(user_type);
             if(user_type == "family"){
               $("#searchQuerytrisomy_type").show();
               $("#selectState").show();
+              $("#name").show();
+              $("#btnSubmit").show();
             }
             else if(user_type == "physician"){
              $("#searchQuerytrisomy_type").hide();
              $("#selectState").show();
+             $("#name").show();
+             $("#btnSubmit").show();
             }
             else {
              $("#searchQuerytrisomy_type").hide();
              $("#selectState").hide();
+             $("#name").hide();
+             $("#btnSubmit").hide();
             }
           }
     </script>
