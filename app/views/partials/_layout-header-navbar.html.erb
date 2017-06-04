@@ -39,6 +39,11 @@
                 <li><a href="/physicians/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
               <% end %>
             <% end %>
+          <% else %>
+             <% if current_user && current_user.family_ids[0] && !current_page?('/families/' + current_user.family_ids[0].to_s) %>
+               <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; My Family</a>
+               </li>
+             <% end %>
           <% end %>
         
           <li class="dropdown">
