@@ -6,7 +6,7 @@
     
     <div class="well">
       <h1 style="text-align: center;">
-        The {{family.family_name}}
+        The {{family.family_name}} Family
       </h1>
       <br>
       <img src='{{family.photo}}'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
@@ -19,6 +19,9 @@
       </p>
       <p>
         State: {{family.state}}
+      </p>
+      <p>
+        Website: <a ng-href="http://{{family.website}}">{{family.website}}</a>
       </p>
       <p>
         Story: {{family.story}}
