@@ -43,6 +43,7 @@ class FamiliesController < ApplicationController
       city: params["family"]["city"],
       state: params["family"]["state"],
       story: params["family"]["story"],
+      website: params["family"]["website"],
       user_id: current_user.id
       )
 
