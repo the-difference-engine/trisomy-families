@@ -133,6 +133,7 @@
         if ($scope.search_form.$dirty) {
           
             var url = "/api/v1/search?" + $httpParamSerializerJQLike($scope.query);
+            console.log(url);
 
             // need to clear trisomy type params from url if it equals nothing
             var url_sub_index = url.indexOf("trisomy_type=");
@@ -142,6 +143,16 @@
             }
             if (url_char == "") {
               url = url.replace("trisomy_type=","");            
+            }
+
+            // need to clear family name params from url if it equals nothing
+            var url_sub_index = url.indexOf("last_name=");
+            var url_char = url.substring((url_sub_index + 10),(url_sub_index + 11));   
+            if (url_char == "&") {
+              url = url.replace("last_name=&","");            
+            }
+            if (url_char == "") {
+              url = url.replace("last_name=","");            
             }
           
             $http({

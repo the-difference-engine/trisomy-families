@@ -32,6 +32,10 @@ class Api::V1::SearchController < ApplicationController
         families = []
       end
 
+      if !params[:last_name].nil?
+        families = Family.where(family_name: params[:last_name])
+      end
+
       @families = families
 
       render 'families.json.jbuilder'
