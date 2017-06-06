@@ -3,7 +3,7 @@
 
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
 
-    <a href="/admin-dashboard">Users Index</a>
+    <a href="/admin-dashboard " class="btn btn-primary">See All Users</a>
     <h2>Children:</h2>
     <div>
       <label>Filter by last name:</label>
