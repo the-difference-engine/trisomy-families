@@ -1,8 +1,7 @@
 class FamilyCenterController < ApplicationController
   def index
-    if !current_user
+    if !current_user || current_user.user_type != "family"
       flash[:warning] = 'You must be logged in to view this page.'
-
       redirect_to '/users/sign_in'
     end
   end
