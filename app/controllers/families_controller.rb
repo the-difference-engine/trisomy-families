@@ -64,7 +64,7 @@ class FamiliesController < ApplicationController
         redirect_to "/families/#{@family.id}"
 
       else
-        redirect_to '/families/new'
+        render '/families/new'
       end
   end
 
