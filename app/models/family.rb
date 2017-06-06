@@ -1,6 +1,7 @@
 class Family < ApplicationRecord
   has_many :children
   belongs_to :user
+  validates :website, format: {with: /(https?:\/\/)/, message: "Must include http:// or https://"}
   geocoded_by :full_address
   after_validation :geocode
 
