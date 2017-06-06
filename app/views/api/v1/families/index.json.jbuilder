@@ -8,5 +8,6 @@ json.array! @families.each do |family|
     json.state family.state
     json.story family.story
     json.photo family.photo
+    json.website family.website
   end
 end
