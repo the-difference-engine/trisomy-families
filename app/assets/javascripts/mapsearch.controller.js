@@ -82,7 +82,6 @@
         if ($scope.query.type === "physician") {
         for(var i = 0; i < $scope.data["data"].length; i++) {
             var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["latitude"], $scope.data["data"][i]["attributes"]["longitude"] );
-            console.log(latlng);
             var firstname = $scope.data["data"][i]["attributes"]["first-name"];
             var lastname = $scope.data["data"][i]["attributes"]["last-name"];
             var address = $scope.data["data"][i]["attributes"]["address"];
@@ -95,7 +94,6 @@
         }
       }
       else if ($scope.query.type === "family") {
-        console.log($scope.data[0].state)
         for(var i = 0; i < $scope.data.length; i++) {
             var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] )
             var lastname = $scope.data[i]["family_name"];
@@ -133,7 +131,19 @@
     $scope.performSearch = function() {
         // send ajax only if form has changed
         if ($scope.search_form.$dirty) {
+          
             var url = "/api/v1/search?" + $httpParamSerializerJQLike($scope.query);
+
+            // need to clear trisomy type params from url if it equals nothing
+            var url_sub_index = url.indexOf("trisomy_type=");
+            var url_char = url.substring((url_sub_index + 13),(url_sub_index + 14));   
+            if (url_char == "&") {
+              url = url.replace("trisomy_type=&","");            
+            }
+            if (url_char == "") {
+              url = url.replace("trisomy_type=","");            
+            }
+          
             $http({
                 method: 'GET',
                 url: url
@@ -141,7 +151,7 @@
                   $scope.data = response.data;
                   removeMarkers(); // for future searches
                   $scope.search_form.$setPristine(); // set to false
-                  $scope.initializeMap();
+                  $scope.initializeMap();                  
 
         }, function errorCallback(response) {
             $scope.searchResults = "No results matched.";
