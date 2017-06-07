@@ -1,0 +1,80 @@
+<h1>Contact Info:</h1>
+<p>Please enter in <i>your</i> contact information. If you are not the parent, you must also enter at least one parent's contact information as well</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-3">      
+       <%= form_for @contact_info_form, url: {action: "create"} do |f| %>        
+        <div class="form-group"> 
+          <%= f.label :contact_first_name, "First Name" %>
+          <%= f.text_field(:contact_first_name, class: "form-control", id: "contact-first-name") %>
+        </div>
+        <div class="form-group">
+          <%= f.label :contact_last_name, "Last Name" %>
+          <%= f.text_field(:contact_last_name, class: "form-control", id: "contact-last-name") %>
+        </div>
+        <div class="form-group">
+          <%= f.label :contact_email, "Email" %>
+          <%= f.text_field(:contact_email, class: "form-control", id: "contact-email") %>
+        </div>
+        <div class="form-group">
+          <%= f.label :contact_phone, "Phone" %>
+          <%= f.text_field(:contact_phone, class: "form-control", id: "contact-phone") %>
+        </div>
+        <div class="form-group"> 
+          <%= f.label :relationship, "Relationship" %>
+          <%= f.text_field(:relationship, class: "form-control", id: "relationship") %>
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="parent-checkbox"> I am a parent of registering participant
+        </div>
+
+        <div id="parent-info">
+          <div class="form-group"> 
+            <%= f.label :parent_first_name, "Parent First Name" %>
+            <%= f.text_field(:parent_first_name, class: "form-control", id: "parent-first-name") %>
+          </div>
+          <div class="form-group">
+            <%= f.label :parent_last_name, "Parent Last Name" %>
+            <%= f.text_field(:parent_last_name, class: "form-control", id: "parent-last-name") %>
+          </div>
+          <div class="form-group">
+            <%= f.label :parent_email, "Parent Email" %>
+            <%= f.text_field(:parent_email, class: "form-control", id: "parent-email") %>
+          </div>
+          <div class="form-group">
+            <%= f.label :parent_phone, "Parent Phone" %>
+            <%= f.text_field(:parent_phone, class: "form-control", id: "parent-phone") %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :other_info, "Other Info" %>
+          <%= f.text_area(:other_info, class: "form-control", id: "other-info") %>
+        </div>
+
+        <%= f.hidden_field(:child_id, :value => @child_id) %>
+
+        <div class="form-group">
+          <%= submit_tag 'Submit', class: "btn btn-warning btn-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#parent-checkbox").click(function() {
+    $("#parent-info").toggle();
+
+    var firstName = $("#contact-first-name").val();
+    var lastName = $("#contact-last-name").val();
+    var email = $("#contact-email").val();
+    var phone = $("#contact-phone").val();
+
+    $("#parent-first-name").attr("value", "firstName");
+    $("#parent-last-name").attr("value", lastName);
+    $("#parent-email").attr("value", email);
+    $("#parent-phone").attr("value", phone);
+  })
+</script>
