@@ -21,14 +21,15 @@ class ResourcesController < ApplicationController
       description: params["resource"]["description"]
     )
 
-    if valid_url?(params["resource"]["url"]) ||  params["resource"]["url"].split('.')[0].include?('www')
+    if valid_url?(params["resource"]["url"]) ||  params["resource"]["url"].split('.')[0].include?('http')
       @resource.assign_attributes(url: params["resource"]["url"]) 
     else
       fixed_url = 'http://' + params["resource"]["url"]
       @resource.assign_attributes(url: fixed_url) 
     end
-
-    if valid_url?(params["resource"]["image"]) ||  params["resource"]["image"].split('.')[0].include?('www')
+    if params["resource"]["image"] == "" 
+      @resource.assign_attributes(image: 'http://westerndental.ie/wp-content/plugins/social-media-builder//img/no-image.png') 
+    elsif valid_url?(params["resource"]["image"]) ||  params["resource"]["image"].split('.')[0].include?('www')
       @resource.assign_attributes(image: params["resource"]["image"]) 
     else
       fixed_url = 'http://' + params["resource"]["image"]
@@ -68,7 +69,7 @@ class ResourcesController < ApplicationController
       description: params["resource"]["description"]
     )
 
-    if valid_url?(params["resource"]["url"]) ||  params["resource"]["url"].split('.')[0].include?('www')
+    if valid_url?(params["resource"]["url"]) ||  params["resource"]["url"].split('.')[0].include?('http')
       @resource.assign_attributes(url: params["resource"]["url"]) 
     else
       fixed_url = 'http://' + params["resource"]["url"]
