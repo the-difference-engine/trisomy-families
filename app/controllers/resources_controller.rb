@@ -44,7 +44,7 @@ class ResourcesController < ApplicationController
   end
 
   def new
-    if current_user && current_user.user_type == 'admin'
+    if current_user
       @resource = Resource.new
     else
       flash[:warning] = 'You must be an administrator to view this page!'
