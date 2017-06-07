@@ -47,7 +47,6 @@
     <div class="row">
       <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending">
         <div class="well">
-          <div>{{user.user_type}}</div>
           <h4>{{user.email}}</h4>
           <hr>
           
