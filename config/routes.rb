@@ -60,10 +60,33 @@ Rails.application.routes.draw do
 
   patch '/profile/:id/photo' => 'children#update_photo'
 
+  # NEW ROUTES FOR CHILD REGISTRATION:
+  get 'registrations' => 'registrations#index'
+  get 'registrations/:id' => 'registrations#show'
+  get 'registrations/:id' => 'registrations#destroy'
+
+  get 'registrations/contact_info/:id' => 'contact_info_forms#show'
+  get 'registrations/contact_info/new' => 'contact_info_forms#new'
+  get 'registrations/contact_info/:id/edit' => 'contact_info_forms#edit'
+  post 'registrations/contact_info' => 'contact_info_forms#create'
+  patch 'registrations/contact_info/:id' => 'contact_info_forms#udpate'
+
+  get 'registrations/background_history/:id' => 'background_history_forms#show'
+  get 'registrations/background_history/new' => 'background_history_forms#new'
+  get 'registrations/background_history/:id/edit' => 'background_history_forms#edit'
+  post 'registrations/background_history' => 'background_history_forms#create'
+  patch 'registrations/background_history/:id' => 'background_history_forms#udpate'
+
+  get 'registrations/health_history/:id' => 'health_history_forms#show'
+  get 'registrations/health_history/new' => 'health_history_forms#new'
+  get 'registrations/health_history/:id/edit' => 'health_history_forms#edit'
+  post 'registrations/health_history' => 'health_history_forms#create'
+  patch 'registrations/health_history/:id' => 'health_history_forms#udpate'
+
+  # OLD ROUTES FOR CHILD REGISTRATION:
   get 'profile/:id/register' => 'children#register'
   post 'profile/:id/register' => 'children#confirm_register'
   get 'profile/:id/edit_registration' => 'children#edit_registration'
-  
   get 'profile/:id/edit_background_history' => 'children#edit_background_history'
   get 'profile/:id/edit_health_history' => 'children#edit_health_history'
   delete '/profile/:id' => 'children#destroy'
