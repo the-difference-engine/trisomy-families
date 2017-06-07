@@ -1,7 +1,13 @@
 class ResourcesController < ApplicationController
 
   def index
-    @resources = Resource.all
+    if current_user
+      @resources = Resource.all
+    else
+      flash[:warning] = 'You must be signed in to view this page!'
+      redirect_to '/'
+    end
+
   end
 
   def valid_url?(url)
