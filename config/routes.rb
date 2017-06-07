@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get '/birthdays' => 'birthdays#index'
       get '/families' => 'families#index'
       get '/families/children' => 'families#children'
+      get '/resources' => 'resources#index'
     end
   end
 
@@ -28,6 +29,13 @@ Rails.application.routes.draw do
   resources :events
 
   get '/queries' => 'users#query_table'
+
+  get '/resources' => 'resources#index'
+  get '/resources/new' => 'resources#new'
+  post '/resources' => 'resources#create'
+  get '/resources/:id/edit' => 'resources#edit'
+  patch '/resources/:id' => 'resources#update'
+  delete '/resources/:id' => 'resources#destroy'
 
   get '/family-dashboard' => 'families#index'
   post '/families' => 'families#create'
