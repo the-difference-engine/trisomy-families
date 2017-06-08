@@ -3,7 +3,7 @@
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
     <br>
     <h1 style="text-align: center;">Resources</h1>
-    <% if current_user && current_user.user_type == 'admin' %>
+    <% if current_user %>
       <%= link_to 'Add Resource', resources_new_path, class: "btn btn-success" %>
     <% end %>
     <br>
@@ -15,7 +15,7 @@
           <a href={{resource.url}}>{{resource.name}}
         </a></h1>
         <br>
-        <img ng-if="resource.image" src='{{resource.image}}' style="width:250px;height:150px; display: block; margin: auto;">
+        <img ng-if="resource.image" src='{{resource.image}}' style="width:250px;height:200px; display: block; margin: auto;">
         <br>
         <h4>
           Description:
