@@ -46,11 +46,11 @@
          <h5 style="color:gray">Trisomy</h5>
          <div class="form-group">
             <%= f.label :trisomy_type, "Type of Trisomy" %>
-            <%= f.select("trisomy_type", options_for_select(trisomy_type, @child.trisomy_type)) %>
+            <%= f.select("trisomy_type", options_for_select(trisomy_type)) %>
          </div>
          <div class="form-group">
             <%= f.label :child_primary_diagnosis %>
-            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis, @child.primary_diagnosis)) %>
+            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %>
          </div>
          <div class="form-group">
             <%= f.label :other_primary_diagnosis %>
