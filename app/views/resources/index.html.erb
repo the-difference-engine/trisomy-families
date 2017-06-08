@@ -1,0 +1,34 @@
+<div ng-app="app">
+  <div ng-controller="resourcesCtrl" ng-init="setup()">
+    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
+    <br>
+    <h1 style="text-align: center;">Resources</h1>
+    <% if current_user %>
+      <%= link_to 'Add Resource', resources_new_path, class: "btn btn-success" %>
+    <% end %>
+    <br>
+    <br>
+    <div class="col-md-4" ng-repeat="resource in resources">
+      <div class="well">
+        
+        <h1 style="text-align: center;">
+          <a href={{resource.url}}>{{resource.name}}
+        </a></h1>
+        <br>
+        <img ng-if="resource.image" src='{{resource.image}}' style="width:250px;height:200px; display: block; margin: auto;">
+        <br>
+        <h4>
+          Description:
+        </h4>
+        <p>{{resource.description}}</p>
+        <% if current_user && current_user.user_type == 'admin' %>
+          <%= link_to "Edit", '/resources/{{resource.id}}/edit', class: "btn btn-info" %>
+          <%= link_to "Delete", '/resources/{{resource.id}}', class: "btn btn-danger", method: :delete %>
+        <% end %>
+
+      </div>
+      
+    </div>
+
+  </div>
+</div>

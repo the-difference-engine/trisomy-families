@@ -155,30 +155,43 @@
         <a href="#" class="button big btn-success">More Events</a>
       </section>
     </div>
+    <div ng-app="app">
+      <div ng-controller="BirthdaysController" ng-init="setUp()">
+          <div class="container-fluid content-row" ng-if="children.length != 0">
+            <!-- include padding top and bottom using the css box model!-->
+            <div class="container">
+              <h2>Trisomy Birthdays</h2>  
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                
+                <div class="carousel-inner">
+                  <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
+                    <div class="row">          
+                      
+                      <img src="{{child.photo}}" style="width:350px;height:350px;"/>
+                      <div class="col-md-6">
+                        <p>Happy Birthday {{child.first_name}}!</p>
+                        
+                        <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                        <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
 
-    <div class="container-fluid content-row">
-      <div class="container">
-        <!-- include padding top and bottom using the css box model!-->
-        <div class="row">
-          <div class="col-xs-12">
-            <h1>Trisomy Birthdays</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12" style="padding-top:0">
-            <h2>Happy Birthday, Johnny!</h2>
-          </div>
-        </div>
-        <div class="row">
-          <!-- include margin-left and margin-right !-->          
-          <div class="col-md-6" style="padding-top:0">            
-            <img class="img-rounded img-responsive" src="https://trisomy-families.s3.amazonaws.com/MvYxsPtHjAljWJruUkjM_trisomy18.jpg"/>
-          </div>
-          <div class="col-md-6" style="padding-top:0">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet.</p>
-            <a href="#" class="button big btn-danger">See Story</a>            
-          </div>
-        </div>
       </div>
     </div>
 
@@ -214,11 +227,11 @@
             <div class="col-md-2">
               <h6>Social</h6>
               <ol class="social">
-                  <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
-                  <li><a class="icon fa-twitter" href="#"><span class="label">Twitter</span></a></li>
-                  <li><a class="icon fa-linkedin" href="#"><span class="label">LinkedIn</span></a></li>
-                  <li><a class="icon fa-google-plus" href="#"><span class="label">Google+</span></a></li>
-                </ol>
+                <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
+                <li><a class="icon fa-twitter" href="#"><span class="label">Twitter</span></a></li>
+                <li><a class="icon fa-linkedin" href="#"><span class="label">LinkedIn</span></a></li>
+                <li><a class="icon fa-google-plus" href="#"><span class="label">Google+</span></a></li>
+              </ol>
             </div>
           </div>
         </div>

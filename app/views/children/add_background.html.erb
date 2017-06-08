@@ -1,4 +1,4 @@
-<h2>Background History:</h2>
+  <h2>Background History:</h2>
   <% if @background_history.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@background_history.errors.count, "error") %> prohibited this background_history from being updated:</h2>
@@ -31,15 +31,28 @@
       
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
-        <% while i < 6 do %>
-          <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
-          
-          <div>
-            <%= label_tag numbers[i]+'_month' %>
-            <% key_name = (numbers[i]+'_month').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
-          </div>
-        <% i += 1 %>
+        <% if @child.current_age <= 6 %>
+          <% while i < @child.current_age do %>
+            <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            
+            <div>
+              <%= label_tag numbers[i]+'_month' %>
+              <% key_name = (numbers[i]+'_month').to_sym %>
+              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+            </div>
+            <% i += 1 %>
+          <% end %>
+        <% else %>
+          <% while i < 6 do %>
+            <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            
+            <div>
+              <%= label_tag numbers[i]+'_month' %>
+              <% key_name = (numbers[i]+'_month').to_sym %>
+              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+            </div>
+            <% i += 1 %>
+          <% end %>
         <% end %>
       <% end %>
       <% if @child.current_age >= 12 %>
@@ -89,15 +102,28 @@
       </div>
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
-        <% while i < 6 do %>
-          <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
-          
-          <div>
-            <%= label_tag numbers[i]+'_month' %>
-            <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
-          </div>
-        <% i += 1 %>
+        <% if @child.current_age <= 6 %>
+          <% while i < @child.current_age do %>
+            <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            
+            <div>
+              <%= label_tag numbers[i]+'_month' %>
+              <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+            </div>
+            <% i += 1 %>
+          <% end %>
+        <% else %>
+          <% while i < 6 do %>
+            <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            
+            <div>
+              <%= label_tag numbers[i]+'_month' %>
+              <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+            </div>
+            <% i += 1 %>
+          <% end %>
         <% end %>
       <% end %>
 
@@ -148,15 +174,28 @@
       </div>
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
-        <% while i < 6 do %>
-          <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
-          
-          <div>
-            <%= label_tag numbers[i]+'_month' %>
-            <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
-          </div>
-        <% i += 1 %>
+        <% if @child.current_age <= 6 %>
+          <% while i < @child.current_age do %>
+            <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            
+            <div>
+              <%= label_tag numbers[i]+'_month' %>
+              <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+            </div>
+            <% i += 1 %>
+          <% end %>
+        <% else %>
+          <% while i < 6 do %>
+            <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            
+            <div>
+              <%= label_tag numbers[i]+'_month' %>
+              <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+            </div>
+            <% i += 1 %>
+          <% end %>
         <% end %>
       <% end %>
 
