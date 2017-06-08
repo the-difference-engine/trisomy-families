@@ -1,12 +1,12 @@
-<h1>Contact Info:</h1>
+<h1>Edit Contact Info:</h1>
 <p>Please enter in <i>your</i> contact information. If you are not the parent, you must also enter at least one parent's contact information as well</p>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-md-3">      
-       <%= form_for @contact_info_form, url: {action: "create"} do |f| %>        
+       <%= form_for @contact_info_form, url: {action: "update"} do |f| %>        
         <div class="form-group"> 
           <%= f.label :contact_first_name, "First Name" %>
-          <%= f.text_field(:contact_first_name, class: "form-control", id: "contact-first-name") %>
+          <%= f.text_field(:contact_first_name, class: "form-control", id: "contact-first-name", value: @contact_info_form.contact_first_name) %>
         </div>
         <div class="form-group">
           <%= f.label :contact_last_name, "Last Name" %>
@@ -52,8 +52,6 @@
           <%= f.label :other_info, "Other Info" %>
           <%= f.text_area(:other_info, class: "form-control", id: "other-info") %>
         </div>
-
-        <%= f.hidden_field(:child_id, :value => @child_id) %>
 
         <div class="form-group">
           <%= submit_tag 'Submit', class: "btn btn-warning btn-lg" %>

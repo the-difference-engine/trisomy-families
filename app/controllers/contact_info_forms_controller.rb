@@ -19,7 +19,7 @@ class ContactInfoFormsController < ApplicationController
       redirect_to "/families/#{family.id}"
     else
       flash[:danger] = "Something went wrong. Please fill out every field in the form."
-      render '/registrations/contact_info/new'
+      render 'new.html.erb'
     end
   end
 
@@ -27,9 +27,20 @@ class ContactInfoFormsController < ApplicationController
   end
 
   def edit
+    @contact_info_form = ContactInfoForm.find_by(id: params[:id])
   end
 
   def update
+    family = Family.find_by(user_id: current_user.id)
+    contact_info = ContactInfoForm.new
+
+    if contact_info.update(contact_info_params)
+      flash[:success] = "Contact info for your child registration has been update!"
+      redirect_to "/families/#{family.id}"
+    else
+      flash[:danger] = "Something went wrong. Please fill out every field in the form."
+      render 'edit.html.erb'
+    end
   end
 
   def contact_info_params

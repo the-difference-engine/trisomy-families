@@ -69,20 +69,20 @@ Rails.application.routes.draw do
   post 'registrations/contact_info' => 'contact_info_forms#create'
   get 'registrations/contact_info/:id' => 'contact_info_forms#show'
   get 'registrations/contact_info/:id/edit' => 'contact_info_forms#edit'
-  patch 'registrations/contact_info/:id' => 'contact_info_forms#udpate'
+  patch 'registrations/contact_info/:id' => 'contact_info_forms#update'
   
   get 'registrations/background_history/new' => 'background_history_forms#new'
   post 'registrations/background_history' => 'background_history_forms#create'
   get 'registrations/background_history/:id' => 'background_history_forms#show'
   get 'registrations/background_history/:id/edit' => 'background_history_forms#edit'
-  patch 'registrations/background_history/:id' => 'background_history_forms#udpate'
+  patch 'registrations/background_history/:id' => 'background_history_forms#update'
 
   
   get 'registrations/health_history/new' => 'health_history_forms#new'
   post 'registrations/health_history' => 'health_history_forms#create'
   get 'registrations/health_history/:id' => 'health_history_forms#show'
   get 'registrations/health_history/:id/edit' => 'health_history_forms#edit'  
-  patch 'registrations/health_history/:id' => 'health_history_forms#udpate'
+  patch 'registrations/health_history/:id' => 'health_history_forms#update'
 
   # OLD ROUTES FOR CHILD REGISTRATION:
   get 'profile/:id/register' => 'children#register'
