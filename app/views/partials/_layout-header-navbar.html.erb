@@ -71,6 +71,7 @@
                         <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
                       <% end %>
                     <% end %>                    
+                    <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
                   </ul>
                 </div>
      
@@ -90,7 +91,13 @@
                   <% if current_user.user_type == 'admin' && !current_page?('/admin-dashboard') %>
                     <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
                   <% end %>
+                <% end %> 
+                <% if !current_page?('/resources') && current_page?('/') %>               
+                  <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
+                <% elsif current_user && !current_page?('/resources') %>
+                  <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
                 <% end %>
+
               <% end %>
              
             </ul>

@@ -31,8 +31,9 @@
       <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
       
     </div>
+    
 
-    <h2>Children:</h2>
+    <h2 ng-if='children[0] != nil'>Children: </h2>
 
     <div class="col-md-4" ng-repeat="child in children">
       <div class="well">

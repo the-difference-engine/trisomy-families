@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605230522) do
+
+ActiveRecord::Schema.define(version: 20170607232743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +133,22 @@ ActiveRecord::Schema.define(version: 20170605230522) do
     t.boolean  "not_applicable"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "contact_info_forms", force: :cascade do |t|
+    t.string   "contact_first_name"
+    t.string   "contact_last_name"
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.string   "parent_first_name"
+    t.string   "parent_last_name"
+    t.string   "parent_email"
+    t.string   "parent_phone"
+    t.string   "relationship"
+    t.text     "other_info"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "child_id"
   end
 
   create_table "cranial_facials", force: :cascade do |t|
@@ -537,6 +554,15 @@ ActiveRecord::Schema.define(version: 20170605230522) do
     t.string   "other"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "url"
+    t.string   "image"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "secondary_diagnoses", force: :cascade do |t|

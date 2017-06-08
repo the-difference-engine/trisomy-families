@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get '/birthdays' => 'birthdays#index'
       get '/families' => 'families#index'
       get '/families/children' => 'families#children'
+      get '/resources' => 'resources#index'
     end
   end
 
@@ -29,6 +30,13 @@ Rails.application.routes.draw do
 
   get '/queries' => 'users#query_table'
 
+  get '/resources' => 'resources#index'
+  get '/resources/new' => 'resources#new'
+  post '/resources' => 'resources#create'
+  get '/resources/:id/edit' => 'resources#edit'
+  patch '/resources/:id' => 'resources#update'
+  delete '/resources/:id' => 'resources#destroy'
+
   get '/family-dashboard' => 'families#index'
   post '/families' => 'families#create'
   get '/families/new' => 'families#new'
@@ -40,8 +48,7 @@ Rails.application.routes.draw do
   get '/physicians/new' => 'physicians#new'
   get '/physicians/:id' => 'physicians#show'
   get '/physicians/:id/edit' => 'physicians#edit'
-  patch '/physicians/:id' => 'physicians#update'
-  
+  patch '/physicians/:id' => 'physicians#update' 
   patch '/physicians/:id/photo' => 'physicians#update_photo'
 
   get '/profile/new' => 'children#new'
@@ -49,23 +56,31 @@ Rails.application.routes.draw do
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
   patch '/profile/:id' => 'children#update'
-
+  delete '/profile/:id' => 'children#destroy'
   patch '/profile/:id/photo' => 'children#update_photo'
 
-  get 'profile/:id/register' => 'children#register'
-  post 'profile/:id/register' => 'children#confirm_register'
-  get 'profile/:id/edit_registration' => 'children#edit_registration'
+  # NEW ROUTES FOR CHILD REGISTRATION:
+  get 'registrations' => 'registrations#index'
+  get 'registrations/:id' => 'registrations#show'
+  get 'registrations/:id' => 'registrations#destroy'
+
+  get 'registrations/contact_info/new' => 'contact_info_forms#new'
+  post 'registrations/contact_info' => 'contact_info_forms#create'
+  get 'registrations/contact_info/:id' => 'contact_info_forms#show'
+  get 'registrations/contact_info/:id/edit' => 'contact_info_forms#edit'
+  patch 'registrations/contact_info/:id' => 'contact_info_forms#update'
   
-  get 'profile/:id/edit_background_history' => 'children#edit_background_history'
-  get 'profile/:id/edit_health_history' => 'children#edit_health_history'
-  delete '/profile/:id' => 'children#destroy'
-  get 'profile/:id/background' => 'children#add_background'
-  get 'profile/:id/health_history' => 'children#add_health_history'
-  post 'profile/:id/background' => 'children#background_history'
-  post 'profile/:id/health' => 'children#health_history'
-  patch 'profile/:id/register' => 'children#update_registration'
-  patch 'profile/:id/health' => 'children#update_health_history'
-  patch 'profile/:id/background' => 'children#update_background_history'
+  get 'registrations/background_history/new' => 'background_history_forms#new'
+  post 'registrations/background_history' => 'background_history_forms#create'
+  get 'registrations/background_history/:id' => 'background_history_forms#show'
+  get 'registrations/background_history/:id/edit' => 'background_history_forms#edit'
+  patch 'registrations/background_history/:id' => 'background_history_forms#update'
+
+  get 'registrations/health_history/new' => 'health_history_forms#new'
+  post 'registrations/health_history' => 'health_history_forms#create'
+  get 'registrations/health_history/:id' => 'health_history_forms#show'
+  get 'registrations/health_history/:id/edit' => 'health_history_forms#edit'  
+  patch 'registrations/health_history/:id' => 'health_history_forms#update'
 
   get '/calendar' => 'users#calendar'
 
