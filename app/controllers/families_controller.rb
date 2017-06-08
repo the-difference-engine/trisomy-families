@@ -43,10 +43,9 @@ class FamiliesController < ApplicationController
       city: params["family"]["city"],
       state: params["family"]["state"],
       story: params["family"]["story"],
+      website: params["family"]["website"],
       user_id: current_user.id
-      )
-
-      @family.save    
+      )   
 
       if params["family"]["photo"]
         charset = Array('A'..'Z') + Array('a'..'z')
@@ -59,10 +58,14 @@ class FamiliesController < ApplicationController
         @family.update(photo: obj.public_url)
       end
 
-      @family.save
+      if @family.save
 
-      flash[:success] = "Family Successfully Added!"
-      redirect_to "/families/#{@family.id}"
+        flash[:success] = "Family Successfully Added!"
+        redirect_to "/families/#{@family.id}"
+
+      else
+        render '/families/new'
+      end
   end
 
   def show
@@ -88,6 +91,7 @@ class FamiliesController < ApplicationController
     @family.story = params[:family][:story]
     @family.city = params[:family][:city]
     @family.state = params[:family][:state]
+    @family.website = params[:family][:website]
     @family.save
     if params["family"]["photo"] != nil
       charset = Array('A'..'Z') + Array('a'..'z')
