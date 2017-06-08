@@ -157,7 +157,7 @@
     </div>
     <div ng-app="app">
       <div ng-controller="BirthdaysController" ng-init="setUp()">
-          <div class="container">
+          <div class="container-fluid content-row" style="">
             <!-- include padding top and bottom using the css box model!-->
             <div class="container">
               <h2>Trisomy Birthdays</h2>  
@@ -170,6 +170,7 @@
                       <img src="{{child.photo}}" style="width:350px;height:350px;"/>
                       <div class="col-md-6">
                         <p>Happy Birthday {{child.first_name}}!</p>
+                        <!-- <p>Now {{child.age}} years old</p> -->
                         <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
                         <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
 
