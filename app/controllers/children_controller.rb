@@ -65,54 +65,56 @@ class ChildrenController < ApplicationController
   end
 
   def update_photo
-    @child = Child.find_by(id: params[:id])
 
     # Generate random string to file_name for uniqueness
     charset = Array('A'..'Z') + Array('a'..'z')
     random_string = Array.new(20) { charset.sample }.join
-    object_name = random_string + '_' + params[:child][:avatar].original_filename
+    object_name = random_string + '_' + params[:child][:avatar_file_name].original_filename
 
     obj = S3_BUCKET.object(object_name)
-    obj.upload_file(params[:child][:avatar].tempfile.path)
+    obj.upload_file(params[:child][:avatar_file_name].tempfile.path)
 
-    @child.update_columns(avatar_file_name: obj.public_url)
+    @child.avatar_file_name = obj.public_url
 
-    if @child.save
-      flash[:message] = "Uploaded succesfully."
-    else
-      flash[:error] = "Error occured in uploading file."
-    end
-
-    redirect_to "/profile/#{@child.id}"
   end
 
   def update
     @child = Child.find_by(id: params[:id])
     @privacy = @child.privacy
-
-    @child.update(
-      first_name: params[:first_name] || @child.first_name,
-      last_name: params[:last_name] || @child.last_name,
-      trisomy_type: params[:trisomy_type] || @child.trisomy_type,
-      birth_date: calculate_date(params[:date_of_birth]) || @child.birth_date,
-      death_date: calculate_date(params[:date_of_death]) || @child.death_date,
-      state: params[:state] || @child.state,
-      city: params[:city] || @child.city,
-      trisomy_story: params[:trisomy_story] || @child.trisomy_story
+    @child.assign_attributes(
+      first_name: params["child"]["first_name"],
+      last_name: params["child"]["last_name"],
+      nickname: params["child"]["nickname"],
+      trisomy_type: params["child"]["trisomy_type"],
+      birth_date: calculate_date(params["child"]["birth_date"]),
+      death_date: calculate_date(params["child"]["death_date"]),
+      birth_order: params["child"]["birth_order"],
+      primary_diagnosis: params["child"]["primary_diagnosis"],
+      other_primary_diagnosis: params["child"]["other_primary_diagnosis"],
+      state: params["child"]["state"],
+      city: params["child"]["city"],
+      trisomy_story: params["child"]["trisomy_story"]
     )
 
-    @privacy.update(
-      story: params[:story] || @privacy.story,
-      avatar: params[:avatar] || @privacy.avatar,
-      location: params[:location] || @privacy.location,
-      birthday: params[:birthday] || @privacy.birthday,
-      trisomy_type: params[:trisomy_type] || @privacy.trisomy_type
+    @privacy.assign_attributes(
+      story: params["child"]["privacy"]["story"],
+      avatar: params["child"]["privacy"]["avatar"],
+      location: params["child"]["privacy"]["location"],
+      birthday: params["child"]["privacy"]["birthday"],
+      trisomy_type: params["child"]["privacy"]["trisomy_type"]
     )
 
-    if @child.save
-      flash[:success] = 'Profile Updated!'
+    if params[:child][:avatar_file_name]
+      update_photo
     end
-    redirect_to "/profile/#{@child.id}"
+
+    if @child.save && @privacy.save
+      flash[:success] = 'Profile Updated!'
+      redirect_to "/profile/#{@child.id}"
+    else
+      render 'edit.html.erb'
+    end
+      
   end
 
   def destroy
