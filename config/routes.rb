@@ -48,8 +48,7 @@ Rails.application.routes.draw do
   get '/physicians/new' => 'physicians#new'
   get '/physicians/:id' => 'physicians#show'
   get '/physicians/:id/edit' => 'physicians#edit'
-  patch '/physicians/:id' => 'physicians#update'
-  
+  patch '/physicians/:id' => 'physicians#update' 
   patch '/physicians/:id/photo' => 'physicians#update_photo'
 
   get '/profile/new' => 'children#new'
@@ -57,7 +56,7 @@ Rails.application.routes.draw do
   get '/profile/:id' => 'children#show'
   get '/profile/:id/edit' => 'children#edit'
   patch '/profile/:id' => 'children#update'
-
+  delete '/profile/:id' => 'children#destroy'
   patch '/profile/:id/photo' => 'children#update_photo'
 
   # NEW ROUTES FOR CHILD REGISTRATION:
@@ -77,27 +76,11 @@ Rails.application.routes.draw do
   get 'registrations/background_history/:id/edit' => 'background_history_forms#edit'
   patch 'registrations/background_history/:id' => 'background_history_forms#update'
 
-  
   get 'registrations/health_history/new' => 'health_history_forms#new'
   post 'registrations/health_history' => 'health_history_forms#create'
   get 'registrations/health_history/:id' => 'health_history_forms#show'
   get 'registrations/health_history/:id/edit' => 'health_history_forms#edit'  
   patch 'registrations/health_history/:id' => 'health_history_forms#update'
-
-  # OLD ROUTES FOR CHILD REGISTRATION:
-  get 'profile/:id/register' => 'children#register'
-  post 'profile/:id/register' => 'children#confirm_register'
-  get 'profile/:id/edit_registration' => 'children#edit_registration'
-  get 'profile/:id/edit_background_history' => 'children#edit_background_history'
-  get 'profile/:id/edit_health_history' => 'children#edit_health_history'
-  delete '/profile/:id' => 'children#destroy'
-  get 'profile/:id/background' => 'children#add_background'
-  get 'profile/:id/health_history' => 'children#add_health_history'
-  post 'profile/:id/background' => 'children#background_history'
-  post 'profile/:id/health' => 'children#health_history'
-  patch 'profile/:id/register' => 'children#update_registration'
-  patch 'profile/:id/health' => 'children#update_health_history'
-  patch 'profile/:id/background' => 'children#update_background_history'
 
   get '/calendar' => 'users#calendar'
 
