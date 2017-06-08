@@ -157,7 +157,7 @@
     </div>
     <div ng-app="app">
       <div ng-controller="BirthdaysController" ng-init="setUp()">
-          <div class="container-fluid content-row" style="">
+          <div class="container-fluid content-row" ng-if="children.length != 0">
             <!-- include padding top and bottom using the css box model!-->
             <div class="container">
               <h2>Trisomy Birthdays</h2>  
@@ -180,11 +180,11 @@
                 </div>
 
                 <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
                   <span class="glyphicon glyphicon-chevron-left"></span>
                   <span class="sr-only">Previous</span>
                 </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
                   <span class="glyphicon glyphicon-chevron-right"></span>
                   <span class="sr-only">Next</span>
                 </a>
