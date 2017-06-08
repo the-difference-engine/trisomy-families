@@ -17,6 +17,7 @@ class Child < ApplicationRecord
   belongs_to :background_history
   belongs_to :health_history
   has_one :privacy
+  has_one :contact_info_form
   accepts_nested_attributes_for :privacy
 
   before_validation :ensure_avatar_file_name_has_a_value, on: :create

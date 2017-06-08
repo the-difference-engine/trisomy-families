@@ -1,16 +1,6 @@
-  <h2>Background History:</h2>
-  <% if @background_history.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@background_history.errors.count, "error") %> prohibited this background_history from being updated:</h2>
-   
-      <ul>
-      <% @background_history.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<%= form_tag "/profile/#{@child.id}/background", method: :post do %>
+<h1>Background History</h1>
+<p>Please enter in the background history of the participant as best as you can. All fields must be filled. If you are not sure about a question, type in "na".</p>
+<%= form_tag "/registrations/background_history", method: :post do %>
   <h3>Participant Measurements</h3>
     <h4>Weight Info:</h4>
       <% if @weight.errors.any? %>
@@ -318,5 +308,6 @@
         <%= label_tag :trisomy_relative %>
         <%= check_box_tag :trisomy_relative, nil, @background_history.trisomy_relative %>
       </div>
+      <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
   <%= submit_tag %>
 <% end %>
