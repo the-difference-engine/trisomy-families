@@ -36,22 +36,10 @@
   <hr>
 
     <div>
-    <% if @child.background_history_id == nil %>
-      <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
-    <% end %>
-    <% if @child.health_history_id == nil %>
-      <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
-      <% end %>
-      <% if @child.registered %>
-        <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
-      <% else %>
-        <%= link_to 'Begin Registration',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
-      <% end %>
-    <% if @child.background_history_id %>
-      <%= link_to 'Edit Background History',"/profile/#{@child.id}/edit_background_history", :class => "btn btn-default" %><br>
-    <% end %>
-    <% if @child.health_history_id %>
-      <%= link_to 'Edit Health History',"/profile/#{@child.id}/edit_health_history", :class => "btn btn-default" %><br>
-    <% end %>
+      <a href="/registrations/contact_info/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Contact Info</button></a>
+      <br>
+      <a href="/registrations/background_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Background History</button></a>
+      <br>
+      <a href="/registrations/health_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Health History</button></a>
   </div>
 </div>
