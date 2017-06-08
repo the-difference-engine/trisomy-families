@@ -15,6 +15,11 @@
  *= require fullcalendar
  */
 
+#myCarousel {
+  margin-right: 3%;
+  margin-left: -2%;
+}
+
 .navbar .navbar-nav {
   display: inline-block;
   float: none;
