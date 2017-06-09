@@ -42,6 +42,11 @@
   <h2>Participant Registration</h2>
   <p>Once all three registration forms have been submitted, your registration will be reviewed. When the registration is accepted, you will have access to The Family Center and Data Center. Here, you can find information on other participants. Start the registration process by clicking below.</p>
   <div>
+    <% if @contact_form && @child.background_history_id && @child.health_history_id %>
+      <a href="/registrations/<%= @child.id %>"><button class="btn btn-success">Review & Submit Registration</button></a>
+    <% end %>
+    <br>
+    
     <% if @contact_form %>
       <a href="/registrations/contact_info/<%= @contact_form.id %>/edit"><button class="btn btn-warning">Edit Contact Info</button></a>
     <% else %>
@@ -65,5 +70,6 @@
     <% else %>
       <button class="btn btn-primary" disabled>Add Health History</button>
     <% end %>
+    <br>
   </div>
 </div>
