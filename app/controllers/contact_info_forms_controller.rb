@@ -13,8 +13,9 @@ class ContactInfoFormsController < ApplicationController
   def create
     family = Family.find_by(user_id: current_user.id)
     contact_info = ContactInfoForm.new(contact_info_params)
-
-    if contact_info.save
+    contact_info.update(child_id: params[:child_id])
+    
+    if contact_info.save      
       flash[:success] = "Contact info for your child registration has been submitted!"
       redirect_to "/families/#{family.id}"
     else
@@ -54,8 +55,7 @@ class ContactInfoFormsController < ApplicationController
       :parent_email,
       :parent_phone,
       :relationship,
-      :other_info,
-      :child_id
+      :other_info
     )
   end
 end
