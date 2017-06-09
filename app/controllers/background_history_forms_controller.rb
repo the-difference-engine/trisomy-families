@@ -121,7 +121,7 @@ class BackgroundHistoryFormsController < ApplicationController
          background_history_id: @background_history.id
        )
       flash[:success] = "Background History Successfully added!"
-      redirect_to "/children/#{@child.id}"
+      redirect_to "/profile/#{@child.id}"
     else
       flash[:warning] = "Unable to add Background History!"
       render 'new.html.erb'
