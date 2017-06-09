@@ -37,7 +37,7 @@ class PhysiciansController < ApplicationController
   end
 
   def show
-    @physician = Physician.find_by(id: params[:id])
+    @physician = Physician.find(params[:id])
 
     if current_user.user_type == 'admin' || current_user.id == @physician.user_id || current_user.family_id
       render 'show.html.erb'
