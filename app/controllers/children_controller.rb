@@ -75,9 +75,15 @@ class ChildrenController < ApplicationController
 
     obj = S3_BUCKET.object(object_name)
     obj.upload_file(params[:child][:avatar_file_name].tempfile.path)
+<<<<<<< HEAD
 
     @child.avatar_file_name = obj.public_url
 
+=======
+
+    @child.avatar_file_name = obj.public_url
+
+>>>>>>> 62f0045fe3cb99259a672040322271b6855d6d94
   end
 
   def update

@@ -53,7 +53,11 @@
           <%= f.text_area(:other_info, class: "form-control", id: "other-info") %>
         </div>
 
+<<<<<<< HEAD
+        <%= f.hidden_field(:child_id, :value => @child_id) %>
+=======
         <input type="hidden" name="child_id" value="<%= @child_id %>">
+>>>>>>> 62f0045fe3cb99259a672040322271b6855d6d94
 
         <div class="form-group">
           <%= submit_tag 'Submit', class: "btn btn-warning btn-lg" %>
