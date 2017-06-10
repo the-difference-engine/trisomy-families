@@ -15,6 +15,22 @@
  *= require fullcalendar
  */
 
+#mosaic_percentage {
+  display: none;
+}
+
+#partial_trisomy {
+  display: none;
+}
+
+#mosaic_percentage_2 {
+  display: none;
+}
+
+#partial_trisomy_2 {
+  display: none;
+}
+
 #myCarousel {
   margin-right: 3%;
   margin-left: -2%;

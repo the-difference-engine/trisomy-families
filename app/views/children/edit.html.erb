@@ -52,9 +52,43 @@
             <%= f.label :child_primary_diagnosis %>
             <%= f.select "primary_diagnosis", options_for_select(primary_trisomy_diagnosis, @child.primary_diagnosis) %>
          </div>
+         <div class="form-group" id="mosaic_percentage">
+            <%= f.label :mosaic_percentage %>
+            <%= f.number_field(:mosaic_percentage, in: 1..15, step: 1 , class: "form-control")%>
+            <br>
+         </div>
+         <div class="form-group" id="partial_trisomy">
+            <%= f.label 'Partial Trisomy:' %>
+            <%= f.radio_button(:partial_trisomy, 'p') %> P
+            <%= f.radio_button(:partial_trisomy, 'q') %> Q
+            <%= f.radio_button(:partial_trisomy, 'both') %> Both
+            <br>
+            <br>
+         </div>
          <div class="form-group">
             <%= f.label :other_primary_diagnosis %>
             <%= f.text_field :other_primary_diagnosis %>
+         </div>
+         <div class="form-group" id="secondary_diagnosis">
+            <%= f.label :child_secondary_diagnosis %>
+            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %>
+         </div>
+         <div class="form-group" id="mosaic_percentage_2">
+            <%= f.label :secondary_mosaic_percentage %>
+            <%= f.number_field(:secondary_mosaic_percentage, in: 1..15, step: 1 , class: "form-control")%>
+            <br>
+         </div>
+         <div class="form-group" id="partial_trisomy_2">
+            <%= f.label 'Partial Trisomy:' %>
+            <%= f.radio_button(:secondary_partial_trisomy, 'p') %> P
+            <%= f.radio_button(:secondary_partial_trisomy, 'q') %> Q
+            <%= f.radio_button(:secondary_partial_trisomy, 'both') %> Both
+            <br>
+            <br>
+         </div>
+         <div class="form-group">
+            <%= f.label :other_secondary_diagnosis %>
+            <%= f.text_field(:other_secondary_diagnosis) %>
          </div>
          <div class="form-group">
             <%= f.label :trisomy_story, "Child Story" %>
@@ -101,3 +135,29 @@
 </div>
 <!-- container -->
 <% end %>
+
+<script>
+   document.getElementById('child_primary_diagnosis').addEventListener('change', function () {
+
+    var style = this.value === 'Mosaic' ? 'inline' : 'none';
+    document.getElementById('mosaic_percentage').style.display = style;
+   });
+
+   document.getElementById('child_primary_diagnosis').addEventListener('change', function () {
+
+    var style = this.value === 'Partial' ? 'inline' : 'none';
+    console.log(this.value)
+    document.getElementById('partial_trisomy').style.display = style;
+   });
+
+   document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
+    var style = this.value === 'Mosaic' ? 'inline' : 'none';
+    document.getElementById('mosaic_percentage_2').style.display = style;
+   });
+
+   document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
+    var style = this.value === 'Partial' ? 'inline' : 'none';
+    document.getElementById('partial_trisomy_2').style.display = style;
+   });
+  
+</script>
