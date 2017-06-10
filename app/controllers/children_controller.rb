@@ -17,6 +17,22 @@ class ChildrenController < ApplicationController
     @child = Child.new(child_params)
     @child.birth_date = calculate_date(params[:child][:birth_date])
     @child.death_date = calculate_date(params[:child][:death_date])
+    if params[:not_applicable] == "n/a"
+      @child.other_chrom_affected = params[:not_applicable]
+    end
+    if params[:child][:primary_diagnosis] == 'Mosaic'
+      @child.mosaic_percentage = params[:child][:mosaic_percentage]
+    elsif params[:child][:primary_diagnosis] == 'Partial'
+      @child.partial_trisomy = params[:child][:partial_trisomy]
+    end
+    if params[:not_applicable_2] == "n/a"
+      @child.secondary_diagnosis = params[:not_applicable_2]
+    elsif params[:child][:secondary_diagnosis] == 'Mosaic'
+      @child.secondary_mosaic_percentage = params[:child][:secondary_mosaic_percentage]
+    elsif params[:child][:secondary_diagnosis] == 'Partial'
+      @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
+    end
+    p @child
     @child.user_id = current_user.id
     @child.build_privacy(privacy_params)
     @child.family_id = current_user.family_ids[0]
@@ -91,8 +107,6 @@ class ChildrenController < ApplicationController
       birth_order: params["child"]["birth_order"],
       primary_diagnosis: params["child"]["primary_diagnosis"],
       other_primary_diagnosis: params["child"]["other_primary_diagnosis"],
-      state: params["child"]["state"],
-      city: params["child"]["city"],
       trisomy_story: params["child"]["trisomy_story"]
     )
 
@@ -138,13 +152,14 @@ class ChildrenController < ApplicationController
                                   :last_name,
                                   :trisomy_type,
                                   :address,
-                                  :city,
-                                  :state,
                                   :trisomy_story,
                                   :nickname,
                                   :birth_order,
                                   :primary_diagnosis,
-                                  :other_primary_diagnosis)
+                                  :secondary_diagnosis,
+                                  :other_chrom_affected,
+                                  :other_primary_diagnosis,
+                                  :other_secondary_diagnosis)
   end
 
   def privacy_params

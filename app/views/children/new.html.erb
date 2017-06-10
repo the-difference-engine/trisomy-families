@@ -50,7 +50,7 @@
          <div class="form-group">
             <%= f.label :other_chrom_affected, "Additional chromosome affected" %>
             <%= f.select("other_chrom_affected", options_for_select(trisomy_type)) %>
-            <span style="display:inline-block; width: 10px;"></span><input type="checkbox" id="n/a"> N/A
+            <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable", checked_value = "n/a" %> N/A
          </div>
          <div class="form-group" id="primary_diagnosis">
             <%= f.label :child_primary_diagnosis %>
@@ -58,7 +58,7 @@
          </div>
          <div class="form-group" id="mosaic_percentage">
             <%= f.label :mosaic_percentage %>
-            <%= f.number_field(:mosaic_percentage, in: 1..15, step: 1 , class: "form-control")%>
+            <%= f.number_field(:mosaic_percentage, in: 1..100, step: 1 , class: "form-control")%>
             <br>
          </div>
          <div class="form-group" id="partial_trisomy">
@@ -75,11 +75,11 @@
          </div>
          <div class="form-group" id="secondary_diagnosis">
             <%= f.label :child_secondary_diagnosis %>
-            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %>
+            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %><span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable_2", checked_value = "n/a" %> N/A
          </div>
          <div class="form-group" id="mosaic_percentage_2">
             <%= f.label :secondary_mosaic_percentage %>
-            <%= f.number_field(:secondary_mosaic_percentage, in: 1..15, step: 1 , class: "form-control")%>
+            <%= f.number_field(:secondary_mosaic_percentage, in: 1..100, step: 1 , class: "form-control")%>
             <br>
          </div>
          <div class="form-group" id="partial_trisomy_2">
@@ -90,7 +90,7 @@
             <br>
             <br>
          </div>
-         <div class="form-group">
+         <div class="form-group" id="other_secondary_diagnosis">
             <%= f.label :other_secondary_diagnosis %>
             <%= f.text_field(:other_secondary_diagnosis) %>
          </div>
@@ -160,6 +160,14 @@
    document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
     var style = this.value === 'Partial' ? 'inline' : 'none';
     document.getElementById('partial_trisomy_2').style.display = style;
+   });
+
+   $('#not_applicable_2').change(function() {
+    if(this.checked) {
+      document.getElementById('other_secondary_diagnosis').style.display = 'none';
+    } else {
+      document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
+    };
    });
   
 </script>
