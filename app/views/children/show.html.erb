@@ -39,6 +39,7 @@
     </div>
   </div>
   <hr>
+<<<<<<< HEAD
 
     <div>
       <a href="/registrations/contact_info/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Contact Info</button></a>
@@ -46,5 +47,39 @@
       <a href="/registrations/background_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Background History</button></a>
       <br>
       <a href="/registrations/health_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Health History</button></a>
+=======
+  <h2>Participant Registration</h2>
+  <p>Once all three registration forms have been submitted, your registration will be reviewed. When the registration is accepted, you will have access to The Family Center and Data Center. Here, you can find information on other participants. Start the registration process by clicking below.</p>
+  <div>
+    <% if @contact_form && @child.background_history_id && @child.health_history_id %>
+      <a href="/registrations/<%= @child.id %>"><button class="btn btn-success">Review & Submit Registration</button></a>
+    <% end %>
+    <br>
+    
+    <% if @contact_form %>
+      <a href="/registrations/contact_info/<%= @contact_form.id %>/edit"><button class="btn btn-warning">Edit Contact Info</button></a>
+    <% else %>
+      <a href="/registrations/contact_info/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Contact Info</button></a>
+    <% end %>
+    <br>
+
+    <% if @child.background_history_id %>
+      <a href="/registrations/background_history/<%= @child.background_history_id %>/edit"><button class="btn btn-warning">Edit Background History</button></a>       
+    <% elsif @contact_form %>
+      <a href="/registrations/background_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Background History</button></a>
+    <% else %>
+      <button class="btn btn-primary" disabled>Add Background History</button>
+    <% end %>
+    <br>
+
+    <% if @child.health_history_id %>
+      <a href="/registrations/health_history/<%= @child.health_history_id %>/edit"><button class="btn btn-warning">Edit Health History</button></a>
+    <% elsif @child.background_history_id %>
+      <a href="/registrations/health_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Health History</button></a>
+    <% else %>
+      <button class="btn btn-primary" disabled>Add Health History</button>
+    <% end %>
+    <br>
+>>>>>>> 62f0045fe3cb99259a672040322271b6855d6d94
   </div>
 </div>
