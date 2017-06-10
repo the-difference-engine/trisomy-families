@@ -78,6 +78,7 @@ class ChildrenController < ApplicationController
 
     @child.avatar_file_name = obj.public_url
 
+
   end
 
   def update

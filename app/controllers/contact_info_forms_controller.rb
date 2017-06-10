@@ -13,11 +13,10 @@ class ContactInfoFormsController < ApplicationController
   def create
     family = Family.find_by(user_id: current_user.id)
     contact_info = ContactInfoForm.new(contact_info_params)
-    contact_info.update(child_id: params[:child_id])
 
-    if contact_info.save      
+    if contact_info.save
       flash[:success] = "Contact info for your child registration has been submitted!"
-      redirect_to "/profile/#{params[:child_id]}"
+      redirect_to "/families/#{family.id}"
     else
       flash[:danger] = "Something went wrong. Please fill out every field in the form."
       render 'new.html.erb'
@@ -33,11 +32,12 @@ class ContactInfoFormsController < ApplicationController
 
   def update
     family = Family.find_by(user_id: current_user.id)
-    contact_info = ContactInfoForm.find_by(id: params[:id])
+    contact_info = ContactInfoForm.new
 
     if contact_info.update(contact_info_params)
       flash[:success] = "Contact info for your child registration has been update!"
-      redirect_to "/profile/#{contact_info.child_id}"
+      redirect_to "/families/#{family.id}"
+
     else
       flash[:danger] = "Something went wrong. Please fill out every field in the form."
       render 'edit.html.erb'
@@ -55,7 +55,9 @@ class ContactInfoFormsController < ApplicationController
       :parent_email,
       :parent_phone,
       :relationship,
-      :other_info
+      :other_info,
+      :child_id
+
     )
   end
 end
