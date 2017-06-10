@@ -32,7 +32,6 @@ class ChildrenController < ApplicationController
     elsif params[:child][:secondary_diagnosis] == 'Partial'
       @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
     end
-    p @child
     @child.user_id = current_user.id
     @child.build_privacy(privacy_params)
     @child.family_id = current_user.family_ids[0]
@@ -109,6 +108,22 @@ class ChildrenController < ApplicationController
       other_primary_diagnosis: params["child"]["other_primary_diagnosis"],
       trisomy_story: params["child"]["trisomy_story"]
     )
+
+    if params[:not_applicable] == "n/a"
+      @child.other_chrom_affected = params[:not_applicable]
+    end
+    if params[:child][:primary_diagnosis] == 'Mosaic'
+      @child.mosaic_percentage = params[:child][:mosaic_percentage]
+    elsif params[:child][:primary_diagnosis] == 'Partial'
+      @child.partial_trisomy = params[:child][:partial_trisomy]
+    end
+    if params[:not_applicable_2] == "n/a"
+      @child.secondary_diagnosis = params[:not_applicable_2]
+    elsif params[:child][:secondary_diagnosis] == 'Mosaic'
+      @child.secondary_mosaic_percentage = params[:child][:secondary_mosaic_percentage]
+    elsif params[:child][:secondary_diagnosis] == 'Partial'
+      @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
+    end
 
     @privacy.assign_attributes(
       story: params["child"]["privacy"]["story"],

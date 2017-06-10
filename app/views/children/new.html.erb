@@ -45,23 +45,23 @@
          <h5 style="color:gray">Trisomy</h5>
          <div class="form-group">
             <%= f.label :trisomy_type, "Type of Trisomy" %>
-            <%= f.select("trisomy_type", options_for_select(trisomy_type)) %>
+            <%= f.select("trisomy_type", options_for_select(trisomy_type), :include_blank => "-" ) %>
          </div>
          <div class="form-group">
             <%= f.label :other_chrom_affected, "Additional chromosome affected" %>
-            <%= f.select("other_chrom_affected", options_for_select(trisomy_type)) %>
+            <%= f.select("other_chrom_affected", options_for_select(trisomy_type), :include_blank => "-"  ) %>
             <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable", checked_value = "n/a" %> N/A
          </div>
          <div class="form-group" id="primary_diagnosis">
             <%= f.label :child_primary_diagnosis %>
-            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %>
+            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis), :include_blank => "-" ) %>
          </div>
-         <div class="form-group" id="mosaic_percentage">
+         <div class="form-group" id="mosaic_percentage" style="display: none;">
             <%= f.label :mosaic_percentage %>
             <%= f.number_field(:mosaic_percentage, in: 1..100, step: 1 , class: "form-control")%>
             <br>
          </div>
-         <div class="form-group" id="partial_trisomy">
+         <div class="form-group" id="partial_trisomy" style="display: none;">
             <%= f.label 'Partial Trisomy:' %>
             <%= f.radio_button(:partial_trisomy, 'p') %> P
             <%= f.radio_button(:partial_trisomy, 'q') %> Q
@@ -73,16 +73,17 @@
             <%= f.label :other_primary_diagnosis %>
             <%= f.text_field(:other_primary_diagnosis) %>
          </div>
-         <div class="form-group" id="secondary_diagnosis">
+         <div class="form-group">
             <%= f.label :child_secondary_diagnosis %>
-            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %><span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable_2", checked_value = "n/a" %> N/A
+            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis), :include_blank => "-"  ) %>
+            <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable_2", checked_value = "n/a" %> N/A
          </div>
-         <div class="form-group" id="mosaic_percentage_2">
+         <div class="form-group" id="mosaic_percentage_2" style="display: none;">
             <%= f.label :secondary_mosaic_percentage %>
             <%= f.number_field(:secondary_mosaic_percentage, in: 1..100, step: 1 , class: "form-control")%>
             <br>
          </div>
-         <div class="form-group" id="partial_trisomy_2">
+         <div class="form-group" id="partial_trisomy_2"style="display: none;">
             <%= f.label 'Partial Trisomy:' %>
             <%= f.radio_button(:secondary_partial_trisomy, 'p') %> P
             <%= f.radio_button(:secondary_partial_trisomy, 'q') %> Q
@@ -140,25 +141,16 @@
 
 <script>
    document.getElementById('child_primary_diagnosis').addEventListener('change', function () {
-
     var style = this.value === 'Mosaic' ? 'inline' : 'none';
     document.getElementById('mosaic_percentage').style.display = style;
-   });
-
-   document.getElementById('child_primary_diagnosis').addEventListener('change', function () {
-
-    var style = this.value === 'Partial' ? 'inline' : 'none';
-    console.log(this.value)
+    style = this.value === 'Partial' ? 'inline' : 'none';
     document.getElementById('partial_trisomy').style.display = style;
    });
 
    document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
     var style = this.value === 'Mosaic' ? 'inline' : 'none';
     document.getElementById('mosaic_percentage_2').style.display = style;
-   });
-
-   document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
-    var style = this.value === 'Partial' ? 'inline' : 'none';
+    style = this.value === 'Partial' ? 'inline' : 'none';
     document.getElementById('partial_trisomy_2').style.display = style;
    });
 
@@ -168,6 +160,34 @@
     } else {
       document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
     };
+   });
+
+   $('#child_secondary_diagnosis').change(function() {
+      if(this.value != "") {
+         $('#not_applicable_2').prop('checked', false);
+         document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
+      }; 
+   });
+
+   $('#not_applicable_2').change(function() {
+      if(this.value === "n/a") {
+         $('#child_secondary_diagnosis').val('');
+         document.getElementById('partial_trisomy_2').style.display = 'none';
+         document.getElementById('mosaic_percentage_2').style.display = 'none';
+      };
+   });
+
+   $('#child_other_chrom_affected').change(function() {
+      console.log(this.value);
+      if(this.value != "") {
+         $('#not_applicable').prop('checked', false);
+      }; 
+   });
+
+   $('#not_applicable').change(function() {
+      if(this.value === "n/a") {
+         $('#child_other_chrom_affected').val('');
+      };
    });
   
 </script>
