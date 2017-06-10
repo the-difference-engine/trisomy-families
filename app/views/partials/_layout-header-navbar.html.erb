@@ -19,8 +19,6 @@
         <ul class="nav navbar-nav navbar-left">
         
           <% if current_page?('/') %>
-            <li><a href="/users/sign_up">Get Involved</a></li>
-            <li><a href="/about" aria-haspopup="true" aria-expanded="false">About</span></a></li>
           <% end %>
           <% if current_user && current_user.user_type != 'admin' %>
             <% if current_user.user_type == 'family' %>
