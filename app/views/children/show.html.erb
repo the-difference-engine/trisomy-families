@@ -3,55 +3,48 @@
     <div class="page-header">
       <h1><%= @child.first_name + " " + @child.last_name%></h1>
     </div>
-    <div class="col-md-6">
+    
+    <div class="row col-md-4">
       <% if @child.avatar_file_name %>
         <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
+        <hr style="width: 0px">
       <% end %>
     </div>
-
-  <div class="row">
-    <div >
-      <h2>My Story </h2>
-      <p><%= @child.trisomy_story %></p>
+    <div class="row col-md-8">
+      <div class="well">
+        <h2>My Story </h2>
+        <hr>
+        <p><%= @child.trisomy_story %></p>
+      </div>
     </div>
-  </div>
-  <hr>
-    
-    <div class="col-md-6 col-md-offset-3 bg-info">
-      <br>
-      <p>Birthday: <%= @child.birth_date.strftime("%B %d") %></p>
-      <p>Age: </p>
-      <p><p>Birth Date: <%= @child.birth_date.strftime("%b %d, %Y") %></p></p>
+    <div class="col-md-6 col-md-offset-3 well" style="margin-left: auto; margin-right: auto; width: 370px;">
+      <h3>Basic Info</h3>
+      <hr>
+      <% if @child.current_age < 12 %>
+        <p>Age: <%= @child.current_age %> months</p>
+        <hr>
+      <% else %>
+        <p>Age: <%= @child.current_age / 12 %></p>
+        <hr>
+      <% end %>
+      <p>Date of Birth: <%= @child.birth_date.strftime("%b %d, %Y") %></p>
+      <hr>
       <p>Trisomy Type: <%= @child.trisomy_type %></p>
       <% if @child.death_date %>
-      <p>Death Date: <%= @child.death_date %></p>
+        <br>
+        <p>Death Date: <%= @child.death_date %></p>
       <% end %>
-      <p>City: <%= @child.city %></p>
-      <p>State: <%= @child.state %></p>
-    </div>
-    <div class="col-md-6 col-md-offset-3">
-    <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+      <hr>
+      <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
     </div>
   </div>
   <hr>
 
     <div>
-    <% if @child.background_history_id == nil %>
-      <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
-    <% end %>
-    <% if @child.health_history_id == nil %>
-      <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
-      <% end %>
-      <% if @child.registered %>
-        <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
-      <% else %>
-        <%= link_to 'Begin Registration',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
-      <% end %>
-    <% if @child.background_history_id %>
-      <%= link_to 'Edit Background History',"/profile/#{@child.id}/edit_background_history", :class => "btn btn-default" %><br>
-    <% end %>
-    <% if @child.health_history_id %>
-      <%= link_to 'Edit Health History',"/profile/#{@child.id}/edit_health_history", :class => "btn btn-default" %><br>
-    <% end %>
+      <a href="/registrations/contact_info/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Contact Info</button></a>
+      <br>
+      <a href="/registrations/background_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Background History</button></a>
+      <br>
+      <a href="/registrations/health_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Health History</button></a>
   </div>
 </div>
