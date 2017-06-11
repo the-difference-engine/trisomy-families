@@ -108,7 +108,7 @@ class ChildrenController < ApplicationController
       other_primary_diagnosis: params["child"]["other_primary_diagnosis"],
       trisomy_story: params["child"]["trisomy_story"]
     )
-
+    
     if params[:not_applicable] == "n/a"
       @child.other_chrom_affected = params[:not_applicable]
     end
