@@ -13,7 +13,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def about
+    render 'about.html.erb'
+  end
+
   def home
+    @all_events = Event.all
+    sorted_events_old_first = @all_events.sort_by &:start
+    @sorted_events = sorted_events_old_first.reverse
   end
 
   def children_index

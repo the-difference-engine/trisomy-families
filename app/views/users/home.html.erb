@@ -39,10 +39,12 @@
     <section id="banner">
       <!-- can add the header tag to wrap inside code !-->
       <header>
-        <span>
-          <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
-          <p>Vivamus condimentum leo eu turpis</p>
-        </span>
+        <h1>Trisomy Families</h1>
+          <span>
+            <h1 class="banner-text" style="color: white;">Bringing the Community Together!</h1>
+
+          </span>
+
       </header>
     </section>
 
@@ -55,21 +57,23 @@
           <div class="col-md-6 col-md-offset-3">
             <div class="col-md-8 col-md-offset-3">
               <h1 class="row-header">
-                Our Mission
+                Mission
               </h1>
             </div>
             <div class="col-md-12">
-              <p>Lhello!!!!m dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet. </p>
+              <h4>Networking, Advocating, Supporting, and Uniting families affected by Trisomy</h4>
+              <br>
+              <p><i>What is trisomy? A trisomy is a type of polysomy in which there are three instances of a particular chromosome, instead of the normal two.  Which results in a number of different congenital medical conditions.</i></p>
+
+
+        
+
+
+
             </div>
             <div class="col-md-12">
               <footer>
                 <ul class="actions">
-                  <li>
-                    <a href="#" class="button big btn-warning">Find out more</a>
-                  </li>
-                  <li>
-                    <a href="#" class="button big btn-danger">Donate</a>
-                  </li>
                 </ul>
               </footer>
             </div>
@@ -85,8 +89,8 @@
           <!-- include margin-left and margin-right !-->
           <!-- this page will introduce the stories behind Trisomy Families !-->
           <div class="col-md-6">
-            <h1 class="row-header" style="color:white">Why We Do It</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet ante. </p>
+            <h1 class="row-header" style="color:white">Create your Profile!</h1>
+            <p>Signup and indicate whether you are a family or a doctor.  Then build your profile page!  Families can add stories and photos, as well as children, where they can provide detailed medical information, ananomously.  Doctors can provide information such a practice location and specialty!</p>
           </div>
         </div>
       </div>
@@ -108,9 +112,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 col-md-offset-4">
-            <a href="#" class="button big btn-success">Read Stories</a>
-          </div>
         </div>
       </div>
     </div>
@@ -121,9 +122,8 @@
         <div class="row">
           <!-- include margin-left and margin-right !-->
           <div class="col-md-6">
-            <h1>Supporting Network of Families</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet.</p>
-            <a href="#" class="button big btn-danger">Join Us</a>
+            <h1>Use our Family Center Interactive Map!</h1>
+            <p>When you signup, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
           </div>
           <div class="col-md-6">
             <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
@@ -132,27 +132,47 @@
       </div>
     </div>
 
+    <!-- <div class="container-fluid content-row">
+      <h1>Upcoming Events</h1>
+        <li>
+          <span class="date">Jan <strong>27</strong></span>
+          <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+          <p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+        </li>
+        <li>
+          <span class="date">Jan <strong>23</strong></span>
+          <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+          <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+        </li>
+        <li>
+          <span class="date">Jan <strong>15</strong></span>
+          <h3><a href="#">Magna tempus lorem feugiat</a></h3>
+          <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+        </li>
+      </ul>
+      <a href="#" class="button big btn-success">More Events</a>
+    </div> -->
+
     <div class="container-fluid content-row odd-row">
+      <section>
+        <h1>Checkout the Data Center!</h1>
+        <h3>In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
+      </section>
+    </div>
+        <div class="container-fluid content-row odd-row">
       <ul class="dates">
         <section>
           <h1>Upcoming Events</h1>
+          <% count = 0 %>
+          <% 3.times do %>
           <li>
-            <span class="date">Jan <strong>27</strong></span>
-            <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
-            <p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+            <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+            <h3><a href="#"><%= @sorted_events[count].title %></a></h3>
+            <p><%= @sorted_events[count].description %></p>
           </li>
-          <li>
-            <span class="date">Jan <strong>23</strong></span>
-            <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
-            <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
-          </li>
-          <li>
-            <span class="date">Jan <strong>15</strong></span>
-            <h3><a href="#">Magna tempus lorem feugiat</a></h3>
-            <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
-          </li>
+          <% count = count + 1 %>
+          <% end %>
         </ul>
-        <a href="#" class="button big btn-success">More Events</a>
       </section>
     </div>
     <div ng-app="app">
@@ -203,34 +223,14 @@
             <div class="col-md-6">
             <address>
               <h2>Trisomy Families<br></h2>
-              Street Address<br>
-              Cary, IL, 56425<br>
+              <br>
+              Cary, IL<br>
             </address>
             </div>
             <div class="col-md-2">
-              <h6>About Us</h6>
-              <ul>
-                <li><a href="">Our Mission</a></li>
-                <li><a href="">Our Team</a></li>
-                <li><a href="">Our Research</a></li>
-                <li><a href="">Contact Us</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h6>Quick Links</h6>
-              <ul>
-                <li><a href="">Trisomy Support</a></li>
-                <li><a href="">Shop</a></li>
-                <li><a href="">Events</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h6>Social</h6>
+              <h6>You can also checkout our Facebook Page!</h6>
               <ol class="social">
                 <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
-                <li><a class="icon fa-twitter" href="#"><span class="label">Twitter</span></a></li>
-                <li><a class="icon fa-linkedin" href="#"><span class="label">LinkedIn</span></a></li>
-                <li><a class="icon fa-google-plus" href="#"><span class="label">Google+</span></a></li>
               </ol>
             </div>
           </div>
