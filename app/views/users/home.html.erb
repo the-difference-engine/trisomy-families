@@ -159,6 +159,14 @@
         <h3>In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
       </section>
     </div>
+    <% @all_events.each do |event| %>
+      <p><%= event.start %> </p>
+    <% end %>
+    <p>divider</p>
+    <% @sorted_events.each do |event| %>
+      <p> <%= event.start %> </p>
+    <% end %> 
+
         <div class="container-fluid content-row odd-row">
       <ul class="dates">
         <section>

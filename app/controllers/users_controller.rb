@@ -18,6 +18,8 @@ class UsersController < ApplicationController
   end
 
   def home
+    @all_events = Event.all
+    @sorted_events = @all_events.sort_by &:start
   end
 
   def children_index
