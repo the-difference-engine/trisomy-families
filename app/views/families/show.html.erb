@@ -41,21 +41,27 @@
       <p>
         Name: <a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %>
       </a></p>
-      <br>
-      <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
-        <img src='<%= child.avatar_file_name %>' style="width:150px;height:150px; display: block; margin: auto;">
+      <% if !child.privacy.avatar %>
+        <br>
+        <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+          <img src='<%= child.avatar_file_name %>' style="width:150px;height:150px; display: block; margin: auto;">
+        <% else %>
+          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <% end %>
+        <br>
       <% else %>
         <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
       <% end %>
-      <br>
       <% if child.nickname != nil %>
         <p>
           Nickname: <%= child.nickname %>
         </p>
       <% end %>
-      <p>
-        Trisomy Type: <%= child.trisomy_type %>
-      </p>
+      <% if child.privacy.trisomy_type == false %>
+        <p>
+          Trisomy Type: <%= child.trisomy_type %>
+        </p>
+      <% end %>
 
     </div>
     
