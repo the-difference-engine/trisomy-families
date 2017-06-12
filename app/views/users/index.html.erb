@@ -7,7 +7,7 @@
     <div>
       <div class="btn-group">
         <% if @family %>
-          <a href ="/families/<%= @family.id %>/edit" class="btn btn-warning">Edit My Family</a>
+          <a href ="/families/<%= @family.id %>" class="btn btn-warning">My Family</a>
         <% else %>
           <a href ="/families/new" class="btn btn-primary">Add My Family</a>          
         <% end %>           
