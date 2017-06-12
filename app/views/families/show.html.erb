@@ -1,61 +1,63 @@
-<div ng-app="app">
-  <div ng-controller="familyCtrl" ng-init="setup()">
-    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-    <br>
-    <br>
-    
-    <div class="well">
-      <h1 style="text-align: center;">
-        The {{family.family_name}} Family
-      </h1>
-      <br>
-      <img src='{{family.photo}}'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
-      <br>
-      <p>
-        Address: {{family.address}}
-      </p>
-      <p>
-        City: {{family.city}}
-      </p>
-      <p>
-        State: {{family.state}}
-      </p>
-      <p>
-        Website: <a ng-href="{{family.website}}">{{family.website}}</a>
-      </p>
-      <p>
-        Story: {{family.story}}
-      </p>
-      
-      <% if current_user.id == @family.user_id %>
-        <%= link_to "Edit", '/families/{{family.id}}/edit', class: "btn btn-info" %>
-        <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
-      <% end %>
-      
-    </div>
-    
+<br>
+<br>
 
-    <h2 ng-if='children[0] != nil'>Children: </h2>
-
-    <div class="col-md-4" ng-repeat="child in children">
-      <div class="well">
-        <p>
-          Name: <a href='/profile/{{child.id}}'>{{child.first_name}} {{child.last_name}}
-        </a></p>
-        <br>
-        <img ng-if="child.picture_url != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png'" src='{{child.picture_url}}' style="width:150px;height:150px; display: block; margin: auto;">
-        <img ng-if="child.picture_url === 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png'" src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
-        <br>
-        <p ng-if='child.nickname != nil'>
-          Nickname: {{child.nickname}}
-        </p>
-        <p>
-          Trisomy Type: {{child.trisomy_type}}
-        </p>
-
-      </div>
-      
-    </div>
-
-  </div>
+<div class="well">
+  <h1 style="text-align: center;">
+    The <%= @family.family_name %> Family
+  </h1>
+  <br>
+  <img src='<%=@family.photo%>'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
+  <br>
+  <p>
+    Address: <%= @family.street_address %>
+  </p>
+  <p>
+    City: <%= @family.city %>
+  </p>
+  <p>
+    State: <%= @family.state %>
+  </p>
+  <p>
+    Website: <a ng-href="#{@family.website}"><%= @family.website %></a>
+  </p>
+  <p>
+    Story: <%= @family.story %>
+  </p>
+  
+  <% if current_user.id == @family.user_id %>
+    <%= link_to "Edit", '/families/{{family.id}}/edit', class: "btn btn-info" %>
+    <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
+  <% end %>
+  
 </div>
+
+<% if @children.count != 0 %>
+  <h2>Children: </h2>
+<% end %>
+
+<% @children.each do |child| %>
+  <div class="col-md-4">
+    <div class="well">
+      <p>
+        Name: <a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %>
+      </a></p>
+      <br>
+      <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+        <img src='<%= child.avatar_file_name %>' style="width:150px;height:150px; display: block; margin: auto;">
+      <% else %>
+        <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+      <% end %>
+      <br>
+      <% if child.nickname != nil %>
+        <p>
+          Nickname: <%= child.nickname %>
+        </p>
+      <% end %>
+      <p>
+        Trisomy Type: <%= child.trisomy_type %>
+      </p>
+
+    </div>
+    
+  </div>
+<% end %>

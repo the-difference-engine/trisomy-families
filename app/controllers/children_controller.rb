@@ -67,7 +67,7 @@ class ChildrenController < ApplicationController
     if user_signed_in?
       @child = Child.find_by(id: params[:id])
       @contact_form = ContactInfoForm.find_by(child_id: @child.id)
-
+      @family = Family.find_by(id: @child.family_id)
       render 'show.html.erb'
     else
       flash[:warning] = 'You must be logged in to use this feature.'

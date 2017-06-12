@@ -70,6 +70,13 @@ class FamiliesController < ApplicationController
 
   def show
     @family = Family.find_by(id: params[:id])
+    @children = []
+    Child.all.each do |child|
+      if child.family_id == @family.id
+        @children << child
+      end
+    end
+    
     render 'show.html.erb'
   end
 
