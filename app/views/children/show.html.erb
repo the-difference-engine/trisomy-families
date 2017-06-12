@@ -5,9 +5,11 @@
     </div>
     <% if @child.privacy.avatar == false %>
       <div class="row col-md-4">
-        <% if @child.avatar_file_name %>
+        <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
           <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
           <hr style="width: 0px">
+        <% else %>
+          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
         <% end %>
       </div>
     <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
