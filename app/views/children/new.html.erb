@@ -11,7 +11,7 @@
 <div class="container">
    <div class="row">
       <div class="col-md-6 col-md-offset-3">
-         <h1 class="text-center">Add a Child</h1>
+         <h1 class="text-center">Add Child</h1>
          <%= form_for @child, url: {action: "create"} do |f| %>
          <h5 style="color:gray">Basic Info</h5>
          <div class="form-group">
@@ -27,11 +27,11 @@
          </div>
          <div class="form-group">
             <%= f.label :date_of_birth, "* Date of Birth" %>
-            <%= f.date_select(:birth_date, class: "form-control")%>
+            <%= f.date_select(:birth_date, class: "form-control", order: [:month, :day, :year], prompt: "-", start_year: 1950, end_year: DateTime.now.year)%>
          </div>
          <div class="form-group">            
             <%= f.label :date_of_death, "Date of Death" %>
-            <%= f.date_select(:death_date, class: "form-control") %>
+            <%= f.date_select(:death_date, class: "form-control", order: [:month, :day, :year], prompt: "-", start_year: 1950, end_year: DateTime.now.year) %>
          </div>
          <div class="form-group">
             <%= f.label :child_birth_order %>

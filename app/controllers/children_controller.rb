@@ -15,22 +15,36 @@ class ChildrenController < ApplicationController
 
   def create
     @child = Child.new(child_params)
-    @child.birth_date = calculate_date(params[:child][:birth_date])
-    @child.death_date = calculate_date(params[:child][:death_date])
+    @child.birth_date = calculate_date(params["child"]["birth_date(1i)"], params["child"]["birth_date(2i)"], params["child"]["birth_date(3i)"])
+    @child.death_date = calculate_date(params["child"]["death_date(1i)"], params["child"]["death_date(2i)"], params["child"]["death_date(3i)"])
     if params[:not_applicable] == "n/a"
-      @child.other_chrom_affected = params[:not_applicable]
+      @child.other_chrom_affected = ""
     end
     if params[:child][:primary_diagnosis] == 'Mosaic'
       @child.mosaic_percentage = params[:child][:mosaic_percentage]
+      @child.partial_trisomy = nil
     elsif params[:child][:primary_diagnosis] == 'Partial'
       @child.partial_trisomy = params[:child][:partial_trisomy]
+      @child.mosaic_percentage = nil
+    else
+      @child.mosaic_percentage = nil
+      @child.partial_trisomy = nil
     end
+
     if params[:not_applicable_2] == "n/a"
-      @child.secondary_diagnosis = params[:not_applicable_2]
+      @child.secondary_diagnosis = ""
+      @child.other_secondary_diagnosis = ""
+      @child.secondary_mosaic_percentage = nil
+      @child.secondary_partial_trisomy = nil
     elsif params[:child][:secondary_diagnosis] == 'Mosaic'
       @child.secondary_mosaic_percentage = params[:child][:secondary_mosaic_percentage]
+      @child.secondary_partial_trisomy = nil
     elsif params[:child][:secondary_diagnosis] == 'Partial'
       @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
+      @child.secondary_mosaic_percentage = nil
+    else
+      @child.secondary_mosaic_percentage = nil
+      @child.secondary_partial_trisomy = nil
     end
     @child.user_id = current_user.id
     @child.build_privacy(privacy_params)
@@ -104,36 +118,53 @@ class ChildrenController < ApplicationController
       last_name: params["child"]["last_name"],
       nickname: params["child"]["nickname"],
       trisomy_type: params["child"]["trisomy_type"],
-      birth_date: calculate_date(params["child"]["birth_date"]),
-      death_date: calculate_date(params["child"]["death_date"]),
+      birth_date: calculate_date(params["child"]["birth_date(1i)"], params["child"]["birth_date(2i)"], params["child"]["birth_date(3i)"]),
+      death_date: calculate_date(params["child"]["death_date(1i)"], params["child"]["death_date(2i)"], params["child"]["death_date(3i)"]),
       birth_order: params["child"]["birth_order"],
       primary_diagnosis: params["child"]["primary_diagnosis"],
+      secondary_diagnosis: params["child"]["secondary_diagnosis"],
       other_primary_diagnosis: params["child"]["other_primary_diagnosis"],
+      other_secondary_diagnosis: params["child"]["other_primary_diagnosis"],
+      other_chrom_affected: params["child"]["other_chrom_affected"],
       trisomy_story: params["child"]["trisomy_story"]
     )
     
     if params[:not_applicable] == "n/a"
-      @child.other_chrom_affected = params[:not_applicable]
+      @child.other_chrom_affected = ""
     end
     if params[:child][:primary_diagnosis] == 'Mosaic'
       @child.mosaic_percentage = params[:child][:mosaic_percentage]
+      @child.partial_trisomy = nil
     elsif params[:child][:primary_diagnosis] == 'Partial'
       @child.partial_trisomy = params[:child][:partial_trisomy]
+      @child.mosaic_percentage = nil
+    else
+      @child.mosaic_percentage = nil
+      @child.partial_trisomy = nil
     end
+
     if params[:not_applicable_2] == "n/a"
-      @child.secondary_diagnosis = params[:not_applicable_2]
+      @child.secondary_diagnosis = ""
+      @child.other_secondary_diagnosis = ""
+      @child.secondary_mosaic_percentage = nil
+      @child.secondary_partial_trisomy = nil
     elsif params[:child][:secondary_diagnosis] == 'Mosaic'
       @child.secondary_mosaic_percentage = params[:child][:secondary_mosaic_percentage]
+      @child.secondary_partial_trisomy = nil
     elsif params[:child][:secondary_diagnosis] == 'Partial'
       @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
+      @child.secondary_mosaic_percentage = nil
+    else
+      @child.secondary_mosaic_percentage = nil
+      @child.secondary_partial_trisomy = nil
     end
 
     @privacy.assign_attributes(
-      story: params["child"]["privacy"]["story"],
-      avatar: params["child"]["privacy"]["avatar"],
-      location: params["child"]["privacy"]["location"],
-      birthday: params["child"]["privacy"]["birthday"],
-      trisomy_type: params["child"]["privacy"]["trisomy_type"]
+      story: params["child"]["privacy_attributes"]["story"],
+      avatar: params["child"]["privacy_attributes"]["avatar"],
+      location: params["child"]["privacy_attributes"]["location"],
+      birthday: params["child"]["privacy_attributes"]["birthday"],
+      trisomy_type: params["child"]["privacy_attributes"]["trisomy_type"]
     )
 
     if params[:child][:avatar_file_name]
@@ -196,7 +227,7 @@ class ChildrenController < ApplicationController
     end
   end
 
-  def calculate_date(date_param)
-    date_param.blank? ? nil : Date.parse(date_param)
+  def calculate_date(month, day, year)
+    month.blank? || day.blank? || year.blank? ? nil : DateTime.new(month.to_i, day.to_i, year.to_i)
   end
 end

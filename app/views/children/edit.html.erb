@@ -11,7 +11,7 @@
 <div class="container">
    <div class="row">
       <div class="col-md-6 col-md-offset-3">
-         <h1 class="text-center">Add a Child</h1>
+         <h1 class="text-center">Edit Child</h1>
          <%= form_for @child, url: {action: "update"} do |f| %>
          <h5 style="color:gray">Basic Info</h5>
          <div class="form-group">
@@ -28,11 +28,11 @@
          </div>
          <div class="form-group">
             <%= f.label :date_of_birth, "Date of Birth" %>
-            <%= f.date_select :birth_date, class: "form-control" %>
+            <%= f.date_select :birth_date, class: "form-control", order: [:month, :day, :year], start_year: 1950 %>
          </div>
          <div class="form-group">            
             <%= f.label :date_of_death, "Date of Death" %>
-            <%= f.date_select :death_date, class: "form-control" %>
+            <%= f.date_select :death_date, order: [:month, :day, :year], prompt: "-", start_year: 1950, class: "form-control" %>
          </div>
          <div class="form-group">
             <%= f.label :child_birth_order %>
@@ -46,7 +46,7 @@
          <h5 style="color:gray">Trisomy</h5>
          <div class="form-group">
             <%= f.label :trisomy_type, "Type of Trisomy" %>
-            <%= f.select("trisomy_type", options_for_select(trisomy_type, @child.trisomy_type), :include_blank => "-" ) %>
+            <%= f.select("trisomy_type", options_for_select(trisomy_type, @child.trisomy_type) ) %>
          </div>
          <div class="form-group">
             <%= f.label :other_chrom_affected, "Additional chromosome affected" %>
@@ -169,7 +169,7 @@
          <% end %>
          <div>
          </div>
-         <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
+         <%= submit_tag 'Update', class: "btn btn-success btn-lg btn-block"%>
       </div>
       <!-- col-md-6 -->
    </div>
