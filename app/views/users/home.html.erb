@@ -162,7 +162,7 @@
           <% 3.times do %>
           <li>
             <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-            <h3><a href="#"><%= @sorted_events[count].title %></a></h3>
+            <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
             <p><%= @sorted_events[count].description %></p>
           </li>
           <% count = count + 1 %>
