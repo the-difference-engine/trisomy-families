@@ -3,42 +3,77 @@
     <div class="page-header">
       <h1><%= @child.first_name + " " + @child.last_name%></h1>
     </div>
-    
-    <div class="row col-md-4">
-      <% if @child.avatar_file_name %>
-        <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
-        <hr style="width: 0px">
-      <% end %>
-    </div>
-    <div class="row col-md-8">
-      <div class="well">
-        <h2>My Story </h2>
-        <hr>
-        <p><%= @child.trisomy_story %></p>
+    <% if @child.privacy.avatar == false %>
+      <div class="row col-md-4">
+        <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+          <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
+          <hr style="width: 0px">
+        <% else %>
+          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <% end %>
       </div>
-    </div>
-    <div class="col-md-6 col-md-offset-3 well" style="margin-left: auto; margin-right: auto; width: 370px;">
-      <h3>Basic Info</h3>
-      <hr>
-      <% if @child.current_age < 12 %>
-        <p>Age: <%= @child.current_age %> months</p>
+    <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+      <div class="row col-md-4">
+        <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <hr style="width: 0px">
+      </div>
+    <% end %>
+    <% if @child.privacy.story == false %>
+      <div class="row col-md-8">
+        <div class="well">
+          <h2>My Story </h2>
+          <hr>
+          <p><%= @child.trisomy_story %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+      <div class="col-md-6 col-md-offset-3 well" style="margin-left: auto; margin-right: auto; width: 370px;">
+        <% if !@child.privacy.avatar || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+          <h3>Basic Info</h3>
+        <% end %>
+        
         <hr>
-      <% else %>
-        <p>Age: <%= @child.current_age / 12 %></p>
-        <hr>
+        <% if @child.privacy.birthday == false %>
+          <% if @child.current_age < 12 && @child.current_age > 1 %>
+            <p>Age: <%= @child.current_age %> months</p>
+            <hr>
+          <% elsif @child.current_age == 1 %>  
+            <p>Age: <%= @child.current_age %> month</p>
+          <% elsif @child.current_age > 24 %>
+            <p>Age: <%= @child.current_age / 12 %> years 
+            <% if (@child.current_age % 12) > 1 %>
+              <%= @child.current_age % 12 %> months
+            <% elsif (@child.current_age % 12) == 1 %>
+              <%= @child.current_age % 12 %> month
+            <% end %>
+            </p>
+            <hr>
+          <% end %>
+          <p>Date of Birth: <%= @child.birth_date.strftime("%b %d, %Y") %></p>
+          <hr>
+        <% end %>
+        <% if @child.privacy.trisomy_type == false %>
+          <p>Trisomy Type: <%= @child.trisomy_type %></p>
+        <% end %>
+        <% if @child.death_date %>
+          <br>
+          <p>Death Date: <%= @child.death_date %></p>
+          <hr>
+        <% end %>
+        <% if current_user.id == @family.user_id %>
+          <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @child.privacy.birthday && @child.privacy.trisomy_type %>
+      <% if current_user.id == @family.user_id %>
+        <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
       <% end %>
-      <p>Date of Birth: <%= @child.birth_date.strftime("%b %d, %Y") %></p>
-      <hr>
-      <p>Trisomy Type: <%= @child.trisomy_type %></p>
-      <% if @child.death_date %>
-        <br>
-        <p>Death Date: <%= @child.death_date %></p>
-      <% end %>
-      <hr>
-      <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
-    </div>
+    <% end %>
   </div>
   <hr>
+  <% if current_user.id == @family.user_id %>
   <h2>Participant Registration</h2>
   <p>Once all three registration forms have been submitted, your registration will be reviewed. When the registration is accepted, you will have access to The Family Center and Data Center. Here, you can find information on other participants. Start the registration process by clicking below.</p>
   <div>
@@ -72,4 +107,5 @@
     <% end %>
     <br>
   </div>
+  <% end %>
 </div>
