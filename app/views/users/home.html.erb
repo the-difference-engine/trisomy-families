@@ -65,11 +65,6 @@
               <br>
               <p><i>What is trisomy? A trisomy is a type of polysomy in which there are three instances of a particular chromosome, instead of the normal two.  Which results in a number of different congenital medical conditions.</i></p>
 
-
-        
-
-
-
             </div>
             <div class="col-md-12">
               <footer>
@@ -83,13 +78,58 @@
     </div>
 
     <div class="container-fluid odd-row content-row">
+      <div ng-app="app">
+        <div ng-controller="BirthdaysController" ng-init="setUp()">
+            <div class="container-fluid content-row" ng-if="children.length != 0">
+              <!-- include padding top and bottom using the css box model!-->
+              <div class="container">
+                <h2>Trisomy Birthdays</h2>  
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  
+                  <div class="carousel-inner">
+                    <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
+                      <div class="row">          
+                        
+                        <img ng-if="child.privacies['avatar'] === false" src="{{child.photo}}" style="width:350px;height:350px;"/>
+                        <img ng-if="child.privacies['avatar'] === true" src="http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png" style="width:350px;height:350px;"/>
+                        <div class="col-md-6">
+                          <p>Happy Birthday {{child.first_name}}!</p>
+                          
+                          <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                          <div ng-if="child.privacies['story'] === false">
+                            <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Left and right controls -->
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid content-row">
       <div class="container">
         <!-- include padding top and bottom using the css box model!-->
         <div class="row">
           <!-- include margin-left and margin-right !-->
           <!-- this page will introduce the stories behind Trisomy Families !-->
           <div class="col-md-6">
-            <h1 class="row-header" style="color:white">Create your Profile!</h1>
+            <h1 class="row-header">Create your Profile!</h1>
             <p>Signup and indicate whether you are a family or a doctor.  Then build your profile page!  Families can add stories and photos, as well as children, where they can provide detailed medical information, ananomously.  Doctors can provide information such a practice location and specialty!</p>
           </div>
         </div>
@@ -98,11 +138,6 @@
         <div class="row">
           <div class="col-md-4 col-sm-4 col-xs-12">
             <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
-            <!-- <p>
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas. Pellentesque varius sodales mauris ac efficitur.
-              </span>
-            </p> -->
           </div>
           <div class="col-md-4 col-sm-4 col-xs-12">
             <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
@@ -116,14 +151,14 @@
       </div>
     </div>
 
-    <div class="container-fluid content-row">
+    <div class="container-fluid odd-row content-row">
       <div class="container">
         <!-- include padding top and bottom using the css box model!-->
         <div class="row">
           <!-- include margin-left and margin-right !-->
           <div class="col-md-6">
             <h1>Use our Family Center Interactive Map!</h1>
-            <p>When you signup, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
+            <p>When you sign up, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
           </div>
           <div class="col-md-6">
             <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
@@ -131,94 +166,46 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="container-fluid content-row">
-      <h1>Upcoming Events</h1>
-        <li>
-          <span class="date">Jan <strong>27</strong></span>
-          <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
-          <p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
-        </li>
-        <li>
-          <span class="date">Jan <strong>23</strong></span>
-          <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
-          <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
-        </li>
-        <li>
-          <span class="date">Jan <strong>15</strong></span>
-          <h3><a href="#">Magna tempus lorem feugiat</a></h3>
-          <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
-        </li>
-      </ul>
-      <a href="#" class="button big btn-success">More Events</a>
-    </div> -->
-
-
+    <div class="container-fluid content-row">
+      <section>
+        <h1>Checkout the Data Center!</h1>
+        <h3>In the Data Center, we anonymously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
+      </section>
+    </div>
 
     <% if @sorted_events.count != 0 %>
       <div class="container-fluid content-row odd-row">
         <ul class="dates">
-          <section>
-            <h1>Upcoming/Recent Events</h1>
-            <% count = 0 %>
-            <% 3.times do %>
-            <li>
-              <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-              <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-              <p><%= @sorted_events[count].description %></p>
-            </li>
-            <% count = count + 1 %>
-            <% end %>
-          </ul>
-        </section>
+          <% if @sorted_events.count > 2 %>
+            <section>
+              <h1>Upcoming/Recent Events</h1>
+              <% count = 2 %>
+              <% 3.times do %>
+              <li>
+                <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                <p><%= @sorted_events[count].description %></p>
+              </li>
+              <% count -= 1 %>
+              <% end %>
+            </section>
+          <% elsif @sorted_events.count <= 2 %>
+            <section>
+              <h1>Upcoming/Recent Events</h1>
+              <% count = @sorted_events.count - 1 %>
+              <% while count >= 0 do %>
+              <li>
+                <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                <p><%= @sorted_events[count].description %></p>
+              </li>
+              <% count -= 1 %>
+              <% end %>
+            </section>
+          <% end %>
+        </ul>
       </div>
     <% end %>
-        <div class="container-fluid content-row">
-
-      <section>
-        <h1>Checkout the Data Center!</h1>
-        <h3>In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
-      </section>
-    </div>
-    <div ng-app="app">
-      <div ng-controller="BirthdaysController" ng-init="setUp()">
-          <div class="container-fluid content-row" ng-if="children.length != 0">
-            <!-- include padding top and bottom using the css box model!-->
-            <div class="container">
-              <h2>Trisomy Birthdays</h2>  
-              <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                
-                <div class="carousel-inner">
-                  <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
-                    <div class="row">          
-                      
-                      <img src="{{child.photo}}" style="width:350px;height:350px;"/>
-                      <div class="col-md-6">
-                        <p>Happy Birthday {{child.first_name}}!</p>
-                        
-                        <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
-                        <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
-            </div>
-            
-          </div>
-      </div>
-    </div>
 
     <footer class="footer">
       <div class="container-fluid">
