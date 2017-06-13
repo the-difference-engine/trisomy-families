@@ -152,22 +152,19 @@
       </ul>
       <a href="#" class="button big btn-success">More Events</a>
     </div> -->
-    <div class="container-fluid content-row odd-row">
-      <section>
-        <h1>Checkout the Data Center!</h1>
-        <h3>In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
-      </section>
-    </div>
+
+
+
     <% if @sorted_events.count != 0 %>
       <div class="container-fluid content-row odd-row">
         <ul class="dates">
           <section>
-            <h1>Upcoming Events</h1>
+            <h1>Upcoming/Recent Events</h1>
             <% count = 0 %>
             <% 3.times do %>
             <li>
               <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-              <h3><a href="#"><%= @sorted_events[count].title %></a></h3>
+              <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
               <p><%= @sorted_events[count].description %></p>
             </li>
             <% count = count + 1 %>
@@ -176,6 +173,13 @@
         </section>
       </div>
     <% end %>
+        <div class="container-fluid content-row">
+
+      <section>
+        <h1>Checkout the Data Center!</h1>
+        <h3>In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
+      </section>
+    </div>
     <div ng-app="app">
       <div ng-controller="BirthdaysController" ng-init="setUp()">
           <div class="container-fluid content-row" ng-if="children.length != 0">
