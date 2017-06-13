@@ -110,7 +110,11 @@ class FamiliesController < ApplicationController
       puts @family
       @family.update(photo: obj.public_url)
     end
-
-    redirect_to "/families/#{@family.id}"
+    if @family.save
+      flash[:success] = "Family Successfully Updated!"
+      redirect_to "/families/#{@family.id}"
+    else
+      render '/families/edit'
+    end 
   end
 end
