@@ -25,7 +25,7 @@
   </p>
   
   <% if current_user.id == @family.user_id %>
-    <%= link_to "Edit", '/families/{{family.id}}/edit', class: "btn btn-info" %>
+    <%= link_to "Edit", "/families/#{@family.id}/edit", class: "btn btn-info" %>
     <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
   <% end %>
   
