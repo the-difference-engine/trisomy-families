@@ -24,17 +24,18 @@ class Child < ApplicationRecord
 
   def current_age
     birthday = self.birth_date
-    current_date = Time.now
+    current_date = DateTime.now
     death = self.death_date
-    age = ((current_date.year - birthday.year) * 12) + (current_date.month - birthday.month)
+    age = (current_date.year - birthday.year) * 12 + (current_date.month - birthday.month)
     if death
       if death.year - birthday.year > 0
-        age = ((death.year - birthday.year) * 12) + (death.month - birthday.month)
+        age = ((death.year - birthday.year) * 12) 
+        if (death.month - birthday.month) > 0
+          age += (death.month - birthday.month)
+        end
       else 
         age = (death.month - birthday.month)
       end
-    elsif (birthday.month > current_date.month || (birthday.month >= current_date.month and birthday.day > current_date.day))
-      age -= 12
     end
     if age == 0
       age = (current_date.month - birthday.month)
