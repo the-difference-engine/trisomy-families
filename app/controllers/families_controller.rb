@@ -70,6 +70,13 @@ class FamiliesController < ApplicationController
 
   def show
     @family = Family.find_by(id: params[:id])
+    @children = []
+    Child.all.each do |child|
+      if child.family_id == @family.id
+        @children << child
+      end
+    end
+    
     render 'show.html.erb'
   end
 
@@ -103,7 +110,11 @@ class FamiliesController < ApplicationController
       puts @family
       @family.update(photo: obj.public_url)
     end
-
-    redirect_to "/families/#{@family.id}"
+    if @family.save
+      flash[:success] = "Family Successfully Updated!"
+      redirect_to "/families/#{@family.id}"
+    else
+      render '/families/edit'
+    end 
   end
 end

@@ -51,9 +51,6 @@ class BackgroundHistoryFormsController < ApplicationController
           @head_circumference.write_attribute(key_name, params[head_circumference_name])
           i += 1
         end
-        @height.save
-        @weight.save
-        @head_circumference.save
       elsif months >= 12
         i = 0
         j = 0
@@ -84,11 +81,10 @@ class BackgroundHistoryFormsController < ApplicationController
 
           j += 1
         end
-        
-        @height.save
-        @weight.save
-        @head_circumference.save
       end
+      @height.save
+      @weight.save
+      @head_circumference.save
     end
 
     @background_history = BackgroundHistory.new(
@@ -172,7 +168,6 @@ class BackgroundHistoryFormsController < ApplicationController
           @head_circumference.write_attribute(key_name, params[head_circumference_name])
           i += 1
         end
-        @height.save
       elsif months >= 12
         i = 0
         j = 0
