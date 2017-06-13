@@ -118,9 +118,9 @@ ActiveRecord::Schema.define(version: 20170611180525) do
     t.boolean  "accepted"
     t.string   "address"
     t.integer  "family_id"
+    t.integer  "contact_info_id"
     t.integer  "secondary_mosaic_percentage"
     t.string   "secondary_partial_trisomy"
-    t.integer  "contact_info_id"
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|

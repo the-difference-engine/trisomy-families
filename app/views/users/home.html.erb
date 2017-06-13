@@ -138,11 +138,6 @@
         <div class="row">
           <div class="col-md-4 col-sm-4 col-xs-12">
             <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
-            <!-- <p>
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas. Pellentesque varius sodales mauris ac efficitur.
-              </span>
-            </p> -->
           </div>
           <div class="col-md-4 col-sm-4 col-xs-12">
             <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
@@ -163,7 +158,7 @@
           <!-- include margin-left and margin-right !-->
           <div class="col-md-6">
             <h1>Use our Family Center Interactive Map!</h1>
-            <p>When you signup, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
+            <p>When you sign up, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
           </div>
           <div class="col-md-6">
             <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
@@ -171,29 +166,44 @@
         </div>
       </div>
     </div>
-  
     <div class="container-fluid content-row">
       <section>
         <h1>Checkout the Data Center!</h1>
-        <h3>In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
+        <h3>In the Data Center, we anonymously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
       </section>
     </div>
+
     <% if @sorted_events.count != 0 %>
       <div class="container-fluid content-row odd-row">
         <ul class="dates">
-          <section>
-            <h1>Upcoming Events</h1>
-            <% count = 0 %>
-            <% 3.times do %>
-            <li>
-              <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-              <h3><a href="#"><%= @sorted_events[count].title %></a></h3>
-              <p><%= @sorted_events[count].description %></p>
-            </li>
-            <% count = count + 1 %>
-            <% end %>
-          </ul>
-        </section>
+          <% if @sorted_events.count > 2 %>
+            <section>
+              <h1>Upcoming/Recent Events</h1>
+              <% count = 2 %>
+              <% 3.times do %>
+              <li>
+                <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                <p><%= @sorted_events[count].description %></p>
+              </li>
+              <% count -= 1 %>
+              <% end %>
+            </section>
+          <% elsif @sorted_events.count <= 2 %>
+            <section>
+              <h1>Upcoming/Recent Events</h1>
+              <% count = @sorted_events.count - 1 %>
+              <% while count >= 0 do %>
+              <li>
+                <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                <p><%= @sorted_events[count].description %></p>
+              </li>
+              <% count -= 1 %>
+              <% end %>
+            </section>
+          <% end %>
+        </ul>
       </div>
     <% end %>
 
