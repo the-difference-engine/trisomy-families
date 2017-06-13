@@ -65,7 +65,7 @@ class HealthHistoryFormsController < ApplicationController
     )
     @gastric_surgery.save
     @nuerological_condition = NuerologicalCondition.new(
-      seizure_epilsepsy: params[:seizure_epilepsy],
+      seizure_epilepsy: params[:seizure_epilepsy],
       brain_malformation: params[:brain_malformation],
       cyst: params[:cyst],
       cp: params[:cp],

@@ -5,6 +5,16 @@
 
     <h2>Contact Information:</h2>
     <% if @contact_info %>
+      <!-- CHECK FOR MISSING REQUIRED FIELDS -->
+      <div>
+        <% @contact_info.attributes.each do |attr_name, attr_value| %>
+          <% if attr_value == nil %>
+            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+        <% end %>
+      </div> 
+      <br>
       <label>Contact First Name:</label> <%= @contact_info.contact_first_name %>
       <br>
       <label>Contact Last Name:</label> <%= @contact_info.contact_last_name %>
@@ -32,6 +42,18 @@
     <hr>
 
     <h2>Basic Participant Information:</h2>
+
+    <!-- CHECK FOR MISSING REQUIRED FIELDS -->
+    <div>
+      <% @family.attributes.each do |attr_name, attr_value| %>
+        <% if attr_value == "" %>
+          <% if attr_name == "street_address" || attr_name == "city" || attr_name == "state" %>
+            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %> <a href="/families/<%= @family.id %>/edit">Edit address</a></span>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div> 
     <label>First name:</label> <%= @child.first_name %>
     <br>
     <label>Last name:</label> <%= @child.last_name %>
@@ -39,7 +61,7 @@
     <label>Birth date:</label> <%= @child.birth_date.strftime('%m/%d/%Y') %>
     <br>
     <% if @child.death_date %><label>Death date: </label> <%= @child.death_date.strftime('%m/%d/%Y') %><br><% end %>
-    <label>Family location:</label> <%= @family.street_address %>, <%= @family.city %>, <%= @family.state %>
+    <label>Family location:</label> <%= @family.street_address %>, <%= @family.city %> <%= @family.state %>
     <br>
     <label>Trisomy type:</label> <%= @child.trisomy_type %>
     <br>
@@ -66,6 +88,27 @@
 
     <h2>Background History</h2>
     <% if @background_history %>
+      <!-- CHECK FOR MISSING REQUIRED FIELDS -->
+      <div>
+        <% @background_history.attributes.each do |attr_name, attr_value| %>
+          <% if attr_value == nil && attr_name != 'trisomy_relative' && attr_name != 'multiple_birth' && attr_name != 'multiple_birth_trisomy' && attr_name != 'siblings_with_trisomy' %>
+            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+          <% if attr_name == "apgar_score" && attr_value == "" %>
+            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+        <% end %>
+        <% if @mother_complication %>
+          <span style="color:red">* REQUIRED FIELD MISSING: mother complications</span>
+          <br>
+        <% end %>
+        
+
+
+      </div> 
+
       <h3>Participant Measurements</h3>
 
       <h4>Weight Info:</h4>
@@ -152,7 +195,7 @@
       <% @health_history.congenital_heart_defect.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
           <li><%= attr_name.gsub("_", " ") %></li>
-        <% elsif attr_name == "other" && attr_value != "" %>
+        <% elsif attr_name == "other" && attr_value != nil %>
           <li><%= attr_value.gsub("on", "other") %></li>      
         <% end %>
       <% end %>
