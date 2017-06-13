@@ -2,6 +2,15 @@ class ResourcesController < ApplicationController
 
   def index
     @resources = Resource.all
+    search_term = params[:search_term]
+
+    if search_term
+      @resources = @resources.where("name iLIKE ? OR description iLIKE ? OR state iLIKE ? OR purpose iLIKE ?", 
+                                "%#{search_term}%",
+                                "%#{search_term}%",
+                                "%#{search_term}%",
+                                "%#{search_term}%")
+    end
   end
 
   def valid_url?(url)
@@ -12,6 +21,8 @@ class ResourcesController < ApplicationController
   def create 
     @resource = Resource.new(
       name: params["resource"]["name"],
+      state: params["resource"]["state"],
+      purpose: params["resource"]["purpose"],
       description: params["resource"]["description"]
     )
 
@@ -60,6 +71,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.find_by(id: params[:id])
     @resource.assign_attributes(
       name: params["resource"]["name"],
+      state: params["resource"]["state"],
+      purpose: params["resource"]["purpose"],
       description: params["resource"]["description"]
     )
 
