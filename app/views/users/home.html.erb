@@ -83,7 +83,7 @@
             <div class="container-fluid content-row" ng-if="children.length != 0">
               <!-- include padding top and bottom using the css box model!-->
               <div class="container">
-                <h2>Trisomy Birthdays</h2>  
+                <h2><%= @home_page_contents.birthday_title %></h2>  
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                   
                   <div class="carousel-inner">
@@ -95,7 +95,7 @@
                         <div class="col-md-6">
                           <p>Happy Birthday {{child.first_name}}!</p>
                           
-                          <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                          <p><%= @home_page_contents.birthday_text %></p>
                           <div ng-if="child.privacies['story'] === false">
                             <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
                           </div>
@@ -129,8 +129,8 @@
           <!-- include margin-left and margin-right !-->
           <!-- this page will introduce the stories behind Trisomy Families !-->
           <div class="col-md-6">
-            <h1 class="row-header">Create your Profile!</h1>
-            <p>Signup and indicate whether you are a family or a doctor.  Then build your profile page!  Families can add stories and photos, as well as children, where they can provide detailed medical information, ananomously.  Doctors can provide information such a practice location and specialty!</p>
+            <h1 class="row-header" style="color:white"><%= @home_page_contents.create_profile_title %></h1>
+            <p><%= @home_page_contents.create_profile_text %></p>
           </div>
         </div>
       </div>
@@ -156,8 +156,9 @@
         <!-- include padding top and bottom using the css box model!-->
         <div class="row">
           <!-- include margin-left and margin-right !-->
-            <h1>Use our Family Center Interactive Map!</h1>
-            <p>When you sign up, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
+          <div class="col-md-6">
+            <h1><%= @home_page_contents.family_center_title %></h1>
+            <p><%= @home_page_contents.family_center_text %></p>
           </div>
           <div class="col-md-6">
             <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
@@ -167,8 +168,8 @@
     </div>
     <div class="container-fluid content-row">
       <section>
-        <h1>Checkout the Data Center!</h1>
-        <h3>In the Data Center, we anonymously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
+        <h1><%= @home_page_contents.data_center_title %></h1>
+        <h3><%= @home_page_contents.data_center_text %></h3>
       </section>
     </div>
 
@@ -205,6 +206,7 @@
         </ul>
       </div>
     <% end %>
+
     <footer class="footer">
       <div class="container-fluid">
         <div class="container">
