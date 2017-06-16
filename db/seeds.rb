@@ -507,6 +507,7 @@ end
 HomePageContent.create(
                         banner_title: "Trisomy Families",
                         banner_text: "Bringing the community together!",
+                        banner_image: "https://trisomy-families.s3.amazonaws.com/AzERgryXfTQxuwkICZRB_background-homepage.jpg",
                         mission_title: "Mission",
                         mission_sub_title: "Networking, Advocating, Supporting, and Uniting families affected by Trisomy",
                         mission_text: "What is trisomy? A trisomy is a type of polysomy in which there are three instances of a particular chromosome, instead of the normal two. Which results in a number of different congenital medical conditions.",
