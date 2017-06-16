@@ -1,7 +1,11 @@
 class HomePageContentsController < ApplicationController
 
   def edit
-    @home_page_content = HomePageContent.first
+    if current_user && current_user.user_type == 'admin'
+      @home_page_content = HomePageContent.first
+    else
+      redirect_to '/'
+    end
   end
 
   def update
@@ -25,6 +29,15 @@ class HomePageContentsController < ApplicationController
                               company_phone_number: params[:home_page_content][:company_phone_number],
                               company_address: params[:home_page_content][:company_address]
                               )
+
+    if params["home_page_content"]["banner_image"] != nil
+      charset = Array('A'..'Z') + Array('a'..'z')
+      random_string = Array.new(20) { charset.sample }.join
+      object_name = random_string + '_' + params["home_page_content"]["banner_image"].original_filename
+      obj = S3_BUCKET.object(object_name)
+      obj.upload_file(params["home_page_content"]["banner_image"].tempfile.path)
+      @home_page_content.update(banner_image: obj.public_url)
+    end
     redirect_to '/'
   end
 
