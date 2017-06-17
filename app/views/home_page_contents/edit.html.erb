@@ -11,6 +11,10 @@
       <%= f.text_area(:banner_text, class: "form-control", placeholder: @home_page_content.banner_text) %>
    </div>
    <div class="form-group">
+      <%= f.label :banner_image, "Banner Image", placeholde: @home_page_content.banner_image %>
+      <%= f.file_field( :banner_image) %>
+   </div>
+   <div class="form-group">
       <%= f.label :mission_title, "Mission Title" %>
       <%= f.text_field(:mission_title, class: "form-control", placeholder: @home_page_content.mission_title) %>
    </div>
