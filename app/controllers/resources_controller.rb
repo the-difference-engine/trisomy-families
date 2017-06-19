@@ -1,7 +1,28 @@
 class ResourcesController < ApplicationController
+  include StatesHelper
 
   def index
     @resources = Resource.all
+    search_term = params[:search_term]
+    sort_attribute = params[:sort]
+    sort_order = params[:sort_order]
+
+    if search_term
+      us_states.each do |state|
+        if search_term.downcase == state[0].downcase
+          search_term = state[1]
+        end
+      end
+      @resources = @resources.where("name iLIKE ? OR description iLIKE ? OR state iLIKE ? OR purpose iLIKE ?", 
+                                "%#{search_term}%",
+                                "%#{search_term}%",
+                                "%#{search_term}%",
+                                "%#{search_term}%")
+    end
+
+    if sort_attribute && sort_order
+      @resources = @resources.order(sort_attribute => sort_order)
+    end
   end
 
   def valid_url?(url)
@@ -12,14 +33,17 @@ class ResourcesController < ApplicationController
   def create 
     @resource = Resource.new(
       name: params["resource"]["name"],
+      state: params["resource"]["state"],
+      purpose: params["resource"]["purpose"],
       description: params["resource"]["description"]
     )
-
-    if valid_url?(params["resource"]["url"]) ||  params["resource"]["url"].split('.')[0].include?('http')
-      @resource.assign_attributes(url: params["resource"]["url"]) 
-    else
-      fixed_url = 'http://' + params["resource"]["url"]
-      @resource.assign_attributes(url: fixed_url) 
+    if params["resource"]["url"] != ""
+      if valid_url?(params["resource"]["url"]) ||  params["resource"]["url"].split('.')[0].include?('http')
+        @resource.assign_attributes(url: params["resource"]["url"]) 
+      else
+        fixed_url = 'http://' + params["resource"]["url"]
+        @resource.assign_attributes(url: fixed_url) 
+      end
     end
     if params["resource"]["image"] == "" 
       @resource.assign_attributes(image: 'http://westerndental.ie/wp-content/plugins/social-media-builder//img/no-image.png') 
@@ -60,6 +84,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.find_by(id: params[:id])
     @resource.assign_attributes(
       name: params["resource"]["name"],
+      state: params["resource"]["state"],
+      purpose: params["resource"]["purpose"],
       description: params["resource"]["description"]
     )
 

@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       delete '/users/:id' => 'users#destroy'
 
       get '/birthdays' => 'birthdays#index'
-      get '/resources' => 'resources#index'
     end
   end
 
