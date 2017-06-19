@@ -1,0 +1,75 @@
+<div class="col-md-6 col-md-offset-3">
+   <h1 class="text-center">Edit Home Page Content</h1>
+   <%= form_for @home_page_content, url: {action: "update"} do |f| %>
+   <h5 style="color:gray">Basic Info</h5>
+   <div class="form-group">
+      <%= f.label :banner_title, "Banner Title" %>
+      <%= f.text_field(:banner_title, class: "form-control", placeholder: @home_page_content.banner_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :banner_text, "Banner Text" %>
+      <%= f.text_area(:banner_text, class: "form-control", placeholder: @home_page_content.banner_text) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :banner_image, "Banner Image", placeholde: @home_page_content.banner_image %>
+      <%= f.file_field( :banner_image) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :mission_title, "Mission Title" %>
+      <%= f.text_field(:mission_title, class: "form-control", placeholder: @home_page_content.mission_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :mission_sub_title, "Mission Sub Title" %>
+      <%= f.text_field(:mission_sub_title, class: "form-control", placeholder: @home_page_content.mission_sub_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :mission_text, "Misson Text" %>
+      <%= f.text_area(:mission_text, class: "form-control", placeholder: @home_page_content.mission_text) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :create_profile_title, "Create Profile Title" %>
+      <%= f.text_field(:create_profile_title, class: "form-control", placeholder: @home_page_content.create_profile_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :create_profile_text, "Create Profile Text" %>
+      <%= f.text_area(:create_profile_text, class: "form-control", placeholder: @home_page_content.create_profile_text) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :family_center_title, "Family Center Title" %>
+      <%= f.text_field(:family_center_title, class: "form-control", placeholder: @home_page_content.family_center_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :family_center_text, "Family Center Text" %>
+      <%= f.text_area(:family_center_text, class: "form-control", placeholder: @home_page_content.family_center_text) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :data_center_title, "Data Center Title" %>
+      <%= f.text_field(:data_center_title, class: "form-control", placeholder: @home_page_content.data_center_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :data_center_text, "Data Center Text" %>
+      <%= f.text_area(:data_center_text, class: "form-control", placeholder: @home_page_content.data_center_text) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :birthday_title, "Birthday Title" %>
+      <%= f.text_field(:birthday_title, class: "form-control", placeholder: @home_page_content.birthday_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :birthday_text, "Birthday Text" %>
+      <%= f.text_area(:birthday_text, class: "form-control", placeholder: @home_page_content.birthday_text) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :company_title, "Organization Name" %>
+      <%= f.text_field(:company_title, class: "form-control", placeholder: @home_page_content.company_title) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :company_phone_number, "Organization Phone Number" %>
+      <%= f.text_field(:company_phone_number, class: "form-control", placeholder: @home_page_content.company_phone_number) %>
+   </div>
+   <div class="form-group">
+      <%= f.label :company_address, "Organization: Street Address, City, State" %>
+      <%= f.text_field(:company_address, class: "form-control", placeholder: @home_page_content.company_address) %>
+   </div>
+      <%= submit_tag 'Update', class: "btn btn-success btn-lg btn-block"%>
+   <% end %>
+</div>

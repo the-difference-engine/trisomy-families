@@ -33,6 +33,7 @@ ReceivedTherapy.delete_all
 Hearing.delete_all
 Vision.delete_all
 HealthHistory.delete_all
+HomePageContent.delete_all
 
 # Create address arrays for physicians and families
 trisomy_strings = ["8", "9", "13", "18", "21", "8", "9", "13", "18", "21", "11", "12", "13", "1", "13", "16", "17", "18", "19", "21", "21", "8", "23", "24"]
@@ -502,3 +503,23 @@ puts  "************************"
   child.background_history_id = @background_history[i].id
   child.save
 end
+
+HomePageContent.create(
+                        banner_title: "Trisomy Families",
+                        banner_text: "Bringing the community together!",
+                        banner_image: "https://trisomy-families.s3.amazonaws.com/AzERgryXfTQxuwkICZRB_background-homepage.jpg",
+                        mission_title: "Mission",
+                        mission_sub_title: "Networking, Advocating, Supporting, and Uniting families affected by Trisomy",
+                        mission_text: "What is trisomy? A trisomy is a type of polysomy in which there are three instances of a particular chromosome, instead of the normal two. Which results in a number of different congenital medical conditions.",
+                        create_profile_title: "CREATE YOUR PROFILE!",
+                        create_profile_text: "Signup and indicate whether you are a family or a doctor. Then build your profile page! Families can add stories and photos, as well as children, where they can provide detailed medical information, ananomously. Doctors can provide information such a practice location and specialty!",
+                        family_center_title: "USE OUR FAMILY CENTER INTERACTIVE MAP!",
+                        family_center_text:"When you signup, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!",
+                        birthday_title: "Trisomy Birthdays",
+                        birthday_text: "May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.",
+                        data_center_title: "CHECKOUT THE DATA CENTER!",
+                        data_center_text: "In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition",
+                        company_title: "Trisomy Families",
+                        company_phone_number: "555-555-5555",
+                        company_address: "Cary, IL"
+                        )

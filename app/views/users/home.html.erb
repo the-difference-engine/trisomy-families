@@ -31,7 +31,15 @@
       <link rel="stylesheet" href="/template/css/homepage/style.css" />
     </noscript>
     <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-
+  <style>
+    #banner{
+              background: #FFFFFF url(<%= @home_page_contents.banner_image %>);
+              background-position: center center;
+              background-size: auto 120%;
+              background-repeat: no-repeat;
+              text-align: left;
+            }
+  </style>
   </head>
   <body class="homepage">
 
@@ -39,9 +47,9 @@
     <section id="banner">
       <!-- can add the header tag to wrap inside code !-->
       <header>
-        <h1>Trisomy Families</h1>
+        <h1><%= @home_page_contents.banner_title %></h1>
           <span>
-            <h1 class="banner-text" style="color: white;">Bringing the Community Together!</h1>
+            <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
 
           </span>
 
@@ -57,13 +65,13 @@
           <div class="col-md-6 col-md-offset-3">
             <div class="col-md-8 col-md-offset-3">
               <h1 class="row-header">
-                Mission
+                <%= @home_page_contents.mission_title %>
               </h1>
             </div>
             <div class="col-md-12">
-              <h4>Networking, Advocating, Supporting, and Uniting families affected by Trisomy</h4>
+              <h4><%= @home_page_contents.mission_sub_title %></h4>
               <br>
-              <p><i>What is trisomy? A trisomy is a type of polysomy in which there are three instances of a particular chromosome, instead of the normal two.  Which results in a number of different congenital medical conditions.</i></p>
+              <p><i><%= @home_page_contents.mission_text %></i></p>
 
             </div>
             <div class="col-md-12">
@@ -83,7 +91,7 @@
             <div class="container-fluid content-row" ng-if="children.length != 0">
               <!-- include padding top and bottom using the css box model!-->
               <div class="container">
-                <h2>Trisomy Birthdays</h2>  
+                <h2><%= @home_page_contents.birthday_title %></h2>  
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                   
                   <div class="carousel-inner">
@@ -95,7 +103,7 @@
                         <div class="col-md-6">
                           <p>Happy Birthday {{child.first_name}}!</p>
                           
-                          <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                          <p><%= @home_page_contents.birthday_text %></p>
                           <div ng-if="child.privacies['story'] === false">
                             <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
                           </div>
@@ -129,8 +137,8 @@
           <!-- include margin-left and margin-right !-->
           <!-- this page will introduce the stories behind Trisomy Families !-->
           <div class="col-md-6">
-            <h1 class="row-header">Create your Profile!</h1>
-            <p>Signup and indicate whether you are a family or a doctor.  Then build your profile page!  Families can add stories and photos, as well as children, where they can provide detailed medical information, ananomously.  Doctors can provide information such a practice location and specialty!</p>
+            <h1 class="row-header" style="color:white"><%= @home_page_contents.create_profile_title %></h1>
+            <p><%= @home_page_contents.create_profile_text %></p>
           </div>
         </div>
       </div>
@@ -157,8 +165,8 @@
         <div class="row">
           <!-- include margin-left and margin-right !-->
           <div class="col-md-6">
-            <h1>Use our Family Center Interactive Map!</h1>
-            <p>When you sign up, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!</p>
+            <h1><%= @home_page_contents.family_center_title %></h1>
+            <p><%= @home_page_contents.family_center_text %></p>
           </div>
           <div class="col-md-6">
             <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
@@ -168,8 +176,8 @@
     </div>
     <div class="container-fluid content-row">
       <section>
-        <h1>Checkout the Data Center!</h1>
-        <h3>In the Data Center, we anonymously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition</h3>
+        <h1><%= @home_page_contents.data_center_title %></h1>
+        <h3><%= @home_page_contents.data_center_text %></h3>
       </section>
     </div>
 
@@ -214,9 +222,9 @@
           <div class="row">
             <div class="col-md-6">
             <address>
-              <h2>Trisomy Families<br></h2>
-              <br>
-              Cary, IL<br>
+              <h2><%= @home_page_contents.company_title %><br></h2>
+              <%= @home_page_contents.company_phone_number %><br>
+              <%= @home_page_contents.company_address %><br>
             </address>
             </div>
             <div class="col-md-2">

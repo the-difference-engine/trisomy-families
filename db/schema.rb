@@ -384,6 +384,28 @@ ActiveRecord::Schema.define(version: 20170613012118) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "home_page_contents", force: :cascade do |t|
+    t.string   "banner_title"
+    t.text     "banner_text"
+    t.string   "banner_image"
+    t.string   "mission_title"
+    t.string   "mission_sub_title"
+    t.text     "mission_text"
+    t.string   "create_profile_title"
+    t.text     "create_profile_text"
+    t.string   "family_center_title"
+    t.text     "family_center_text"
+    t.string   "data_center_title"
+    t.text     "data_center_text"
+    t.string   "birthday_title"
+    t.text     "birthday_text"
+    t.string   "company_title"
+    t.string   "company_phone_number"
+    t.string   "company_address"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "intestinal_issues", force: :cascade do |t|
     t.boolean  "duodenal_atresia_stenosis_web"
     t.boolean  "anal_stenosis_atresia"
