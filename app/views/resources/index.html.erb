@@ -1,13 +1,46 @@
 <br>
-<h1 style="text-align: center;">Resources</h1>
-<% if current_user %>
-  <%= link_to 'Add Resource', resources_new_path, class: "btn btn-success" %>
-<% end %>
-<%= form_tag "/resources", method: :get do %>
-  <%= text_field_tag :search_term %>
-  <%= submit_tag "Search" %>
-<% end %>
+<div class="well">
+  <h1 style="text-align: center;">Resources</h1>
+</div>
 <br>
+<div class="well">
+  <% if current_user %>
+    <%= link_to 'Add Resource', resources_new_path, class: "btn btn-success" %>
+  <% end %>
+  <br>
+
+  <%= form_tag "/resources", method: :get do %>
+    <%= text_field_tag :search_term %><span style="display:inline-block; width: 0px;"></span><%= submit_tag "Search", class: "btn btn-primary", style: "height: 28px; width:90px; padding:0;"%>
+  <% end %>
+  <h4>
+    <i class="glyphicon glyphicon-filter"></i>
+    Filters:
+  </h4>
+  Name
+  <% if current_page?('/resources?sort=name&sort_order=desc') || request.original_url.split("/")[3] == "resources" || !current_page?('/resources?sort=name&sort_order=asc') %>
+  | 
+    <a href="/resources?sort=name&sort_order=asc" id="a_z"><i class="glyphicon glyphicon-sort-by-alphabet"></i></a>
+  <% end %>
+  <% if current_page?('/resources?sort=name&sort_order=asc') || !current_page?('/resources?sort=name&sort_order=desc') %>
+  |
+    <a href="/resources?sort=name&sort_order=desc" id="z_a"><i class="glyphicon glyphicon-sort-by-alphabet-alt"></i></a>
+  <% end %>
+  <br>
+  Date Created
+  <% if current_page?('/resources?sort=updated_at&sort_order=desc') || request.original_url.split("/")[3] == "resources" || !current_page?('/resources?sort=updated_at&sort_order=asc') %>
+  |
+    <a href="/resources?sort=updated_at&sort_order=asc" id="old_new"><i class="glyphicon glyphicon-sort-by-attributes-alt"></i></a>
+  <% end %>
+
+  <% if current_page?('/resources?sort=updated_at&sort_order=asc') || request.original_url.split("/")[3] == "resources" || !current_page?('/resources?sort=updated_at&sort_order=desc') %>
+  |
+    <a href="/resources?sort=updated_at&sort_order=desc" id="new_old"><i class="glyphicon glyphicon-sort-by-attributes"></i></a>
+  <% end %>
+  <br>
+  <% if request.original_url.split("/")[3] != "resources" %>
+    View All | <a href="/resources"><i class="glyphicon glyphicon-asterisk"></i></a>
+  <% end %>
+</div>
 <br>
 <% @resources.each do |resource| %>
   <div class="col-md-4">
