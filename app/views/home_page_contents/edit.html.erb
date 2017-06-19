@@ -1,3 +1,13 @@
+<% if @home_page_content.errors.any?%>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+   <%= pluralize(@home_page_content.errors.count, "Error") %>
+   <ul>
+      <% @home_page_content.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+   </ul>
+</div>
+<% end %>
 <div class="col-md-6 col-md-offset-3">
    <h1 class="text-center">Edit Home Page Content</h1>
    <%= form_for @home_page_content, url: {action: "update"} do |f| %>
@@ -11,8 +21,8 @@
       <%= f.text_area(:banner_text, class: "form-control", placeholder: @home_page_content.banner_text) %>
    </div>
    <div class="form-group">
-      <%= f.label :banner_image, "Banner Image", placeholde: @home_page_content.banner_image %>
-      <%= f.file_field( :banner_image) %>
+      <%= f.label :banner_image, "Banner Image" %>
+      <%= f.file_field( :banner_image, placeholder: @home_page_content.banner_image) %>
    </div>
    <div class="form-group">
       <%= f.label :mission_title, "Mission Title" %>

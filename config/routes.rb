@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   delete '/profile/:id' => 'children#destroy'
   patch '/profile/:id/photo' => 'children#update_photo'
 
+  get '/homepagecontents/new' => 'home_page_contents#new'
+  post '/homepagecontents' => 'home_page_contents#create'
   get '/homepagecontents/1/edit' => 'home_page_contents#edit'
   patch '/homepagecontents/1' => 'home_page_contents#update'
 
