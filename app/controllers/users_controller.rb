@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @home_page_contents = HomePageContent.first
     if current_user && current_user.user_type == 'admin'
       @family = Family.find_by(user_id: current_user.id)
       render 'index.html.erb'
