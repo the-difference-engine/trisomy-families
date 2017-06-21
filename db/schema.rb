@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613001014) do
+ActiveRecord::Schema.define(version: 20170613012118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -588,6 +588,8 @@ ActiveRecord::Schema.define(version: 20170613001014) do
     t.string   "image"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "state"
+    t.string   "purpose"
   end
 
   create_table "secondary_diagnoses", force: :cascade do |t|
