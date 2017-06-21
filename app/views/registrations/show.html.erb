@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-xs-12">
+    <br>
     <h1>Registration Review</h1>
+    <p style="font-size:18px"><b>Use this page to review your entire registration and make sure everything is correct. Any missing fields are shown in red at the top of each section and must be filled before submitting your registration. Use the edit buttons at the bottom of each section if you need to change any part of your registration.</b></p>
+    <p style="font-size:18px"><b>Once you have filled out all required fields and have reviewed your registration, click the submit button at the bottom of the page to send your registration for review. Once reviewed and accepted, you will be notified via the email.</b></p>
     <hr>
+    <br>
 
     <h2>Contact Information:</h2>
     <% if @contact_info %>
@@ -9,7 +13,7 @@
       <div>
         <% @contact_info.attributes.each do |attr_name, attr_value| %>
           <% if attr_value == nil %>
-            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
             <br>
           <% end %>
         <% end %>
@@ -48,7 +52,7 @@
       <% @family.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == "" %>
           <% if attr_name == "street_address" || attr_name == "city" || attr_name == "state" %>
-            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %> <a href="/families/<%= @family.id %>/edit">Edit address</a></span>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %> <a href="/families/<%= @family.id %>/edit">Edit address</a></span>
             <br>
           <% end %>
         <% end %>
@@ -92,21 +96,14 @@
       <div>
         <% @background_history.attributes.each do |attr_name, attr_value| %>
           <% if attr_value == nil && attr_name != 'trisomy_relative' && attr_name != 'multiple_birth' && attr_name != 'multiple_birth_trisomy' && attr_name != 'siblings_with_trisomy' %>
-            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
             <br>
           <% end %>
           <% if attr_name == "apgar_score" && attr_value == "" %>
-            <span style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
             <br>
           <% end %>
         <% end %>
-        <% if @mother_complication %>
-          <span style="color:red">* REQUIRED FIELD MISSING: mother complications</span>
-          <br>
-        <% end %>
-        
-
-
       </div> 
 
       <h3>Participant Measurements</h3>
@@ -186,6 +183,17 @@
 
 
     <h2>Health History</h2>
+
+    <!-- VALIDATE ENTITIES -->
+    <% @health_history.attributes.each do |attr_name, attr_value| %>
+      <% if attr_value == nil %>
+        <% if attr_name == 'offered_cardiac_surgery' || attr_name == 'first_cardiac_surgery_successful' || attr_name == 'sleep_apnea' || attr_name == 'hearing_test' || attr_name == 'failed_eye_exam' || attr_name == 'in_ei' %>
+          <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+          <br>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <h3>Heart</h3>
     <label>Congenital Heart Disease?</label> <% if @health_history.chd %>yes<% else %>no<% end %>
     <br>
@@ -196,7 +204,9 @@
         <% if attr_value == true %>
           <li><%= attr_name.gsub("_", " ") %></li>
         <% elsif attr_name == "other" && attr_value != nil %>
-          <li><%= attr_value.gsub("on", "other") %></li>      
+          <li><%= attr_value.gsub("on", "other") %></li>  
+        <% elsif attr_value == nil %>
+
         <% end %>
       <% end %>
     </ul>
@@ -210,54 +220,59 @@
     <label>Age when first cardiac surgery was performed:</label> <%= @health_history.first_cardiac_surgery_age %> 
 
     <h3>Intestinal issues:</h3> 
+    <span id="intestinal-issues" style="display:none">none</span>
     <ul>   
       <% @health_history.intestinal_issue.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
-          <li><%= attr_name.gsub("_", " ") %></li>          
+          <li class="intestinal-issues"><%= attr_name.gsub("_", " ") %></li>
         <% end %>
       <% end %>
     </ul>
     <br>
 
     <h3>Gastric surgeries:</h3> 
+    <span id="gastric-surgery" style="display:none">none</span>
     <ul>   
       <% @health_history.gastric_surgery.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
-          <li><%= attr_name.gsub("_", " ") %></li> 
+          <li class="gastric-surgery"><%= attr_name.gsub("_", " ") %></li> 
         <% elsif attr_name == "other" && attr_value != "" %>
-          <li><%= attr_value.gsub("_", " ") %></li>         
+          <li class="gastric-surgery"><%= attr_value.gsub("_", " ") %></li>         
         <% end %>
       <% end %>
     </ul>
     <br>
 
     <h3>Neurological conditions:</h3> 
+    <span id="neuro-cond" style="display:none">none</span>
     <ul>   
       <% @health_history.nuerological_condition.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
-          <li><%= attr_name.gsub("_", " ") %></li> 
+          <li class="neuro-cond"><%= attr_name.gsub("_", " ") %></li> 
         <% elsif attr_name == "other" && attr_value != "" %>
-          <li><%= attr_value.gsub("_", " ") %></li>         
+          <li class="neuro-cond"><%= attr_value.gsub("_", " ") %></li>         
         <% end %>
       <% end %>
     </ul>
     <br>
 
     <h3>Muscular/Skeletal:</h3> 
+    <span id="muscular" style="display:none">none</span>
     <ul>   
       <% @health_history.muscular_skeletal.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
-          <li><%= attr_name.gsub("_", " ") %></li>          
+          <li class="muscular"><%= attr_name.gsub("_", " ") %></li>          
         <% end %>
       <% end %>
     </ul>
     <br>
 
     <h3>Cranial/Facial:</h3> 
+    <span id="cranial" style="display:none">none</span>
     <ul>   
       <% @health_history.cranial_facial.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
-          <li><%= attr_name.gsub("_", " ") %></li>          
+          <li class="cranial"><%= attr_name.gsub("_", " ") %></li>          
         <% end %>
       <% end %>
     </ul>
@@ -277,12 +292,13 @@
     <br>
 
     <h3>Endocrine:</h3> 
+    <span id="endo" style="display:none">none</span>    
     <ul>   
       <% @health_history.endocrine.attributes.each do |attr_name, attr_value| %>
         <% if attr_value == true %>
-          <li><%= attr_name.gsub("_", " ") %></li>  
+          <li class="endo"><%= attr_name.gsub("_", " ") %></li>  
         <% elsif attr_name == "other" && attr_value != "" %>
-          <li><%= attr_value.gsub("_", " ") %></li>        
+          <li class="endo"><%= attr_value.gsub("_", " ") %></li>        
         <% end %>
       <% end %>
     </ul>
@@ -369,8 +385,47 @@
 
     <h2>Submit Registration</h2>
     <p>By submitting this registration, I agree that all information provided is true and as accurate as possible. Once your registration has been reviewed, you will receive a confirmation email and access to fully-registered features on our site.</p>
-    <%= form_tag "registrations/#{@child.id}", method: :post do %>
-      <%= submit_tag "Submit Registration", class: "btn btn-success" %>
-    <% end %>
+      
+    <div id="fields-incomplete">
+      <p style="color:red">All required must be filled before you can submit your application. See fields listed in each section above.</p>
+    </div>
+
+    <div id="fields-complete" style="display:none">
+      <%= form_tag "registrations/#{@child.id}", method: :post do %>
+        <%= submit_tag "Submit Registration", class: "btn btn-success" %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<script>
+  if ($(".intestinal-issues").length == 0) {
+    $("#intestinal-issues").show();
+  }
+
+  if ($(".gastric-surgery").length == 0) {
+    $("#gastric-surgery").show();
+  }
+  
+  if ($(".neuro-cond").length == 0) {
+    $("#neuro-cond").show();
+  }
+
+  if ($(".muscular").length == 0) {
+    $("#muscular").show();
+  }
+
+  if ($(".cranial").length == 0) {
+    $("#cranial").show();
+  }
+
+  if ($(".endo").length == 0) {
+    $("#endo").show();
+  }
+
+  if ($(".missing-field").length == 0) {
+    $("#fields-incomplete").hide();
+    $("#fields-complete").show();
+  }
+
+</script>

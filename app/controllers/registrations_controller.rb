@@ -10,15 +10,7 @@ class RegistrationsController < ApplicationController
       @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
       @health_history = HealthHistory.find_by(id: @child.health_history_id)
 
-      i = 0
-      @mother_complication = false
-      @background_history.mother_complication.attributes.each do |attr_name, attr_value|
-        if attr_name != 'id' && attr_name != 'created_at' && attr_name != 'id'
-          if attr_value != nil
-            @mother_complication = true
-          end
-        end
-      end
+      @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
 
       render 'show.html.erb'
     else
@@ -29,4 +21,17 @@ class RegistrationsController < ApplicationController
 
   def destroy
   end
+
+  def presence_of_one(entity_attrs)
+    entity_attrs.each do |attr_name, attr_value|
+      if attr_name != 'id' && attr_name != 'created_at' && attr_name != 'updated_at'
+        if attr_value != nil
+          return true
+        else
+          return false
+        end
+      end
+    end
+  end
+
 end
