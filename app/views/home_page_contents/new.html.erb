@@ -9,8 +9,8 @@
 </div>
 <% end %>
 <div class="col-md-6 col-md-offset-3">
-   <h1 class="text-center">Edit Home Page Content</h1>
-   <%= form_for @home_page_content, url: {action: "update"} do |f| %>
+   <h1 class="text-center">Create Home Page Content</h1>
+   <%= form_for @home_page_content, url: {action: "create"} do |f| %>
       <h5 style="color:gray">Basic Info</h5>
       <div class="form-group">
          <%= f.label :banner_title, "Banner Title" %>
@@ -21,7 +21,7 @@
          <%= f.text_area :banner_text, class: "form-control" %>
       </div>
       <div class="form-group">
-         <%= f.label :banner_image, "Banner Image" %><span style="display:inline-block; width: 113px;"></span><%= check_box_tag "no_banner_image", checked_value = "n/a" %> N/A
+         <%= f.label :banner_image, "Banner Image" %>
          <%= f.file_field :banner_image  %>
       </div>
       <div class="form-group">
@@ -45,15 +45,15 @@
          <%= f.text_area :create_profile_text, class: "form-control" %>
       </div>
       <div class="form-group">
-         <%= f.label :create_profile_image1, "Create Profile Image 1" %><span style="display:inline-block; width: 60px;"></span><%= check_box_tag "no_profile_image_1", checked_value = "n/a" %> N/A
+         <%= f.label :create_profile_image1, "Create Profile Image 1" %>
          <%= f.file_field :create_profile_image1  %>
       </div>
       <div class="form-group">
-         <%= f.label :create_profile_image2, "Create Profile Image 2" %><span style="display:inline-block; width: 60px;"></span><%= check_box_tag "no_profile_image_2", checked_value = "n/a" %> N/A
+         <%= f.label :create_profile_image2, "Create Profile Image 2" %>
          <%= f.file_field :create_profile_image2  %>
       </div>
       <div class="form-group">
-         <%= f.label :create_profile_image3, "Create Profile Image 3" %><span style="display:inline-block; width: 60px;"></span><%= check_box_tag "no_profile_image_3", checked_value = "n/a" %> N/A
+         <%= f.label :create_profile_image3, "Create Profile Image 3" %>
          <%= f.file_field :create_profile_image3  %>
       </div>
       <div class="form-group">
@@ -65,7 +65,7 @@
          <%= f.text_area :family_center_text, class: "form-control" %>
       </div>
       <div class="form-group">
-         <%= f.label :family_center_image, "Family Center Image" %><span style="display:inline-block; width: 60px;"></span><%= check_box_tag "no_family_center_image", checked_value = "n/a" %> N/A
+         <%= f.label :family_center_image, "Family Center Image" %>
          <%= f.file_field :family_center_image  %>
       </div>
       <div class="form-group">
@@ -77,7 +77,7 @@
          <%= f.text_area :data_center_text, class: "form-control" %>
       </div>
       <div class="form-group">
-         <%= f.label :data_center_image, "Data Center Image" %><span style="display:inline-block; width: 60px;"></span><%= check_box_tag "no_data_center_image", checked_value = "n/a" %> N/A
+         <%= f.label :data_center_image, "Data Center Image" %>
          <%= f.file_field :data_center_image  %>
       </div>
       <div class="form-group">
@@ -100,6 +100,6 @@
          <%= f.label :company_address, "Organization: Street Address, City, State" %>
          <%= f.text_field :company_address, class: "form-control" %>
       </div>
-      <%= submit_tag 'Update', class: "btn btn-success btn-lg btn-block"%>
+      <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
    <% end %>
 </div>

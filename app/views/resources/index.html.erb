@@ -8,10 +8,11 @@
     <%= link_to 'Add Resource', resources_new_path, class: "btn btn-success" %>
   <% end %>
   <br>
-
+  <hr>  
   <%= form_tag "/resources", method: :get do %>
     <%= text_field_tag :search_term %><span style="display:inline-block; width: 0px;"></span><%= submit_tag "Search", class: "btn btn-primary", style: "height: 28px; width:90px; padding:0;"%>
   <% end %>
+  <hr>  
   <h4>
     <i class="glyphicon glyphicon-filter"></i>
     Filters:
