@@ -251,7 +251,7 @@
         <% if @home_page_contents != nil %>
           <div class="container-fluid content-row" ng-if="children.length == 0">            
             <div class="row">
-              <% if @home_page_contents.family_center_image %>
+              <% if @home_page_contents.family_center_image != "" || @home_page_contents.family_center_image != nil  %>
                 
                 <div class="col-md-6">
                   <% if @home_page_contents.family_center_title != "" %>
@@ -286,7 +286,25 @@
           </div>
           <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
             <div class="row">
-              <div class="col-md-6">
+              <% if @home_page_contents.family_center_image != "" || @home_page_contents.family_center_image != nil  %>
+                
+                <div class="col-md-6">
+                  <% if @home_page_contents.family_center_title != "" %>
+                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
+                  <% else %>
+                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
+                  <% end %>
+                  <hr>
+                  <% if @home_page_contents.family_center_text != "" %>                
+                    <p><%= @home_page_contents.family_center_text %></p>
+                  <% else %>
+                    <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
+                  <% end %>
+                </div>
+                <div class="col-md-6">
+                  <img src=<%= @home_page_contents.family_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
+                </div>
+              <% else %>
                 <% if @home_page_contents.family_center_title != "" %>
                   <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
                 <% else %>
@@ -298,11 +316,6 @@
                 <% else %>
                   <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
                 <% end %>
-              </div>
-              <% if @home_page_contents.family_center_image %>
-                <div class="col-md-6">
-                  <img src=<%= @home_page_contents.family_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
               <% end %>
             </div>
           </div>
@@ -310,7 +323,7 @@
         <% if @home_page_contents != nil %>
           <div class="container-fluid odd-row content-row" ng-if="children.length == 0">
             <div class="row">
-              <% if @home_page_contents.data_center_image %>
+              <% if @home_page_contents.data_center_image != "" || @home_page_contents.data_center_image != nil %>
                 
                 <div class="col-md-6">
                   <% if @home_page_contents.data_center_title != "" %>
@@ -345,7 +358,7 @@
           </div>
           <div class="container-fluid content-row" ng-if="children.length != 0">
             <div class="row">
-              <% if @home_page_contents.data_center_image %>
+              <% if @home_page_contents.data_center_image != "" || @home_page_contents.data_center_image != nil %>
                 
                 <div class="col-md-6">
                   <% if @home_page_contents.data_center_title != "" %>
