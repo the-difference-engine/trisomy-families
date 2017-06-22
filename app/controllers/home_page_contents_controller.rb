@@ -1,6 +1,5 @@
 class HomePageContentsController < ApplicationController
 
-
   def create
     @home_page_content = HomePageContent.new(
         banner_title: params[:home_page_content][:banner_title],
@@ -84,14 +83,14 @@ class HomePageContentsController < ApplicationController
 
   def edit
     if current_user && current_user.user_type == 'admin'
-      @home_page_content = HomePageContent.first
+      @home_page_content = HomePageContent.last
     else
       redirect_to '/'
     end
   end
 
   def update
-    @home_page_content = HomePageContent.first
+    @home_page_content = HomePageContent.last
 
     @home_page_content.update(
                               banner_title: params[:home_page_content][:banner_title],
@@ -119,7 +118,8 @@ class HomePageContentsController < ApplicationController
       obj = S3_BUCKET.object(object_name)
       obj.upload_file(params["home_page_content"]["banner_image"].tempfile.path)
       @home_page_content.update(banner_image: obj.public_url)
-    elsif params[:no_banner_image] == "n/a"
+    end
+    if params[:no_banner_image] == "n/a"
       @home_page_content.update(banner_image: "")
     end
     if params["home_page_content"]["create_profile_image1"] != nil
@@ -129,7 +129,8 @@ class HomePageContentsController < ApplicationController
       obj = S3_BUCKET.object(object_name)
       obj.upload_file(params["home_page_content"]["create_profile_image1"].tempfile.path)
       @home_page_content.update(create_profile_image1: obj.public_url)
-    elsif params[:no_profile_image_1] == "n/a"
+    end
+    if params[:no_profile_image_1] == "n/a"
       @home_page_content.update(create_profile_image1: "")
     end
     if params["home_page_content"]["create_profile_image2"] != nil
@@ -139,7 +140,8 @@ class HomePageContentsController < ApplicationController
       obj = S3_BUCKET.object(object_name)
       obj.upload_file(params["home_page_content"]["create_profile_image2"].tempfile.path)
       @home_page_content.update(create_profile_image2: obj.public_url)
-    elsif params[:no_profile_image_2] == "n/a"
+    end
+    if params[:no_profile_image_2] == "n/a"
       @home_page_content.update(create_profile_image2: "")
     end
     if params["home_page_content"]["create_profile_image3"] != nil
@@ -149,7 +151,8 @@ class HomePageContentsController < ApplicationController
       obj = S3_BUCKET.object(object_name)
       obj.upload_file(params["home_page_content"]["create_profile_image3"].tempfile.path)
       @home_page_content.update(create_profile_image3: obj.public_url)
-    elsif params[:no_profile_image_3] == "n/a"
+    end
+    if params[:no_profile_image_3] == "n/a"
       @home_page_content.update(create_profile_image3: "")
     end
     if params["home_page_content"]["family_center_image"] != nil
@@ -159,7 +162,8 @@ class HomePageContentsController < ApplicationController
       obj = S3_BUCKET.object(object_name)
       obj.upload_file(params["home_page_content"]["family_center_image"].tempfile.path)
       @home_page_content.update(family_center_image: obj.public_url)
-    elsif params[:no_family_center_image] == "n/a"
+    end
+    if params[:no_family_center_image] == "n/a"
       @home_page_content.update(family_center_image: "")
     end
     if params["home_page_content"]["data_center_image"] != nil
@@ -169,7 +173,8 @@ class HomePageContentsController < ApplicationController
       obj = S3_BUCKET.object(object_name)
       obj.upload_file(params["home_page_content"]["data_center_image"].tempfile.path)
       @home_page_content.update(data_center_image: obj.public_url)
-    elsif params[:no_data_center_image] == "n/a"
+    end
+    if params[:no_data_center_image] == "n/a"
       @home_page_content.update(data_center_image: "")
     end
 

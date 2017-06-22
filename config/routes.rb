@@ -58,8 +58,8 @@ Rails.application.routes.draw do
 
   get '/homepagecontents/new' => 'home_page_contents#new'
   post '/homepagecontents' => 'home_page_contents#create'
-  get '/homepagecontents/1/edit' => 'home_page_contents#edit'
-  patch '/homepagecontents/1' => 'home_page_contents#update'
+  get '/homepagecontents/:id/edit' => 'home_page_contents#edit'
+  patch '/homepagecontents/:id' => 'home_page_contents#update'
 
   # NEW ROUTES FOR CHILD REGISTRATION:
   get 'registrations' => 'registrations#index'
