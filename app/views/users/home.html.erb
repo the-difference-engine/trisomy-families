@@ -43,241 +43,346 @@
   </style>
   </head>
   <body class="homepage">
-    <% if @home_page_contents != nil %>
-      <!-- Banner -->
-      <section id="banner">
-        <!-- can add the header tag to wrap inside code !-->
-        <header>
-            <h1><%= @home_page_contents.banner_title %></h1>
-            <span>
-              <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
-            </span>
-        </header>
-      </section>
-    <% end %>
-    <% if @home_page_contents != nil && @home_page_contents.mission_text != ""  %>
-      <!-- mission box !-->
-      <div class="container-fluid content-row">
-        <section>
-          <% if @home_page_contents.mission_title != "" %>
-            <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
-              <%= @home_page_contents.mission_title %>
-            </h1>
-          <% else %>
-            <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
-              Our Mission
-            </h1>
-          <% end %>
-          <% if @home_page_contents.mission_sub_title != "" %>
-            <h4><%= @home_page_contents.mission_sub_title %></h4>
-          <% end %>
-          <hr>
-          <h3><%= @home_page_contents.mission_text %></h3>
-        </section>
-      </div>
-              
-    <% end %>
-    
-    <div class="container-fluid odd-row content-row">
-      <div ng-app="app">
-        <div ng-controller="BirthdaysController" ng-init="setUp()">
-            <div class="container-fluid content-row" ng-if="children.length != 0">
-              <!-- include padding top and bottom using the css box model!-->
-              <div class="container">
-                <% if @home_page_contents != nil && @home_page_contents.birthday_title != "" %>
-                  <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
-                <% else %>
-                  <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> Today's Birthdays</h1>  
-                <% end %>
-                <hr style="width: 93%">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                  
-                  <div class="carousel-inner">
-                    <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
-                      <div class="row">          
-                        
-                        <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="width:350px;height:350px;"/>
-                        <img ng-if="child.privacies['avatar'] === true" src="http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png" style="width:350px;height:350px;"/>
-                        <div class="col-md-6">
-                          <p>Happy Birthday, {{child.first_name}}!</p>
-                          <% if @home_page_contents != nil && @home_page_contents.birthday_text != "" %>
-                            <p><%= @home_page_contents.birthday_text %></p>
-                            <div ng-if="child.privacies['story'] === false">
-                              <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
-                            </div>
-                          <% else %>
-                            <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
-                            <div ng-if="child.privacies['story'] === false">
-                              <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
-                            </div>
-                          <% end %>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Left and right controls -->
-                  <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-              </div>
-              
-            </div>
-        </div>
-      </div>
-    </div>
-    <% if @home_page_contents != nil %>
-      <div class="container-fluid content-row">
-        <div class="container">
-          <!-- include padding top and bottom using the css box model!-->
-          <div class="row">
-            <!-- include margin-left and margin-right !-->
-            <!-- this page will introduce the stories behind Trisomy Families !-->
-            <div class="col-md-6">
-              <% if @home_page_contents.create_profile_title != "" %>
-                <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
+    <div ng-app="app">
+      <div ng-controller="BirthdaysController" ng-init="setUp()">
+        <% if @home_page_contents != nil %>
+          <!-- Banner -->
+          <section id="banner">
+            <!-- can add the header tag to wrap inside code !-->
+            <header>
+                <h1><%= @home_page_contents.banner_title %></h1>
+                <span>
+                  <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
+                </span>
+            </header>
+          </section>
+        <% end %>
+        <% if @home_page_contents != nil && @home_page_contents.mission_text != ""  %>
+          <div class="container-fluid content-row">
+            <section>
+              <% if @home_page_contents.mission_title != "" %>
+                <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
+                  <%= @home_page_contents.mission_title %>
+                </h1>
               <% else %>
-                <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
+                <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
+                  Our Mission
+                </h1>
               <% end %>
-              <hr style="width: 93%">
-              <% if @home_page_contents.create_profile_text != "" %>
-                <p><%= @home_page_contents.create_profile_text %></p>
-              <% else %>
-                <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <p><img class="hover-zoom img-circle" src=""></p>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
-            </div>
-          </div>
-          <div class="row">
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if @home_page_contents != nil %>
-      <div class="container-fluid odd-row content-row">
-        <div class="container">
-          <!-- include padding top and bottom using the css box model!-->
-          <div class="row">
-            <!-- include margin-left and margin-right !-->
-            <div class="col-md-6">
-              <% if @home_page_contents.family_center_title != "" %>
-                <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
-              <% else %>
-                <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
+              <% if @home_page_contents.mission_sub_title != "" %>
+                <h4><%= @home_page_contents.mission_sub_title %></h4>
               <% end %>
               <hr>
-              <% if @home_page_contents.family_center_text != "" %>                
-                <p><%= @home_page_contents.family_center_text %></p>
-              <% else %>
-                <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
-              <% end %>
-            </div>
-            <div class="col-md-6">
-              <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="90%"/>
-            </div>
+              <h3><%= @home_page_contents.mission_text %></h3>
+            </section>
           </div>
-        </div>
-      </div>
-    <% end %>
-    <% if @home_page_contents != nil %>
-      <div class="container-fluid content-row">
-        <section>
-          <% if @home_page_contents.data_center_title != "" %>
-            <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
-          <% else %>
-            <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
-          <% end %>
-    
-          <hr>
-          <h3><%= @home_page_contents.data_center_text %></h3>
-        </section>
-      </div>
-    <% end %>
+                  
+        <% end %>
 
-    <% if @sorted_events.count != 0 %>
-      <div class="container-fluid content-row odd-row">
-        <ul class="dates">
-          <% if @sorted_events.count > 2 %>
-            <section>
-              <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
-              <% count = 2 %>
-              <% 3.times do %>
-              <li>
-                <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-                <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-                <p><%= @sorted_events[count].description %></p>
-              </li>
-              <% count -= 1 %>
-              <% end %>
-            </section>
-          <% elsif @sorted_events.count <= 2 %>
-            <section>
-              <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
-              <% count = @sorted_events.count - 1 %>
-              <% while count >= 0 do %>
-              <li>
-                <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-                <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-                <p><%= @sorted_events[count].description %></p>
-              </li>
-              <% count -= 1 %>
-              <% end %>
-            </section>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="container">
-          <!-- include padding top and bottom using the css box model!-->
-          <div class="row">
-            <div class="col-md-6">
-            <address>
-            <% if @home_page_contents != nil %>
-              <h2><%= @home_page_contents.company_title %><br></h2>
-              <%= @home_page_contents.company_phone_number %><br>
-              <%= @home_page_contents.company_address %><br>
+        <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
+          <div class="container">
+            <% if @home_page_contents != nil && @home_page_contents.birthday_title != "" %>
+              <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
+            <% else %>
+              <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> Today's Birthdays</h1>  
             <% end %>
-            </address>
-            </div>
-            <div class="col-md-2">
-              <h6>You can also checkout our Facebook Page!</h6>
-              <ol class="social">
-                <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
-              </ol>
-            </div>
+            <hr style="width: 93%">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              
+              <div class="carousel-inner">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
+                  <div class="row">          
+                    
+                    <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="width:350px;height:350px;"/>
+                    <img ng-if="child.privacies['avatar'] === true" src="http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png" style="width:350px;height:350px;"/>
+                    <div class="col-md-6">
+                      <p>Happy Birthday, {{child.first_name}}!</p>
+                      <% if @home_page_contents != nil && @home_page_contents.birthday_text != "" %>
+                        <p><%= @home_page_contents.birthday_text %></p>
+                        <div ng-if="child.privacies['story'] === false">
+                          <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                        </div>
+                      <% else %>
+                        <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                        <div ng-if="child.privacies['story'] === false">
+                          <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                        </div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>  
           </div>
         </div>
-        <div class="container">
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3 text-center copyright">
-          <p>2017 © Trisomy Families. All Rights Reserved.</p>
-        </div>
+
+
+        <% if @home_page_contents != nil %>
+          <div class="container-fluid content-row" ng-if="children.length != 0">
+            <div class="row">
+              <div class="col-md-6">
+                <% if @home_page_contents.create_profile_title != "" %>
+                  <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
+                <% else %>
+                  <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
+                <% end %>
+                <hr style="width: 93%">
+                <% if @home_page_contents.create_profile_text != "" %>
+                  <p><%= @home_page_contents.create_profile_text %></p>
+                <% else %>
+                  <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
+                <% end %>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
+              </div>
+            </div>
+              
+
+          </div>
+
+          <div class="container-fluid odd-row content-row" ng-if="children.length == 0">
+            <div class="container">
+              <!-- include padding top and bottom using the css box model!-->
+              <div class="row">
+                <!-- include margin-left and margin-right !-->
+                <!-- this page will introduce the stories behind Trisomy Families !-->
+                <div class="col-md-6">
+                  <% if @home_page_contents.create_profile_title != "" %>
+                    <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
+                  <% else %>
+                    <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
+                  <% end %>
+                  <hr style="width: 93%">
+                  <% if @home_page_contents.create_profile_text != "" %>
+                    <p><%= @home_page_contents.create_profile_text %></p>
+                  <% else %>
+                    <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% if @home_page_contents != nil %>
+          <div class="container-fluid content-row" ng-if="children.length == 0">            
+            <div class="row">
+              <div class="col-md-6">
+                <% if @home_page_contents.family_center_title != "" %>
+                  <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
+                <% else %>
+                  <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
+                <% end %>
+                <hr>
+                <% if @home_page_contents.family_center_text != "" %>                
+                  <p><%= @home_page_contents.family_center_text %></p>
+                <% else %>
+                  <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="90%"/>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
+            <div class="row">
+              <div class="col-md-6">
+                <% if @home_page_contents.family_center_title != "" %>
+                  <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
+                <% else %>
+                  <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
+                <% end %>
+                <hr>
+                <% if @home_page_contents.family_center_text != "" %>                
+                  <p><%= @home_page_contents.family_center_text %></p>
+                <% else %>
+                  <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="90%"/>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% if @home_page_contents != nil %>
+          <div class="container-fluid odd-row content-row" ng-if="children.length == 0">
+            <section>
+              <% if @home_page_contents.data_center_title != "" %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+              <% end %>
+            
+              <hr>
+              <h3><%= @home_page_contents.data_center_text %></h3>
+            </section>
+          </div>
+          <div class="container-fluid content-row" ng-if="children.length != 0">
+            <section>
+              <% if @home_page_contents.data_center_title != "" %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+              <% end %>
+        
+              <hr>
+              <h3><%= @home_page_contents.data_center_text %></h3>
+            </section>
+          </div>
+        <% end %>
+
+        <% if @sorted_events.count != 0 %>
+          <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
+            <ul class="dates">
+              <% if @sorted_events.count > 2 %>
+                <section>
+                  <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                  <% count = 2 %>
+                  <% 3.times do %>
+                  <li>
+                    <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                    <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                    <p><%= @sorted_events[count].description %></p>
+                  </li>
+                  <% count -= 1 %>
+                  <% end %>
+                </section>
+              <% elsif @sorted_events.count <= 2 %>
+                <section>
+                  <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                  <% count = @sorted_events.count - 1 %>
+                  <% while count >= 0 do %>
+                  <li>
+                    <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                    <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                    <p><%= @sorted_events[count].description %></p>
+                  </li>
+                  <% count -= 1 %>
+                  <% end %>
+                </section>
+              <% end %>
+            </ul>
+          </div>
+          <div class="container-fluid content-row" ng-if="children.length == 0">
+            <ul class="dates">
+              <% if @sorted_events.count > 2 %>
+                <section>
+                  <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                  <% count = 2 %>
+                  <% 3.times do %>
+                  <li>
+                    <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                    <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                    <p><%= @sorted_events[count].description %></p>
+                  </li>
+                  <% count -= 1 %>
+                  <% end %>
+                </section>
+              <% elsif @sorted_events.count <= 2 %>
+                <section>
+                  <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                  <% count = @sorted_events.count - 1 %>
+                  <% while count >= 0 do %>
+                  <li>
+                    <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                    <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                    <p><%= @sorted_events[count].description %></p>
+                  </li>
+                  <% count -= 1 %>
+                  <% end %>
+                </section>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <footer class="footer" style="background-color: #00A1F1; color: white" ng-if="children.length == 0">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <address>
+                  <% if @home_page_contents != nil %>
+                    <h2><%= @home_page_contents.company_title %><br></h2>
+                    Phone: <%= @home_page_contents.company_phone_number %><br>
+                    Address: <%= @home_page_contents.company_address %><br>
+                  <% end %>
+                </address>
+              </div>
+              <div class="col-md-2">
+                <h6>You can also checkout our Facebook Page!</h6>
+                <ol class="social">
+                  <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
+                </ol>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3 text-center copyright">
+                <p>2017 © Trisomy Families. All Rights Reserved.</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <footer class="footer" ng-if="children.length != 0">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <address>
+                  <% if @home_page_contents != nil %>
+                    <h2><%= @home_page_contents.company_title %><br></h2>
+                    <%= @home_page_contents.company_phone_number %><br>
+                    <%= @home_page_contents.company_address %><br>
+                  <% end %>
+                </address>
+              </div>
+              <div class="col-md-2">
+                <h6>You can also checkout our Facebook Page!</h6>
+                <ol class="social">
+                  <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
+                </ol>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3 text-center copyright">
+                <p>2017 © Trisomy Families. All Rights Reserved.</p>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
-    </footer>
-    
   </body>
 </html>
