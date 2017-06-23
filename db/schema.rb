@@ -393,22 +393,22 @@ ActiveRecord::Schema.define(version: 20170622184615) do
     t.text     "mission_text"
     t.string   "create_profile_title"
     t.text     "create_profile_text"
+    t.string   "create_profile_image1"
+    t.string   "create_profile_image2"
+    t.string   "create_profile_image3"
     t.string   "family_center_title"
     t.text     "family_center_text"
+    t.string   "family_center_image"
     t.string   "data_center_title"
     t.text     "data_center_text"
+    t.string   "data_center_image"
     t.string   "birthday_title"
     t.text     "birthday_text"
     t.string   "company_title"
     t.string   "company_phone_number"
     t.string   "company_address"
     t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "create_profile_image1"
-    t.string   "create_profile_image2"
-    t.string   "create_profile_image3"
-    t.string   "family_center_image"
-    t.string   "data_center_image"
+    t.datetime "updated_at",            null: false            
   end
 
   create_table "intestinal_issues", force: :cascade do |t|
