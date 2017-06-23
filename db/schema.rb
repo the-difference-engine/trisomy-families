@@ -408,7 +408,7 @@ ActiveRecord::Schema.define(version: 20170622184615) do
     t.string   "company_phone_number"
     t.string   "company_address"
     t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "updated_at",            null: false            
   end
 
   create_table "intestinal_issues", force: :cascade do |t|
