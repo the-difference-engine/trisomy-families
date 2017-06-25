@@ -3,6 +3,26 @@
 class Api::V1::SearchController < ApplicationController
   def index
     if params[:type] == 'physician'
+
+      # # IF NO OTHER PARAMS BUT PHYSICIANS
+      # if params[:last_name].nil? && params[:state].nil?
+      #   physicians = Physician.all
+      # elsif !params[:last_name].nil? && params[:state].nil?
+      #   physicians = Physician.where(last_name: params[:last_name])
+      # else
+      #   physicians = []
+      # end
+
+      # # IF FILTER JUST BY LAST NAME
+
+      # # IF FILTER JUST BY STATE
+
+      # # IF FILTER BY BOTH
+
+      # # 
+
+      # @physicians = physicians
+      # render 'physicians.json.jbuilder'
       rows = Physician.where(phys_hash_params)
       if !params[:limit].nil?
         rows = rows.limit(params[:limit].to_i)
@@ -53,6 +73,9 @@ class Api::V1::SearchController < ApplicationController
     end
     if !params[:specialty].nil?
       h[:specialty] = params[:specialty]
+    end
+    if !params[:last_name].nil?
+      h[:last_name] = params[:last_name]
     end
     h
   end
