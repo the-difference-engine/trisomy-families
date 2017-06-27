@@ -16,7 +16,7 @@
       <% end %>
       <div>
         <%= label_tag :weight_at_birth %>
-        <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5, :required => 'required')  %> 
       </div>
       
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
@@ -28,7 +28,7 @@
             <div>
               <%= label_tag numbers[i]+'_month' %>
               <% key_name = (numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5, :required => 'required')  %> 
             </div>
             <% i += 1 %>
           <% end %>
@@ -39,7 +39,7 @@
             <div>
               <%= label_tag numbers[i]+'_month' %>
               <% key_name = (numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5, :required => 'required')  %> 
             </div>
             <% i += 1 %>
           <% end %>
@@ -48,14 +48,14 @@
       <% if @child.current_age >= 12 %>
         <div>
           <%= label_tag :one_year %>
-          <%= number_field_tag(:one_year, nil, in: 1.0..20, step: 0.5)  %> 
+          <%= number_field_tag(:one_year, nil, in: 1.0..20, step: 0.5, :required => 'required')  %> 
         </div>
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
           <%= label_tag :eighteen_month %>
-          <%= number_field_tag(:eighteen_month, nil, in: 1.0..20, step: 0.5)  %> 
+          <%= number_field_tag(:eighteen_month, nil, in: 1.0..20, step: 0.5, :required => 'required')  %> 
         </div>
       <% end %>
 
@@ -68,7 +68,7 @@
           <div>
             <%= label_tag string_year[k]+'_year' %>
             <% key_name = (string_year[k]+'_year').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+            <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5, :required => 'required')  %> 
           </div>
           <% k += 1 %>
         <% end %>
@@ -88,7 +88,7 @@
       <% end %>
       <div>
         <%= label_tag :height_at_birth %>
-        <%= number_field_tag(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+        <%= number_field_tag(:height_at_birth, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
       </div>
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
@@ -99,7 +99,7 @@
             <div>
               <%= label_tag numbers[i]+'_month' %>
               <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, :required => 'required')  %>  
             </div>
             <% i += 1 %>
           <% end %>
@@ -110,7 +110,7 @@
             <div>
               <%= label_tag numbers[i]+'_month' %>
               <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
             </div>
             <% i += 1 %>
           <% end %>
@@ -120,14 +120,14 @@
       <% if @child.current_age >= 12 %>
         <div>
           <%= label_tag :one_year %>
-          <%= number_field_tag(:height_one_year, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= number_field_tag(:height_one_year, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
         </div>
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
           <%= label_tag :eighteen_month %>
-          <%= number_field_tag(:height_eighteen_month, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= number_field_tag(:height_eighteen_month, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
         </div>
       <% end %>
 
@@ -140,7 +140,7 @@
           <div>
             <%= label_tag string_year[k]+'_year' %>
             <% key_name = ('height_'+string_year[k]+'_year').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
           </div>
           <% k += 1 %>
         <% end %>
@@ -160,7 +160,7 @@
       <% end %>
       <div>
         <%= label_tag :head_circumference_at_birth %>
-        <%= number_field_tag(:head_circumference_at_birth, @background_history.head_circumference_at_birth, in: 10.0..30, step: 0.5)  %> 
+        <%= number_field_tag(:head_circumference_at_birth, @background_history.head_circumference_at_birth, in: 10.0..30, step: 0.5, :required => 'required')  %> 
       </div>
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
@@ -171,7 +171,7 @@
             <div>
               <%= label_tag numbers[i]+'_month' %>
               <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, :required => 'required')  %>  
             </div>
             <% i += 1 %>
           <% end %>
@@ -182,7 +182,7 @@
             <div>
               <%= label_tag numbers[i]+'_month' %>
               <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, :required => 'required')  %>  
             </div>
             <% i += 1 %>
           <% end %>
@@ -192,14 +192,14 @@
       <% if @child.current_age >= 12 %>
         <div>
           <%= label_tag :one_year %>
-          <%= number_field_tag(:hc_one_year, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= number_field_tag(:hc_one_year, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
         </div>
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
           <%= label_tag :eighteen_month %>
-          <%= number_field_tag(:hc_eighteen_month, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= number_field_tag(:hc_eighteen_month, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
         </div>
       <% end %>
 
@@ -212,7 +212,7 @@
           <div>
             <%= label_tag string_year[k]+'_year' %>
             <% key_name = ('hc_'+string_year[k]+'_year').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, :required => 'required')  %> 
           </div>
           <% k += 1 %>
         <% end %>
@@ -309,5 +309,6 @@
         <%= check_box_tag :trisomy_relative, nil, @background_history.trisomy_relative %>
       </div>
       <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
-  <%= submit_tag %>
+    <%= submit_tag 'Save', class: "btn btn-primary"%>
+  
 <% end %>
