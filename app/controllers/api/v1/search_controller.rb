@@ -3,20 +3,38 @@
 class Api::V1::SearchController < ApplicationController
   def index
     if params[:type] == 'physician'
-      rows = Physician.where(phys_hash_params)
-      if !params[:limit].nil?
-        rows = rows.limit(params[:limit].to_i)
+
+
+
+      if !params[:last_name].nil? && params[:state].nil?
+        # rows = state
+      elsif params[:last_name].nil? && !params[:state].nil?
+        # rows = last name
+      elsif !params[:last_name].nil? && !params[:state].nil?
+        
+      elsif params[:last_name].nil? && params[:state].nil?
+        physicians = Physician.all
+      else 
+        # rows == []
       end
-      if !params[:fields].nil?
-        fields_array = []
-        params[:fields].split(',').each do |attr|
-          fields_array.push(attr.to_sym)
-        end
-        # bug - id is returned even if ommitted
-        render json: rows, fields: { physician: fields_array }, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
-      else
-        render json: rows, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
-      end
+
+      @physicians = physicians
+      render 'physicians.json.jbuilder'
+
+      # rows = Physician.where(phys_hash_params)
+      # if !params[:limit].nil?
+      #   rows = rows.limit(params[:limit].to_i)
+      # end
+      # if !params[:fields].nil?
+      #   fields_array = []
+      #   params[:fields].split(',').each do |attr|
+      #     fields_array.push(attr.to_sym)
+      #   end
+      #   # bug - id is returned even if ommitted
+      #   render json: rows, fields: { physician: fields_array }, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
+      # else
+      #   render json: rows, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
+      # end
 
     elsif params[:type] == 'family'
 
@@ -56,7 +74,6 @@ class Api::V1::SearchController < ApplicationController
       h[:specialty] = params[:specialty]
     end
     if !params[:last_name].nil?
-      # capitalize last name
       h[:last_name] = params[:last_name]
     end
     h
