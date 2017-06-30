@@ -9,8 +9,11 @@ class RegistrationsController < ApplicationController
       @contact_info = ContactInfoForm.find_by(child_id: @child.id)
       @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
       @health_history = HealthHistory.find_by(id: @child.health_history_id)
-
-      @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
+      p @background_history
+      if @background_history != nil 
+        @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
+      end
+      
 
       render 'show.html.erb'
     else

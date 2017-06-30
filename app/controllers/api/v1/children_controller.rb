@@ -24,13 +24,6 @@ class Api::V1::ChildrenController < ApplicationController
       @trisomy_types_hash[key] = value - 1
     end
 
-
-
-
-
-
-
-
     render 'index2.json.jbuilder'
   end
 
@@ -52,26 +45,17 @@ class Api::V1::ChildrenController < ApplicationController
       @birth_order_hash[key] = value - 1
     end
 
-
-
-
-
-
-
-
     render 'index3.json.jbuilder'
   end
 
-
-
-
-
   def update
-    @children = Child.includes(background_history: [:weight, :height, :head_circumference, :mother_complication], health_history: [:congenital_heart_defect, :intestinal_issue, :gastric_surgery, :nuerological_condition, :muscular_skeletal, :cranial_facial, :endocrine, :hearing, :vision, :behavioral_health, :received_therapy]).where.not({health_history_id: nil, background_history_id: nil})
     @child = Child.find_by(id: params[:id])
-    @child.update(
-      accepted: params[:accepted]
-    )
-    @child.save(validate: false)
+    if params["accepted"] == "Accept Child"
+      @child.update(
+        accepted: true
+      )
+      @child.save
+      redirect_to '/children-index'
+    end
   end
 end
