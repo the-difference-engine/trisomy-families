@@ -31,7 +31,7 @@
  background-color: #f7f7f7; 
 }
 
-#child_first_name {
+#child_first_name, #child_last_name, #child_nickname, #child_birth_order, #child_trisomy_story, #child_other_primary_diagnosis, #child_other_secondary_diagnosis, #child_mosaic_percentage, #child_secondary_mosaic_percentage {
  background-color: #f7f7f7;  
 }
 

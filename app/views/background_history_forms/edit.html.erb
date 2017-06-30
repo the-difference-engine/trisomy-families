@@ -34,9 +34,10 @@
         <% if @child.current_age <= 6 %>
           <% while i < @child.current_age do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>
               <% key_name = (numbers[i]+'_month').to_sym %>
               <%= number_field_tag(key_name, @weight.send(key_name), in: 10..30, step: 0.5, required: true)  %> 
             </div>
@@ -45,9 +46,10 @@
         <% else %>
           <% while i < 6 do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>
               <% key_name = (numbers[i]+'_month').to_sym %>
               <%= number_field_tag(key_name, @weight.send(key_name), in: 10..30, step: 0.5, required: true)  %> 
             </div>
@@ -57,14 +59,14 @@
       <% end %>
       <% if @child.current_age >= 12 %>
         <div>
-          <%= label_tag :one_year %>
+          <%= label_tag :first_year %>
           <%= number_field_tag(:one_year, @weight.one_year, in: 1.0..20, step: 0.5, required: true)  %> 
         </div>
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteen_month %>
+          <%= label_tag :eighteenth_month %>
           <%= number_field_tag(:eighteen_month, @weight.eighteen_month, in: 1.0..20, step: 0.5, required: true)  %> 
         </div>
       <% end %>
@@ -74,9 +76,10 @@
         <% age = @child.current_age / 12 %>
         <% while k < (age - 1) do %>
           <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
+          <% years = ['Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth', 'Twenty-First', 'Twenty-Second', 'Twenty-Third', 'Twenty-Fourth', 'Twenty-Fifth', 'Twenty-Sixth', 'Twenty-Seventh', 'Twenty-Eighth', 'Twenty-Ninth', 'Thirtieth', 'Thirty-First', 'Thirty-Second', 'Thirty-Third', 'Thirty-Fourth', 'Thirty-Fifth', 'Thirty-Sixth', 'Thirty-Seventh', 'Thirty-Eighth', 'Thirty-Ninth', 'Fortieth'] %>
           
           <div>
-            <%= label_tag string_year[k]+'_year' %>
+            <%= label_tag years[k]+'_year' %>
             <% key_name = (string_year[k]+'_year').to_sym %>
             <%= number_field_tag(key_name, @weight.send(key_name), in: 1.0..20, step: 0.5, required: true)  %> 
           </div>
@@ -106,9 +109,10 @@
         <% if @child.current_age <= 6 %>
           <% while i < @child.current_age do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>
               <% value_name = (numbers[i]+'_month').to_sym %>
               <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
               <%= number_field_tag(key_name, @height.send(value_name), in: 10..30, step: 0.5, required: true)  %> 
@@ -118,9 +122,9 @@
         <% else %>
           <% while i < 6 do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
-            
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>
               <% value_name = (numbers[i]+'_month').to_sym %>
               <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
               <%= number_field_tag(key_name, @height.send(value_name), in: 10..30, step: 0.5, required: true)  %> 
@@ -132,14 +136,14 @@
       <% end %>
       <% if @child.current_age >= 12 %>
         <div>
-          <%= label_tag :one_year %>
+          <%= label_tag :first_year %>
           <%= number_field_tag(:height_one_year, @height.one_year, in: 10..30, step: 0.5, required: true)  %> 
         </div>
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteen_month %>
+          <%= label_tag :eighteenth_month %>
           <%= number_field_tag(:height_eighteen_month, @height.eighteen_month, in: 10..30, step: 0.5, required: true)  %> 
         </div>
       <% end %>
@@ -149,9 +153,9 @@
         <% age = @child.current_age / 12 %>
         <% while k < (age - 1) do %>
           <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
-          
+          <% years = ['Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth', 'Twenty-First', 'Twenty-Second', 'Twenty-Third', 'Twenty-Fourth', 'Twenty-Fifth', 'Twenty-Sixth', 'Twenty-Seventh', 'Twenty-Eighth', 'Twenty-Ninth', 'Thirtieth', 'Thirty-First', 'Thirty-Second', 'Thirty-Third', 'Thirty-Fourth', 'Thirty-Fifth', 'Thirty-Sixth', 'Thirty-Seventh', 'Thirty-Eighth', 'Thirty-Ninth', 'Fortieth'] %>
           <div>
-            <%= label_tag string_year[k]+'_year' %>
+            <%= label_tag years[k]+'_year' %>
             <% value_name = (string_year[k]+'_year').to_sym %>
             <% key_name = ('height_'+string_year[k]+'_year').to_sym %>
             <%= number_field_tag(key_name, @height.send(value_name), in: 10..30, step: 0.5, required: true)  %> 
@@ -181,9 +185,10 @@
         <% if @child.current_age <= 6 %>
           <% while i < @child.current_age do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>
               <% value_name = (numbers[i]+'_month').to_sym %>
               <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
               <%= number_field_tag(key_name, @head_circumference.send(value_name), in: 10..30, step: 0.5, required: true)  %> 
@@ -193,9 +198,10 @@
         <% else %>
           <% while i < 6 do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>
               <% value_name = (numbers[i]+'_month').to_sym %>
               <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
               <%= number_field_tag(key_name, @head_circumference.send(value_name), in: 10..30, step: 0.5, required: true)  %> 
@@ -206,14 +212,14 @@
       <% end %>
       <% if @child.current_age >= 12 %>
         <div>
-          <%= label_tag :one_year %>
+          <%= label_tag :first_year %>
           <%= number_field_tag(:hc_one_year, @head_circumference.one_year, in: 10..20, step: 0.5, required: true)  %> 
         </div>
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteen_month %>
+          <%= label_tag :eighteenth_month %>
           <%= number_field_tag(:hc_eighteen_month, @head_circumference.eighteen_month, in: 10..20, step: 0.5, required: true)  %> 
         </div>
       <% end %>
@@ -223,9 +229,9 @@
         <% age = @child.current_age / 12 %>
         <% while k < (age - 1) do %>
           <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
-          
+          <% years = ['Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth', 'Twenty-First', 'Twenty-Second', 'Twenty-Third', 'Twenty-Fourth', 'Twenty-Fifth', 'Twenty-Sixth', 'Twenty-Seventh', 'Twenty-Eighth', 'Twenty-Ninth', 'Thirtieth', 'Thirty-First', 'Thirty-Second', 'Thirty-Third', 'Thirty-Fourth', 'Thirty-Fifth', 'Thirty-Sixth', 'Thirty-Seventh', 'Thirty-Eighth', 'Thirty-Ninth', 'Fortieth'] %>
           <div>
-            <%= label_tag string_year[k]+'_year' %>
+            <%= label_tag years[k]+'_year' %>
             <% value_name = (string_year[k]+'_year').to_sym %>
             <% key_name = ('hc_'+string_year[k]+'_year').to_sym %>
             <%= number_field_tag(key_name, @head_circumference.send(value_name), in: 10..20, step: 0.5, required: true)  %> 
