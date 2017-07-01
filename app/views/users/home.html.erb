@@ -35,7 +35,7 @@
       #banner{
                 background: url(<%= @home_page_contents.banner_image %>);
                 background-position: center center;
-                background-size: auto 120%;
+                background-size: auto 140%;
                 background-repeat: no-repeat;
                 text-align: left;
               }
@@ -43,7 +43,7 @@
       #banner{
                 background: url("https://blog.chocchildrens.org/wp-content/uploads/2016/03/iStock_000022912430_Full-1038x576.jpg");
                 background-position: center center;
-                background-size: auto 120%;
+                background-size: auto 140%;
                 background-repeat: no-repeat;
                 text-align: left;
               }
@@ -51,17 +51,27 @@
   </style>
   </head>
   <body class="homepage">
-    <% if @home_page_contents != nil %>
       <div ng-app="app">
         <div ng-controller="BirthdaysController" ng-init="setUp()">
-          <section id="banner">
-            <header>
-                <h1><%= @home_page_contents.banner_title %></h1>
-                <span>
-                  <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
-                </span>
-            </header>
-          </section>
+          <% if (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") && (@home_page_contents.banner_text != nil && @home_page_contents.banner_text != "") %>
+            <section id="banner">
+              <header>
+                  <h1><%= @home_page_contents.banner_title %></h1>
+                  <span>
+                    <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
+                  </span>
+              </header>
+            </section>
+          <% else %>
+            <section id="banner">
+              <header>
+                  <h1>Trisomy Families</h1>
+                  <span>
+                    <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
+                  </span>
+              </header>
+            </section>
+          <% end %>
           <% if @home_page_contents.mission_text != ""  %>
             <div class="container-fluid content-row">
               <section>
@@ -559,8 +569,5 @@
           </footer>
         </div>
       </div>
-    <% elsif current_user && current_user.user_type == 'admin' %>
-      <a href="/homepagecontents/new" class="btn btn-primary btn-lg btn-block">Create Home Page Content</a>
-    <% end %>
   </body>
 </html>
