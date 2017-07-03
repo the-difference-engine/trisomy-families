@@ -90,7 +90,6 @@
             var zipcode = $scope.data[i]["zip_code"];
             var website = $scope.data[i]["website"];
             var specialty = $scope.data[i]["specialty"]
-            console.log(specialty)
             createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, website);
         }
       }
@@ -132,7 +131,6 @@
     $scope.performSearch = function() {
         // send ajax only if form has changed
         if ($scope.search_form.$dirty) {
-          
             var url = "/api/v1/search?" + $httpParamSerializerJQLike($scope.query);
 
             // need to clear trisomy type params from url if it equals nothing

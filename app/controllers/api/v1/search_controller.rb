@@ -3,38 +3,22 @@
 class Api::V1::SearchController < ApplicationController
   def index
     if params[:type] == 'physician'
-
-
-
       if !params[:last_name].nil? && params[:state].nil?
-        # rows = state
+        phys_last_name = params[:last_name].downcase        
+        physicians = Physician.where('lower(last_name) = ?', phys_last_name)      
       elsif params[:last_name].nil? && !params[:state].nil?
-        # rows = last name
-      elsif !params[:last_name].nil? && !params[:state].nil?
-        
+        physicians = Physician.where(state: params[:state])
       elsif params[:last_name].nil? && params[:state].nil?
         physicians = Physician.all
+      elsif !params[:last_name].nil? && !params[:state].nil?
+        last_name = params[:last_name].downcase
+        physicians = Physicians.where('lower(last_name) = ?', last_name)
       else 
-        # rows == []
+        physicians == []
       end
 
       @physicians = physicians
       render 'physicians.json.jbuilder'
-
-      # rows = Physician.where(phys_hash_params)
-      # if !params[:limit].nil?
-      #   rows = rows.limit(params[:limit].to_i)
-      # end
-      # if !params[:fields].nil?
-      #   fields_array = []
-      #   params[:fields].split(',').each do |attr|
-      #     fields_array.push(attr.to_sym)
-      #   end
-      #   # bug - id is returned even if ommitted
-      #   render json: rows, fields: { physician: fields_array }, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
-      # else
-      #   render json: rows, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
-      # end
 
     elsif params[:type] == 'family'
 
