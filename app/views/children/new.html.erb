@@ -15,11 +15,12 @@
          <%= form_for @child, url: {action: "create"} do |f| %>
          <h5 style="color:gray">Basic Info</h5>
          <div class="form-group">
-            <%= f.label :child_first_name, "* Full Name" %>
-            <%= f.text_field(:first_name, class: "form-control", placeholder: 'First Name') %>
+            <%= f.label :child_first_name, "First Name" %>
+            <%= f.text_field(:first_name, class: "form-control") %>
          </div>
          <div class="form-group">
-            <%= f.text_field(:last_name, class: "form-control", placeholder: 'Last Name') %>
+            <%= f.label :child_first_name, "Last Name" %>
+            <%= f.text_field(:last_name, class: "form-control") %>
          </div>
          <div class="form-group">
             <%= f.label :child_nickname %>
