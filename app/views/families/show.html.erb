@@ -1,9 +1,36 @@
 <% if current_user && @family.id.to_s == params[:id] %>
-  <h1>My Family Profile</h1>
-  <p>Welcome to your Trisomy Family profile page. Others will be able to see your profile page. If you set your story to "private", then only registered families will be able to to see your profile.</p>
-  <p>In order to see other's private profile pages, utilize the family & physician search center and explore the data center, you must first register at least one Trisomy participant (child). To start this process, create a child profile. From there you will be able to complete and submit a full registration form.</p>
-  <p>Click "Add Child" below to get started</p>
+  <div class="row" style="background-color:#f2f2f2; padding:15px;">
+    <div class="col-md-2">
+      <a href="/family-center"><h4 id="family"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h4></a>
+    </div>
+    <div class="col-md-2">
+      <a href="/data-center"><h4 id="data"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h4></a>
+    </div>
+    <div class="col-md-3">
+      <a href="/resources"><h4 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> Add Resources</h4></a>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="family-desc">
+      <h4 style="color:darkblue">Find other families and physicians with our interactive map search functionality.</h4>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="data-desc">
+      <h4 style="color:darkblue">See trisomy patient data in the form of tables and charts.</h4>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="resource-desc">
+      <h4 style="color:darkblue">View and add resources for Trisomy-related topics.</h4>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>My Family Profile</h1>
+      <p>Welcome to your Trisomy Family profile page. Others will be able to see your profile page. If you set your story to "private", then only registered families will be able to to see your profile.</p>
+      <p>In order to see other's private profile pages, utilize the family & physician search center and explore the data center, you must first register at least one Trisomy participant (child). To start this process, create a child profile. From there you will be able to complete and submit a full registration form.</p>
+      <p>Click "Add Child" below to get started</p>
+    </div>
+  </div>
+  <br>
 <% end %>
+
 
 <div class="well">
   <h1 style="text-align: center;">
@@ -71,3 +98,24 @@
     
   </div>
 <% end %>
+
+<script>
+  $("#family").hover(function() {
+    $("#family-desc").show();
+  })
+  $("#family").mouseout(function() {
+    $("#family-desc").hide();
+  })
+  $("#data").hover(function() {
+    $("#data-desc").show();
+  })
+  $("#data").mouseout(function() {
+    $("#data-desc").hide();
+  })
+  $("#resource").hover(function() {
+    $("#resource-desc").show();
+  })
+  $("#resource").mouseout(function() {
+    $("#resource-desc").hide();
+  })
+</script>
