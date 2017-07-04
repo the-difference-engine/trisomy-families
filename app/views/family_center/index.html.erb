@@ -89,13 +89,19 @@
   </body>
 
     <script>
+          // INITIALIZE FIELDS          
           $("#searchQuerytrisomy_type").hide();
           $("#selectState").hide();
           $("#name").hide();
           $("#btnSubmit").hide();
           function toggleTrisomyType(){
+
+            // RESET FIELD VALUES
+            $("#searchQuerytrisomy_type").attr("value", "hello");
+            console.log($("#searchQuerytrisomy_type").value);
+
+            // SHOW AND HIDE FIELDS
             var user_type = $("#searchQueryType").val();
-            console.log(user_type);
             if(user_type == "family"){
               $("#searchQuerytrisomy_type").show();
               $("#selectState").show();
