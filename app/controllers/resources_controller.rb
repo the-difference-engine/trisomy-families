@@ -1,5 +1,7 @@
 class ResourcesController < ApplicationController
   include StatesHelper
+  require 'sendgrid-ruby'
+  include SendGrid
 
   def index
     @resources = Resource.all
@@ -23,12 +25,7 @@ class ResourcesController < ApplicationController
     if sort_attribute && sort_order
       @resources = @resources.order(sort_attribute => sort_order)
     end
-  end
-
-  def valid_url?(url)
-    url_regexp = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
-    url =~ url_regexp ? true : false
-  end
+  end  
 
   def create 
     @resource = Resource.new(
@@ -55,6 +52,9 @@ class ResourcesController < ApplicationController
     end
 
     if @resource.save
+      # Send email alert to admin
+      admin_alert
+
       flash[:success] = "Resource #{@resource.name} Created!"
       redirect_to "/resources"
     else
@@ -120,6 +120,27 @@ class ResourcesController < ApplicationController
       flash[:warning] = "Resource #{@resource.name} Deleted Successfully!"
       redirect_to '/resources'
     end
+  end
+
+  def valid_url?(url)
+    url_regexp = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+    url =~ url_regexp ? true : false
+  end
+
+  def admin_alert
+    # Will only notify oldest admin (first created)
+    admin_email = User.where(user_type: "admin").first.email
+
+    from = Email.new(email: ENV["SENDGRID_USERNAME"])
+    to = Email.new(email: admin_email)
+    subject = 'A new resource has been added'
+    message = "#{current_user.first_name} #{current_user.last_name} (#{current_user.email}) has added a new resource to the Trisomy Families website. Link to resources: #{request.url}"
+
+    content = Content.new(type: 'text/html', value: message)
+    mail = Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
 end
