@@ -40,6 +40,8 @@
       <label>Other Info:</label> <%= @contact_info.other_info %>
       <br>
       <a href="/registrations/contact_info/<%= @contact_info.id %>/edit" class="btn btn-warning" id="edit_contact_info">Edit Contact Info</a>
+    <% else %>
+      <a href="/registrations/contact_info/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Contact Info</button></a>
     <% end %>
     <br>
     <br>
@@ -175,6 +177,8 @@
       <label>Trisomy relative?</label> <% if @background_history.trisomy_relative %>yes<% else %>no<% end %>
       <br>
       <a href="/registrations/background_history/<%= @background_history.id %>/edit" class="btn btn-warning" id="edit_background_history">Edit Background History</a>
+    <% else %>
+      <a href="/registrations/background_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Background History</button></a>
     <% end %>
     <br>
     <br>
@@ -376,6 +380,8 @@
       <label>Interest in participating in upcomming trials? </label> <% if @health_history.clinical_trial_participation %>yes<% else %>no<% end %>
       <br>
       <a href="/registrations/health_history/<%= @health_history.id %>/edit" class="btn btn-warning" id="edit_health_history">Edit Health History</a>
+    <% else %>
+      <a href="/registrations/health_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Health History</button></a>
     <% end %>
     <br>
     <br>
@@ -394,9 +400,11 @@
         <% end %>
       </div>
     <% elsif current_user.user_type === "admin" %>
-      <%= form_tag "../api/v1/children/#{@child.id}", method: :patch do %>
-        <%= submit_tag "Accept Child", :name => "accepted", class: "btn btn-info" %>
-      <% end %>
+      <div id="fields-complete" style="display:none">
+        <%= form_tag "../api/v1/children/#{@child.id}", method: :patch do %>
+          <%= submit_tag "Accept Child", :name => "accepted", class: "btn btn-info" %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
