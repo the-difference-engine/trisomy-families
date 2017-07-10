@@ -121,7 +121,7 @@ class BackgroundHistoryFormsController < ApplicationController
 
     else
       flash[:warning] = "Unable to add Background History!"
-      redirect_to "/profile/#{@child.id}"
+      render "new.html.erb"
     end
 
   end
@@ -242,7 +242,7 @@ class BackgroundHistoryFormsController < ApplicationController
       redirect_to "/profile/#{@child.id}"
     else
       flash[:warning] = "Background History Could Not Be Updated!"
-      render 'edit.html.erb'
+      redirect_to "/registrations/background_history/#{@background_history.id}/edit"
     end
   end
 

@@ -3,20 +3,22 @@
 class Api::V1::SearchController < ApplicationController
   def index
     if params[:type] == 'physician'
-      rows = Physician.where(phys_hash_params)
-      if !params[:limit].nil?
-        rows = rows.limit(params[:limit].to_i)
+      if !params[:last_name].nil? && params[:state].nil?
+        phys_last_name = params[:last_name].downcase        
+        physicians = Physician.where('lower(last_name) = ?', phys_last_name)      
+      elsif params[:last_name].nil? && !params[:state].nil?
+        physicians = Physician.where(state: params[:state])
+      elsif params[:last_name].nil? && params[:state].nil?
+        physicians = Physician.all
+      elsif !params[:last_name].nil? && !params[:state].nil?
+        last_name = params[:last_name].downcase
+        physicians = Physicians.where('lower(last_name) = ?', last_name)
+      else 
+        physicians == []
       end
-      if !params[:fields].nil?
-        fields_array = []
-        params[:fields].split(',').each do |attr|
-          fields_array.push(attr.to_sym)
-        end
-        # bug - id is returned even if ommitted
-        render json: rows, fields: { physician: fields_array }, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
-      else
-        render json: rows, each_serializer: Api::V1::PhysicianSerializer, adapter: :json_api, root: false
-      end
+
+      @physicians = physicians
+      render 'physicians.json.jbuilder'
 
     elsif params[:type] == 'family'
 
@@ -33,7 +35,8 @@ class Api::V1::SearchController < ApplicationController
       end
 
       if !params[:last_name].nil?
-        families = Family.where(family_name: params[:last_name])
+        family_name = params[:last_name].downcase
+        families = Family.where('lower(family_name) = ?', family_name)
       end
 
       @families = families
@@ -53,6 +56,9 @@ class Api::V1::SearchController < ApplicationController
     end
     if !params[:specialty].nil?
       h[:specialty] = params[:specialty]
+    end
+    if !params[:last_name].nil?
+      h[:last_name] = params[:last_name]
     end
     h
   end
