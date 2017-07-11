@@ -76,8 +76,24 @@ class FamiliesController < ApplicationController
         @children << child
       end
     end
-    
-    render 'show.html.erb'
+    if current_user && current_user.user_type != "doctor"
+      user_family = Family.find_by(user_id: current_user.id)
+      if user_family != nil
+        render 'show.html.erb'
+      else 
+        redirect_to "/families/new"
+      end
+    elsif current_user && current_user.user_type == "doctor"
+      doctor = Physician.find_by(user_id: current_user.id)
+      if doctor
+        redirect_to "/physicians/#{doctor.id}"
+      else
+        redirect_to "/physicians/new"
+      end
+    else
+      flash[:warning] = 'You must be logged in to view this page.'
+      redirect_to '/' 
+    end
   end
 
   def edit
