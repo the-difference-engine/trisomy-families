@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get '/children/birth_order_totals' => 'children#birth_order_totals'
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
-      patch '/children' => 'children#update'
+      patch '/children/:id' => 'children#update'
       delete '/users/:id' => 'users#destroy'
 
       get '/birthdays' => 'birthdays#index'
