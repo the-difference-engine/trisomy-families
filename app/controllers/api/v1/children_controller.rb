@@ -1,6 +1,9 @@
 # API/V1/ChildrenController
 class Api::V1::ChildrenController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  require 'sendgrid-ruby'
+  include SendGrid
+
   def index
     @children = Child.all
     render 'index.json.jbuilder'
@@ -54,8 +57,25 @@ class Api::V1::ChildrenController < ApplicationController
       @child.update(
         accepted: true
       )
-      @child.save
-      redirect_to '/children-index'
+      if @child.save
+        user_alert(@child)
+        redirect_to '/children-index'
+      end
     end
+  end
+
+  def user_alert(child)
+    user_email = child.user.email
+
+    from = Email.new(email: ENV["SENDGRID_USERNAME"])
+    to = Email.new(email: user_email)
+    subject = 'Child Registration'
+    message = "#{child.first_name} #{child.last_name}'s registration has been accepted."
+
+    content = Content.new(type: 'text/html', value: message)
+    mail = Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
   end
 end
