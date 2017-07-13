@@ -269,7 +269,7 @@ class HealthHistoryFormsController < ApplicationController
          health_history_id: @health_history.id
        )
       flash[:success] = "Health History Added!"
-      redirect_to "/profile/#{@child.id}"
+      redirect_to "/registrations/#{@child.id}"
     else
       flash[:warning] = "Health History Could Not Be Added!"
       render 'new.html.erb'
@@ -535,7 +535,7 @@ class HealthHistoryFormsController < ApplicationController
         health_history_id: @health_history.id
       )
       flash[:success] = "Health History Successfully Updated!"
-      redirect_to "/profile/#{@child.id}"
+      redirect_to "/registrations/#{@child.id}"
     else
       flash[:warning] = "Health History Could Not Be Updated!"
       render 'edit.html.erb'

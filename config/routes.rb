@@ -64,7 +64,8 @@ Rails.application.routes.draw do
   # NEW ROUTES FOR CHILD REGISTRATION:
   get 'registrations' => 'registrations#index'
   get 'registrations/:id' => 'registrations#show'
-  get 'registrations/:id' => 'registrations#destroy'
+  delete 'registrations/:id' => 'registrations#destroy'
+  patch '/registrations/:id' => 'registrations#update'
 
   get 'registrations/contact_info/new' => 'contact_info_forms#new'
   post 'registrations/contact_info' => 'contact_info_forms#create'
