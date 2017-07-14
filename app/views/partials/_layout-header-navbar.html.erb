@@ -36,8 +36,7 @@
                   <% end %>
                 <% elsif current_user.user_type == 'doctor' || current_user.user_type == 'admin' %> 
                   <% if current_user.physician_ids[0] && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
-                  <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; My Profile</a></li> 
-                  <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span></li>
+                  <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>&nbsp; My Profile</a></li> 
                   <% elsif !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) && !current_page?('/physicians/new') %>
                     <li><a href="/physicians/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
                   <% end %>
