@@ -173,7 +173,7 @@ class ChildrenController < ApplicationController
 
     if @child.save && @privacy.save
       flash[:success] = 'Profile Updated!'
-      redirect_to "/profile/#{@child.id}"
+      redirect_to "/registrations/#{@child.id}"
     else
       render 'edit.html.erb'
     end

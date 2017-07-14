@@ -8,3 +8,4 @@ json.city child.city
 json.state child.state
 json.birth_order child.birth_order
 json.accepted child.accepted
+json.registered child.registered

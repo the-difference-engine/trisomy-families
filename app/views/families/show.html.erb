@@ -93,7 +93,9 @@
           Trisomy Type: <%= child.trisomy_type %>
         </p>
       <% end %>
-
+      <% if current_user.id == @family.user_id %>
+        <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+      <% end %>
     </div>
     
   </div>
