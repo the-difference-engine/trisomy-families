@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     sorted_events_old_first = @all_events.sort_by &:start
     @sorted_events = sorted_events_old_first.reverse
     @home_page_contents = HomePageContent.last
+    @images = Dir.glob("app/assets/images/carousel/*.{gif,jpg,png}")
   end
 
   def children_index

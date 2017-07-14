@@ -51,166 +51,137 @@
   </style>
   </head>
   <body class="homepage">
-      <div ng-app="app">
-        <div ng-controller="BirthdaysController" ng-init="setUp()">
-          <% if (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") && (@home_page_contents.banner_text != nil && @home_page_contents.banner_text != "") %>
-            <section id="banner">
-              <header>
-                  <h1><%= @home_page_contents.banner_title %></h1>
-                  <span>
-                    <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
-                  </span>
-              </header>
-            </section>
-          <% else %>
-            <section id="banner">
-              <header>
-                  <h1>Trisomy Families</h1>
-                  <span>
-                    <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
-                  </span>
-              </header>
-            </section>
-          <% end %>
-          <% if @home_page_contents.mission_text != ""  %>
-            <div class="container-fluid content-row">
-              <section>
-                <% if @home_page_contents.mission_title != "" %>
-                  <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
-                    <%= @home_page_contents.mission_title %>
-                  </h1>
-                <% else %>
-                  <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
-                    Our Mission
-                  </h1>
-                <% end %>
-                <% if @home_page_contents.mission_sub_title != "" %>
-                  <h4 style="text-align: center"><%= @home_page_contents.mission_sub_title %></h4>
-                <% end %>
-                <hr>
-                <h3><%= @home_page_contents.mission_text %></h3>
-              </section>
-            </div>                  
-          <% end %>
-          <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
-            <div class="container">
-              <% if @home_page_contents.birthday_title != "" %>
-                <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
-              <% else %>
-                <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> Today's Birthdays</h1>  
-              <% end %>
-              <hr style="width: 93%">
-              <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                
-                <div class="carousel-inner">
-                  <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
-                    <div class="row">          
-                      
-                      <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="width:350px;height:350px;"/>
-                      <img ng-if="child.privacies['avatar'] === true" src="http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png" style="width:350px;height:350px;"/>
-                      <div class="col-md-6">
-                        <p>Happy Birthday, {{child.first_name}}!</p>
-                        <% if @home_page_contents != nil && @home_page_contents.birthday_text != "" %>
-                          <p><%= @home_page_contents.birthday_text %></p>
-                          <div ng-if="child.privacies['story'] === false">
-                            <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
-                          </div>
-                        <% else %>
-                          <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
-                          <div ng-if="child.privacies['story'] === false">
-                            <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
-                          </div>
-                        <% end %>
 
-                      </div>
+
+      <!-- BANNER -->
+
+      <% if (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") && (@home_page_contents.banner_text != nil && @home_page_contents.banner_text != "") %>
+        <section id="banner">
+          <header>
+              <h1><%= @home_page_contents.banner_title %></h1>
+              <span>
+                <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
+              </span>
+          </header>
+        </section>
+      <% else %>
+        <section id="banner">
+          <header>
+              <h1>Trisomy Families</h1>
+              <span>
+                <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
+              </span>
+          </header>
+        </section>
+      <% end %>
+      <% if @home_page_contents.mission_text != ""  %>
+        <div class="container-fluid content-row">
+          <section>
+            <% if @home_page_contents.mission_title != "" %>
+              <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
+                <%= @home_page_contents.mission_title %>
+              </h1>
+            <% else %>
+              <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
+                Our Mission
+              </h1>
+            <% end %>
+            <% if @home_page_contents.mission_sub_title != "" %>
+              <h4 style="text-align: center"><%= @home_page_contents.mission_sub_title %></h4>
+            <% end %>
+            <hr>
+            <h3><%= @home_page_contents.mission_text %></h3>
+          </section>
+        </div>                  
+      <% end %>
+
+
+
+
+      <!-- SLIDESHOW / CAROUSEL-->
+
+      <div class="container-fluid odd-row content-row" ng-app="app">
+        <div class="container" ng-controller="BirthdaysController" ng-init="setUp()">
+          
+
+          <div ng-if="birthdays==true">    
+            <% if @home_page_contents.birthday_title != "" %>
+              <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
+            <% else %>
+              <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> Today's Birthdays</h1>  
+            <% end %>
+            <hr style="width: 93%">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              
+              <div class="carousel-inner">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
+                  <div class="row">                 
+                    <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="height:350px;"/>
+                    <img ng-if="child.privacies['avatar'] === true" src="http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png" style="height:350px;"/>
+                    <div class="col-md-6">
+                      <p>Happy Birthday, {{child.first_name}}!</p>
+                      <% if @home_page_contents != nil && @home_page_contents.birthday_text != "" %>
+                        <p><%= @home_page_contents.birthday_text %></p>
+                        <div ng-if="child.privacies['story'] === false">
+                          <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                        </div>
+                      <% else %>
+                        <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                        <div ng-if="child.privacies['story'] === false">
+                          <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                        </div>
+                      <% end %>
                     </div>
                   </div>
                 </div>
-
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>  
-            </div>
-          </div>
-          <div class="container-fluid content-row" ng-if="children.length != 0">
-            <div class="row">
-              <div class="col-md-6">
-                <% if @home_page_contents.create_profile_title != "" %>
-                  <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
-                <% else %>
-                  <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
-                <% end %>
-                <hr style="width: 93%">
-                <% if @home_page_contents.create_profile_text != "" %>
-                  <p><%= @home_page_contents.create_profile_text %></p>
-                <% else %>
-                  <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
-                <% end %>
               </div>
-            </div>            
-            <div class="row">
-              <% if (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+          </div>
+
+
+          <div ng-if="birthdays==false">
+            <h2 style="color:#fff; margin-top:0;">No Trisomy birthdays today but here are some words of inspiration:</h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="image in images">                  
+                  <div class="row">                 
+                    <!-- <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="width:350px;height:350px;"/> -->
+                    <img src="{{image.photo}}" style="height:350px;"/>
+                    <div class="col-md-6">
+                    </div>
+                  </div>                  
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
-                </div>
-              <% elsif ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil)) || ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) != "" && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil)) || ((@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil))  %>
-                <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
-                  </div>
-                <% end %>
-              <% elsif (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) || (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) || (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
-                <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
-                  </div>
-                <% end %>
-              <% else %>
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
-                  </div>
-                <% end %>
+
+              </div>
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
           </div>
-          <div class="container-fluid odd-row content-row" ng-if="children.length == 0">
+        </div>
+      </div>
+
+
+
+      <!-- CREATE PROFILE -->
+
+      <div class="container-fluid content-row">
+        <div class="row">
+          <div class="col-md-6">
             <% if @home_page_contents.create_profile_title != "" %>
               <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
             <% else %>
@@ -221,353 +192,185 @@
               <p><%= @home_page_contents.create_profile_text %></p>
             <% else %>
               <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
-            <% end %>                
-            <div class="row">
-              <% if (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
-                </div>
-              <% elsif ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil)) || ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) != "" && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil)) || ((@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil))  %>
-                <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
-                  </div>
-                <% end %>
-              <% elsif (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) || (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) || (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
-                <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
-                  </div>
-                <% end %>
-                <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
-                  </div>
-                <% end %>
-              <% else %>
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-12">
-                    <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
-                  </div>
-                <% end %>
-            </div>
-          </div>          
-          <div class="container-fluid content-row" ng-if="children.length == 0">
-            <div class="row">
-              <% if @home_page_contents.family_center_image != "" && @home_page_contents.family_center_image != nil  %>
-                
-                <div class="col-md-6">
-                  <% if @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
-                  <% else %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
-                  <% end %>
-                  <hr>
-                  <% if @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
-                    <p><%= @home_page_contents.family_center_text %></p>
-                  <% else %>
-                    <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src=<%= @home_page_contents.family_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
-              <% else %>
-                <div class="col-md-6">
-                  <% if @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
-                  <% else %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
-                  <% end %>
-                  <hr>
-                  <% if @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
-                    <p><%= @home_page_contents.family_center_text %></p>
-                  <% else %>
-                    <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
-                </div>
-              <% end %>
-            </div>
+            <% end %>
           </div>
-          <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
-            <div class="row">
-              <% if @home_page_contents.family_center_image != "" && @home_page_contents.family_center_image != nil  %>
-                
-                <div class="col-md-6">
-                  <% if @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
-                  <% else %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
-                  <% end %>
-                  <hr>
-                  <% if @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
-                    <p><%= @home_page_contents.family_center_text %></p>
-                  <% else %>
-                    <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src=<%= @home_page_contents.family_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
-              <% else %>
-                <div class="col-md-6">
-                  <% if @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
-                  <% else %>
-                    <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h1>
-                  <% end %>
-                  <hr>
-                  <% if @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
-                    <p><%= @home_page_contents.family_center_text %></p>
-                  <% else %>
-                    <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state. </p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
-                </div>
-              <% end %>
+        </div>            
+        <div class="row">
+          <% if (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
             </div>
-          </div>
-          <div class="container-fluid odd-row content-row" ng-if="children.length == 0">
-            <div class="row">
-              <% if @home_page_contents.data_center_image != "" && @home_page_contents.data_center_image != nil %>
-                
-                <div class="col-md-6">
-                  <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
-                    <hr>
-                  <% else %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
-                    <hr>
-                  <% end %>
-                  <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
-                    <p><%= @home_page_contents.data_center_text %></p>
-                  <% else %>
-                    <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src=<%= @home_page_contents.data_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
-              <% else %>
-                <div class="col-md-6">
-                  <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
-                    <hr>
-                  <% else %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
-                    <hr>
-                  <% end %>
-                  <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
-                    <p><%= @home_page_contents.data_center_text %></p>
-                  <% else %>
-                    <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src="https://www.enterprisedb.com/sites/default/files/blogs/statistics.jpg" class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
-              <% end %>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
             </div>
-          </div>
-          <div class="container-fluid content-row" ng-if="children.length != 0">
-            <div class="row">
-              <% if @home_page_contents.data_center_image != "" && @home_page_contents.data_center_image != nil %>
-                
-                <div class="col-md-6">
-                  <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil  %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
-                  <% else %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
-                  <% end %>
-                  <hr>
-                  <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
-                    <p><%= @home_page_contents.data_center_text %></p>
-                  <% else %>
-                    <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src=<%= @home_page_contents.data_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
-              <% else %>
-                <div class="col-md-6">
-                  <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
-                    <hr>
-                  <% else %>
-                    <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
-                    <hr>
-                  <% end %>
-                  <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
-                    <p><%= @home_page_contents.data_center_text %></p>
-                  <% else %>
-                    <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
-                  <% end %>
-                </div>
-                <div class="col-md-6">
-                  <img src="https://www.enterprisedb.com/sites/default/files/blogs/statistics.jpg" class="img-rounded" style="height: 375px; width: 500px"/>
-                </div>
-              <% end %>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
             </div>
-          </div>
-          <% if @sorted_events.count != 0 %>
-            <div class="container-fluid odd-row content-row" ng-if="children.length != 0">
-              <ul class="dates">
-                <% if @sorted_events.count > 2 %>
-                  <section>
-                    <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
-                    <% count = 2 %>
-                    <% 3.times do %>
-                    <li>
-                      <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-                      <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-                      <p><%= @sorted_events[count].description %></p>
-                    </li>
-                    <% count -= 1 %>
-                    <% end %>
-                  </section>
-                <% elsif @sorted_events.count <= 2 %>
-                  <section>
-                    <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
-                    <% count = @sorted_events.count - 1 %>
-                    <% while count >= 0 do %>
-                    <li>
-                      <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-                      <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-                      <p><%= @sorted_events[count].description %></p>
-                    </li>
-                    <% count -= 1 %>
-                    <% end %>
-                  </section>
-                <% end %>
-              </ul>
-            </div>
-            <div class="container-fluid content-row" ng-if="children.length == 0">
-              <ul class="dates">
-                <% if @sorted_events.count > 2 %>
-                  <section>
-                    <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
-                    <% count = 2 %>
-                    <% 3.times do %>
-                    <li>
-                      <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-                      <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-                      <p><%= @sorted_events[count].description %></p>
-                    </li>
-                    <% count -= 1 %>
-                    <% end %>
-                  </section>
-                <% elsif @sorted_events.count <= 2 %>
-                  <section>
-                    <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
-                    <% count = @sorted_events.count - 1 %>
-                    <% while count >= 0 do %>
-                    <li>
-                      <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
-                      <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
-                      <p><%= @sorted_events[count].description %></p>
-                    </li>
-                    <% count -= 1 %>
-                    <% end %>
-                  </section>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-          <footer class="footer" style="background-color: #00A1F1; color: white" ng-if="children.length == 0">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-6">
-                  <address>
-                    <% if @home_page_contents.company_title != nil && @home_page_contents.company_title != "" %>
-                      <h2><%= @home_page_contents.company_title %><br></h2>
-                    <% end %>
-                    <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
-                      Phone: <%= @home_page_contents.company_phone_number %><br>
-                    <% end %>
-                    <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
-                      Address: <%= @home_page_contents.company_address %><br>
-                    <% end %>
-                  </address>
-                </div>
-                <div class="col-md-2">
-                  <h6>You can also checkout our Facebook Page!</h6>
-                  <ol class="social">
-                    <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
-                  </ol>
-                </div>
+          <% elsif ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil)) || ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) != "" && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil)) || ((@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil))  %>
+            <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
               </div>
-              
-              <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center copyright">
-                  <p>2017 © Trisomy Families. All Rights Reserved.</p>
-                </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
               </div>
-            </div>
-          </footer>
-          <footer class="footer" ng-if="children.length != 0">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-6">
-                  <address>
-                    <% if @home_page_contents.company_title != nil && @home_page_contents.company_title != "" %>
-                      <h2><%= @home_page_contents.company_title %><br></h2>
-                    <% end %>
-                    <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
-                      <%= @home_page_contents.company_phone_number %><br>
-                    <% end %>
-                    <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
-                      <%= @home_page_contents.company_address %><br>
-                    <% end %>
-                  </address>
-                </div>
-                <div class="col-md-2">
-                  <h6>You can also checkout our Facebook Page!</h6>
-                  <ol class="social">
-                    <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
-                  </ol>
-                </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
               </div>
-              
-              <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center copyright">
-                  <p>2017 © Trisomy Families. All Rights Reserved.</p>
-                </div>
+            <% end %>
+          <% elsif (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) || (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) || (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
+            <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
               </div>
-            </div>
-          </footer>
+            <% end %>
+            <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
+              </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
+              </div>
+            <% end %>
+          <% else %>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
+              </div>
+            <% end %>
         </div>
       </div>
+
+
+
+      <!-- DATA CENTER -->
+
+      <div class="container-fluid content-row">
+        <div class="row">
+          <% if @home_page_contents.data_center_image != "" && @home_page_contents.data_center_image != nil %>
+            
+            <div class="col-md-6">
+              <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil  %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
+              <% end %>
+              <hr>
+              <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
+                <p><%= @home_page_contents.data_center_text %></p>
+              <% else %>
+                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <img src=<%= @home_page_contents.data_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
+            </div>
+          <% else %>
+            <div class="col-md-6">
+              <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+                <hr>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
+                <hr>
+              <% end %>
+              <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
+                <p><%= @home_page_contents.data_center_text %></p>
+              <% else %>
+                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <img src="https://www.enterprisedb.com/sites/default/files/blogs/statistics.jpg" class="img-rounded" style="height: 375px; width: 500px"/>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+
+
+      <!-- SPECIAL EVENTS -->
+
+      <% if @sorted_events.count != 0 %>
+        <div class="container-fluid odd-row content-row">
+          <ul class="dates">
+            <% if @sorted_events.count > 2 %>
+              <section>
+                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                <% count = 2 %>
+                <% 3.times do %>
+                <li>
+                  <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                  <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                  <p><%= @sorted_events[count].description %></p>
+                </li>
+                <% count -= 1 %>
+                <% end %>
+              </section>
+            <% elsif @sorted_events.count <= 2 %>
+              <section>
+                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                <% count = @sorted_events.count - 1 %>
+                <% while count >= 0 do %>
+                <li>
+                  <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                  <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                  <p><%= @sorted_events[count].description %></p>
+                </li>
+                <% count -= 1 %>
+                <% end %>
+              </section>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+
+      <!-- FOOTER -->
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <address>
+                <% if @home_page_contents.company_title != nil && @home_page_contents.company_title != "" %>
+                  <h2><%= @home_page_contents.company_title %><br></h2>
+                <% end %>
+                <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
+                  <%= @home_page_contents.company_phone_number %><br>
+                <% end %>
+                <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
+                  <%= @home_page_contents.company_address %><br>
+                <% end %>
+              </address>
+            </div>
+            <div class="col-md-2">
+              <h6>You can also checkout our Facebook Page!</h6>
+              <ol class="social">
+                <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
+              </ol>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center copyright">
+              <p>2017 © Trisomy Families. All Rights Reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
   </body>
 </html>
