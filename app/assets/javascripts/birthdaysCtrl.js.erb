@@ -1,0 +1,30 @@
+/* global angular */
+angular.module("app").controller('BirthdaysController', ['$scope', '$http', function($scope, $http) {
+
+  $scope.setUp = function() {
+      $http.get('/api/v1/birthdays.json').then(function successCallback(response) {
+            $scope.birthdays = false;
+            $scope.children = response.data;
+
+            var url_str = window.location.href
+            var arr = url_str.split("/");
+            var domain_str = arr[0] + "//" + arr[2] + "/"
+
+            $scope.images = [
+                              {photo: domain_str + "t11.jpg"},
+                              {photo: domain_str + "t12.jpg"},
+                              {photo: domain_str + "t13.jpg"},
+                              {photo: domain_str + "t15.jpg"},
+                              {photo: domain_str + "t17.jpg"}
+                            ];
+            console.log($scope.children[0].photo);
+            console.log($scope.images[0].photo);
+            console.log(domain_str);
+          },
+          function errorCallback(response) {
+              console.log("Error on set-up");
+    });
+  };
+
+  window.$scope = $scope;
+}]);
