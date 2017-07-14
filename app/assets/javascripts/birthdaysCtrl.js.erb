@@ -4,6 +4,7 @@ angular.module("app").controller('BirthdaysController', ['$scope', '$http', func
   $scope.setUp = function() {
       $http.get('/api/v1/birthdays.json').then(function successCallback(response) {
 
+            // ChECK IF THERE ARE BIRTHDAYS
             $scope.children = response.data;
             if ($scope.children.length == 0) {
               $scope.birthdays = false;
@@ -11,6 +12,7 @@ angular.module("app").controller('BirthdaysController', ['$scope', '$http', func
               $scope.birthdays = true;
             }
 
+            // SET UP DEFAULT IMAGES IF NO BIRTHDAYS -> THIS IS CURRENTLY HARD-CODED IN
             var url_str = window.location.href
             var arr = url_str.split("/");
             var domain_str = arr[0] + "//" + arr[2] + "/"
