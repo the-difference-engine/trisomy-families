@@ -73,9 +73,9 @@
     <br>
     <label>Birth order:</label> <%= @child.birth_order %>
     <br>
-    <label>Priamary diagnosis:</label> <%= @child.primary_diagnosis %>
+    <label>Primary diagnosis:</label> <%= @child.primary_diagnosis %>
     <br>
-    <label>Other priamary diagnosis:</label> <%= @child.other_primary_diagnosis %>
+    <label>Other primary diagnosis:</label> <%= @child.other_primary_diagnosis %>
     <br>
     <label>Secondary diagnosis:</label> <%= @child.secondary_diagnosis %>
     <br>
@@ -386,25 +386,39 @@
     <br>
     <br>
     <hr>
-    <% if current_user.user_type != "admin" %>
-      <h2>Submit Registration</h2>
-      <p>By submitting this registration, I agree that all information provided is true and as accurate as possible. Once your registration has been reviewed, you will receive a confirmation email and access to fully-registered features on our site.</p>
+    <% if current_user.user_type != "admin" && !@child.registered %>
         
       <div id="fields-incomplete">
+        <h2>Registration Incomplete</h2>
         <p style="color:red">All required must be filled before you can submit your application. See fields listed in each section above.</p>
       </div>
 
       <div id="fields-complete" style="display:none">
-        <%= form_tag "registrations/#{@child.id}", method: :post do %>
-          <%= submit_tag "Submit Registration", class: "btn btn-success" %>
+        <h2>Submit Registration</h2>
+        <p>By submitting this registration, I agree that all information provided is true and as accurate as possible. Once your registration has been reviewed, you will receive a confirmation email and access to fully-registered features on our site.</p>
+
+        <%= form_tag "/registrations/#{@child.id}", method: :patch do %>
+          <%= submit_tag "Submit Registration", :name => "submition", class: "btn btn-success" %>
         <% end %>
       </div>
-    <% elsif current_user.user_type === "admin" %>
+    <% elsif current_user.user_type === "admin" && !@child.accepted && @child.registered %>
       <div id="fields-complete" style="display:none">
         <%= form_tag "../api/v1/children/#{@child.id}", method: :patch do %>
           <%= submit_tag "Accept Child", :name => "accepted", class: "btn btn-info" %>
         <% end %>
       </div>
+    <% elsif current_user.user_type === "admin" && !@child.registered %>
+      <h2>Registration Not Received</h2>
+      <p></p>
+      <p style="color:red">User must submit child's registration for reviewal in order to be accepted.</p>
+      
+    <% elsif current_user.user_type != "admin" && @child.registered && !@child.accepted %>
+      <h2>Registration Sent</h2>
+      <p></p>
+      <p style="color:red">Admin has been notified and the child's registration is under review.</p>
+      
+    <% else %>
+      <h2>Child Accepted & Fully Registered</h2>
     <% end %>
   </div>
 </div>

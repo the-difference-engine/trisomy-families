@@ -17,7 +17,7 @@ class ContactInfoFormsController < ApplicationController
 
     if contact_info.save      
       flash[:success] = "Contact info for your child registration has been submitted!"
-      redirect_to "/profile/#{params[:child_id]}"
+      redirect_to "/registrations/#{params[:child_id]}"
     else
       flash[:danger] = "Something went wrong. Please fill out every field in the form."
       render 'new.html.erb'
@@ -36,8 +36,8 @@ class ContactInfoFormsController < ApplicationController
     contact_info = ContactInfoForm.find_by(id: params[:id])
 
     if contact_info.update(contact_info_params)
-      flash[:success] = "Contact info for your child registration has been update!"
-      redirect_to "/profile/#{contact_info.child_id}"
+      flash[:success] = "Contact info for your child registration has been updated!"
+      redirect_to "/registrations/#{contact_info.child_id}"
     else
       flash[:danger] = "Something went wrong. Please fill out every field in the form."
       render 'edit.html.erb'
