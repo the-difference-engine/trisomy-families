@@ -3,6 +3,7 @@
   
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
     <div>
+      <br>
       <% if @home_page_contents != nil  %>
         <a href="/homepagecontents/<%=@home_page_contents.id%>/edit" class="btn btn-primary">Edit Home Page Content</a>    
       <% else %>

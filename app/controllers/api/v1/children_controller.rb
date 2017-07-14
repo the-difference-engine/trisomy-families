@@ -1,6 +1,9 @@
 # API/V1/ChildrenController
 class Api::V1::ChildrenController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  require 'sendgrid-ruby'
+  include SendGrid
+
   def index
     @children = Child.all
     render 'index.json.jbuilder'
@@ -24,13 +27,6 @@ class Api::V1::ChildrenController < ApplicationController
       @trisomy_types_hash[key] = value - 1
     end
 
-
-
-
-
-
-
-
     render 'index2.json.jbuilder'
   end
 
@@ -52,26 +48,34 @@ class Api::V1::ChildrenController < ApplicationController
       @birth_order_hash[key] = value - 1
     end
 
-
-
-
-
-
-
-
     render 'index3.json.jbuilder'
   end
 
-
-
-
-
   def update
-    @children = Child.includes(background_history: [:weight, :height, :head_circumference, :mother_complication], health_history: [:congenital_heart_defect, :intestinal_issue, :gastric_surgery, :nuerological_condition, :muscular_skeletal, :cranial_facial, :endocrine, :hearing, :vision, :behavioral_health, :received_therapy]).where.not({health_history_id: nil, background_history_id: nil})
     @child = Child.find_by(id: params[:id])
-    @child.update(
-      accepted: params[:accepted]
-    )
-    @child.save(validate: false)
+    if params["accepted"] == "Accept Child"
+      @child.update(
+        accepted: true
+      )
+      if @child.save
+        user_alert(@child)
+        redirect_to '/children-index'
+      end
+    end
+  end
+
+  def user_alert(child)
+    user_email = child.user.email
+
+    from = Email.new(email: ENV["SENDGRID_USERNAME"])
+    to = Email.new(email: user_email)
+    subject = 'Child Registration'
+    message = "#{child.first_name} #{child.last_name}'s registration has been accepted."
+
+    content = Content.new(type: 'text/html', value: message)
+    mail = Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
   end
 end
