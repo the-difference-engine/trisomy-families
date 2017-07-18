@@ -25,35 +25,39 @@
 
     <h2>Users:</h2>
     <div>
-      <label>Filter by email:</label>
-      <input ng-model="emailFilter" list="emails">
-      <datalist id="emails">
-        <option ng-repeat="user in users track by $index">{{ user.email }}</option>
-      </datalist>
-    </div>
-    <br>
-    <div>
-      <label>Filter by type:</label>
-      <select ng-model="user_typeFilter" list="user_types">
-
-      <datalist id="user_types">
-        <option>admin</option>
-        <option>doctor</option>
-        <option>family</option>
-      </datalist>
+      <label>Filter by:</label>
+      <select id="filter_type">
+        <datalist>
+          <option>Name</option>
+          <option>Email</option>
+          <option>Type</option>
+        </datalist>
       </select>
-    </div>
-    <br>
-    <div>
-      <label>Filter by last name:</label>
-      <input ng-model="lastName">
+      <div id="user_emails" style="display: none;">
+        <input ng-model="emailFilter" list="emails" id="email_text">
+        <datalist id="emails">
+          <option ng-repeat="user in users track by $index">{{ user.email }}</option>
+        </datalist>
+      </div>
+      <div id="types" style="display: none;">
+        <select ng-model="user_typeFilter" list="user_types">
+          <datalist id="user_types">
+            <option>admin</option>
+            <option>doctor</option>
+            <option>family</option>
+          </datalist>
+        </select>
+      </div>
+      <div id="full_name" style="display: inline-block;">
+        <input ng-model="fullName" id="full_name_text">
+      </div>
     </div>
     <br>
     <button ng-click="setOrderAttribute('id')">Order by creation time</button>
     <br>
     <br>
     <div class="row">
-      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending">
+      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {full_name: fullName} | orderBy:orderAttribute:isOrderDescending">
         <div class="well">
           <h4>{{user.email}}</h4>
           <hr>
@@ -92,3 +96,25 @@
     </div>
   </div>
 </div>
+<script>
+   document.getElementById('filter_type').addEventListener('change', function () {
+    if(this.value === 'Email') {
+      document.getElementById('user_emails').style.display = 'inline-block';
+      document.getElementById('types').style.display = 'none';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+    } else if (this.value === 'Type') {
+      document.getElementById('types').style.display = 'inline-block';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('user_emails').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('email_text').value = "";
+    } else if (this.value ==='Name'){
+      document.getElementById('full_name').style.display = 'inline-block';
+      document.getElementById('types').style.display = 'none';
+      document.getElementById('user_emails').style.display = 'none';
+      document.getElementById('email_text').value = "";
+    };
+   });
+  
+</script>

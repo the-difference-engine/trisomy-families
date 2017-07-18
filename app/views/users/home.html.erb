@@ -102,8 +102,6 @@
 
       <div class="container-fluid odd-row content-row" ng-app="app">
         <div class="container" ng-controller="BirthdaysController" ng-init="setUp()">
-          
-
           <div ng-if="birthdays==true">    
             <% if @home_page_contents.birthday_title != "" %>
               <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
@@ -144,18 +142,15 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-
           </div>
 
-
           <div ng-if="birthdays==false">
-            <h2 style="color:#fff; margin-top:0;">No Trisomy birthdays today but here are some words of inspiration:</h2>
+            <h2 style="color:#fff; margin-top:0;">No Trisomy birthdays today so here are some words of inspiration:</h2>
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="item" ng-class="{active:!$index}" ng-repeat="image in images">                  
                   <div class="row">                 
-                    <!-- <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="width:350px;height:350px;"/> -->
-                    <img src="{{image.photo}}" style="height:350px;"/>
+                    <img src="{{image.photo}}" style="height:350px; margin-left: 28%"/>
                     <div class="col-md-6">
                     </div>
                   </div>                  
@@ -174,8 +169,6 @@
           </div>
         </div>
       </div>
-
-
 
       <!-- CREATE PROFILE -->
 
@@ -252,11 +245,9 @@
         </div>
       </div>
 
-
-
       <!-- DATA CENTER -->
 
-      <div class="container-fluid content-row">
+      <div class="container-fluid odd-row content-row">
         <div class="row">
           <% if @home_page_contents.data_center_image != "" && @home_page_contents.data_center_image != nil %>
             
@@ -298,16 +289,14 @@
         </div>
       </div>
 
-
-
       <!-- SPECIAL EVENTS -->
 
       <% if @sorted_events.count != 0 %>
-        <div class="container-fluid odd-row content-row">
+        <div class="container-fluid content-row">
           <ul class="dates">
             <% if @sorted_events.count > 2 %>
               <section>
-                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming &Recent Events</h1>
                 <% count = 2 %>
                 <% 3.times do %>
                 <li>
@@ -320,7 +309,7 @@
               </section>
             <% elsif @sorted_events.count <= 2 %>
               <section>
-                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming &Recent Events</h1>
                 <% count = @sorted_events.count - 1 %>
                 <% while count >= 0 do %>
                 <li>
@@ -336,12 +325,10 @@
         </div>
       <% end %>
 
-
-
       <!-- FOOTER -->
 
       <footer class="footer">
-        <div class="container-fluid">
+        <div class="container-fluid odd-row">
           <div class="row">
             <div class="col-md-6">
               <address>

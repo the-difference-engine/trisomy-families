@@ -69,9 +69,10 @@
 <% @children.each do |child| %>
   <div class="col-md-4">
     <div class="well">
-      <p>
-        Name: <a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %>
-      </a></p>
+      <div style="text-align: center">
+        <h4><a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %></a></h4 style="color: blue">
+        <hr>
+      </div>
       <% if !child.privacy.avatar %>
         <br>
         <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
@@ -94,7 +95,9 @@
         </p>
       <% end %>
       <% if current_user.id == @family.user_id %>
-        <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+        <div style="text-align: center">
+          <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+        </div>
       <% end %>
     </div>
     
