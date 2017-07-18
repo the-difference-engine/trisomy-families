@@ -70,7 +70,11 @@
   <div class="col-md-4">
     <div class="well">
       <div style="text-align: center">
-        <h4><a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %></a></h4 style="color: blue">
+        <% if (child.privacy.attributes.values[2..-3].select {|value| value == false}.count <= 1 && child.privacy.avatar == false) %>
+          <h4><%= child.first_name %> <%= child.last_name %></a></h4>
+        <% elsif child.privacy.attributes.values[2..-3].select {|value| value == false}.count > 0 %> 
+          <h4><a href='/profile/<%= child.id %>' style="color: blue"><%= child.first_name %> <%= child.last_name %></a></h4>          
+        <% end %>
         <hr>
       </div>
       <% if !child.privacy.avatar %>

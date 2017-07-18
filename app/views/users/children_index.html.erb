@@ -32,7 +32,9 @@
       <div class="col-md-4" ng-repeat="child in children | filter: {last_name: last_nameFilter} | orderBy: sortBy | orderBy:orderAttribute:isOrderDescending ">
         <div class="well">
           <div style="text-align: center">
-            <h4>{{child.first_name}} {{child.last_name}}</h4>
+            <h4 ng-if='child.privacy.avatar === true && child.privacy_count <= 1'>{{child.first_name}} {{child.last_name}}</h4>
+            <h4 ng-if='child.privacy_count === 1 && child.privacy.avatar === false'>{{child.first_name}} {{child.last_name}}</h4>
+            <h4 ng-if='child.privacy_count > 1'><a href="/profile/{{child.id}}" style="color:green">{{child.first_name}} {{child.last_name}}</a></h4>
             <hr>
           </div>
           <p ng-if='child.registered' >Registered: {{child.registered}} </p>

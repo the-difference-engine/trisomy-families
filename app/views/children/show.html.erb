@@ -63,10 +63,5 @@
         <% end %>
       </div>
     <% end %>
-    <% if @child.privacy.birthday && @child.privacy.trisomy_type %>
-      <% if current_user.id == @family.user_id %>
-        <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
-      <% end %>
-    <% end %>
   </div>
 </div>
