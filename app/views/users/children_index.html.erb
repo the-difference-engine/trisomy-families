@@ -34,13 +34,21 @@
           <div style="text-align: center">
             <h4 ng-if='child.privacy.avatar === true && child.privacy_count <= 1'>{{child.first_name}} {{child.last_name}}</h4>
             <h4 ng-if='child.privacy_count === 1 && child.privacy.avatar === false'>{{child.first_name}} {{child.last_name}}</h4>
-            <h4 ng-if='child.privacy_count > 1'><a href="/profile/{{child.id}}" style="color:green">{{child.first_name}} {{child.last_name}}</a></h4>
+            <h4 ng-if='child.privacy_count > 1'><a href="/profile/{{child.id}}" style="color:blue">{{child.first_name}} {{child.last_name}}</a></h4>
             <hr>
           </div>
-          <p ng-if='child.registered' >Registered: {{child.registered}} </p>
-          <p ng-if='!child.registered' >Registered: false </p>
-          <p ng-if='child.accepted' >Accepted: {{child.accepted}} </p>
-          <p ng-if='!child.accepted' >Accepted: false </p>
+          <div ng-if='child.privacy.avatar === false && child.avatar != "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png"'>
+            <img src='{{child.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>
+          <div ng-if='child.privacy.avatar === true || (child.privacy.avatar === false && child.avatar == "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png")'>
+            <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>  
+          <p ng-if='child.registered'><label>Registered:</label> {{child.registered}} </p>
+          <p ng-if='!child.registered'><label>Registered:</label> false</p>
+          <p ng-if='child.accepted'><label>Accepted:</label> {{child.accepted}}</p>
+          <p ng-if='!child.accepted'><label>Accepted:</label> false </p>
           <div style="text-align: center">
             <hr>
             <a href="/registrations/{{child.id}}"><button class="btn btn-primary">View Registration</button></a>

@@ -64,6 +64,14 @@
             <h4 ng-if='user.user_type === "doctor" && user.profile'><a href="/physicians/{{user.profile}}" style="color:blue">{{user.first_name}} {{user.last_name}}</a></h4>
           </div>
           <hr>
+          <div ng-if='user.avatar && user.avatar != null'>
+            <img src='{{user.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>
+          <div ng-if='!user.avatar || user.avatar === null'>
+            <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>  
           <label>Email:</label> {{user.email}}
           <br>
           <label>Type:</label> {{user.user_type}}

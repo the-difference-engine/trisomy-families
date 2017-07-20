@@ -3,11 +3,13 @@ if user.user_type == 'family'
   @profile = Family.find_by(user_id: user.id)
   if @profile != nil
     json.profile @profile.id
+    json.avatar user.avatar_file_name
   end
 elsif user.user_type == 'doctor'
   @profile = Physician.find_by(user_id: user.id) 
   if @profile != nil
     json.profile @profile.id
+    json.avatar @profile.avatar_file_name
   end
 end
 json.first_name user.first_name
