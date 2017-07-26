@@ -64,21 +64,94 @@ class ChildrenController < ApplicationController
   end
 
   def show    
-    if user_signed_in?
-      @child = Child.find_by(id: params[:id])
-      @contact_form = ContactInfoForm.find_by(child_id: @child.id)
-      @family = Family.find_by(id: @child.family_id)
-      render 'show.html.erb'
+    @child = Child.find_by(id: params[:id])    
+
+    if !@child
+      flash[:danger] = "Profile does not exist"
+      redirect_back(fallback_location: root_path)
+    end
+
+    i = 0
+    @child.privacy.attributes.each do |attr_name, attr_value|
+      if attr_value == true
+        i += 1
+      end
+    end
+    if i > 2
+      child_privacy = true
     else
-      flash[:warning] = 'You must be logged in to use this feature.'
-      redirect_to '/users/sign_in'
+      child_privacy = false
+    end
+
+    if current_user
+      my_family = Family.find_by(user_id: current_user.id)
+
+      if current_user.user_type == "doctor"
+        flash[:danger] = "Your account does not have access to that page"
+        redirect_back(fallback_location: root_path)
+      elsif !@child
+        flash[:danger] = "That profile does not exist"
+        redirect_back(fallback_location: root_path)
+      elsif my_family  
+        registered = false      
+        my_family.children.each do |child|
+          if child.accepted
+            registered = true
+          end
+        end
+        if registered || current_user.user_type == "admin"
+          @contact_form = ContactInfoForm.find_by(child_id: @child.id)
+          @family = Family.find_by(id: @child.family_id)
+          render 'show.html.erb'
+        else
+          if child_privacy == true
+            flash[:danger] = "Un-registered users do not have access to private profiles"
+            redirect_back(fallback_location: root_path)
+          else
+            @contact_form = ContactInfoForm.find_by(child_id: @child.id)
+            @family = Family.find_by(id: @child.family_id)
+            render 'show.html.erb'
+          end          
+        end
+      else        
+        @contact_form = ContactInfoForm.find_by(child_id: @child.id)
+        @family = Family.find_by(id: @child.family_id)
+        render 'show.html.erb'
+      end
+    else
+      if child_privacy == true
+        flash[:danger] = "That page is set to private"
+        redirect_back(fallback_location: root_path)
+      else
+        @contact_form = ContactInfoForm.find_by(child_id: @child.id)
+        @family = Family.find_by(id: @child.family_id)
+        render 'show.html.erb' 
+      end
     end
   end
 
-  def edit
+  def edit    
     @child = Child.find_by(id: params[:id])
-    @privacy = @child.privacy
-    render 'edit.html.erb'
+    if !@child 
+      flash[:danger] = "Profile does not exist"
+      redirect_back(fallback_location: root_path)
+    elsif !current_user
+      flash[:danger] = "You must be logged in to view that page!"
+      redirect_back(fallback_location: root_path)
+    elsif current_user == "doctor"
+      flash[:danger] = "You do not have access to that page because you are a doctor-type user."
+      redirect_back(fallback_location: root_path)
+    else
+      my_family = Family.find_by(user_id: current_user.id)
+      if current_user.user_type == "admin" || @child.family_id == my_family.id
+        @privacy = @child.privacy
+        render 'edit.html.erb'
+      else 
+        flash[:danger] = "You are not authorized to view that page!"
+        redirect_back(fallback_location: root_path)
+      end   
+    end
+    
   end
 
   def add_photo

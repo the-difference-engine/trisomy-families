@@ -25,6 +25,31 @@ class ResourcesController < ApplicationController
     if sort_attribute && sort_order
       @resources = @resources.order(sort_attribute => sort_order)
     end
+
+    if current_user
+      if current_user.user_type == "family"
+
+        my_family = Family.find_by(user_id: current_user.id)
+        registered = false      
+        my_family.children.each do |child|
+          if child.accepted
+            registered = true
+          end
+        end
+
+        if registered == true
+          @permissions = true
+        else
+          @permissions = false
+        end
+
+      else
+        @permissions = true
+      end
+    else
+      @permissions = false
+    end
+
   end  
 
   def create 
@@ -64,9 +89,32 @@ class ResourcesController < ApplicationController
 
   def new
     if current_user
-      @resource = Resource.new
+
+      if current_user.user_type == "family"
+
+        my_family = Family.find_by(user_id: current_user.id)
+        registered = false      
+        my_family.children.each do |child|
+          if child.accepted
+            registered = true
+          end
+        end
+
+        if registered
+          @resource = Resource.new
+          render 'new.html.erb'
+        else
+          flash[:danger] = 'You must have at least one registered participant to access that page.'
+          redirect_to '/'
+        end
+
+      else
+        @resource = Resource.new
+        render 'new.html.erb'
+      end
+     
     else
-      flash[:warning] = 'You must be an administrator to view this page!'
+      flash[:danger] = 'You do not have access to that page.'
       redirect_to '/'
     end
   end

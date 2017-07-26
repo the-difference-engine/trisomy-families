@@ -46,7 +46,10 @@
         </select>
       </div>
       <div id="full_name" style="display: inline-block;">
-        <input ng-model="fullName" id="full_name_text">
+        <input ng-model="fullName" id="full_name_text" list="names">
+        <datalist id="names">
+          <option ng-repeat="user in users track by $index">{{ user.full_name }}</option>
+      </datalist>
       </div>
     </div>
     <br>
@@ -81,7 +84,7 @@
           <form>
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"'>
               <label>Update User Type: </label>
-              <select ng-model="user.user_type" list="types" disableEntry: true >
+              <select ng-model="user.user_type" list="types" ng-change="resetFilter()" disableEntry: true >
                 <datalist id="types">
                   <option>admin</option>
                   <option>family</option>
@@ -104,23 +107,28 @@
   </div>
 </div>
 <script>
+
    document.getElementById('filter_type').addEventListener('change', function () {
     if(this.value === 'Email') {
+      
       document.getElementById('user_emails').style.display = 'inline-block';
       document.getElementById('types').style.display = 'none';
       document.getElementById('full_name').style.display = 'none';
       document.getElementById('full_name_text').value = "";
+
     } else if (this.value === 'Type') {
+      
       document.getElementById('types').style.display = 'inline-block';
       document.getElementById('full_name').style.display = 'none';
       document.getElementById('user_emails').style.display = 'none';
       document.getElementById('full_name_text').value = "";
-      document.getElementById('email_text').value = "";
+      document.getElementById('email_text').value = null;
     } else if (this.value ==='Name'){
+      
       document.getElementById('full_name').style.display = 'inline-block';
       document.getElementById('types').style.display = 'none';
       document.getElementById('user_emails').style.display = 'none';
-      document.getElementById('email_text').value = "";
+      document.getElementById('email_text').value = null;
     };
    });
   

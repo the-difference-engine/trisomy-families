@@ -1,6 +1,7 @@
 json.id child.id
 json.first_name child.first_name
 json.last_name child.last_name
+json.full_name child.first_name + " " + child.last_name
 json.trisomy_type child.trisomy_type
 json.birth_date child.birth_date
 json.death_date child.death_date
