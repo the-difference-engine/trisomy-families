@@ -2,7 +2,7 @@
   <div ng-controller="adminchildrenCtrl" ng-init="setup()">
 
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-
+    <br>
     <a href="/admin-dashboard " class="btn btn-primary">See All Users</a>
     <h2>Children:</h2>
     <label>Filter by:</label>
@@ -29,7 +29,7 @@
       </select>
     </div>
     <div id="order" style="display: none;">
-      <select id="orderType">
+      <select ng-model="orderBy" id="dateOrder">
         <option value=""></option>
         <option value="newToOld">Newest To Oldest</option>
         <option value="oldToNew">Oldest To Newest</option>        
@@ -38,7 +38,7 @@
     <br>
     <br>
     <div class="row">
-      <div class="col-md-4" ng-repeat="child in children | filter: {full_name: fullName} | orderBy: sortBy | orderBy:orderAttribute:isOrderDescending ">
+      <div class="col-md-4" ng-repeat="child in children | filter: {full_name: fullName} | orderBy:sortBy | orderBy:orderAttribute:isOrderDescending ">
         <div class="well">
           <div style="text-align: center">
             <h4 ng-if='child.privacy.avatar === true && child.privacy_count <= 1'>{{child.first_name}} {{child.last_name}}</h4>
@@ -76,6 +76,7 @@
       document.getElementById('full_name').style.display = 'none';
       document.getElementById('order').style.display = 'none';
       document.getElementById('full_name_text').value = "";
+      document.getElementById('dateOrder').value = '';
 
     } else if (this.value === 'Name') {
       
@@ -83,6 +84,7 @@
       document.getElementById('registration').style.display = 'none';
       document.getElementById('order').style.display = 'none';
       document.getElementById('selected_registration').value = undefined;
+      document.getElementById('dateOrder').value = '';
 
     } else if (this.value ==='Date Created'){
       
@@ -95,7 +97,7 @@
     };
    });
 
-   document.getElementById('orderType').addEventListener('change', function () {
+   document.getElementById('dateOrder').addEventListener('change', function () {
     $scope.setOrderAttribute(this.value);
    });
   
