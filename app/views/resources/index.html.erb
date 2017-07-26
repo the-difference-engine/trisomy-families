@@ -4,7 +4,7 @@
 </div>
 <br>
 <div class="well">
-  <% if current_user %>
+  <% if @permissions %>
     <%= link_to 'Add Resource', resources_new_path, class: "btn btn-success" %>
   <% end %>
   <br>
