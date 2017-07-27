@@ -140,12 +140,12 @@
       <div class="well">
         <h4>Weights:</h4>
         <hr>
-        <label>Weight at birth:</label> <%= @background_history.weight_at_birth %>
-        <br>
+        <label>At Birth:</label> <%= @background_history.weight_at_birth.to_f %>
+        <p></p>
         <% @background_history.weight.attributes.each do |attr_name, attr_value| %>
           <% if attr_name != "id" && attr_name != "created_at" && attr_name != "updated_at" && attr_value != nil %>
-            <label><%= attr_name.gsub("_", " ") %></label> <%= attr_value %>
-            <br>
+            <label><%= attr_name[0..attr_name.index("_")-1].capitalize %> <%= attr_name[attr_name.index("_")+1..-1].capitalize %>:</label> <%= attr_value.to_f %>
+            <p></p>
           <% end %>
         <% end %>
       </div>
@@ -153,24 +153,24 @@
       <div class="well">
         <h4>Heights:</h4>
         <hr>
-        <label>Height at birth:</label> <%= @background_history.height_at_birth %>
-        <br>
+        <label>At Birth:</label> <%= @background_history.height_at_birth.to_f %>
+        <p></p>
         <% @background_history.height.attributes.each do |attr_name, attr_value| %>
           <% if attr_name != "id" && attr_name != "created_at" && attr_name != "updated_at" && attr_value != nil %>
-            <label><%= attr_name.gsub("_", " ") %></label> <%= attr_value %>
-            <br>
+            <label><%= attr_name[0..attr_name.index("_")-1].capitalize %> <%= attr_name[attr_name.index("_")+1..-1].capitalize %>:</label> <%= attr_value.to_f %>
+            <p></p>
           <% end %>
         <% end %>
       </div>
       <div class="well">
         <h4>Head Circumferences:</h4>
         <hr>
-        <label>Circumference at birth:</label> <%= @background_history.head_circumference_at_birth %>
-        <br>
+        <label>At Birth:</label> <%= @background_history.head_circumference_at_birth.to_f %>
+        <p></p>
         <% @background_history.head_circumference.attributes.each do |attr_name, attr_value| %>
           <% if attr_name != "id" && attr_name != "created_at" && attr_name != "updated_at" && attr_value != nil %>
-            <label><%= attr_name.gsub("_", " ") %></label> <%= attr_value %>
-            <br>
+            <label><%= attr_name[0..attr_name.index("_")-1].capitalize %> <%= attr_name[attr_name.index("_")+1..-1].capitalize %>:</label> <%= attr_value.to_f %>
+            <p></p>
           <% end %>
         <% end %>
       </div>
@@ -182,7 +182,7 @@
         <ul>
           <% @background_history.mother_complication.attributes.each do |attr_name, attr_value| %>
             <% if attr_value == true %>
-              <li><%= attr_name.gsub("_", " ") %></li> 
+              <li><%= attr_name.gsub("_", " ").capitalize %></li> 
             <% elsif attr_name == "other" && attr_value != "" %>
               <li><%= attr_value.gsub("_", " ") %></li>        
             <% end %>
@@ -192,9 +192,9 @@
       <div class="well">
         <label>Delivery method:</label> <%= @background_history.delivery_method %>
         <br>
-        <label>C Section offered?</label> <%= @background_history.offered_c_section %>
+        <label>C Section offered?</label> <%= @background_history.offered_c_section.capitalize %>
         <br>
-        <label>Child birth complications?</label> <%= @background_history.child_complication %>
+        <label>Child birth complications?</label> <%= @background_history.child_complication.capitalize %>
         <br>
         <label>Apgar score:</label> <%= @background_history.apgar_score %>
         <br>
@@ -245,7 +245,7 @@
             <ul>
               <% @health_history.congenital_heart_defect.attributes.each do |attr_name, attr_value| %>
                 <% if attr_value == true %>
-                  <li><%= attr_name.gsub("_", " ") %></li>
+                  <li><%= attr_name.gsub("_", " ").capitalize %></li>
                 <% elsif attr_name == "other" && attr_value != nil %>
                   <li><%= attr_value.gsub("on", "other") %></li>  
                 <% elsif attr_value == nil %>
@@ -255,13 +255,15 @@
             </ul>
           </div>
         <% end %>
-        <% if @health_history.offered_cardiac_surgery != "" %>
+        <% if @health_history.offered_cardiac_surgery != nil %>
           <label>Offered cardiac surgery?</label> <%= @health_history.offered_cardiac_surgery.capitalize %>
           <br>
         <% end %>
         <label>Multiple cardiac surgeries?</label> <% if @health_history.offered_cardiac_surgery %>Yes<% else %>No<% end %>
         <br>
-        <label>First cardiac surgery successful?</label> <%= @health_history.first_cardiac_surgery_successful %>
+        <% if @health_history.first_cardiac_surgery_successful != nil %>
+          <label>First cardiac surgery successful?</label> <%= @health_history.first_cardiac_surgery_successful.capitalize %>
+        <% end %>
         <br>
         <% if @health_history.first_cardiac_surgery_age != nil %> 
           <label>Age when first cardiac surgery was performed:</label> <%= @health_history.first_cardiac_surgery_age %> 
@@ -329,9 +331,11 @@
           <% end %>
         </ul>
       </div>
-      <div class="well">
-        <label>Sleep Apnea?</label> <%= @health_history.sleep_apnea.capitalize %>
-      </div>
+      <% if @health_history.sleep_apnea != nil %>
+        <div class="well">
+          <label>Sleep Apnea?</label> <%= @health_history.sleep_apnea.capitalize %>
+        </div>
+      <% end %>
 
       <h3>Cancer:</h3>
       <div class="well">
@@ -426,14 +430,18 @@
       <% end %>
       <h3>School & Therapies</h3>
       <div class="well">
-        <label>Participant attended EI?</label> <%= @health_history.in_ei.capitalize %>
-        <br>
+        <% if @health_history.in_ei != nil %>
+          <label>Participant attended EI?</label> <%= @health_history.in_ei.capitalize %>
+          <br>
+        <% end %>
         <label>Participant attended school?</label> <% if @health_history.attend_school %>Yes<% else %>No<% end %>
         <br>
-        <label>Participant home schooled?</label> <% if @health_history.home_schooled_bound %>yes<% else %>No<% end %>
+        <label>Participant home schooled?</label> <% if @health_history.home_schooled_bound %>Yes<% else %>No<% end %>
         <br>
-        <label>Highest level of education:</label> <%= @health_history.highest_education %>
-        <br>
+        <% if @health_history.highest_education != nil %>
+          <label>Highest level of education:</label> <%= @health_history.highest_education %>
+          <br>
+        <% end %>
       </div>
       <% if @health_history.received_therapy.attributes.values[1..-3].any? {|value| value == true} %>
         <div class="well">

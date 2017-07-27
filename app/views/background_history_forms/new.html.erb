@@ -1,7 +1,8 @@
 <h1>Background History</h1>
 <p>Please enter in the background history of the participant as best as you can. All fields must be filled. If you are not sure about a question, type in "na".</p>
 <%= form_tag "/registrations/background_history", method: :post do %>
-  <h3>Participant Measurements</h3>
+  <h3>Participant Measurements:</h3>
+  <p></p> 
   <div class="well">
     <h4>Weights:</h4>
     <hr>
@@ -251,8 +252,9 @@
       <% end %>
   </div>
   <h3>Birth Information:</h3>
+  <p></p> 
   <div class="well">
-    <p>Mother Complications:</p>
+    <h4>Mother Complications:</h4>
     <hr>
       <%= label_tag :gestational_diabetes %>
       <%= check_box_tag :gestational_diabetes, nil, @mother_complications.gestational_diabetes %>
@@ -328,9 +330,9 @@
         <%= label_tag :multiple_birth_trisomy %>
         <%= check_box_tag :multiple_birth_trisomy, nil, @background_history.multiple_birth_trisomy %>
     </div>
-    <div class="well"> 
-      <h3>Participant Genetic History</h3>
-      <hr>      
+    <h3>Participant Genetic History:</h3>
+    <p></p> 
+    <div class="well">       
       <%= label_tag :siblings_with_trisomy %>
       <%= check_box_tag :siblings_with_trisomy, nil, @background_history.siblings_with_trisomy %>
       <p></p> 
