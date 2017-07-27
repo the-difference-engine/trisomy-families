@@ -359,12 +359,16 @@
 
       <h3>Hearing:</h3>
       <div class="well">
-        <label>Infant hearing test passed?</label> <%= @health_history.hearing_test.capitalize %>
-        <br>
+        <% if @health_history.hearing_test %>
+          <label>Infant hearing test passed?</label> <%= @health_history.hearing_test.capitalize %>
+          <br>
+        <% end %>
         <label>Had an ABR?</label> <% if @health_history.had_an_abr %>Yes<% else%>No<% end %>
         <br>
-        <label>Diagnosed with hearing loss or deafness?</label> <%= @health_history.hearing_loss_or_deaf.capitalize %>
-        <br>
+        <% if @health_history.hearing_loss_or_deaf %>
+          <label>Diagnosed with hearing loss or deafness?</label> <%= @health_history.hearing_loss_or_deaf.capitalize %>
+          <br>
+        <% end %>
       </div>
       <% if @health_history.hearing.attributes.values[1..-3].any? {|value| value == true} %>
         <div class="well">
@@ -386,10 +390,12 @@
       </div>
 
       <h3>Vision:</h3>
-      <div class="well">
-        <label>Failed eye exam?</label> <%= @health_history.failed_eye_exam.capitalize %>
-        <br>
-      </div>
+      <% if @health_history.failed_eye_exam %>
+        <div class="well">
+          <label>Failed eye exam?</label> <%= @health_history.failed_eye_exam.capitalize %>
+          <br>
+        </div>
+      <% end %>
       <% if @health_history.vision.attributes.values[1..-3].any? {|value| value == true} %>
         <div class="well">
           <label>Vision Diagnosis:</label>
@@ -469,7 +475,7 @@
         <p>By submitting this registration, I agree that all information provided is true and as accurate as possible. Once your registration has been reviewed, you will receive a confirmation email and access to fully-registered features on our site.</p>
 
         <%= form_tag "/registrations/#{@child.id}", method: :patch do %>
-          <%= submit_tag "Submit Registration", :name => "submition", class: "btn btn-success" %>
+          <%= submit_tag "Submit Registration", :name => "submission", class: "btn btn-success" %>
         <% end %>
       </div>
       <br>
