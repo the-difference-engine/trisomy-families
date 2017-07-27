@@ -21,6 +21,7 @@ class RegistrationsController < ApplicationController
 
   def show
     @child = Child.find_by(id: params[:id])
+
     if @child
       @family = Family.find_by(id: @child.family_id)
       @contact_info = ContactInfoForm.find_by(child_id: @child.id)

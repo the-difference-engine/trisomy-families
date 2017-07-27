@@ -346,7 +346,7 @@
             <li><%= attr_name.gsub("_", " ") %></li>
           <% elsif attr_name == "other_diagnosis" && attr_value != "" %>
             <li><%= attr_value.gsub("_", " ") %></li>
-          <% elsif attr_name == "other_delay" && attr_value != "" %>
+          <% elsif attr_name == "other_delay" && attr_value != nil %>
             <li><%= attr_value.gsub("_", " ") %></li>
           <% end %>
         <% end %>
