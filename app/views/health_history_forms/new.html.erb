@@ -1,5 +1,6 @@
 <h1>Health History</h1>
 <p>Please enter in the background history of the participant as best as you can. All fields must be filled.</p>
+<hr>
 <%= form_tag "/registrations/health_history", method: :post do %>
   <h3>Heart:</h3>
   <p></p>
@@ -15,9 +16,14 @@
     </div>
   <% end %>
   <div class="well">
-    <%= label_tag 'Congenital Heart Disease?' %>
+    <h4><%= label_tag 'Congenital Heart Disease?' %></h4>
+    <hr>
     <%= check_box_tag :chd, nil, @health_history.chd %>
-    <p></p> 
+  </div>
+  <br>
+  <div class="well">
+    <h4>Defects? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :asd %>
     <%= check_box_tag :asd, nil, @congenital_heart_defect.asd %>
     <p></p> 
@@ -44,7 +50,8 @@
   </div>
   <br>
   <div class="well">
-    <p>Offered cardiac surgery?</p>
+    <h4>Offered cardiac surgery?</h4>
+    <hr>
     <%= label_tag :yes %>
     <%= radio_button_tag :offered_cardiac_surgery, 'yes', (@health_history.offered_cardiac_surgery == "yes") %>
     <br>
@@ -56,12 +63,14 @@
   </div>
   <br>
   <div class="well">
-    <%= label_tag :first_cardiac_surgery_age %>:
+    <h4><%= label_tag :first_cardiac_surgery_age %>?</h4>
+    <hr>
     <%= number_field_tag(:first_cardiac_surgery_age, @health_history.first_cardiac_surgery_age, in: 1.0..50, step: 1)  %> 
   </div>
   <br>
   <div class="well">
-    <p>Was the first cardiac surgery successful?</p>
+    <h4>Was the first cardiac surgery successful?</h4>
+    <hr>
     <%= label_tag :yes %>
     <%= radio_button_tag :first_cardiac_surgery_successful, 'yes', (@health_history.first_cardiac_surgery_successful == 'yes') %>
     <br>
@@ -73,10 +82,12 @@
   </div>
   <br>
   <div class="well">
-    <%= label_tag :multiple_cardiac_surgeries %>?
+    <h4><%= label_tag :multiple_cardiac_surgeries %>?</h4>
+    <hr>
     <%= check_box_tag :multiple_cardiac_surgeries, nil, @health_history.multiple_cardiac_surgeries %>
     <!-- change to save a string -->
   </div>
+  <hr>
   <h3>Gastric/Intestinal:</h3>
   <p></p>
     <% if @intestinal_issue.errors.any? %>
@@ -91,6 +102,8 @@
     </div>
   <% end %>
   <div class="well">
+    <h4>Conditions? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :duodenal_atresia_stenosis_web %>
     <%= check_box_tag :duodenal_atresia_stenosis_web, nil, @intestinal_issue.duodenal_atresia_stenosis_web %>
     <p></p> 
@@ -152,6 +165,8 @@
     </div>
   <% end %>
   <div class="well">
+    <h4>Surgeries? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :repair_of_duodenal_atresia_stenosis_web %>
     <%= check_box_tag :repair_of_duodenal_atresia_stenosis_web, nil, @gastric_surgery.repair_of_duodenal_atresia_stenosis_web %>
     <p></p> 
@@ -173,6 +188,7 @@
     <%= label_tag :other_gastric_surgery %>:
     <%= text_field_tag :other_gastric_surgery, @gastric_surgery.other %>
   </div>
+  <hr>
   <h3>Neurological:</h3>
   <p></p>
     <% if @nuerological_condition.errors.any? %>
@@ -187,6 +203,8 @@
     </div>
   <% end %>
   <div class="well">
+    <h4>Conditions? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :seizure_epilepsy %>
     <%= check_box_tag :seizure_epilepsy, nil, @health_history.seizure_epilepsy %>
     <p></p> 
@@ -206,24 +224,26 @@
     <%= check_box_tag :unsure, nil, @nuerological_condition.unsure %>
     <p></p> 
   </div>
+  <br>
   <div class="well">
-    <h4>Surgeries:</h4>
+    <h4>Surgeries? Mark all that apply:</h4>
     <hr>
     <%= label_tag :brain_malformation_surgery %>
     <%= check_box_tag :brain_malformation_surgery, nil, @nuerological_condition.brain_malformation_surgery %>
-    <br>
+    <p></p>
     <%= label_tag :cyst_surgery %>
     <%= check_box_tag :cyst_surgery, nil, @nuerological_condition.cyst_surgery %>
-    <br>
+    <p></p>
     <%= label_tag :cp_surgery %>
     <%= check_box_tag :cp_surgery, nil, @nuerological_condition.cp_surgery %>
-    <br>
+    <p></p>
     <%= label_tag :stroke_surgery %>
     <%= check_box_tag :stroke_surgery, nil, @nuerological_condition.stroke_surgery %>
-    <br>
-    <%= label_tag :other_nuero_surgery %>
+    <p></p>
+    Other Neuro Surgery:
     <%= text_field_tag :other_nuero_surgery, @nuerological_condition.other %>
   </div>
+  <hr>
   <h3>Muscular/Skeletal:</h3>
   <p></p>
     <% if @muscular_skeletal.errors.any? %>
@@ -238,6 +258,8 @@
     </div>
   <% end %>
   <div class="well">
+    <h4>Conditions? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :atlanto_axial_instability %>
     <%= check_box_tag :atlanto_axial_instability, nil, @muscular_skeletal.atlanto_axial_instability %>
     <p></p> 
@@ -278,7 +300,7 @@
     <%= check_box_tag :rocker_bottom_feet, nil, @muscular_skeletal.rocker_bottom_feet %>
   </div>
   <div class="well">
-    <h4>Surgeries:</h4>
+    <h4>Surgeries? Mark all that apply:</h4>
     <hr>
     <%= label_tag :atlanto_axial_instability_surgery %>
     <%= check_box_tag :atlanto_axial_instability_surgery, nil, @muscular_skeletal.atlanto_axial_instability_surgery %>
@@ -319,6 +341,7 @@
     <%= label_tag :rocker_bottom_feet_surgery %>
     <%= check_box_tag :rocker_bottom_feet_surgery, nil, @muscular_skeletal.rocker_bottom_feet_surgery %>
   </div>
+  <hr>
   <h3>Cranial/Facial:</h3>
   <p></p>
     <% if @cranial_facial.errors.any? %>
@@ -333,7 +356,8 @@
     </div>
   <% end %>
   <div class="well">
-    <p>Sleep Apnea?</p>
+    <h4>Sleep Apnea?</h4>
+    <hr>
     <%= label_tag :yes %>
     <%= radio_button_tag :sleep_apnea, 'yes', (@health_history.sleep_apnea == 'yes') %>
     <p></p> 
@@ -344,6 +368,8 @@
     <%= radio_button_tag :sleep_apnea, 'n/a', (@health_history.sleep_apnea == 'n/a') %>
   </div>
   <div class="well">
+    <h4>Conditions? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :cranial_deformities %>
     <%= check_box_tag :cranial_deformities, nil, @cranial_facial.cranial_deformities %>
     <p></p> 
@@ -374,15 +400,17 @@
     <%= label_tag :delayed_teething %>
     <%= check_box_tag :delayed_teething, nil, @cranial_facial.delayed_teething %>
   </div>
+  <hr>
   <h3>Cancer:</h3>
   <p></p>
   <div class="well">
-    <%= label_tag :cancer %>:
+    Type:
     <%= select_tag( :cancer, options_for_select(cancer_options, @health_history.cancer)) %>
     <p></p>
     <%= label_tag :other %>:
     <%= text_field_tag :cancer_other, @health_history.other_cancer %>
   </div>
+  <hr>
   <h3>Endocrine:</h3>
   <p></p>
     <% if @endocrine.errors.any? %>
@@ -397,6 +425,8 @@
     </div>
   <% end %>
   <div class="well">
+    <h4>Conditions? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :hyperthyroidism %>
     <%= check_box_tag :hyperthyroidism, nil, @endocrine.hyperthyroidism %>
     <p></p>
@@ -445,12 +475,6 @@
     <%= label_tag :delayed_late_puberty %>
     <%= check_box_tag :delayed_late_puberty, nil, @endocrine.delayed_late_puberty %>
     <p></p>
-    <%= label_tag :unsure %>
-    <%= check_box_tag :unsure, nil, @endocrine.unsure %>
-    <p></p>
-    <%= label_tag :other_endocrine %>
-    <%= text_field_tag :other_endocrine, @endocrine.other %>
-    <p></p>
     <%= label_tag :high_blood_sugar %>
     <%= check_box_tag :high_blood_sugar, nil, @endocrine.high_blood_sugar %>
     <p></p>
@@ -459,8 +483,14 @@
     <p></p>
     <%= label_tag :increased_abdominal_fat %>
     <%= check_box_tag :increased_abdominal_fat, nil, @endocrine.increased_abdominal_fat %>
+    <p></p>
+    <%= label_tag :unsure %>
+    <%= check_box_tag :unsure, nil, @endocrine.unsure %>
+    <p></p>
+    <%= label_tag :other_endocrine %>:
+    <%= text_field_tag :other_endocrine, @endocrine.other %>
   </div>
-
+  <hr>
   <h3>Hearing:</h3>
   <p></p>
     <% if @hearing.errors.any? %>
@@ -476,6 +506,7 @@
   <% end %>
   <div class="well">
     <h4>Did the participant pass the infant hearing test?</h4>
+    <hr>
     <%= label_tag :yes %>
     <%= radio_button_tag :hearing_test, 'yes', (@health_history.hearing_test == 'yes') %>
     <br>
@@ -484,13 +515,20 @@
     <br>
     <%= label_tag 'n/a' %>
     <%= radio_button_tag :hearing_test, 'n/a', (@health_history.hearing_test == 'n/a') %>
+  </div>
+  <div class="well">
     <h4>Has the participant had an ABR?</h4>
+    <hr>
     <%= check_box_tag :had_an_abr, nil, @health_history.had_an_abr %>
-    <p></p>
+  </div>
+  <div class="well">
     <h4>Has the participant ever had an diagnosis of hearing loss and/or deafness?</h4>
+    <hr>
     <%= select_tag( :hearing_loss_or_deaf, options_for_select(hearing_diagnosis, @health_history.hearing_loss_or_deaf)) %>
-    <p></p>
+  </div>
+  <div class="well">
     <h4>Which best describes the hearing loss? Mark all that apply:</h4>
+    <hr>
     <%= label_tag :transient %>
     <%= check_box_tag :transient, nil, @hearing.transient %>
     <p></p>
@@ -505,10 +543,13 @@
     <p></p>
     <%= label_tag :other_hearing %>:
     <%= text_field_tag :other_hearing, @hearing.other %>
+  </div>
+  <div class="well"> 
     <h4>Has the participant ever received treatment for hearing loss?</h4>
+    <hr>
     <%= select_tag( :hearing_loss_treatment, options_for_select(hearing_treatments, @health_history.hearing_loss_treatment)) %>
   </div>
-
+  <hr>
   <h3>Vision:</h3>
   <p></p>
 
@@ -525,6 +566,7 @@
   <% end %>
   <div class="well">
     <h4>Has the participant ever failed an eye exam?</h4>
+    <hr>
     <%= label_tag :yes %>
     <%= radio_button_tag :failed_eye_exam, 'yes', (@health_history.failed_eye_exam == 'yes') %>
     <br>
@@ -533,9 +575,10 @@
     <br>
     <%= label_tag 'n/a' %>
     <%= radio_button_tag :failed_eye_exam, 'n/a', (@health_history.failed_eye_exam == 'n/a') %>
-    <p></p>
+  </div>
+  <div class="well">
     <h4>Has the participant ever experience or been diagnosed with the following? Mark all that apply:</h4>
-    <p></p>
+    <hr>
     <%= label_tag :cataract %>
     <%= check_box_tag :cataract, nil, @vision.cataract %>
     <p></p>
@@ -599,6 +642,7 @@
     <%= label_tag "Doesn't close eyes when sleeping" %>
     <%= check_box_tag :doesnt_close_eyes_when_sleeping, nil, @vision.doesnt_close_eyes_when_sleeping %>
   </div>
+  <hr>
   <h3>Behavior:</h3>
   <p></p>
     <% if @behavioral_health.errors.any? %>
@@ -614,7 +658,7 @@
   <% end %>
   <div class="well">
     <h4>Has the participant ever been diagnosed with any of the following? Mark all that apply:</h4>
-    <p></p>
+    <hr>
     <%= label_tag :add %>
     <%= check_box_tag :add, nil, @behavioral_health.add %>
     <p></p>
@@ -651,12 +695,12 @@
     <%= label_tag :odd %>
     <%= check_box_tag :odd, nil, @behavioral_health.odd %>
     <p></p>
-    <%= label_tag :other_diagnosis %>
+    <%= label_tag :other_diagnosis %>:
     <%= text_field_tag :other_diagnosis, @behavioral_health.other_diagnosis %>
   </div>
   <div class="well">
     <h4>Does/did the participant have any of the following developmental delays? Mark all that apply:</h4>
-    <p></p>
+    <hr>
     <%= label_tag :learning_disability %>
     <%= check_box_tag :learning_disability, nil, @behavioral_health.learning_disability %>
     <p></p>
@@ -687,6 +731,7 @@
     <%= label_tag :other_delay %>:
     <%= text_field_tag :other_delay, @behavioral_health.other_delay %>
   </div>
+  <hr>
   <h3>School/Therapies:</h3>
   <p></p>
     <% if @received_therapy.errors.any? %>
@@ -714,22 +759,25 @@
   </div>
   <div class="well">
     <h4>Did/does the participant attend school?</h4>
+    <hr>
     <%= check_box_tag :attend_school, nil, @health_history.attend_school %>
   </div>
   <p></p>
   <div class="well">
     <h4>Did/does the participant get home schooled or was/is homebound? </h4>
+    <hr>
     <%= check_box_tag :home_schooled_bound, nil, @health_history.home_schooled_bound %>
   </div>
   <p></p>
   <div class="well">
     <h4>What is the participant's highest level of education completed?</h4>
+    <hr>
     <%= select_tag( :highest_education, options_for_select(highest_education, @health_history.highest_education)) %>
   </div>
   <p></p>
   <div class="well">
     <h4>Has the participant ever received therapies? Mark all that apply:</h4>
-    <p></p>
+    <hr>
     <%= label_tag 'ot (occupational)' %>
     <%= check_box_tag :ot, nil, @received_therapy.ot %>
     <p></p>
@@ -766,18 +814,22 @@
     <%= label_tag :other_therapy %>:
     <%= text_field_tag :other_therapy, @received_therapy.other %>
   </div>
+  <hr>
   <h3>Clinical Research & Trials:</h3>
   <p></p>
   <div class="well">
     <h4>Is the living participant currently participating in clinical trials or research studies?</h4>
+    <hr>
     <%= check_box_tag :clinical_trial, nil, @health_history.clinical_trial %>
   </div>
+  <br>
   <div class="well">
     <h4>Is the living participant (or legal guardian of minor participant) interested in participating in upcoming trials?</h4>
+    <hr>
     <%= check_box_tag :clinical_trial_participation, nil, @health_history.clinical_trial_participation %>
   </div>
   <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
-  <div>
-    <%= submit_tag 'Save Changes', class: "btn btn-primary" %>
-  </div>
+  <hr>
+  <%= submit_tag 'Save Changes', class: "btn btn-primary" %>
+  
 <% end %>

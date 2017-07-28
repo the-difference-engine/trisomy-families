@@ -84,7 +84,7 @@
 
             <h4 ng-if='user.user_type === "family" && user.profile'><a href="/families/{{user.profile}}" style="color:green">{{user.first_name}} {{user.last_name}}</a></h4>
             
-            <h4 ng-if='user.user_type === "doctor" && user.profile'><a href="/physicians/{{user.profile}}" style="color:blue">{{user.first_name}} {{user.last_name}}</a></h4>
+            <h4 ng-if='user.user_type === "doctor" && user.profile'><a href="/physicians/{{user.profile}}" style="color:red">{{user.first_name}} {{user.last_name}}</a></h4>
           </div>
           <hr>
           <div ng-if='user.avatar && user.avatar != null'>

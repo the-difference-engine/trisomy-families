@@ -192,18 +192,30 @@
       <div class="well">
         <label>Delivery method:</label> <%= @background_history.delivery_method %>
         <br>
-        <label>C Section offered?</label> <%= @background_history.offered_c_section.capitalize %>
-        <br>
-        <label>Child birth complications?</label> <%= @background_history.child_complication.capitalize %>
-        <br>
-        <label>Apgar score:</label> <%= @background_history.apgar_score %>
-        <br>
-        <label>Gestation age:</label> <%= @background_history.gestation_age %>
-        <br>
-        <label>Mother's age at birth:</label> <%= @background_history.mother_age_at_birth %>
-        <br>
-        <label>Father's age at birth:</label> <%= @background_history.father_age_at_birth %>
-        <br>
+        <% if @background_history.offered_c_section %> 
+          <label>C Section offered?</label> <%= @background_history.offered_c_section.capitalize %>
+          <br>
+        <% end %>
+        <% if @background_history.child_complication %> 
+          <label>Child birth complications?</label> <%= @background_history.child_complication.capitalize %>
+          <br>
+        <% end %>
+        <% if @background_history.apgar_score %>
+          <label>Apgar score:</label> <%= @background_history.apgar_score %>
+          <br>
+        <% end %>
+        <% if @background_history.gestation_age %>
+          <label>Gestation age:</label> <%= @background_history.gestation_age %>
+          <br>
+        <% end %>
+        <% if @background_history.mother_age_at_birth %>
+          <label>Mother's age at birth:</label> <%= @background_history.mother_age_at_birth %>
+          <br>
+        <% end %>
+        <% if @background_history.father_age_at_birth %>
+          <label>Father's age at birth:</label> <%= @background_history.father_age_at_birth %>
+          <br>
+        <% end %>
         <label>Multiple birth?</label> <% if @background_history.multiple_birth %>Yes<% else%>No<% end %>
         <br>
         <label>Multiple birth trisomy?</label> <% if @background_history.gestation_age %>Yes<% else %>No<% end %>
@@ -237,7 +249,7 @@
       <h3>Heart Issues:</h3>
       <div class="well">
         <label>Congenital Heart Disease?</label> <% if @health_history.chd %>Yes<% else %>No<% end %>
-        <br>
+        <p></p> 
         <% if @health_history.congenital_heart_defect.attributes.values[1..-3].any? {|value| value == true} %>
           <div class="well">
             <label>Congenital Heart Defects:</label>
@@ -257,14 +269,14 @@
         <% end %>
         <% if @health_history.offered_cardiac_surgery != nil %>
           <label>Offered cardiac surgery?</label> <%= @health_history.offered_cardiac_surgery.capitalize %>
-          <br>
+          <p></p> 
         <% end %>
         <label>Multiple cardiac surgeries?</label> <% if @health_history.offered_cardiac_surgery %>Yes<% else %>No<% end %>
-        <br>
+        <p></p> 
         <% if @health_history.first_cardiac_surgery_successful != nil %>
           <label>First cardiac surgery successful?</label> <%= @health_history.first_cardiac_surgery_successful.capitalize %>
+          <p></p> 
         <% end %>
-        <br>
         <% if @health_history.first_cardiac_surgery_age != nil %> 
           <label>Age when first cardiac surgery was performed:</label> <%= @health_history.first_cardiac_surgery_age %> 
         <% end %>
@@ -365,13 +377,13 @@
       <div class="well">
         <% if @health_history.hearing_test %>
           <label>Infant hearing test passed?</label> <%= @health_history.hearing_test.capitalize %>
-          <br>
+          <p></p> 
         <% end %>
         <label>Had an ABR?</label> <% if @health_history.had_an_abr %>Yes<% else%>No<% end %>
-        <br>
+        <p></p> 
         <% if @health_history.hearing_loss_or_deaf %>
           <label>Diagnosed with hearing loss or deafness?</label> <%= @health_history.hearing_loss_or_deaf.capitalize %>
-          <br>
+          <p></p> 
         <% end %>
       </div>
       <% if @health_history.hearing.attributes.values[1..-3].any? {|value| value == true} %>
@@ -432,15 +444,15 @@
       <div class="well">
         <% if @health_history.in_ei != nil %>
           <label>Participant attended EI?</label> <%= @health_history.in_ei.capitalize %>
-          <br>
+          <p></p> 
         <% end %>
         <label>Participant attended school?</label> <% if @health_history.attend_school %>Yes<% else %>No<% end %>
-        <br>
+        <p></p> 
         <label>Participant home schooled?</label> <% if @health_history.home_schooled_bound %>Yes<% else %>No<% end %>
-        <br>
+        <p></p> 
         <% if @health_history.highest_education != nil %>
           <label>Highest level of education:</label> <%= @health_history.highest_education %>
-          <br>
+          <p></p> 
         <% end %>
       </div>
       <% if @health_history.received_therapy.attributes.values[1..-3].any? {|value| value == true} %>
@@ -461,7 +473,7 @@
       <h3>Clinical Research & Trials</h3>
       <div class="well">
         <label>Currently participating in clincal trials or research studies? </label> <% if @health_history.clinical_trial %>Yes<% else %>No<% end %>
-        <br>
+        <p></p> 
         <label>Interest in participating in upcomming trials? </label> <% if @health_history.clinical_trial_participation %>Yes<% else %>No<% end %>
       </div>
       <a href="/registrations/health_history/<%= @health_history.id %>/edit" class="btn btn-warning" id="edit_health_history">Edit Health History</a>
