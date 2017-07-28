@@ -70,7 +70,7 @@ class Api::V1::ChildrenController < ApplicationController
     from = Email.new(email: ENV["SENDGRID_USERNAME"])
     to = Email.new(email: user_email)
     subject = 'Child Registration'
-    message = "#{child.first_name} #{child.last_name}'s registration has been accepted."
+    message = "Congratulations, your Trisomy participant #{child.first_name} #{child.last_name}'s registration has been accepted! Thank you for connecting with us."
 
     content = Content.new(type: 'text/html', value: message)
     mail = Mail.new(from, subject, to, content)
