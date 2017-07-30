@@ -59,18 +59,19 @@ class Api::V1::ChildrenController < ApplicationController
       )
       if @child.save
         user_alert(@child)
+        flash[:success] = "The participant's registration has been accepted. The registration's contact will receive a confimation email."
         redirect_to '/children-index'
       end
     end
   end
 
   def user_alert(child)
-    user_email = child.user.email
+    register_contact_info = ContactInfoForm.find_by(child_id: child.id)    
 
     from = Email.new(email: ENV["SENDGRID_USERNAME"])
-    to = Email.new(email: user_email)
+    to = Email.new(email: register_contact_info.contact_email)
     subject = 'Child Registration'
-    message = "#{child.first_name} #{child.last_name}'s registration has been accepted."
+    message = "Congratulations, your Trisomy participant #{child.first_name} #{child.last_name}'s registration has been accepted! Thank you for connecting with us."
 
     content = Content.new(type: 'text/html', value: message)
     mail = Mail.new(from, subject, to, content)
