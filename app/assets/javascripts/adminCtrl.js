@@ -7,12 +7,14 @@
       });
 
       $scope.setOrderAttribute = function(inputAttribute) {
-        if (inputAttribute !== $scope.orderAttribute) {
-          $scope.isOrderDescending = false;
+        inputAttribute === "oldToNew" ? $scope.isOrderDescending = false : inputAttribute === "newToOld" ? $scope.isOrderDescending = !$scope.isOrderDescending : $scope.isOrderDescending = '';
+        
+        if ($scope.isOrderDescending != '') {
+          $scope.orderAttribute = 'id';
         } else {
-          $scope.isOrderDescending = !$scope.isOrderDescending;
-        }
-        $scope.orderAttribute = inputAttribute;
+          $scope.orderAttribute = undefined;
+        };
+        
       };
 
       $scope.alerts = [];

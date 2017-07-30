@@ -31,6 +31,14 @@
         });
       };
 
+      $scope.deleteChild = function(id) {
+
+        $http.delete('api/v1/children/'+ id +'.json').then(function(response) {
+
+          $scope.alerts.push({type: 'success', msg: 'Well done! You successfully deleted the child.'});
+        });
+      };
+
       $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
       };

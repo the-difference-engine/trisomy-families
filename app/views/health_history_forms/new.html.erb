@@ -18,7 +18,11 @@
   <div class="well">
     <h4><%= label_tag 'Congenital Heart Disease?' %></h4>
     <hr>
-    <%= check_box_tag :chd, nil, @health_history.chd %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :chd, true, (@health_history.chd == true) %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :chd, false, (@health_history.chd == false) %>
   </div>
   <br>
   <div class="well">
@@ -84,7 +88,11 @@
   <div class="well">
     <h4><%= label_tag :multiple_cardiac_surgeries %>?</h4>
     <hr>
-    <%= check_box_tag :multiple_cardiac_surgeries, nil, @health_history.multiple_cardiac_surgeries %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :multiple_cardiac_surgeries, true, (@health_history.multiple_cardiac_surgeries == true) %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :multiple_cardiac_surgeries, false, (@health_history.multiple_cardiac_surgeries == false) %>
     <!-- change to save a string -->
   </div>
   <hr>
@@ -360,10 +368,10 @@
     <hr>
     <%= label_tag :yes %>
     <%= radio_button_tag :sleep_apnea, 'yes', (@health_history.sleep_apnea == 'yes') %>
-    <p></p> 
+    <br>
     <%= label_tag :no %>
     <%= radio_button_tag :sleep_apnea, 'no', (@health_history.sleep_apnea == 'no') %>
-    <p></p> 
+    <br>
     <%= label_tag 'n/a' %>
     <%= radio_button_tag :sleep_apnea, 'n/a', (@health_history.sleep_apnea == 'n/a') %>
   </div>
@@ -519,7 +527,11 @@
   <div class="well">
     <h4>Has the participant had an ABR?</h4>
     <hr>
-    <%= check_box_tag :had_an_abr, nil, @health_history.had_an_abr %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :had_an_abr, true %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :had_an_abr, false %>
   </div>
   <div class="well">
     <h4>Has the participant ever had an diagnosis of hearing loss and/or deafness?</h4>
@@ -760,19 +772,27 @@
   <div class="well">
     <h4>Did/does the participant attend school?</h4>
     <hr>
-    <%= check_box_tag :attend_school, nil, @health_history.attend_school %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :attend_school, true, (@health_history.attend_school == true) %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :attend_school, false, (@health_history.attend_school == false) %>
   </div>
   <p></p>
   <div class="well">
     <h4>Did/does the participant get home schooled or was/is homebound? </h4>
     <hr>
-    <%= check_box_tag :home_schooled_bound, nil, @health_history.home_schooled_bound %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :home_schooled_bound, true, (@health_history.home_schooled_bound == true) %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :home_schooled_bound, false, (@health_history.home_schooled_bound == false) %>
   </div>
   <p></p>
   <div class="well">
     <h4>What is the participant's highest level of education completed?</h4>
     <hr>
-    <%= select_tag( :highest_education, options_for_select(highest_education, @health_history.highest_education)) %>
+    <%= select_tag( :highest_education, options_for_select(highest_education, @health_history.highest_education), prompt: "-") %>
   </div>
   <p></p>
   <div class="well">
@@ -820,13 +840,21 @@
   <div class="well">
     <h4>Is the living participant currently participating in clinical trials or research studies?</h4>
     <hr>
-    <%= check_box_tag :clinical_trial, nil, @health_history.clinical_trial %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :clinical_trial, true, (@health_history.clinical_trial == true) %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :clinical_trial, false, (@health_history.clinical_trial == false) %>
   </div>
   <br>
   <div class="well">
     <h4>Is the living participant (or legal guardian of minor participant) interested in participating in upcoming trials?</h4>
     <hr>
-    <%= check_box_tag :clinical_trial_participation, nil, @health_history.clinical_trial_participation %>
+    <%= label_tag :yes %>
+    <%= radio_button_tag :clinical_trial_participation, true, (@health_history.clinical_trial_participation == true) %>
+    <br>
+    <%= label_tag :no %>
+    <%= radio_button_tag :clinical_trial_participation, false, (@health_history.clinical_trial_participation == false) %>
   </div>
   <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
   <hr>

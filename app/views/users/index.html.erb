@@ -30,13 +30,6 @@
         <a href="/homepagecontents/new" class="btn btn-success">Create Home Page Content</a>    
       <% end %>
       <a href="/children-index" class="btn btn-primary">See All Children</a>
-      <div class="btn-group">
-        <% if @family %>
-          <a href ="/families/<%= @family.id %>" class="btn btn-info">My Family</a>
-        <% else %>
-          <a href ="/families/new" class="btn btn-success">Add My Family</a>
-        <% end %>   
-      </div>
     </div>
     <hr />
 
@@ -48,6 +41,7 @@
           <option>Name</option>
           <option>Email</option>
           <option>Type</option>
+          <option>Date Created</option>
         </datalist>
       </select>
       <div id="user_emails" style="display: none;">
@@ -71,9 +65,14 @@
           <option ng-repeat="user in users track by $index">{{ user.full_name }}</option>
       </datalist>
       </div>
+      <div id="order" style="display: none;">
+      <select ng-model="orderBy" id="dateOrder">
+        <option value=""></option>
+        <option value="newToOld">Newest To Oldest</option>
+        <option value="oldToNew">Oldest To Newest</option>        
+      </select>
     </div>
-    <br>
-    <button ng-click="setOrderAttribute('id')">Order by creation time</button>
+    </div>
     <br>
     <br>
     <div class="row">
@@ -103,7 +102,7 @@
           <br>
           <form>
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"'>
-              <label>Update User Type: </label>
+              <label>Change User Type: </label>
               <select ng-model="user.user_type" list="types" ng-change="resetFilter()" disableEntry: true >
                 <datalist id="types">
                   <option>admin</option>
@@ -111,10 +110,12 @@
                 </datalist>
               </select>
             </div>
-              <input type="hidden" ng-model="user.id">
-            <br>
+            <input type="hidden" ng-model="user.id">
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"' class="submit">
               <input class="btn btn-info" value="Update" ng-click="updateType(user.user_type, user.id)">
+            </div>
+            <div style="text-align: center">
+              <a href="/families/{{user.profile}}/edit"><input class="btn btn-success" value="Edit Profile"></a>
             </div>
             <div class="submit">
               <input class="btn btn-danger" value="Delete" ng-click="deleteUser(user.id)">
@@ -135,6 +136,8 @@
       document.getElementById('types').style.display = 'none';
       document.getElementById('full_name').style.display = 'none';
       document.getElementById('full_name_text').value = "";
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('dateOrder').value = '';
 
     } else if (this.value === 'Type') {
       
@@ -143,14 +146,30 @@
       document.getElementById('user_emails').style.display = 'none';
       document.getElementById('full_name_text').value = "";
       document.getElementById('email_text').value = null;
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('dateOrder').value = '';
     } else if (this.value ==='Name'){
       
       document.getElementById('full_name').style.display = 'inline-block';
       document.getElementById('types').style.display = 'none';
       document.getElementById('user_emails').style.display = 'none';
       document.getElementById('email_text').value = null;
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('dateOrder').value = '';
+    } else if (this.value ==='Date Created'){
+      console.log("yeah");
+      document.getElementById('order').style.display = 'inline-block';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('selected_registration').value = undefined;
+      document.getElementById('user_emails').style.display = 'none';
+      document.getElementById('email_text').value = null;      
     };
   });
+  
+  document.getElementById('dateOrder').addEventListener('change', function () {
+    $scope.setOrderAttribute(this.value);
+   });
 
   $("#family").hover(function() {
     $("#family-desc").show();

@@ -80,7 +80,9 @@
           <p ng-if='!child.accepted'><label>Accepted:</label> false </p>
           <div style="text-align: center">
             <hr>
-            <a href="/registrations/{{child.id}}"><button class="btn btn-primary">View Registration</button></a>
+            <a href="/registrations/{{child.id}}"><input class="btn btn-primary" value="View Registration"></a>
+            <br>
+            <input class="btn btn-danger" value="Delete" ng-click="deleteChild(child.id)">
           </div>
         </div>
       </div>

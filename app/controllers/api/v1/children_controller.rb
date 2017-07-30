@@ -79,4 +79,10 @@ class Api::V1::ChildrenController < ApplicationController
     sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
     response = sg.client.mail._('send').post(request_body: mail.to_json)
   end
+
+  def destroy
+    @child = Child.find_by(id: params[:id])
+    @child.destroy
+
+  end
 end
