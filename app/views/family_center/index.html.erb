@@ -4,7 +4,6 @@
         height: 600px;
         width: 100%;
        }
-
 /* Removes styles for active state - when user presses the submit button. */
        .btn:focus {
          outline: none;
@@ -22,7 +21,7 @@
       <h4>Search For:</h4>
       <div class="form-group">
         <label for="searchQueryType"></label>
-        <select class="form-control" id="searchQueryType" ng-model="query.type">
+        <select class="form-control" id="searchQueryType" ng-model="query.type" onchange="toggleTrisomyType()">
           <option value="">--User Type--</option>
           <option value="family">Family</option>
           <option value="physician">Physician</option>
@@ -68,14 +67,13 @@
         <ang-select-usstates ng-model="query.state" name="State" id="selectState" class="form-control"></ang-select-usstates>
       </div>
 
-      <input type="button" class="btn btn-success" value="Search" ng-click="performSearch()">
+      <input type="button" id="btnSubmit" class="btn btn-success" value="Search" ng-click="performSearch()">
     </form>
       <h3>{{ searchResults }}</h3>
       <div id="map"></div>
 
 <!-- #####################################################################
     Search form does not behave properly, however this will not affect demo.
-
     1. If lastname is edited and then left empty, the form will submit an empty string
       and cause a crash.
     2. Select state button is not active if selected first.
@@ -89,3 +87,40 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzNgVwahZQ63o16EMv8eU4XFvdkgdr2XM">
     </script>
   </body>
+
+    <script>
+          // INITIALIZE FIELDS          
+          $("#searchQuerytrisomy_type").hide();
+          $("#selectState").hide();
+          $("#name").hide();
+          $("#btnSubmit").hide();
+          function toggleTrisomyType(){
+
+            // RESET FIELD VALUES
+            $("#searchQuerytrisomy_type").attr("value", "hello");
+            console.log($("#searchQuerytrisomy_type").value);
+
+            // SHOW AND HIDE FIELDS
+            var user_type = $("#searchQueryType").val();
+            if(user_type == "family"){
+              $("#searchQuerytrisomy_type").show();
+              $("#selectState").show();
+              $("#name").show();
+              $("#btnSubmit").show();
+            }
+            else if(user_type == "physician"){
+             $("#searchQuerytrisomy_type").hide();
+             $("#selectState").show();
+             $("#name").show();
+             $("#btnSubmit").show();
+            }
+            else {
+             $("#searchQuerytrisomy_type").hide();
+             $("#selectState").hide();
+             $("#name").hide();
+             $("#btnSubmit").hide();
+            }
+          }
+    </script>
+
+

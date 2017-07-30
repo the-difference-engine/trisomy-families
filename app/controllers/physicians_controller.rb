@@ -1,4 +1,7 @@
 class PhysiciansController < ApplicationController
+  require 'sendgrid-ruby'
+  include SendGrid
+  
   def new
     if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
       @physician = Physician.new
@@ -12,6 +15,19 @@ class PhysiciansController < ApplicationController
     @physician = Physician.new(physician_params)
 
     if @physician.save
+
+      admin_email = User.where(user_type: "admin").first.email
+
+      from = Email.new(email: ENV["SENDGRID_USERNAME"])
+      to = Email.new(email: admin_email)
+      subject = 'Physician created alert'
+      message = "#{current_user.first_name} #{current_user.last_name} (#{current_user.email}) has created a physician profile."
+
+      content = Content.new(type: 'text/html', value: message)
+      mail = Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
 
       flash[:success] = 'Profile created!'
       redirect_to "/physicians/#{@physician.id}"
@@ -37,7 +53,7 @@ class PhysiciansController < ApplicationController
   end
 
   def show
-    @physician = Physician.find_by(id: params[:id])
+    @physician = Physician.find(params[:id])
 
     if current_user.user_type == 'admin' || current_user.id == @physician.user_id || current_user.family_id
       render 'show.html.erb'

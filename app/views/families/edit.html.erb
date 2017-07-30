@@ -1,6 +1,6 @@
 <% if @family.errors.any?%>
 <div id="error_explanation" class="alert alert-danger" role="alert">
-   <%= pluralize(@child.errors.count, "Error") %>
+   <%= pluralize(@family.errors.count, "Error") %>
    <ul>
       <% @family.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -38,6 +38,10 @@
          <div class="form-group">
             <%= f.label :state, 'State' %>
             <%= f.select("state", options_for_select(us_states, @family.state), class: "form-control") %>
+         </div>
+         <div class="form-group">
+            <%= f.label :website, "Family Website" %>
+            <%= f.text_field(:website, class: "form-control") %>
          </div>
          <hr>
          <div>

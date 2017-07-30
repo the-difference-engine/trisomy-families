@@ -4,7 +4,9 @@ module DeliveryMethodHelper
       ['Planned C-section'],
       ['Emergency C-section'],
       ['Natural'],
-      ['Vaginal with medication']  
+      ['Vaginal with medication'],
+      ['Not Sure']
+
     ]
   end
 end

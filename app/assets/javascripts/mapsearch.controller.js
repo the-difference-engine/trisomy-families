@@ -22,8 +22,7 @@
         });
     }, 100)
 
-
-    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage) {
+    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, website) {      
           var marker = new google.maps.Marker({
             map: $scope.map,
             position: latlng,
@@ -42,7 +41,7 @@
               state+' '+
               zipcode+'</p>'+
               '<p><b>Specialty:</b> '+specialty+'<br>'+
-              '<a href='+showPage+'>More info</a></p>'+
+              '<a href='+website+' target="_blank">Website</a></p>'+
               '</div>'+
               '</div>';
               $scope.infoWindow.setContent(contentString);
@@ -81,29 +80,27 @@
     function displayMarkers() {
         // loop through data array
         if ($scope.query.type === "physician") {
-        for(var i = 0; i < $scope.data["data"].length; i++) {
-            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["latitude"], $scope.data["data"][i]["attributes"]["longitude"] );
-            console.log(latlng);
-            var firstname = $scope.data["data"][i]["attributes"]["first-name"];
-            var lastname = $scope.data["data"][i]["attributes"]["last-name"];
-            var address = $scope.data["data"][i]["attributes"]["address"];
-            var state = $scope.data["data"][i]["attributes"]["state"];
-            var city = $scope.data["data"][i]["attributes"]["city"];
-            var zipcode = $scope.data["data"][i]["attributes"]["zip-code"];
-            var showPage = $scope.data["data"][i]["attributes"]["self-url"];
-            var specialty = $scope.data["data"][i]["attributes"]["specialty"]
-            createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage);
+        for(var i = 0; i < $scope.data.length; i++) {
+            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] );                     
+            var firstname = $scope.data[i]["first_name"]; 
+            var lastname = $scope.data[i]["last_name"];
+            var address = $scope.data[i]["address"];
+            var state = $scope.data[i]["state"];
+            var city = $scope.data[i]["city"];
+            var zipcode = $scope.data[i]["zip_code"];
+            var website = $scope.data[i]["website"];
+            var specialty = $scope.data[i]["specialty"]
+            createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, website);
         }
       }
       else if ($scope.query.type === "family") {
-        console.log($scope.data[0].state)
         for(var i = 0; i < $scope.data.length; i++) {
-            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] )
+            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] );
             var lastname = $scope.data[i]["family_name"];
             var address = $scope.data[i]["street_address"];
             var state = $scope.data[i]["state"];
             var city = $scope.data[i]["city"];
-            var trisomy = $scope.data[i]["trisomy_type"];
+            var trisomy = $scope.data[i]["children"];
             var showPage = "/families/" + $scope.data[i]["id"];
             createFamilyMarker(latlng, lastname, address, state, city, trisomy, showPage);
         }
@@ -135,6 +132,27 @@
         // send ajax only if form has changed
         if ($scope.search_form.$dirty) {
             var url = "/api/v1/search?" + $httpParamSerializerJQLike($scope.query);
+
+            // need to clear trisomy type params from url if it equals nothing
+            var url_sub_index = url.indexOf("trisomy_type=");
+            var url_char = url.substring((url_sub_index + 13),(url_sub_index + 14));   
+            if (url_char == "&") {
+              url = url.replace("trisomy_type=&","");            
+            }
+            if (url_char == "") {
+              url = url.replace("trisomy_type=","");            
+            }
+
+            // need to clear family name params from url if it equals nothing
+            var url_sub_index = url.indexOf("last_name=");
+            var url_char = url.substring((url_sub_index + 10),(url_sub_index + 11));   
+            if (url_char == "&") {
+              url = url.replace("last_name=&","");            
+            }
+            if (url_char == "") {
+              url = url.replace("last_name=","");            
+            }
+          
             $http({
                 method: 'GET',
                 url: url
@@ -142,7 +160,7 @@
                   $scope.data = response.data;
                   removeMarkers(); // for future searches
                   $scope.search_form.$setPristine(); // set to false
-                  $scope.initializeMap();
+                  $scope.initializeMap();                  
 
         }, function errorCallback(response) {
             $scope.searchResults = "No results matched.";

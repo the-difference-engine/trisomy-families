@@ -1,83 +1,232 @@
-<div class="container">
-  <div class="col-md-6 col-md-offset-3">
-    <h1 class="text-center">Edit Profile</h1>
-    <hr>
-  <div class="buttons">
-    <p>Update photo: </p>
-    <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
-        <%= form.file_field :avatar, :class => "form-group" %>
-        <%= submit_tag nil, class: "btn btn-success", id: "image-submit"%>
-    <% end %>
-   </div>
-<%= form_tag "/profile/#{@child.id}", method: :patch do %>
-<h5 style="color:gray">Basic Info</h5>
-  <div class="form-group">
-    <%= label_tag :child_first_name, "First Name" %>
-    <%= text_field_tag :first_name, @child.first_name, placeholder: 'First Name', class: "form-control"%>
-  </div>
-  <div class="form-group">
-    <%= label_tag :child_first_name, "Last Name" %>
-    <%= text_field_tag :last_name, @child.last_name, placeholder: 'Last Name', class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :date_of_birth %>
-    <%= date_field_tag :date_of_birth, (@child.birth_date && @child.birth_date.to_date) || '', class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= label_tag 'Date of death (optional)' %>
-    <%= date_field_tag :date_of_death, (@child.death_date && @child.death_date.to_date) || '', class: "form-control" %>
-  </div>
-  <hr>
-  <h5 style="color:gray">Location</h5>
-  <div class="form-group">
-    <%= label_tag :state %>
-    <%= select_tag(:state, options_for_select(us_states, "#{@child.state}"), class: "form-control") %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :city %>
-    <%= text_field_tag :city, @child.city, class: "form-control" %>
-  </div>
-  <hr>
-  <h5 style="color:gray">Trisomy</h5>
-  <div class="form-group">
-    <%= label_tag :trisomy_story %>
-    <%= text_area_tag :trisomy_story, @child.trisomy_story, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :trisomy_type, "Type of Trisomy" %>
-    <%= select_tag(:trisomy_type, options_for_select(trisomy_type, @child.trisomy_type)) %>
-    <%#= select_tag(:trisomy_type, @child.trisomy_type) %>
-  </div>
-
-  <hr>
-  <h5 style="color:gray">Privacy Settings</h5>
-  <div class="form-group">
-    <%= label_tag 'Profile Image:' %>
-    <%= radio_button_tag :avatar, false, @privacy.avatar, :checked => (!@privacy.avatar) %> Public
-    <%= radio_button_tag :avatar, true, @privacy.avatar, :checked => (@privacy.avatar) %> Private
-  </div>
-  <div class="form-group">
-    <%= label_tag 'Address:' %>
-    <%= radio_button_tag :location, false, @privacy.location, :checked => (!@privacy.location) %> Public
-    <%= radio_button_tag :location, true, @privacy.location, :checked => (@privacy.location) %> Private
-  </div>
-  <div class="form-group">
-    <%= label_tag 'Birthday:' %>
-    <%= radio_button_tag :birthday, false, @privacy.birthday, :checked => (!@privacy.birthday) %> Public
-    <%= radio_button_tag :birthday, true, @privacy.birthday, :checked => (@privacy.birthday) %> Private
-  </div>
-  <div class="form-group">
-    <%= label_tag 'Trisomy Type:' %>
-    <%= radio_button_tag :trisomy_type, false, @privacy.trisomy_type, :checked => (!@privacy.trisomy_type) %> Public
-    <%= radio_button_tag :trisomy_type, true, @privacy.trisomy_type, :checked => (@privacy.trisomy_type) %> Private
-  </div>
-  <div class="form-group">
-    <%= label_tag 'Story:' %>
-    <%= radio_button_tag :story, false, @privacy.story, :checked => (!@privacy.story) %> Public
-    <%= radio_button_tag :story, true, @privacy.story, :checked => (@privacy.story) %> Private
-  </div>
-  <%= submit_tag 'Save', class: "btn btn-success btn-lg btn-block" %>
-  <% end %>
-  <%= link_to 'Delete Profile',"/profile/#{@child.id}",method: :delete, data: {confirm: "Are you sure you want to delete this profile?"}, :class => "btn btn-danger btn-lg btn-block" %>
-   <a class="btn btn-default btn-lg btn-block" href="/profile/<%= @child.id %>" role="button">Cancel</a>
+<% if @child.errors.any?%>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+   <%= pluralize(@child.errors.count, "Error") %>
+   <ul>
+      <% @child.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+   </ul>
 </div>
+<% end %>
+<div class="container">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <h1 class="text-center">Edit Child</h1>
+         <%= form_for @child, url: {action: "update"} do |f| %>
+         <h5 style="color:gray">Basic Info</h5>
+         <div class="form-group">
+            <%= f.label :child_first_name, "First Name" %>
+            <%= f.text_field(:first_name, class: "form-control", placeholder: 'First Name') %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_first_name, "Last Name" %>
+            <%= f.text_field(:last_name, class: "form-control", placeholder: 'Last Name') %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_nickname %>
+            <%= f.text_field(:nickname, class: "form-control") %>
+         </div>
+         <div class="form-group">
+            <%= f.label :date_of_birth, "Date of Birth" %>
+            <%= f.date_select :birth_date, class: "form-control", order: [:month, :day, :year], start_year: 1950, end_year: DateTime.now.year %>
+         </div>
+         <div class="form-group">            
+            <%= f.label :date_of_death, "Date of Death" %>
+            <%= f.date_select :death_date, order: [:month, :day, :year], prompt: "-", start_year: 1950, class: "form-control" %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_birth_order %>
+            <%= f.number_field(:birth_order, in: 1..15, step: 1 , class: "form-control")%>
+         </div>
+         <div class="form-group">
+            <%= f.label :avatar_file_name, "Add a Photo" %>
+            <%= f.file_field( :avatar_file_name) %>
+         </div>
+         <hr>
+         <h5 style="color:gray">Trisomy</h5>
+         <div class="form-group">
+            <%= f.label :trisomy_type, "Type of Trisomy" %>
+            <%= f.select("trisomy_type", options_for_select(trisomy_type, @child.trisomy_type) ) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :other_chrom_affected, "Additional chromosome affected" %>
+            <%= f.select("other_chrom_affected", options_for_select(trisomy_type, @child.other_chrom_affected), :include_blank => "-"  ) %>
+            <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable", checked_value = "n/a" %> N/A
+         </div>
+         <div class="form-group" id="primary_diagnosis">
+            <%= f.label :child_primary_diagnosis %>
+            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis, @child.primary_diagnosis), :include_blank => "-" ) %>
+         </div>
+         <% if @child.mosaic_percentage %>
+            <div class="form-group" id="mosaic_percentage">
+               <%= f.label :mosaic_percentage %>
+               <%= f.number_field(:mosaic_percentage, in: 1..100, step: 1, class: "form-control")%>
+            <br>
+         </div>
+         <% else %>
+            <div class="form-group" id="mosaic_percentage" style="display: none;">
+               <%= f.label :mosaic_percentage %>
+               <%= f.number_field(:mosaic_percentage, in: 1..100, step: 1, class: "form-control")%>
+            <br>
+         </div>
+         <% end %>
+         <% if @child.partial_trisomy %>
+            <div class="form-group" id="partial_trisomy"">
+               <%= f.label 'Partial Trisomy:' %>
+               <%= f.radio_button(:partial_trisomy, 'p') %> P
+               <%= f.radio_button(:partial_trisomy, 'q') %> Q
+               <%= f.radio_button(:partial_trisomy, 'both') %> Both
+               <br>
+               <br>
+            </div>
+         <% else %>
+            <div class="form-group" id="partial_trisomy" style="display: none;">
+               <%= f.label 'Partial Trisomy:' %>
+               <%= f.radio_button(:partial_trisomy, 'p') %> P
+               <%= f.radio_button(:partial_trisomy, 'q') %> Q
+               <%= f.radio_button(:partial_trisomy, 'both') %> Both
+               <br>
+               <br>
+            </div>
+         <% end %>
+         <div class="form-group">
+            <%= f.label :other_primary_diagnosis %>
+            <%= f.text_field(:other_primary_diagnosis) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_secondary_diagnosis %>
+            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis, @child.secondary_diagnosis), :include_blank => "-"  ) %>
+            <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable_2", checked_value = "n/a" %> N/A
+         </div>
+         <% if @child.secondary_mosaic_percentage %>
+            <div class="form-group" id="mosaic_percentage_2">
+               <%= f.label :secondary_mosaic_percentage %>
+               <%= f.number_field(:secondary_mosaic_percentage, in: 1..100, step: 1, class: "form-control")%>
+            <br>
+         </div>
+         <% else %>
+            <div class="form-group" id="mosaic_percentage_2" style="display: none;">
+               <%= f.label :secondary_mosaic_percentage %>
+               <%= f.number_field(:secondary_mosaic_percentage, in: 1..100, step: 1, class: "form-control")%>
+            <br>
+         </div>
+         <% end %>
+         <% if @child.secondary_partial_trisomy %>
+            <div class="form-group" id="partial_trisomy_2"">
+               <%= f.label 'Partial Trisomy:' %>
+               <%= f.radio_button(:secondary_partial_trisomy, 'p') %> P
+               <%= f.radio_button(:secondary_partial_trisomy, 'q') %> Q
+               <%= f.radio_button(:secondary_partial_trisomy, 'both') %> Both
+               <br>
+               <br>
+            </div>
+         <% else %>
+            <div class="form-group" id="partial_trisomy_2" style="display: none;">
+               <%= f.label 'Partial Trisomy:' %>
+               <%= f.radio_button(:secondary_partial_trisomy, 'p') %> P
+               <%= f.radio_button(:secondary_partial_trisomy, 'q') %> Q
+               <%= f.radio_button(:secondary_partial_trisomy, 'both') %> Both
+               <br>
+               <br>
+            </div>
+         <% end %>
+         <div class="form-group" id="other_secondary_diagnosis">
+            <%= f.label :other_secondary_diagnosis %>
+            <%= f.text_field(:other_secondary_diagnosis) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :trisomy_story, "* Child Story" %>
+            <%= f.text_area( :trisomy_story, class: "form-control", row: "3")%>
+         </div>
+         <hr>
+         <h5 style="color:gray">Privacy Settings</h5>
+         <%= f.fields_for :privacy do |privacy_form| %>
+         <div class="form-group">
+            <%= privacy_form.label 'Profile Image:' %>
+            <%= privacy_form.radio_button(:avatar, false) %> Public
+            <%= privacy_form.radio_button(:avatar, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Birthday:' %>
+            <%= privacy_form.radio_button(:birthday, false) %> Public
+            <%= privacy_form.radio_button(:birthday, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Trisomy Type:' %>
+            <%= privacy_form.radio_button(:trisomy_type, false)%> Public
+            <%= privacy_form.radio_button(:trisomy_type, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Story:' %>
+            <%= privacy_form.radio_button(:story, false) %> Public
+            <%= privacy_form.radio_button(:story, true) %> Private
+         </div>
+         <div class="form-group">
+            <%= privacy_form.label 'Address:' %>
+            <%= privacy_form.radio_button(:location, false) %> Public
+            <%= privacy_form.radio_button(:location, true) %> Private
+         </div>
+         <% end %>
+         <div>
+         </div>
+         <%= submit_tag 'Update', class: "btn btn-success btn-lg btn-block"%>
+      </div>
+      <!-- col-md-6 -->
+   </div>
+   <!-- row -->
+</div>
+<!-- container -->
+<% end %>
+
+<script>
+   document.getElementById('child_primary_diagnosis').addEventListener('change', function () {
+    var style = this.value === 'Mosaic' ? 'inline' : 'none';
+    document.getElementById('mosaic_percentage').style.display = style;
+    style = this.value === 'Partial' ? 'inline' : 'none';
+    document.getElementById('partial_trisomy').style.display = style;
+   });
+
+   document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
+    var style = this.value === 'Mosaic' ? 'inline' : 'none';
+    document.getElementById('mosaic_percentage_2').style.display = style;
+    style = this.value === 'Partial' ? 'inline' : 'none';
+    document.getElementById('partial_trisomy_2').style.display = style;
+   });
+
+   $('#not_applicable_2').change(function() {
+    if(this.checked) {
+      document.getElementById('other_secondary_diagnosis').style.display = 'none';
+    } else {
+      document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
+    };
+   });
+
+   $('#child_secondary_diagnosis').change(function() {
+      if(this.value != "") {
+         $('#not_applicable_2').prop('checked', false);
+         document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
+      }; 
+   });
+
+   $('#not_applicable_2').change(function() {
+      if(this.value === "n/a") {
+         $('#child_secondary_diagnosis').val('');
+         document.getElementById('partial_trisomy_2').style.display = 'none';
+         document.getElementById('mosaic_percentage_2').style.display = 'none';
+      };
+   });
+
+   $('#child_other_chrom_affected').change(function() {
+      console.log(this.value);
+      if(this.value != "") {
+         $('#not_applicable').prop('checked', false);
+      }; 
+   });
+
+   $('#not_applicable').change(function() {
+      if(this.value === "n/a") {
+         $('#child_other_chrom_affected').val('');
+      };
+   });
+  
+</script>

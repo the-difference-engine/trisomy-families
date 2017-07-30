@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428050650) do
+ActiveRecord::Schema.define(version: 20170622184615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,14 +94,14 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.string   "city"
     t.string   "state"
     t.text     "trisomy_story"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
-    t.boolean  "private",                   default: false
+    t.boolean  "private",                     default: false
     t.string   "nickname"
     t.integer  "birth_order"
     t.string   "other_chrom_affected"
@@ -114,10 +114,13 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.integer  "parent_id"
     t.string   "other_primary_diagnosis"
     t.string   "other_secondary_diagnosis"
-    t.boolean  "registered",                default: false
+    t.boolean  "registered",                  default: false
     t.boolean  "accepted"
     t.string   "address"
     t.integer  "family_id"
+    t.integer  "contact_info_id"
+    t.integer  "secondary_mosaic_percentage"
+    t.string   "secondary_partial_trisomy"
   end
 
   create_table "congenital_heart_defects", force: :cascade do |t|
@@ -132,6 +135,22 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.boolean  "not_applicable"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "contact_info_forms", force: :cascade do |t|
+    t.string   "contact_first_name"
+    t.string   "contact_last_name"
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.string   "parent_first_name"
+    t.string   "parent_last_name"
+    t.string   "parent_email"
+    t.string   "parent_phone"
+    t.string   "relationship"
+    t.text     "other_info"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "child_id"
   end
 
   create_table "cranial_facials", force: :cascade do |t|
@@ -199,6 +218,7 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.string   "website"
   end
 
   create_table "gastric_surgeries", force: :cascade do |t|
@@ -364,6 +384,33 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "home_page_contents", force: :cascade do |t|
+    t.string   "banner_title"
+    t.text     "banner_text"
+    t.string   "banner_image"
+    t.string   "mission_title"
+    t.string   "mission_sub_title"
+    t.text     "mission_text"
+    t.string   "create_profile_title"
+    t.text     "create_profile_text"
+    t.string   "create_profile_image1"
+    t.string   "create_profile_image2"
+    t.string   "create_profile_image3"
+    t.string   "family_center_title"
+    t.text     "family_center_text"
+    t.string   "family_center_image"
+    t.string   "data_center_title"
+    t.text     "data_center_text"
+    t.string   "data_center_image"
+    t.string   "birthday_title"
+    t.text     "birthday_text"
+    t.string   "company_title"
+    t.string   "company_phone_number"
+    t.string   "company_address"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false            
+  end
+
   create_table "intestinal_issues", force: :cascade do |t|
     t.boolean  "duodenal_atresia_stenosis_web"
     t.boolean  "anal_stenosis_atresia"
@@ -443,6 +490,7 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.string   "other"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.boolean  "seizure_epilepsy"
   end
 
   create_table "parents", force: :cascade do |t|
@@ -536,6 +584,17 @@ ActiveRecord::Schema.define(version: 20170428050650) do
     t.string   "other"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "url"
+    t.string   "image"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "state"
+    t.string   "purpose"
   end
 
   create_table "secondary_diagnoses", force: :cascade do |t|

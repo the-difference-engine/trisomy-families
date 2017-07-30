@@ -1,18 +1,7 @@
-<h2>Health History</h2>
-  <% if @health_history.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@health_history.errors.count, "error") %> prohibited this health_history from being updated:</h2>
-   
-      <ul>
-      <% @health_history.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<%= form_tag "/profile/#{@child.id}/health", method: :patch do %>
-<h3>Heart</h3>
+<h1>Health History</h1>
+<p>Please enter in the background history of the participant as best as you can. All fields must be filled.</p>
+<%= form_tag "/registrations/health_history", method: :post do %>
+  <h3>Heart</h3>
   <% if @congenital_heart_defect.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@congenital_heart_defect.errors.count, "error") %> prohibited this congenital_heart_defect from being updated:</h2>
@@ -756,6 +745,7 @@
     <h4>Is the living participant (or legal guardian of minor participant) interested in participating in upcoming trials?</h4>
     <%= check_box_tag :clinical_trial_participation, nil, @health_history.clinical_trial_participation %>
   </div>
+  <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
   <div>
     <%= submit_tag %>
   </div>

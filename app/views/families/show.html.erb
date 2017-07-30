@@ -1,34 +1,123 @@
-<div class="container">
-  <div class="row">
-    <div class="page-header">
-      <h1>The <%= @family.family_name %> Family</h1>
+<% if current_user && @family.id.to_s == params[:id] %>
+  <div class="row" style="background-color:#f2f2f2; padding:15px;">
+    <div class="col-md-2">
+      <a href="/family-center"><h5 id="family"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h5></a>
     </div>
-    <div class="col-md-6">
-      <img src = "<%= @family.photo %>"/>
+    <div class="col-md-2">
+      <a href="/data-center"><h5 id="data"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h5></a>
     </div>
-    <div class="row">
-      <h4>Location:</h4> <p><%= @family.city %>, <%= @family.state %></p>
-      <h4>Our Story:</h4> 
-      <p><%= @family.story %></p> 
+    <div class="col-md-3">
+      <a href="/resources"><h5 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> Add Resources</h5></a>
     </div>
-    <hr>
-    <% if @family.user_id == current_user.id %>
-    <button><a href="/families/<%= @family.id %>/edit">Edit</a></button>
-    <button><%= link_to('Add Child', profile_new_path) %></button>
-    <% end %>
-
-    <% if @family.children.count == 1 %>
-      <h2>Child:</h2>
-      <% @family.children.each do |child| %>
-        <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
-        <h4><a href = "/profile/<%=child.id %>"><%= child.nickname %></a></h4>
-      <% end %>
-    <% elsif @family.children.count > 1 %>
-      <h2>Children:</h2>
-      <% @family.children.each do |child| %>
-        <p><%= child.first_name %> - Trisomy Type: <%= child.trisomy_type %></p>
-        <h4><a href = "/profile/<%= child.id %>"><%= child.nickname %></a></h4>
-      <% end %>
-    <% end %>
+    <div class="col-xs-12" style="display:none;" id="family-desc">
+      <p style="color:darkblue">Find other families and physicians with our interactive map search functionality.</p>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="data-desc">
+      <p style="color:darkblue">See trisomy patient data in the form of tables and charts.</p>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="resource-desc">
+      <p style="color:darkblue">Add resources for Trisomy-related topics.</h4>
+    </div>
   </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>My Family Profile</h1>
+      <p>Welcome to your Trisomy Family profile page. Others will be able to see your profile page. If you set your story to "private", then only registered families will be able to to see your profile.</p>
+      <p>In order to see other's private profile pages, utilize the <a href="/family-center">family & physician search center</a> and explore <a href="/data-center">the data center</a>, you must first register at least one Trisomy participant (child). To start this process, create a child profile. From there you will be able to complete and submit a full registration form.</p>
+      <p>Click "Add Child" below to get started</p>
+    </div>
+  </div>
+  <br>
+<% end %>
+
+
+<div class="well">
+  <h1 style="text-align: center;">
+    The <%= @family.family_name %> Family
+  </h1>
+  <br>
+  <img src='<%=@family.photo%>'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
+  <br>
+  <p>
+    Address: <%= @family.street_address %>
+  </p>
+  <p>
+    City: <%= @family.city %>
+  </p>
+  <p>
+    State: <%= @family.state %>
+  </p>
+  <p>
+    Website: <a ng-href="#{@family.website}"><%= @family.website %></a>
+  </p>
+  <p>
+    Story: <%= @family.story %>
+  </p>
+  
+  <% if current_user.id == @family.user_id %>
+    <%= link_to "Edit", "/families/#{@family.id}/edit", class: "btn btn-info" %>
+    <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
+  <% end %>
+  
 </div>
+
+<% if @children.count != 0 %>
+  <h2>Children: </h2>
+<% end %>
+
+<% @children.each do |child| %>
+  <div class="col-md-4">
+    <div class="well">
+      <p>
+        Name: <a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %>
+      </a></p>
+      <% if !child.privacy.avatar %>
+        <br>
+        <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+          <img src='<%= child.avatar_file_name %>' style="width:150px;height:150px; display: block; margin: auto;">
+        <% else %>
+          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <% end %>
+        <br>
+      <% else %>
+        <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+      <% end %>
+      <% if child.nickname != nil %>
+        <p>
+          Nickname: <%= child.nickname %>
+        </p>
+      <% end %>
+      <% if child.privacy.trisomy_type == false %>
+        <p>
+          Trisomy Type: <%= child.trisomy_type %>
+        </p>
+      <% end %>
+      <% if current_user.id == @family.user_id %>
+        <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+      <% end %>
+    </div>
+    
+  </div>
+<% end %>
+
+<script>
+  $("#family").hover(function() {
+    $("#family-desc").show();
+  })
+  $("#family").mouseout(function() {
+    $("#family-desc").hide();
+  })
+  $("#data").hover(function() {
+    $("#data-desc").show();
+  })
+  $("#data").mouseout(function() {
+    $("#data-desc").hide();
+  })
+  $("#resource").hover(function() {
+    $("#resource-desc").show();
+  })
+  $("#resource").mouseout(function() {
+    $("#resource-desc").hide();
+  })
+</script>

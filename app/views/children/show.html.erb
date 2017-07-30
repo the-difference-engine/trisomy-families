@@ -3,55 +3,70 @@
     <div class="page-header">
       <h1><%= @child.first_name + " " + @child.last_name%></h1>
     </div>
-    <div class="col-md-6">
-      <% if @child.avatar_file_name %>
-        <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
-      <% end %>
-    </div>
-
-  <div class="row">
-    <div >
-      <h2>My Story </h2>
-      <p><%= @child.trisomy_story %></p>
-    </div>
-  </div>
-  <hr>
-    
-    <div class="col-md-6 col-md-offset-3 bg-info">
-      <br>
-      <p>Birthday: <%= @child.birth_date.strftime("%B %d") %></p>
-      <p>Age: </p>
-      <p><p>Birth Date: <%= @child.birth_date.strftime("%b %d, %Y") %></p></p>
-      <p>Trisomy Type: <%= @child.trisomy_type %></p>
-      <% if @child.death_date %>
-      <p>Death Date: <%= @child.death_date %></p>
-      <% end %>
-      <p>City: <%= @child.city %></p>
-      <p>State: <%= @child.state %></p>
-    </div>
-    <div class="col-md-6 col-md-offset-3">
-    <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
-    </div>
-  </div>
-  <hr>
-
-    <div>
-    <% if @child.background_history_id == nil %>
-      <%= link_to 'Add Background History',"/profile/#{@child.id}/background", :class => "btn btn-default" %><br>
+    <% if @child.privacy.avatar == false %>
+      <div class="row col-md-4">
+        <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+          <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
+          <hr style="width: 0px">
+        <% else %>
+          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <% end %>
+      </div>
+    <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+      <div class="row col-md-4">
+        <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <hr style="width: 0px">
+      </div>
     <% end %>
-    <% if @child.health_history_id == nil %>
-      <%= link_to 'Add Health History',"/profile/#{@child.id}/health_history", :class => "btn btn-default" %><br>
-      <% end %>
-      <% if @child.registered %>
-        <%= link_to 'Edit Basic Registration',"/profile/#{@child.id}/edit_registration", :class => "btn btn-default" %><br>
-      <% else %>
-        <%= link_to 'Begin Registration',"/profile/#{@child.id}/register", :class => "btn btn-default" %><br>
-      <% end %>
-    <% if @child.background_history_id %>
-      <%= link_to 'Edit Background History',"/profile/#{@child.id}/edit_background_history", :class => "btn btn-default" %><br>
+    <% if @child.privacy.story == false %>
+      <div class="row col-md-8">
+        <div class="well">
+          <h2>My Story </h2>
+          <hr>
+          <p><%= @child.trisomy_story %></p>
+        </div>
+      </div>
     <% end %>
-    <% if @child.health_history_id %>
-      <%= link_to 'Edit Health History',"/profile/#{@child.id}/edit_health_history", :class => "btn btn-default" %><br>
+    <% if !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+      <div class="col-md-6 col-md-offset-3 well" style="margin-left: auto; margin-right: auto; width: 370px;">
+        <% if !@child.privacy.avatar || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+          <h3>Basic Info</h3>
+        <% end %>
+        
+        <hr>
+        <% if @child.privacy.birthday == false %>
+          <% if @child.current_age < 12 && @child.current_age > 1 %>
+            <p>Age: <%= @child.current_age %> months</p>
+            <hr>
+          <% elsif @child.current_age == 1 %>  
+            <p>Age: <%= @child.current_age %> month</p>
+          <% elsif @child.current_age > 24 %>
+            <p>Age: <%= @child.current_age / 12 %> years 
+            <% if (@child.current_age % 12) > 1 %>
+              <%= @child.current_age % 12 %> months
+            <% elsif (@child.current_age % 12) == 1 %>
+              <%= @child.current_age % 12 %> month
+            <% end %>
+            </p>
+            <hr>
+          <% end %>
+          <p>Date of Birth: <%= @child.birth_date.strftime("%b %d, %Y") %></p>
+          <hr>
+        <% end %>
+        <% if @child.privacy.trisomy_type == false %>
+          <p>Trisomy Type: <%= @child.trisomy_type %></p>
+        <% end %>
+        <% if @child.death_date %>
+          <br>
+          <p>Death Date: <%= @child.death_date %></p>
+          <hr>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @child.privacy.birthday && @child.privacy.trisomy_type %>
+      <% if current_user && current_user.id == @family.user_id %>
+        <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
+      <% end %>
     <% end %>
   </div>
 </div>

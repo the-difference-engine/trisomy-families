@@ -51,6 +51,9 @@ gem 'faker', '~> 1.6.6'
 
 gem 'aws-sdk', '~> 2.3'
 
+# for sending secure emails
+gem 'sendgrid-ruby'
+
 gem 'as-duration'
 
 

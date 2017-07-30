@@ -13,8 +13,9 @@ require 'as-duration'
 Physician.delete_all
 User.where.not(user_type: "admin").delete_all
 User.where(user_type: nil).delete_all
-Child.delete_all
-Family.delete_all
+admin_family = Family.find_by(user_id: User.first.id)
+Family.where.not(user_id: admin_family.user_id).delete_all
+Child.where.not(family_id: admin_family.id).delete_all
 Parent.delete_all
 Event.delete_all
 Endocrine.delete_all
@@ -33,6 +34,9 @@ ReceivedTherapy.delete_all
 Hearing.delete_all
 Vision.delete_all
 HealthHistory.delete_all
+HomePageContent.delete_all
+
+
 
 # Create address arrays for physicians and families
 trisomy_strings = ["8", "9", "13", "18", "21", "8", "9", "13", "18", "21", "11", "12", "13", "1", "13", "16", "17", "18", "19", "21", "21", "8", "23", "24"]
@@ -192,7 +196,12 @@ puts  "************************"
       longitude: family_addresses[i][5],
       street_address: family_addresses[i][0],
       city: family_addresses[i][1],
-      state: family_addresses[i][2]
+      state: family_addresses[i][2],
+      website: "https://somewebsite.com",
+      story: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non libero felis. Etiam pharetra mauris vitae condimentum molestie. Sed sed tincidunt lectus. Vivamus sollicitudin fringilla ultrices. Duis arcu est, pretium quis tortor nec, vestibulum finibus mi. Sed arcu sapien, sodales sed facilisis et, suscipit nec nisi. Proin maximus ultrices cursus. Mauris in iaculis sem, sed tincidunt mauris.
+Suspendisse fringilla, orci sit amet viverra luctus, purus nulla maximus sapien, egestas tempus augue nibh at lectus. Mauris sed dignissim justo. Nam rhoncus semper pharetra. Quisque molestie blandit tellus a egestas. Sed mollis est a dui vulputate consequat. Aliquam pretium tempor egestas. Vestibulum tristique scelerisque arcu eget semper. Proin et imperdiet nisi.
+
+Vivamus faucibus ultrices risus, eu ornare eros eleifend in. Fusce laoreet nulla sit amet justo volutpat cursus. Pellentesque tincidunt elit eget orci commodo vestibulum. Morbi eget sapien ante. Fusce fringilla massa sed massa imperdiet iaculis. Fusce non efficitur dui, sed porttitor velit. Cras non vulputate risus. Vivamus eget arcu ultricies, tincidunt nibh sed, malesuada diam. Mauris quis odio erat. Maecenas vel dapibus urna, eget gravida tortor. Pellentesque a tellus vel erat accumsan viverra feugiat ut mauris. Aliquam bibendum commodo ornare."
     )
     u1_family.save
 
@@ -219,10 +228,10 @@ puts  "************************"
                 mosaic_percentage: nil,
                 health_history_id: nil,
                 background_history_id: nil,
-                primary_diagnosis: nil,
+                primary_diagnosis: primary_diagnosis[rand(0..5)],
                 secondary_diagnosis: nil,
                 partial_trisomy: nil,
-                parent_id: u1.id,
+                parent_id: u1_family.id,
                 other_primary_diagnosis: nil,
                 other_secondary_diagnosis: nil,
                 family_id: u1_family.id
@@ -502,3 +511,23 @@ puts  "************************"
   child.background_history_id = @background_history[i].id
   child.save
 end
+
+HomePageContent.create(
+                        banner_title: "Trisomy Families",
+                        banner_text: "Bringing the community together!",
+                        banner_image: "https://trisomy-families.s3.amazonaws.com/AzERgryXfTQxuwkICZRB_background-homepage.jpg",
+                        mission_title: "Mission",
+                        mission_sub_title: "Networking, Advocating, Supporting, and Uniting families affected by Trisomy",
+                        mission_text: "What is trisomy? A trisomy is a type of polysomy in which there are three instances of a particular chromosome, instead of the normal two. Which results in a number of different congenital medical conditions.",
+                        create_profile_title: "CREATE YOUR PROFILE!",
+                        create_profile_text: "Signup and indicate whether you are a family or a doctor. Then build your profile page! Families can add stories and photos, as well as children, where they can provide detailed medical information, ananomously. Doctors can provide information such a practice location and specialty!",
+                        family_center_title: "USE OUR FAMILY CENTER INTERACTIVE MAP!",
+                        family_center_text:"When you signup, your address will be plotted on an interactive map, allowing users to find you by location, and allowing you to find them!",
+                        birthday_title: "Trisomy Birthdays",
+                        birthday_text: "May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.",
+                        data_center_title: "CHECKOUT THE DATA CENTER!",
+                        data_center_text: "In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition",
+                        company_title: "Trisomy Families",
+                        company_phone_number: "555-555-5555",
+                        company_address: "Cary, IL"
+                        )

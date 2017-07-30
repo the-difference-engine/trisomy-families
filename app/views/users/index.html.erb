@@ -2,15 +2,23 @@
   <div ng-controller="adminCtrl" ng-init="setup()">
   
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-    <a href="/children-index">Children Index</a>
+    <div>
+      <br>
+      <% if @home_page_contents != nil  %>
+        <a href="/homepagecontents/<%=@home_page_contents.id%>/edit" class="btn btn-primary">Edit Home Page Content</a>    
+      <% else %>
+        <a href="/homepagecontents/new" class="btn btn-primary">Create Home Page Content</a>    
+      <% end %>
+    </div>    
+    <a href="/children-index" class="btn btn-primary">See All Children</a>
 
     <div>
       <div class="btn-group">
         <% if @family %>
-          <a href ="/families/<%= @family.id %>/edit" class="btn btn-warning">Edit My Family</a>
+          <a href ="/families/<%= @family.id %>" class="btn btn-warning">My Family</a>
         <% else %>
           <a href ="/families/new" class="btn btn-primary">Add My Family</a>          
-        <% end %>           
+        <% end %>   
       </div>
     </div>
     <hr />
@@ -47,7 +55,6 @@
     <div class="row">
       <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending">
         <div class="well">
-          <div>{{user.user_type}}</div>
           <h4>{{user.email}}</h4>
           <hr>
           

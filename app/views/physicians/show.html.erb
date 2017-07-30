@@ -74,7 +74,7 @@
             <ul class="list-icons">
               <li><i class="fa fa-phone pr-10 text-default"></i> <%= @physician.phone_number %></li>
               <li><i class="fa fa-mobile pr-10 text-default"></i> <%= @physician.personal_number %></li>
-              <li><a href="mailto:info@janedoe.com"><i class="fa fa-envelope-o pr-10"></i>info@janedoe.com</a></li>
+              <li><a href="mailto:<%= current_user.email %>"><i class="fa fa-envelope-o pr-10"></i><%= current_user.email %></a></li>
           </div>
         </div>
 

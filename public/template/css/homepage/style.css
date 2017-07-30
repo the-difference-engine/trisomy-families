@@ -725,14 +725,7 @@
 /* Banner                                                                        */
 /*********************************************************************************/
 
-	#banner
-	{
-		background: #FFFFFF url('images/background-homepage.jpg');
-		background-position: center center;
-		background-size: auto 120%;
-		background-repeat: no-repeat;
-		text-align: left;
-	}
+
 
 		/*#banner header
 		{

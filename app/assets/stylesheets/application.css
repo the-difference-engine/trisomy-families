@@ -15,6 +15,31 @@
  *= require fullcalendar
  */
 
+#weight_at_birth, #one_month, #two_month, #three_month, #four_month, #five_month, #six_month, #one_year, #eighteen_month, #two_year, #three_year, #four_year, #five_year, #six_year, #seven_year, #eight_year, #nine_year, #ten_year, #eleven_year, #twelve_year, #thirteen_year, #fourteen_year, #fifteen_year, #sixteen_year, #seventeen_year, #eighteen_year, #nineteen_year, #twenty_year, #twentyone_year, #twentytwo_year, #twentythree_year, #twentyfour_year, #twentyfive_year, #twentysix_year, #twentyseven_year, #twentyeight_year, #twentynine_year, #thirty_year, #thirtyone_year, #thirtytwo_year, #thirtythree_year, #thirtyfour_year, #thirtyfive_year, #thirtysix_year, #thirtyseven_year, #thirtyeight_year, #thirtynine_year, #forty_year {
+  background-color: #f7f7f7;
+}
+
+#height_at_birth, #height_one_month, #height_two_month, #height_three_month, #height_four_month, #height_five_month, #height_six_month, #height_one_year, #height_eighteen_month, #height_two_year, #height_three_year, #height_four_year, #height_five_year, #height_six_year, #height_seven_year, #height_eight_year, #height_nine_year, #height_ten_year, #height_eleven_year, #height_twelve_year, #height_thirteen_year, #height_fourteen_year, #height_fifteen_year, #height_sixteen_year, #height_seventeen_year, #height_eighteen_year, #height_nineteen_year, #height_twenty_year, #height_twentyone_year, #height_twentytwo_year, #height_twentythree_year, #height_twentyfour_year, #height_twentyfive_year, #height_twentysix_year, #height_twentyseven_year, #height_twentyeight_year, #height_twentynine_year, #height_thirty_year, #height_thirtyone_year, #height_thirtytwo_year, #height_thirtythree_year, #height_thirtyfour_year, #height_thirtyfive_year, #height_thirtysix_year, #height_thirtyseven_year, #height_thirtyeight_year, #height_thirtynine_year, #height_forty_year {
+  background-color: #f7f7f7;
+}
+
+#head_circumference_at_birth, #hc_one_month, #hc_two_month, #hc_three_month, #hc_four_month, #hc_five_month, #hc_six_month, #hc_one_year, #hc_eighteen_month, #hc_two_year, #hc_three_year, #hc_four_year, #hc_five_year, #hc_six_year, #hc_seven_year, #hc_eight_year, #hc_nine_year, #hc_ten_year, #hc_eleven_year, #hc_twelve_year, #hc_thirteen_year, #hc_fourteen_year, #hc_fifteen_year, #hc_sixteen_year, #hc_seventeen_year, #hc_eighteen_year, #hc_nineteen_year, #hc_twenty_year, #hc_twentyone_year, #hc_twentytwo_year, #hc_twentythree_year, #hc_twentyfour_year, #hc_twentyfive_year, #hc_twentysix_year, #hc_twentyseven_year, #hc_twentyeight_year, #hc_twentynine_year, #hc_thirty_year, #hc_thirtyone_year, #hc_thirtytwo_year, #hc_thirtythree_year, #hc_thirtyfour_year, #hc_thirtyfive_year, #hc_thirtysix_year, #hc_thirtyseven_year, #hc_thirtyeight_year, #hc_thirtynine_year, #hc_forty_year {
+  background-color: #f7f7f7;
+}
+
+#other_complications, #apgar_score, #gestation_age, #mother_age_at_birth, #father_age_at_birth {
+ background-color: #f7f7f7; 
+}
+
+#child_first_name, #child_last_name, #child_nickname, #child_birth_order, #child_trisomy_story, #child_other_primary_diagnosis, #child_other_secondary_diagnosis, #child_mosaic_percentage, #child_secondary_mosaic_percentage {
+ background-color: #f7f7f7;  
+}
+
+#myCarousel {
+  margin-right: 3%;
+  margin-left: -2%;
+}
+
 .navbar .navbar-nav {
   display: inline-block;
   float: none;
@@ -80,4 +105,9 @@
 #sign-up-line {
   width: 200px;
   margin-left: 0;
+}
+
+/* Errors */
+#error_explanation h2, #error_explanation li {
+  color:red;
 }

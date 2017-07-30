@@ -9,14 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
-    <link href="/template/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/template/fonts/font-awesome/css/font-awesome.css">
     <link href="/template/css/homepage/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/template/css/homepage/style-desktop.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-    <script src="/template/js/homepage/jquery.min.js"></script>
     <script src="/template/js/homepage/jquery.dropotron.min.js"></script>
     <script src="/template/js/homepage/skel.min.js"></script>
     <script src="/template/js/homepage/skel-layers.min.js"></script>
@@ -31,182 +30,347 @@
       <link rel="stylesheet" href="/template/css/homepage/style.css" />
     </noscript>
     <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-
+  <style>
+    <% if @home_page_contents != nil && (@home_page_contents.banner_image != "" && @home_page_contents.banner_image != nil) %>
+      #banner{
+                background: url(<%= @home_page_contents.banner_image %>);
+                background-position: center center;
+                background-size: auto 140%;
+                background-repeat: no-repeat;
+                text-align: left;
+              }
+    <% else %>
+      #banner{
+                background: url("https://blog.chocchildrens.org/wp-content/uploads/2016/03/iStock_000022912430_Full-1038x576.jpg");
+                background-position: center center;
+                background-size: auto 140%;
+                background-repeat: no-repeat;
+                text-align: left;
+              }
+    <% end %>
+  </style>
   </head>
   <body class="homepage">
 
-    <!-- Banner -->
-    <section id="banner">
-              <!-- can add the header tag to wrap inside code !-->
-              <header>
-                <span>
-                  <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
-                  <p>Vivamus condimentum leo eu turpis</p>
-              </span>
-            </header>
-          </section>
 
-    <!-- mission box !-->
-    <div class="container-fluid content-row">
-      <div class="container">
-        <!-- include padding top and bottom using the css box model!-->
-        <div class="row">
-          <!-- include margin-left and margin-right !-->
-          <div class="col-md-6 col-md-offset-3">
-            <div class="col-md-8 col-md-offset-3">
-              <h1 class="row-header">
+      <!-- BANNER -->
+
+      <% if (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") && (@home_page_contents.banner_text != nil && @home_page_contents.banner_text != "") %>
+        <section id="banner">
+          <header>
+              <h1><%= @home_page_contents.banner_title %></h1>
+              <span>
+                <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
+              </span>
+          </header>
+        </section>
+      <% else %>
+        <section id="banner">
+          <header>
+              <h1>Trisomy Families</h1>
+              <span>
+                <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
+              </span>
+          </header>
+        </section>
+      <% end %>
+      <% if @home_page_contents.mission_text != ""  %>
+        <div class="container-fluid content-row">
+          <section>
+            <% if @home_page_contents.mission_title != "" %>
+              <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
+                <%= @home_page_contents.mission_title %>
+              </h1>
+            <% else %>
+              <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
                 Our Mission
               </h1>
-            </div>
-            <div class="col-md-12">
-              <p>Lhello!!!!m dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet. </p>
-            </div>
-            <div class="col-md-12">
-              <footer>
-                <ul class="actions">
-                  <li>
-                    <a href="#" class="button big btn-warning">Find out more</a>
-                  </li>
-                  <li>
-                    <a href="#" class="button big btn-danger">Donate</a>
-                  </li>
-                </ul>
-              </footer>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid odd-row content-row">
-      <div class="container">
-        <!-- include padding top and bottom using the css box model!-->
-        <div class="row">
-          <!-- include margin-left and margin-right !-->
-          <!-- this page will introduce the stories behind Trisomy Families !-->
-          <div class="col-md-6">
-            <h1 class="row-header" style="color:white">Why We Do It</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet ante. </p>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
-            <!-- <p>
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas. Pellentesque varius sodales mauris ac efficitur.
-              </span>
-            </p> -->
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-md-offset-4">
-            <a href="#" class="button big btn-success">Read Stories</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid content-row">
-      <div class="container">
-        <!-- include padding top and bottom using the css box model!-->
-        <div class="row">
-          <!-- include margin-left and margin-right !-->
-          <div class="col-md-6">
-            <h1>Supporting Network of Families</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum leo eu turpis accumsan sagittis. Nullam auctor nisl vitae nulla egestas, sed mattis nunc congue. Quisque aliquet dictum imperdiet. Pellentesque varius sodales mauris ac efficitur. Aliquam justo lorem, sollicitudin quis dolor et, laoreet imperdiet.</p>
-            <a href="#" class="button big btn-danger">Join Us</a>
-          </div>
-          <div class="col-md-6">
-            <img src="/template/images/children-line.png" class="img-rounded" height="95%" width="95%"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid content-row odd-row">
-      <ul class="dates">
-        <section>
-          <h1>Upcoming Events</h1>
-                  <li>
-                    <span class="date">Jan <strong>27</strong></span>
-                    <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
-                    <p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
-                  </li>
-                  <li>
-                    <span class="date">Jan <strong>23</strong></span>
-                    <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
-                    <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
-                  </li>
-                  <li>
-                    <span class="date">Jan <strong>15</strong></span>
-                    <h3><a href="#">Magna tempus lorem feugiat</a></h3>
-                    <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
-                  </li>
-                </ul>
-                <a href="#" class="button big btn-success">More Events</a>
+            <% end %>
+            <% if @home_page_contents.mission_sub_title != "" %>
+              <h4 style="text-align: center"><%= @home_page_contents.mission_sub_title %></h4>
+            <% end %>
+            <hr>
+            <h3><%= @home_page_contents.mission_text %></h3>
           </section>
-    </div>
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="container">
-          <!-- include padding top and bottom using the css box model!-->
+        </div>                  
+      <% end %>
+
+
+
+
+      <!-- SLIDESHOW / CAROUSEL-->
+
+      <div class="container-fluid odd-row content-row" ng-app="app">
+        <div class="container" ng-controller="BirthdaysController" ng-init="setUp()">
+          
+
+          <div ng-if="birthdays==true">    
+            <% if @home_page_contents.birthday_title != "" %>
+              <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
+            <% else %>
+              <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> Today's Birthdays</h1>  
+            <% end %>
+            <hr style="width: 93%">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              
+              <div class="carousel-inner">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="child in children">
+                  <div class="row">                 
+                    <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="height:350px;"/>
+                    <img ng-if="child.privacies['avatar'] === true" src="http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png" style="height:350px;"/>
+                    <div class="col-md-6">
+                      <p>Happy Birthday, {{child.first_name}}!</p>
+                      <% if @home_page_contents != nil && @home_page_contents.birthday_text != "" %>
+                        <p><%= @home_page_contents.birthday_text %></p>
+                        <div ng-if="child.privacies['story'] === false">
+                          <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                        </div>
+                      <% else %>
+                        <p>May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.</p>
+                        <div ng-if="child.privacies['story'] === false">
+                          <a href="/profile/{{child.id}}" class="button big btn-danger">See Story</a>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-if="children.length > 1">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-if="children.length > 1">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+          </div>
+
+
+          <div ng-if="birthdays==false">
+            <h2 style="color:#fff; margin-top:0;">No Trisomy birthdays today but here are some words of inspiration:</h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="image in images">                  
+                  <div class="row">                 
+                    <!-- <img ng-if="child.privacies['avatar'] === false" ng-src="{{child.photo}}" style="width:350px;height:350px;"/> -->
+                    <img src="{{image.photo}}" style="height:350px;"/>
+                    <div class="col-md-6">
+                    </div>
+                  </div>                  
+                </div>
+
+              </div>
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- CREATE PROFILE -->
+
+      <div class="container-fluid content-row">
+        <div class="row">
+          <div class="col-md-6">
+            <% if @home_page_contents.create_profile_title != "" %>
+              <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
+            <% else %>
+              <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
+            <% end %>
+            <hr style="width: 93%">
+            <% if @home_page_contents.create_profile_text != "" %>
+              <p><%= @home_page_contents.create_profile_text %></p>
+            <% else %>
+              <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
+            <% end %>
+          </div>
+        </div>            
+        <div class="row">
+          <% if (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
+            </div>
+          <% elsif ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) && (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil)) || ((@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) != "" && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil)) || ((@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) && (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil))  %>
+            <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
+              </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
+              </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
+              </div>
+            <% end %>
+          <% elsif (@home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil) || (@home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil) || (@home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil) %>
+            <% if @home_page_contents.create_profile_image1 != "" && @home_page_contents.create_profile_image1 != nil %>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image1 %>></p>
+              </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image2 != "" && @home_page_contents.create_profile_image2 != nil %>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image2 %>></p>
+              </div>
+            <% end %>
+            <% if @home_page_contents.create_profile_image3 != "" && @home_page_contents.create_profile_image3 != nil %>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
+              </div>
+            <% end %>
+          <% else %>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
+              </div>
+            <% end %>
+        </div>
+      </div>
+
+
+
+      <!-- DATA CENTER -->
+
+      <div class="container-fluid content-row">
+        <div class="row">
+          <% if @home_page_contents.data_center_image != "" && @home_page_contents.data_center_image != nil %>
+            
+            <div class="col-md-6">
+              <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil  %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
+              <% end %>
+              <hr>
+              <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
+                <p><%= @home_page_contents.data_center_text %></p>
+              <% else %>
+                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <img src=<%= @home_page_contents.data_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
+            </div>
+          <% else %>
+            <div class="col-md-6">
+              <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+                <hr>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
+                <hr>
+              <% end %>
+              <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
+                <p><%= @home_page_contents.data_center_text %></p>
+              <% else %>
+                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <img src="https://www.enterprisedb.com/sites/default/files/blogs/statistics.jpg" class="img-rounded" style="height: 375px; width: 500px"/>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+
+
+      <!-- SPECIAL EVENTS -->
+
+      <% if @sorted_events.count != 0 %>
+        <div class="container-fluid odd-row content-row">
+          <ul class="dates">
+            <% if @sorted_events.count > 2 %>
+              <section>
+                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                <% count = 2 %>
+                <% 3.times do %>
+                <li>
+                  <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                  <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                  <p><%= @sorted_events[count].description %></p>
+                </li>
+                <% count -= 1 %>
+                <% end %>
+              </section>
+            <% elsif @sorted_events.count <= 2 %>
+              <section>
+                <h1><i class="fa fa-calendar" aria-hidden="true"></i> Upcoming/Recent Events</h1>
+                <% count = @sorted_events.count - 1 %>
+                <% while count >= 0 do %>
+                <li>
+                  <span class="date"><%= @sorted_events[count].start.strftime("%b") %> <strong><%= @sorted_events[count].start.strftime("%-d") %></strong></span>
+                  <h3><a href="/events/<%= @sorted_events[count].id %>"><%= @sorted_events[count].title %></a></h3>
+                  <p><%= @sorted_events[count].description %></p>
+                </li>
+                <% count -= 1 %>
+                <% end %>
+              </section>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+
+      <!-- FOOTER -->
+
+      <footer class="footer">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-md-6">
-            <address>
-              <h2>Trisomy Families<br></h2>
-              Street Address<br>
-              Cary, IL, 56425<br>
-            </address>
+              <address>
+                <% if @home_page_contents.company_title != nil && @home_page_contents.company_title != "" %>
+                  <h2><%= @home_page_contents.company_title %><br></h2>
+                <% end %>
+                <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
+                  <%= @home_page_contents.company_phone_number %><br>
+                <% end %>
+                <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
+                  <%= @home_page_contents.company_address %><br>
+                <% end %>
+              </address>
             </div>
             <div class="col-md-2">
-              <h6>About Us</h6>
-              <ul>
-                <li><a href="">Our Mission</a></li>
-                <li><a href="">Our Team</a></li>
-                <li><a href="">Our Research</a></li>
-                <li><a href="">Contact Us</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h6>Quick Links</h6>
-              <ul>
-                <li><a href="">Trisomy Support</a></li>
-                <li><a href="">Shop</a></li>
-                <li><a href="">Events</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h6>Social</h6>
+              <h6>You can also checkout our Facebook Page!</h6>
               <ol class="social">
-                  <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
-                  <li><a class="icon fa-twitter" href="#"><span class="label">Twitter</span></a></li>
-                  <li><a class="icon fa-linkedin" href="#"><span class="label">LinkedIn</span></a></li>
-                  <li><a class="icon fa-google-plus" href="#"><span class="label">Google+</span></a></li>
-                </ol>
+                <li><a class="icon fa-facebook" href="https://www.facebook.com/trisomyfamilies.hope.18.13.awareness/"><span class="label">Facebook</span></a></li>
+              </ol>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center copyright">
+              <p>2017 © Trisomy Families. All Rights Reserved.</p>
             </div>
           </div>
         </div>
-        <div class="container">
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3 text-center copyright">
-          <p>2017 © Trisomy Families. All Rights Reserved.</p>
-        </div>
-      </div>
-    </div>
-    </footer>
+      </footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    
   </body>
 </html>
