@@ -15,6 +15,16 @@
  *= require fullcalendar
  */
 
+#link-container {
+    text-align: center;
+}
+#link {
+    background: white;
+    color: #00A1F1;
+    display: inline-block;
+    padding: 25px;
+}
+
 #pic {
   width:auto;
   height:325px; 

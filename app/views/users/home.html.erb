@@ -336,10 +336,10 @@
                   <h2><%= @home_page_contents.company_title %><br></h2>
                 <% end %>
                 <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
-                  <%= @home_page_contents.company_phone_number %><br>
+                  Number: (<%= @home_page_contents.company_phone_number[0,3] %>) <%= @home_page_contents.company_phone_number[3,3] %>-<%= @home_page_contents.company_phone_number[6..-1] %> <br>
                 <% end %>
                 <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
-                  <%= @home_page_contents.company_address %><br>
+                  Address: <%= @home_page_contents.company_address %><br>
                 <% end %>
               </address>
             </div>
