@@ -1,7 +1,6 @@
 module HearingTreatmentsHelper
   def hearing_treatments
     [
-      ['None'],
       ['N/A'],
       ['Hearing Aid'],
       ['Cochlear Implant'],

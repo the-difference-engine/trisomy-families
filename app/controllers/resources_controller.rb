@@ -182,7 +182,7 @@ class ResourcesController < ApplicationController
     from = Email.new(email: ENV["SENDGRID_USERNAME"])
     to = Email.new(email: admin_email)
     subject = 'A new resource has been added'
-    message = "#{current_user.first_name} #{current_user.last_name} (#{current_user.email}) has added a new resource to the Trisomy Families website. Link to resources: #{request.url}"
+    message = "#{current_user.first_name} #{current_user.last_name} (#{current_user.email}) has added a new resource to the Trisomy Association website. Link to resources: #{request.url}"
 
     content = Content.new(type: 'text/html', value: message)
     mail = Mail.new(from, subject, to, content)

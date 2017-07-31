@@ -55,7 +55,7 @@
     Story: <%= @family.story %>
   </p>
   
-  <% if current_user.id == @family.user_id %>
+  <% if current_user.id == @family.user_id || current_user.user_type == "admin" %>
     <%= link_to "Edit", "/families/#{@family.id}/edit", class: "btn btn-info" %>
     <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
   <% end %>
@@ -69,9 +69,14 @@
 <% @children.each do |child| %>
   <div class="col-md-4">
     <div class="well">
-      <p>
-        Name: <a href='/profile/<%= child.id %>'><%= child.first_name %> <%= child.last_name %>
-      </a></p>
+      <div style="text-align: center">
+        <% if (child.privacy.attributes.values[2..-3].select {|value| value == false}.count <= 1 && child.privacy.avatar == false) %>
+          <h4><%= child.first_name %> <%= child.last_name %></a></h4>
+        <% elsif child.privacy.attributes.values[2..-3].select {|value| value == false}.count > 0 %> 
+          <h4><a href='/profile/<%= child.id %>' style="color: blue"><%= child.first_name %> <%= child.last_name %></a></h4>          
+        <% end %>
+        <hr>
+      </div>
       <% if !child.privacy.avatar %>
         <br>
         <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
@@ -94,7 +99,12 @@
         </p>
       <% end %>
       <% if current_user.id == @family.user_id %>
-        <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+        <p>
+          Registered: <%= child.registered %>
+        </p>
+        <div style="text-align: center">
+          <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+        </div>
       <% end %>
     </div>
     

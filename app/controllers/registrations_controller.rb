@@ -7,14 +7,21 @@ class RegistrationsController < ApplicationController
 
   def update
     @child = Child.find_by(id: params[:id])
-    if params["submition"] == "Submit Registration"
+    @family = Family.find_by(id: @child.family_id)
+    @contact_info = ContactInfoForm.find_by(child_id: @child.id)
+    @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
+    @health_history = HealthHistory.find_by(id: @child.health_history_id)
+    if @background_history != nil 
+      @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
+    end
+    if params["submission"] == "Submit Registration"
       @child.update(
         registered: true
       )
       if @child.save
         admin_alert(@child)
         flash[:success] = "Registration for #{@child.first_name} #{@child.last_name} has been submitted successfully."
-        redirect_to '/registration/#{child.id}'
+        render 'show.html.erb'
       end
     end
   end

@@ -2,85 +2,120 @@
   <div ng-controller="adminCtrl" ng-init="setup()">
   
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-    <div>
+    <div class="row" style="background-color:#f2f2f2; padding:15px;">
+      <div class="col-md-2">
+        <a href="/family-center"><h5 id="family"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h5></a>
+      </div>
+      <div class="col-md-2">
+        <a href="/data-center"><h5 id="data"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h5></a>
+      </div>
+      <div class="col-md-3">
+        <a href="/resources"><h5 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> Add Resources</h5></a>
+      </div>
+      <div class="col-xs-12" style="display:none;" id="family-desc">
+        <p style="color:darkblue">Find other families and physicians with our interactive map search functionality.</p>
+      </div>
+      <div class="col-xs-12" style="display:none;" id="data-desc">
+        <p style="color:darkblue">See trisomy patient data in the form of tables and charts.</p>
+      </div>
+      <div class="col-xs-12" style="display:none;" id="resource-desc">
+        <p style="color:darkblue">Add resources for Trisomy-related topics.</h4>
+      </div>
+    </div>
+    <div class="btn-group">
       <br>
       <% if @home_page_contents != nil  %>
-        <a href="/homepagecontents/<%=@home_page_contents.id%>/edit" class="btn btn-primary">Edit Home Page Content</a>    
+        <a href="/homepagecontents/<%=@home_page_contents.id%>/edit" class="btn btn-warning">Edit Home Page</a>    
       <% else %>
-        <a href="/homepagecontents/new" class="btn btn-primary">Create Home Page Content</a>    
+        <a href="/homepagecontents/new" class="btn btn-success">Create Home Page Content</a>    
       <% end %>
-    </div>    
-    <a href="/children-index" class="btn btn-primary">See All Children</a>
-
-    <div>
-      <div class="btn-group">
-        <% if @family %>
-          <a href ="/families/<%= @family.id %>" class="btn btn-warning">My Family</a>
-        <% else %>
-          <a href ="/families/new" class="btn btn-primary">Add My Family</a>          
-        <% end %>   
-      </div>
+      <a href="/children-index" class="btn btn-primary">See All Children</a>
     </div>
     <hr />
 
     <h2>Users:</h2>
     <div>
-      <label>Filter by email:</label>
-      <input ng-model="emailFilter" list="emails">
-      <datalist id="emails">
-        <option ng-repeat="user in users track by $index">{{ user.email }}</option>
+      <label>Filter by:</label>
+      <select id="filter_type">
+        <datalist>
+          <option>Name</option>
+          <option>Email</option>
+          <option>Type</option>
+          <option>Date Created</option>
+        </datalist>
+      </select>
+      <div id="user_emails" style="display: none;">
+        <input ng-model="emailFilter" list="emails" id="email_text">
+        <datalist id="emails">
+          <option ng-repeat="user in users track by $index">{{ user.email }}</option>
+        </datalist>
+      </div>
+      <div id="types" style="display: none;">
+        <select ng-model="user_typeFilter" list="user_types">
+          <datalist id="user_types">
+            <option>admin</option>
+            <option>doctor</option>
+            <option>family</option>
+          </datalist>
+        </select>
+      </div>
+      <div id="full_name" style="display: inline-block;">
+        <input ng-model="fullName" id="full_name_text" list="names">
+        <datalist id="names">
+          <option ng-repeat="user in users track by $index">{{ user.full_name }}</option>
       </datalist>
-    </div>
-    <br>
-    <div>
-      <label>Filter by type:</label>
-      <select ng-model="user_typeFilter" list="user_types">
-
-      <datalist id="user_types">
-        <option>admin</option>
-        <option>doctor</option>
-        <option>family</option>
-      </datalist>
+      </div>
+      <div id="order" style="display: none;">
+      <select ng-model="orderBy" id="dateOrder">
+        <option value=""></option>
+        <option value="newToOld">Newest To Oldest</option>
+        <option value="oldToNew">Oldest To Newest</option>        
       </select>
     </div>
-    <br>
-    <div>
-      <label>Filter by last name:</label>
-      <input ng-model="lastName">
     </div>
-    <br>
-    <button ng-click="setOrderAttribute('id')">Order by creation time</button>
     <br>
     <br>
     <div class="row">
-      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {last_name: lastName} | orderBy:orderAttribute:isOrderDescending">
+      <div class="col-md-4" ng-repeat="user in users | filter: {user_type: user_typeFilter} | filter: {email: emailFilter} | filter: {full_name: fullName} | orderBy:orderAttribute:isOrderDescending">
         <div class="well">
-          <h4>{{user.email}}</h4>
-          <hr>
-          
-          <p ng-if='user.profile === nil'>Name: {{user.first_name}} {{user.last_name}} </p>
+          <div style="text-align: center;">
+            <h4 ng-if='user.profile === nil'>{{user.first_name}} {{user.last_name}} </h4>
 
-          <p ng-if='user.user_type === "family" && user.profile'>Name: <a href="/families/{{user.profile}}">{{user.first_name}} {{user.last_name}}</a></p>
-          
-          <p ng-if='user.user_type === "doctor" && user.profile'>Name: <a href="/physicians/{{user.profile}}">{{user.first_name}} {{user.last_name}}</a></p>
-          
-          <p>Type: {{user.user_type}}</p>
-          <p>Signed up: {{user.created_at | date:format:'M'}}</p>
-          <div ></div>
+            <h4 ng-if='user.user_type === "family" && user.profile'><a href="/families/{{user.profile}}" style="color:green">{{user.first_name}} {{user.last_name}}</a></h4>
+            
+            <h4 ng-if='user.user_type === "doctor" && user.profile'><a href="/physicians/{{user.profile}}" style="color:red">{{user.first_name}} {{user.last_name}}</a></h4>
+          </div>
+          <hr>
+          <div ng-if='user.avatar && user.avatar != null'>
+            <img src='{{user.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>
+          <div ng-if='!user.avatar || user.avatar === null'>
+            <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>  
+          <label>Email:</label> {{user.email}}
+          <br>
+          <label>Type:</label> {{user.user_type}}
+          <br>
+          <label>Signed up:</label> {{user.created_at | date:format:'M'}}
+          <br>
           <form>
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"'>
-              <label>Update User Type: </label>
-              <select ng-model="user.user_type" list="types" disableEntry: true >
+              <label>Change User Type: </label>
+              <select ng-model="user.user_type" list="types" ng-change="resetFilter()" disableEntry: true >
                 <datalist id="types">
                   <option>admin</option>
                   <option>family</option>
                 </datalist>
               </select>
             </div>
-              <input type="hidden" ng-model="user.id">
-            <br>
+            <input type="hidden" ng-model="user.id">
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"' class="submit">
               <input class="btn btn-info" value="Update" ng-click="updateType(user.user_type, user.id)">
+            </div>
+            <div style="text-align: center">
+              <a href="/families/{{user.profile}}/edit"><input class="btn btn-success" value="Edit Profile"></a>
             </div>
             <div class="submit">
               <input class="btn btn-danger" value="Delete" ng-click="deleteUser(user.id)">
@@ -92,3 +127,67 @@
     </div>
   </div>
 </div>
+<script>
+
+  document.getElementById('filter_type').addEventListener('change', function () {
+    if(this.value === 'Email') {
+      
+      document.getElementById('user_emails').style.display = 'inline-block';
+      document.getElementById('types').style.display = 'none';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('dateOrder').value = '';
+
+    } else if (this.value === 'Type') {
+      
+      document.getElementById('types').style.display = 'inline-block';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('user_emails').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('email_text').value = null;
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('dateOrder').value = '';
+    } else if (this.value ==='Name'){
+      
+      document.getElementById('full_name').style.display = 'inline-block';
+      document.getElementById('types').style.display = 'none';
+      document.getElementById('user_emails').style.display = 'none';
+      document.getElementById('email_text').value = null;
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('dateOrder').value = '';
+    } else if (this.value ==='Date Created'){
+      console.log("yeah");
+      document.getElementById('order').style.display = 'inline-block';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('selected_registration').value = undefined;
+      document.getElementById('user_emails').style.display = 'none';
+      document.getElementById('email_text').value = null;      
+    };
+  });
+  
+  document.getElementById('dateOrder').addEventListener('change', function () {
+    $scope.setOrderAttribute(this.value);
+   });
+
+  $("#family").hover(function() {
+    $("#family-desc").show();
+  })
+  $("#family").mouseout(function() {
+    $("#family-desc").hide();
+  })
+  $("#data").hover(function() {
+    $("#data-desc").show();
+  })
+  $("#data").mouseout(function() {
+    $("#data-desc").hide();
+  })
+  $("#resource").hover(function() {
+    $("#resource-desc").show();
+  })
+  $("#resource").mouseout(function() {
+    $("#resource-desc").hide();
+  })
+  
+</script>

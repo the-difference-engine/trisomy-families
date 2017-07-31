@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :relationship, presence: true, on: :update
   validates :user_type, presence: true
+
+  def full_name
+    self.first_name + " " + self.last_name
+  end
 end

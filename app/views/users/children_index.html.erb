@@ -2,49 +2,144 @@
   <div ng-controller="adminchildrenCtrl" ng-init="setup()">
 
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-
-    <a href="/admin-dashboard " class="btn btn-primary">See All Users</a>
-    <h2>Children:</h2>
-    <div>
-      <label>Filter by last name:</label>
-      <input ng-model="last_nameFilter" list="names">
-
-      <datalist id="names">
-        <option ng-repeat="child in children track by $index">{{ child.last_name }}</option>
-      </datalist>
+    <div class="row" style="background-color:#f2f2f2; padding:15px;">
+      <div class="col-md-2">
+        <a href="/family-center"><h5 id="family"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h5></a>
+      </div>
+      <div class="col-md-2">
+        <a href="/data-center"><h5 id="data"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h5></a>
+      </div>
+      <div class="col-md-3">
+        <a href="/resources"><h5 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> Add Resources</h5></a>
+      </div>
+      <div class="col-xs-12" style="display:none;" id="family-desc">
+        <p style="color:darkblue">Find other families and physicians with our interactive map search functionality.</p>
+      </div>
+      <div class="col-xs-12" style="display:none;" id="data-desc">
+        <p style="color:darkblue">See trisomy patient data in the form of tables and charts.</p>
+      </div>
+      <div class="col-xs-12" style="display:none;" id="resource-desc">
+        <p style="color:darkblue">Add resources for Trisomy-related topics.</h4>
+      </div>
     </div>
     <br>
-    <div>
-      <label>Sort by Registration:</label>
-      <select ng-model="sortBy">
+    <a href="/admin-dashboard " class="btn btn-primary">See All Users</a>
+    <h2>Children:</h2>
+    <label>Filter by:</label>
+    <select id="filter_type">
+      <datalist>
+        <option>Name</option>
+        <option>Registration</option>
+        <option>Date Created</option>
+
+      </datalist>
+    </select>
+    <div id="full_name" style="display: inline-block;">
+      <input id="full_name_text" ng-model="fullName" list="names">
+
+      <datalist id="names">
+        <option ng-repeat="child in children track by $index">{{ child.full_name }}</option>
+      </datalist>
+    </div>
+    <div id="registration" style="display: none;">
+      <select ng-model="sortBy" id="selected_registration">
+        <option value=""></option>
         <option value="-registered">Registered</option>
         <option value="registered">Not registered</option>
-        <option value="accepted">Accepted</option>
-        <option value="-accepted">Not Accepted</option>
+      </select>
+    </div>
+    <div id="order" style="display: none;">
+      <select ng-model="orderBy" id="dateOrder">
+        <option value=""></option>
+        <option value="newToOld">Newest To Oldest</option>
+        <option value="oldToNew">Oldest To Newest</option>        
       </select>
     </div>
     <br>
-
-    <button ng-click="setOrderAttribute('id')">Order by creation time</button>
-    <br>
     <br>
     <div class="row">
-      <div class="col-md-4" ng-repeat="child in children | filter: {last_name: last_nameFilter} | orderBy: sortBy | orderBy:orderAttribute:isOrderDescending ">
+      <div class="col-md-4" ng-repeat="child in children | filter: {full_name: fullName} | orderBy:sortBy | orderBy:orderAttribute:isOrderDescending ">
         <div class="well">
           <div style="text-align: center">
-            <h4>{{child.first_name}} {{child.last_name}}</h4>
+            <h4 ng-if='child.privacy.avatar === true && child.privacy_count <= 1'>{{child.first_name}} {{child.last_name}}</h4>
+            <h4 ng-if='child.privacy_count === 1 && child.privacy.avatar === false'>{{child.first_name}} {{child.last_name}}</h4>
+            <h4 ng-if='child.privacy_count > 1'><a href="/profile/{{child.id}}" style="color:blue">{{child.first_name}} {{child.last_name}}</a></h4>
             <hr>
           </div>
-          <p ng-if='child.registered' >Registered: {{child.registered}} </p>
-          <p ng-if='!child.registered' >Registered: false </p>
-          <p ng-if='child.accepted' >Accepted: {{child.accepted}} </p>
-          <p ng-if='!child.accepted' >Accepted: false </p>
+          <div ng-if='child.privacy.avatar === false && child.avatar != "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png"'>
+            <img src='{{child.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>
+          <div ng-if='child.privacy.avatar === true || (child.privacy.avatar === false && child.avatar == "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png")'>
+            <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+            <br>
+          </div>  
+          <p ng-if='child.registered'><label>Registered:</label> {{child.registered}} </p>
+          <p ng-if='!child.registered'><label>Registered:</label> false</p>
+          <p ng-if='child.accepted'><label>Accepted:</label> {{child.accepted}}</p>
+          <p ng-if='!child.accepted'><label>Accepted:</label> false </p>
           <div style="text-align: center">
             <hr>
-            <a href="/registrations/{{child.id}}"><button class="btn btn-primary">View Registration</button></a>
+            <a href="/registrations/{{child.id}}"><input class="btn btn-primary" value="View Registration"></a>
+            <br>
+            <input class="btn btn-danger" value="Delete" ng-click="deleteChild(child.id)">
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+
+   document.getElementById('filter_type').addEventListener('change', function () {
+    if(this.value === 'Registration') {
+      document.getElementById('registration').style.display = 'inline-block';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('dateOrder').value = '';
+
+    } else if (this.value === 'Name') {
+      
+      document.getElementById('full_name').style.display = 'inline-block';
+      document.getElementById('registration').style.display = 'none';
+      document.getElementById('order').style.display = 'none';
+      document.getElementById('selected_registration').value = undefined;
+      document.getElementById('dateOrder').value = '';
+
+    } else if (this.value ==='Date Created'){
+      
+      document.getElementById('order').style.display = 'inline-block';
+      document.getElementById('registration').style.display = 'none';
+      document.getElementById('full_name').style.display = 'none';
+      document.getElementById('full_name_text').value = "";
+      document.getElementById('selected_registration').value = undefined;
+      
+    };
+   });
+
+   document.getElementById('dateOrder').addEventListener('change', function () {
+    $scope.setOrderAttribute(this.value);
+   });
+
+   $("#family").hover(function() {
+     $("#family-desc").show();
+   })
+   $("#family").mouseout(function() {
+     $("#family-desc").hide();
+   })
+   $("#data").hover(function() {
+     $("#data-desc").show();
+   })
+   $("#data").mouseout(function() {
+     $("#data-desc").hide();
+   })
+   $("#resource").hover(function() {
+     $("#resource-desc").show();
+   })
+   $("#resource").mouseout(function() {
+     $("#resource-desc").hide();
+   })
+  
+</script>

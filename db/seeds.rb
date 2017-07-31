@@ -513,7 +513,7 @@ puts  "************************"
 end
 
 HomePageContent.create(
-                        banner_title: "Trisomy Families",
+                        banner_title: "Trisomy Association",
                         banner_text: "Bringing the community together!",
                         banner_image: "https://trisomy-families.s3.amazonaws.com/AzERgryXfTQxuwkICZRB_background-homepage.jpg",
                         mission_title: "Mission",
@@ -527,7 +527,7 @@ HomePageContent.create(
                         birthday_text: "May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.",
                         data_center_title: "CHECKOUT THE DATA CENTER!",
                         data_center_text: "In the Data Center, we ananomously use the information you enter about you or your family members trisomy condition to build graphs and tables that could provide further insight into this complicated medical condition",
-                        company_title: "Trisomy Families",
+                        company_title: "Trisomy Association",
                         company_phone_number: "555-555-5555",
                         company_address: "Cary, IL"
                         )

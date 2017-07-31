@@ -1,72 +1,102 @@
-<div class="container">
-  <div class="row">
-    <div class="page-header">
-      <h1><%= @child.first_name + " " + @child.last_name%></h1>
-    </div>
-    <% if @child.privacy.avatar == false %>
-      <div class="row col-md-4">
-        <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
-          <%= image_tag @child.avatar_file_name, :class => "img-thumbnail"%>
-          <hr style="width: 0px">
-        <% else %>
-          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
-        <% end %>
-      </div>
-    <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
-      <div class="row col-md-4">
-        <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
-        <hr style="width: 0px">
-      </div>
-    <% end %>
-    <% if @child.privacy.story == false %>
-      <div class="row col-md-8">
-        <div class="well">
-          <h2>My Story </h2>
-          <hr>
-          <p><%= @child.trisomy_story %></p>
-        </div>
-      </div>
-    <% end %>
-    <% if !@child.privacy.birthday || !@child.privacy.trisomy_type %>
-      <div class="col-md-6 col-md-offset-3 well" style="margin-left: auto; margin-right: auto; width: 370px;">
-        <% if !@child.privacy.avatar || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
-          <h3>Basic Info</h3>
-        <% end %>
-        
-        <hr>
-        <% if @child.privacy.birthday == false %>
-          <% if @child.current_age < 12 && @child.current_age > 1 %>
-            <p>Age: <%= @child.current_age %> months</p>
-            <hr>
-          <% elsif @child.current_age == 1 %>  
-            <p>Age: <%= @child.current_age %> month</p>
-          <% elsif @child.current_age > 24 %>
-            <p>Age: <%= @child.current_age / 12 %> years 
-            <% if (@child.current_age % 12) > 1 %>
-              <%= @child.current_age % 12 %> months
-            <% elsif (@child.current_age % 12) == 1 %>
-              <%= @child.current_age % 12 %> month
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
+  <div class="page-header">
+    <h1><%= @child.first_name + " " + @child.last_name%></h1>
+  </div>
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-card-4">
+        <div class="w3-display-container">
+          <% if @child.privacy.avatar == false %>
+            <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+              <%= image_tag @child.avatar_file_name, :class => "img-thumbnail", id: "pic" %>
+            <% else %>
+              <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>
             <% end %>
-            </p>
+          <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+            <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>          
+          <% end %>
+        </div>
+        <hr style="width: 0px">
+        <div class="w3-container">
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Basic Info</b></p>
+          <hr>
+          <% if @child.privacy.birthday == false %>
+            <% if @child.current_age < 12 && @child.current_age > 1 %>
+              <label>Age:</label> <%= @child.current_age %> months
+              <hr>
+            <% elsif @child.current_age == 1 %>  
+              <label>Age:</label> <%= @child.current_age %> month
+            <% elsif @child.current_age > 24 %>
+              <label>Age:</label> <%= @child.current_age / 12 %> years 
+              <% if (@child.current_age % 12) > 1 %>
+                <%= @child.current_age % 12 %> months
+              <% elsif (@child.current_age % 12) == 1 %>
+                <%= @child.current_age % 12 %> month
+              <% end %>
+              </p>
+              <hr>
+            <% end %>
+            <label>Date of Birth:</label> <%= @child.birth_date.strftime("%b %d, %Y") %>
             <hr>
           <% end %>
-          <p>Date of Birth: <%= @child.birth_date.strftime("%b %d, %Y") %></p>
-          <hr>
-        <% end %>
-        <% if @child.privacy.trisomy_type == false %>
-          <p>Trisomy Type: <%= @child.trisomy_type %></p>
-        <% end %>
-        <% if @child.death_date %>
-          <br>
-          <p>Death Date: <%= @child.death_date %></p>
-          <hr>
+          <% if @child.privacy.trisomy_type == false && @child.death_date %>
+            <label>Trisomy Type:</label> <%= @child.trisomy_type %>
+            <hr>
+            <label>Death Date:</label> <%= @child.death_date %>
+            <hr style="width: 0px">
+          <% elsif @child.privacy.trisomy_type == false  %>
+            <label>Trisomy Type:</label> <%= @child.trisomy_type %>
+            <hr style="width: 0px">
+          <% end %>
+          <% if @child.death_date %>
+            <label>Death Date:</label> <%= @child.death_date %>
+            <hr style="width: 0px">
+          <% end %>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+        <% if @child.privacy.story == false %>
+          <h2 class="w3-padding-16">My Story</h2>
+          <div class="w3-container">  
+            <p><%= @child.trisomy_story %></p>          
+          </div>
         <% end %>
       </div>
-    <% end %>
-    <% if @child.privacy.birthday && @child.privacy.trisomy_type %>
-      <% if current_user && current_user.id == @family.user_id %>
-        <%= link_to 'Edit Profile',"/profile/#{@child.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %><br>
-      <% end %>
-    <% end %>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
   </div>
+  
+  <!-- End Page Container -->
 </div>
+
+</body>
+</html>
