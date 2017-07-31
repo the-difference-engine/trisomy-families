@@ -114,8 +114,11 @@
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"' class="submit">
               <input class="btn btn-info" value="Update" ng-click="updateType(user.user_type, user.id)">
             </div>
-            <div style="text-align: center">
+            <div style="text-align: center" ng-if='::user.user_type === "family"'>
               <a href="/families/{{user.profile}}/edit"><input class="btn btn-success" value="Edit Profile"></a>
+            </div>
+            <div style="text-align: center" ng-if='::user.user_type === "doctor"'>
+              <a href="/physicians/{{user.profile}}/edit"><input class="btn btn-success" value="Edit Profile"></a>
             </div>
             <div class="submit">
               <input class="btn btn-danger" value="Delete" ng-click="deleteUser(user.id)">
