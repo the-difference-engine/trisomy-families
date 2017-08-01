@@ -109,8 +109,8 @@
         <label>Partial trisomy arm affected:</label> <%= @child.partial_trisomy %>
         <br>
       <% end %>
-      <% if @child.other_chrom_affected != "" %>
-        <label>Additional chromosomes affected:</label>
+      <% if @child.other_chrom_affected != nil && @child.other_chrom_affected != "" %>
+        <label>Additional chromosomes affected:</label> <%= @child.other_chrom_affected %>
         <br>
       <% end %>
     </div>

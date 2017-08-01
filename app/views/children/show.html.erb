@@ -34,9 +34,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>          
           <% end %>
         </div>
+        <% if @child.privacy.attributes.values[3..-3].any? {|value| value == true} %>
         <hr style="width: 0px">
         <div class="w3-container">
-
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Basic Info</b></p>
           <hr>
           <% if @child.privacy.birthday == false %>
@@ -72,8 +72,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <hr style="width: 0px">
           <% end %>
         </div>
+        <% end %>
       </div><br>
-
     <!-- End Left Column -->
     </div>
 
