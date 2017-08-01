@@ -269,14 +269,14 @@
             </div>
           <% else %>
             <div class="col-md-6">
-              <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
+              <% if @home_page_contents != nil && @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
                 <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
                 <hr>
               <% else %>
                 <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
                 <hr>
               <% end %>
-              <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
+              <% if @home_page_contents != nil && @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
                 <p><%= @home_page_contents.data_center_text %></p>
               <% else %>
                 <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
