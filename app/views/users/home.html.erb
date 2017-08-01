@@ -74,7 +74,7 @@
           </header>
         </section>
       <% end %>
-      <% if @home_page_contents.mission_text != ""  %>
+      <% if @home_page_contents != nil && @home_page_contents.mission_text != ""  %>
         <div class="container-fluid content-row">
           <section>
             <% if @home_page_contents.mission_title != "" %>
