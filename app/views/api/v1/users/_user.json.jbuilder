@@ -11,6 +11,8 @@ elsif user.user_type == 'doctor'
     json.profile @profile.id
     json.avatar @profile.avatar_file_name
   end
+else
+  json.profile nil 
 end
 json.first_name user.first_name
 json.last_name user.last_name
