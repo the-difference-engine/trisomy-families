@@ -103,7 +103,7 @@
       <div class="container-fluid odd-row content-row" ng-app="app">
         <div class="container" ng-controller="BirthdaysController" ng-init="setUp()">
           <div ng-if="birthdays==true">    
-            <% if @home_page_contents.birthday_title != "" %>
+            <% if @home_page_contents != nil && @home_page_contents.birthday_title != "" %>
               <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @home_page_contents.birthday_title %></h1>  
             <% else %>
               <h1><i class="fa fa-birthday-cake" aria-hidden="true"></i> Today's Birthdays</h1>  
@@ -175,13 +175,13 @@
       <div class="container-fluid content-row">
         <div class="row">
           <div class="col-md-6">
-            <% if @home_page_contents.create_profile_title != "" %>
+            <% if @home_page_contents != nil && @home_page_contents.create_profile_title != "" %>
               <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
             <% else %>
               <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
             <% end %>
             <hr style="width: 93%">
-            <% if @home_page_contents.create_profile_text != "" %>
+            <% if @home_page_contents != nil && @home_page_contents.create_profile_text != "" %>
               <p><%= @home_page_contents.create_profile_text %></p>
             <% else %>
               <p>Create a profile and reach out to others. Relate on common ground or share your knowledge and help one another. When all is said and done, we are in this together. </p>
