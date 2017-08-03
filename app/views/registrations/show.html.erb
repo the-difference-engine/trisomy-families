@@ -98,11 +98,11 @@
         <br>
       <% end %>
       <% if @child.other_primary_diagnosis != "" %>
-        <label>Other secondary diagnosis: <%= @child.other_secondary_diagnosis %></label>
+        <label>Other secondary diagnosis:</label> <%= @child.other_secondary_diagnosis %>
         <br>
       <% end %>
       <% if @child.mosaic_percentage != nil && @child.mosaic_percentage != "" %>
-        <label>Mosaic trisomy percent: <%= @child.mosaic_percentage %></label>
+        <label>Mosaic trisomy percent:</label> <%= @child.mosaic_percentage %>
         <br>
       <% end %>
       <% if @child.partial_trisomy != nil && @child.partial_trisomy != "" %>
