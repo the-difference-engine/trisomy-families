@@ -57,6 +57,8 @@
   
   <% if current_user.id == @family.user_id || current_user.user_type == "admin" %>
     <%= link_to "Edit", "/families/#{@family.id}/edit", class: "btn btn-info" %>
+  <% end %>
+  <% if current_user.id == @family.user_id %>
     <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
   <% end %>
   
