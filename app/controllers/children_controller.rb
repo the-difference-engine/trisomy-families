@@ -66,7 +66,7 @@ class ChildrenController < ApplicationController
   def show    
     @child = Child.find_by(id: params[:id])    
 
-    if !@child
+    if @child == nil
       flash[:danger] = "Profile does not exist"
       redirect_back(fallback_location: root_path)
     end
