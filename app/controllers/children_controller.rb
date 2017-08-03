@@ -66,22 +66,17 @@ class ChildrenController < ApplicationController
   def show    
     @child = Child.find_by(id: params[:id])    
 
-    if @child == nil
-      flash[:danger] = "Profile does not exist"
-      redirect_back(fallback_location: root_path)
-    end
-
-    i = 0
-    @child.privacy.attributes.each do |attr_name, attr_value|
-      if attr_value == true
-        i += 1
-      end
-    end
-    if i > 2
-      child_privacy = true
-    else
-      child_privacy = false
-    end
+    # i = 0
+    # @child.privacy.attributes.each do |attr_name, attr_value|
+    #   if attr_value == true
+    #     i += 1
+    #   end
+    # end
+    # if i > 2
+    #   child_privacy = true
+    # else
+    #   child_privacy = false
+    # end
 
     if current_user
       my_family = Family.find_by(user_id: current_user.id)
