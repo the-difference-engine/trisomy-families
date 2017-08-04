@@ -33,7 +33,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <% end %>
         </div>
         <% if @child.privacy.attributes.values[4..-3].any? {|value| value == false} %>
-        <hr style="width: 0px">
+      </div>
+      <div class="w3-white w3-card-4">
+        <hr style="width: 0px;">
         <div class="w3-container">
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Basic Info</b></p>
           <hr>
