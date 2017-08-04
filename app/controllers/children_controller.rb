@@ -65,8 +65,6 @@ class ChildrenController < ApplicationController
 
   def show    
     @child = Child.find_by(id: params[:id])    
-    p @child
-    p @child.privacy
 
     if current_user
       my_family = Family.find_by(user_id: current_user.id)
