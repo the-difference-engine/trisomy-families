@@ -90,8 +90,8 @@ class ChildrenController < ApplicationController
           @contact_form = ContactInfoForm.find_by(child_id: @child.id)
           @family = Family.find_by(id: @child.family_id)
           render 'show.html.erb'
-        elsif child_privacy == true && current_user.user_type != "admin" &&  !registered
-          flash[:danger] = "Un-registered users do not have access to private profiles"
+        elsif child_privacy == false && current_user.user_type != "admin" &&  !registered
+          flash[:danger] = "Un-registered users do not have access to profiles"
           redirect_back(fallback_location: root_path)
         else
           flash[:danger] = "That page is set to private"
