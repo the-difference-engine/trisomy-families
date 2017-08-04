@@ -65,21 +65,14 @@ class ChildrenController < ApplicationController
 
   def show    
     @child = Child.find_by(id: params[:id])    
-
-    # i = 0
-    # @child.privacy.attributes.each do |attr_name, attr_value|
-    #   if attr_value == true
-    #     i += 1
-    #   end
-    # end
-    # if i > 2
-    #   child_privacy = true
-    # else
-    #   child_privacy = false
-    # end
+    p @child
+    p @child.privacy
 
     if current_user
       my_family = Family.find_by(user_id: current_user.id)
+      if @child != nil 
+        @child.privacy.attributes.values[2..-3].select {|value| value == false}.count > 1 ? child_privacy = false : child_privacy = true
+      end
 
       if current_user.user_type == "doctor"
         flash[:danger] = "Your account does not have access to that page"
@@ -92,22 +85,20 @@ class ChildrenController < ApplicationController
         my_family.children.each do |child|
           if child.accepted
             registered = true
+            break
           end
         end
-        if registered || current_user.user_type == "admin"
+        if (registered || current_user.user_type == "admin") && child_privacy == false
           @contact_form = ContactInfoForm.find_by(child_id: @child.id)
           @family = Family.find_by(id: @child.family_id)
           render 'show.html.erb'
+        elsif child_privacy == true && current_user.user_type != "admin" &&  !registered
+          flash[:danger] = "Un-registered users do not have access to private profiles"
+          redirect_back(fallback_location: root_path)
         else
-          if child_privacy == true
-            flash[:danger] = "Un-registered users do not have access to private profiles"
-            redirect_back(fallback_location: root_path)
-          else
-            @contact_form = ContactInfoForm.find_by(child_id: @child.id)
-            @family = Family.find_by(id: @child.family_id)
-            render 'show.html.erb'
-          end          
-        end
+          flash[:danger] = "That page is set to private"
+          redirect_back(fallback_location: root_path)
+        end          
       else        
         @contact_form = ContactInfoForm.find_by(child_id: @child.id)
         @family = Family.find_by(id: @child.family_id)
