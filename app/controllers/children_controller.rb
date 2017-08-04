@@ -86,7 +86,7 @@ class ChildrenController < ApplicationController
             break
           end
         end
-        if ((registered || current_user.user_type == "admin") && child_privacy == false) || current_user.family_id == @child.family_id 
+        if current_user.family_id == @child.family_id  || ((registered || current_user.user_type == "admin") && child_privacy == false)
           @contact_form = ContactInfoForm.find_by(child_id: @child.id)
           @family = Family.find_by(id: @child.family_id)
           render 'show.html.erb'
