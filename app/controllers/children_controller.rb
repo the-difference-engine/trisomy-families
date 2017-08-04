@@ -124,7 +124,7 @@ class ChildrenController < ApplicationController
     elsif !current_user
       flash[:danger] = "You must be logged in to view that page!"
       redirect_back(fallback_location: root_path)
-    elsif current_user == "doctor"
+    elsif current_user.user_type == "doctor"
       flash[:danger] = "You do not have access to that page because you are a doctor-type user."
       redirect_back(fallback_location: root_path)
     else
