@@ -104,23 +104,22 @@
       <% end %>
       <% if current_user.id == @family.user_id %>
         <p>
-          Registered: <%= child.registered %>
+          <label>Registered:</label> <%= child.registered.to_s.capitalize %>
         </p>
+        <% if child.nickname == "" && child.privacy.trisomy_type == true %>
+          <div>
+            <hr style="width: 0px; height: 58px">
+          </div>
+        <% elsif child.nickname != "" && child.privacy.trisomy_type == true %>
+          <div>
+            <hr style="width: 0px; height: 15px">
+          </div>
+        <% end %>
         <div style="text-align: center">
           <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
         </div>
         <div style="text-align: center">
           <%= link_to "Delete", "/profile/#{child.id}", class: "btn btn-danger", method: :delete %>
-        </div>
-      <% end %>
-      <% if child.privacy.trisomy_type == true && child.nickname == "" %>
-        <div>
-          <hr style="width: 0px; height: 42px">
-        </div>
-      <% end %>
-      <% if child.privacy.trisomy_type == true && child.nickname != "" %>
-        <div>
-          <hr style="width: 0px; height: 16px">
         </div>
       <% end %>
     </div>
