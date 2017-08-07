@@ -81,13 +81,14 @@
           <div style="text-align: center;">
             <h4 ng-if='user.profile === nil'>{{user.first_name}} {{user.last_name}} </h4>
 
-            <h4 ng-if='user.user_type === "family" && user.profile'><a href="/families/{{user.profile}}" style="color:green">{{user.first_name}} {{user.last_name}}</a></h4>
+            <h4 ng-if='::user.user_type === "family" && user.profile'><a href="/families/{{user.profile}}" style="color:green">{{user.first_name}} {{user.last_name}}</a></h4>
+            <h4 ng-if='::user.user_type === "admin" && user.profile'><a href="/families/{{user.profile}}" style="color:blue">{{user.first_name}} {{user.last_name}}</a></h4>
             
-            <h4 ng-if='user.user_type === "doctor" && user.profile'><a href="/physicians/{{user.profile}}" style="color:red">{{user.first_name}} {{user.last_name}}</a></h4>
+            <h4 ng-if='::user.user_type === "doctor" && user.profile'><a href="/physicians/{{user.profile}}" style="color:red">{{user.first_name}} {{user.last_name}}</a></h4>
           </div>
           <hr>
           <div ng-if='user.avatar && user.avatar != null'>
-            <img src='{{user.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
+            <img ng-src='{{user.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
             <br>
           </div>
           <div ng-if='!user.avatar || user.avatar === null'>
@@ -96,21 +97,25 @@
           </div>  
           <label>Email:</label> {{user.email}}
           <br>
-          <label>Type:</label> {{user.user_type}}
+          <label>Type:</label> {{::user.user_type.charAt(0).toUpperCase()}}{{ ::user.user_type.slice(1)}}
           <br>
           <label>Signed up:</label> {{user.created_at | date:format:'M'}}
           <br>
-          <form>
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"'>
               <label>Change User Type: </label>
               <select ng-model="user.user_type" list="types" ng-change="resetFilter()" disableEntry: true >
                 <datalist id="types">
-                  <option>admin</option>
-                  <option>family</option>
+                  <option value="admin">Admin</option>
+                  <option value="family">Family</option>
                 </datalist>
               </select>
             </div>
+            <div ng-if='user.user_type === "doctor"'>
+              <label></label>
+              <br>
+            </div>
             <input type="hidden" ng-model="user.id">
+            <hr>
             <div ng-if='::user.user_type === "family" || user.user_type === "admin"' class="submit">
               <input class="btn btn-info" value="Update" ng-click="updateType(user.user_type, user.id)">
             </div>
@@ -123,7 +128,16 @@
             <div class="submit">
               <input class="btn btn-danger" value="Delete" ng-click="deleteUser(user.id)">
             </div>
-          </form>
+            <div style="text-align: center" ng-if='user.profile === nil'>
+              <hr style="width: 0px; height: 15px">              
+            </div>
+            <div ng-if='::user.user_type === "doctor" && user.profile != nil'>
+              <hr style="width: 0px; height: 20px">
+            </div>
+            <div ng-if='::user.user_type === "admin" && user.profile != nil'>
+              <hr style="width: 0px; height: 15px">
+            </div>
+          
           <br>
         </div>
       </div>

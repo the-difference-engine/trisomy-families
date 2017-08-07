@@ -71,6 +71,7 @@ class FamiliesController < ApplicationController
   def show
     @family = Family.find_by(id: params[:id])
     if @family != nil
+      @admin = User.where(user_type: "admin").first
       @children = []
       Child.all.each do |child|
         if child.family_id == @family.id

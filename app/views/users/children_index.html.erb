@@ -67,7 +67,7 @@
             <hr>
           </div>
           <div ng-if='child.privacy.avatar === false && child.avatar != "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png"'>
-            <img src='{{child.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
+            <img ng-src='{{child.avatar}}' style="width:150px;height:150px; display: block; margin: auto;">
             <br>
           </div>
           <div ng-if='child.privacy.avatar === true || (child.privacy.avatar === false && child.avatar == "https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png")'>

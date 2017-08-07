@@ -1,5 +1,5 @@
 json.id user.id
-if user.user_type == 'family'
+if user.user_type == 'family' || user.user_type == 'admin'
   @profile = Family.find_by(user_id: user.id)
   if @profile != nil
     json.profile @profile.id

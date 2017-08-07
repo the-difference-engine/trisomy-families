@@ -55,7 +55,7 @@
     Story: <%= @family.story %>
   </p>
   
-  <% if current_user.id == @family.user_id || current_user.user_type == "admin" %>
+  <% if current_user.id == @family.user_id || (current_user.user_type == "admin" && @admin.id == current_user.id) %>
     <%= link_to "Edit", "/families/#{@family.id}/edit", class: "btn btn-info" %>
   <% end %>
   <% if current_user.id == @family.user_id %>
@@ -88,16 +88,18 @@
         <% end %>
         <br>
       <% else %>
+        <br>
         <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <br>
       <% end %>
-      <% if child.nickname != nil %>
+      <% if child.nickname != "" %>
         <p>
-          Nickname: <%= child.nickname %>
+          <label>Nickname:</label> <%= child.nickname %>
         </p>
       <% end %>
-      <% if child.privacy.trisomy_type == false %>
+      <% if child.privacy.trisomy_type === false %>
         <p>
-          Trisomy Type: <%= child.trisomy_type %>
+          <label>Trisomy Type:</label> <%= child.trisomy_type %>
         </p>
       <% end %>
       <% if current_user.id == @family.user_id %>
@@ -109,6 +111,16 @@
         </div>
         <div style="text-align: center">
           <%= link_to "Delete", "/profile/#{child.id}", class: "btn btn-danger", method: :delete %>
+        </div>
+      <% end %>
+      <% if child.privacy.trisomy_type == true && child.nickname == "" %>
+        <div>
+          <hr style="width: 0px; height: 42px">
+        </div>
+      <% end %>
+      <% if child.privacy.trisomy_type == true && child.nickname != "" %>
+        <div>
+          <hr style="width: 0px; height: 16px">
         </div>
       <% end %>
     </div>
