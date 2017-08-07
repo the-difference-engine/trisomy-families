@@ -44,6 +44,10 @@ class Child < ApplicationRecord
     
   end
 
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+
   protected
 
   def ensure_avatar_file_name_has_a_value

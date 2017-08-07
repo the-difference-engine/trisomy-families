@@ -2,7 +2,6 @@ class ChildrenController < ApplicationController
   def new
     @family = Family.find_by(id: current_user.family_id)
     unless user_signed_in?
-      # @child.user_id = current_user.id
       flash[:warning] = 'You must be logged in to use this feature.'
       redirect_to '/'
     else
@@ -56,7 +55,7 @@ class ChildrenController < ApplicationController
 
     # byebug
     if @child.save
-      flash[:success] = 'Profile created!'
+      flash[:success] = "#{@child.full_name} was successfully created!"
       redirect_to "/profile/#{@child.id}"
     else
       render 'new.html.erb'
@@ -86,9 +85,6 @@ class ChildrenController < ApplicationController
             break
           end
         end
-        p registered 
-        p current_user.user_type == "admin"
-        p child_privacy == false
         if ((registered || current_user.user_type == "admin") && child_privacy == false) || my_family.id == @child.family_id
           @contact_form = ContactInfoForm.find_by(child_id: @child.id)
           @family = Family.find_by(id: @child.family_id)
@@ -232,7 +228,7 @@ class ChildrenController < ApplicationController
     end
 
     if @child.save && @privacy.save
-      flash[:success] = 'Profile Updated!'
+      flash[:success] = "#{@child.full_name} was successfully updated!"
       redirect_to "/registrations/#{@child.id}"
     else
       render 'edit.html.erb'
@@ -242,8 +238,83 @@ class ChildrenController < ApplicationController
 
   def destroy
     @child = Child.find_by(id: params[:id])
-    @child.destroy
-    redirect_to "/families/#{@child.family_id}"
+    @privacy = Privacy.find_by(child_id: @child.id)
+    @contact_info = ContactInfoForm.find_by(child_id: @child.id)
+    @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
+    @health_history = HealthHistory.find_by(id: @child.health_history_id)
+    if @contact_info != nil
+      @contact_info.destroy
+    end
+    if @health_history != nil
+      if @health_history.chd_id != nil
+        @congenital_heart_defect = CongenitalHeartDefect.find_by(id: @health_history.chd_id)
+        @congenital_heart_defect.destroy
+      end
+      if @health_history.intestinal_issues_id != nil
+        @intestinal_issue = IntestinalIssue.find_by(id: @health_history.intestinal_issues_id)
+        @intestinal_issue.destroy
+      end
+      if @health_history.gastric_surgery_id != nil
+        @gastric_surgery = GastricSurgery.find_by(id: @health_history.gastric_surgery_id)
+        @gastric_surgery.destroy
+      end
+      if @health_history.nuerological_condition_id != nil
+        @neurological_condition = NuerologicalCondition.find_by(id: @health_history.nuerological_condition_id)
+        @neurological_condition.destroy
+      end
+      if @health_history.muscular_skeletal_id != nil
+        @muscular_skeletal = MuscularSkeletal.find_by(id: @health_history.muscular_skeletal_id)
+        @muscular_skeletal.destroy
+      end
+      if @health_history.cranial_facial_id != nil
+        @cranial_facial = CranialFacial.find_by(id: @health_history.cranial_facial_id)
+        @cranial_facial.destroy
+      end
+      if @health_history.endocrine_id != nil
+        @endocrine = Endocrine.find_by(id: @health_history.endocrine_id)
+        @endocrine.destroy
+      end
+      if @health_history.hearing_id != nil
+        @hearing = Hearing.find_by(id: @health_history.hearing_id)
+        @hearing.destroy
+      end
+      if @health_history.vision_id != nil
+        @vision = Vision.find_by(id: @health_history.vision_id)
+        @vision.destroy
+      end
+      if @health_history.behavioral_health_id != nil
+        @behavioral_health = BehavioralHealth.find_by(id: @health_history.behavioral_health_id) 
+        @behavioral_health.destroy
+      end
+      if @health_history.received_therapy_id != nil
+        @received_therapy = ReceivedTherapy.find_by(id: @health_history.received_therapy_id)
+        @received_therapy.destroy
+      end
+      @health_history.destroy
+    end
+    if @background_history != nil
+      if @background_history.mother_complication_id != nil
+        @mother_complications = MotherComplication.find_by(id: @background_history.mother_complication_id)
+        @mother_complications.destroy
+      end
+      if @background_history.weight_id != nil
+        @weight = Weight.find_by(id: @background_history.weight_id)
+        @weight.destroy
+      end
+      if @background_history.height_id != nil
+        @height = Height.find_by(id: @background_history.height_id)
+        @height.destroy
+      end
+      if @background_history.head_circumference_id != nil
+        @head_circumference = HeadCircumference.find_by(id: @background_history.head_circumference_id)
+        @head_circumference.destroy
+      end
+      @background_history.destroy
+    end
+    if @child.destroy && @privacy.destroy
+      flash[:success] = "#{@child.full_name} was successfully deleted."
+      redirect_to "/families/#{@child.family_id}"
+    end
   end
 
 
