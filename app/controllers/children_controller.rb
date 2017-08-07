@@ -64,7 +64,7 @@ class ChildrenController < ApplicationController
   end
 
   def show    
-    @child = Child.find_by(id: params[:id])    
+    @child = Child.find_by(id: params[:id])   
 
     if current_user
       my_family = Family.find_by(user_id: current_user.id)
@@ -86,12 +86,15 @@ class ChildrenController < ApplicationController
             break
           end
         end
-        if current_user.family_id == @child.family_id  || ((registered || current_user.user_type == "admin") && child_privacy == false)
+        p registered 
+        p current_user.user_type == "admin"
+        p child_privacy == false
+        if ((registered || current_user.user_type == "admin") && child_privacy == false) || my_family.id == @child.family_id
           @contact_form = ContactInfoForm.find_by(child_id: @child.id)
           @family = Family.find_by(id: @child.family_id)
           render 'show.html.erb'
-        elsif child_privacy == false && current_user.user_type != "admin" &&  !registered
-          flash[:danger] = "Un-registered users do not have access to profiles"
+        elsif (child_privacy == true && current_user.user_type != "admin") ||  !registered
+          flash[:danger] = "Un-registered users do not have access to view profiles"
           redirect_back(fallback_location: root_path)
         else
           flash[:danger] = "That page is set to private"
@@ -122,7 +125,7 @@ class ChildrenController < ApplicationController
     elsif !current_user
       flash[:danger] = "You must be logged in to view that page!"
       redirect_back(fallback_location: root_path)
-    elsif current_user.user_type == "doctor"
+    elsif current_user == "doctor"
       flash[:danger] = "You do not have access to that page because you are a doctor-type user."
       redirect_back(fallback_location: root_path)
     else
@@ -240,7 +243,7 @@ class ChildrenController < ApplicationController
   def destroy
     @child = Child.find_by(id: params[:id])
     @child.destroy
-    redirect_to '/family-dashboard'
+    redirect_to "/families/#{@child.family_id}"
   end
 
 
