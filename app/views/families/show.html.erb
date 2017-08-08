@@ -40,19 +40,21 @@
   <img src='<%=@family.photo%>'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
   <br>
   <p>
-    Address: <%= @family.street_address %>
+    <label>Address:</label> <%= @family.street_address %>
   </p>
   <p>
-    City: <%= @family.city %>
+    <label>City:</label> <%= @family.city %>
   </p>
   <p>
-    State: <%= @family.state %>
+    <label>State:</label> <%= @family.state %>
   </p>
+  <% if @family.website != "" %>
+    <p>
+      <label>Website:</label> <a ng-href="#{@family.website}"><%= @family.website %></a>
+    </p>
+  <% end %>
   <p>
-    Website: <a ng-href="#{@family.website}"><%= @family.website %></a>
-  </p>
-  <p>
-    Story: <%= @family.story %>
+    <label>Story:</label> <%= @family.story %>
   </p>
   
   <% if current_user.id == @family.user_id || (current_user.user_type == "admin" && @admin.id == current_user.id) %>
