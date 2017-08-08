@@ -6,17 +6,23 @@
     <div class="col-md-2">
       <a href="/data-center"><h5 id="data"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h5></a>
     </div>
+    <div class="col-md-2">
+      <a href="/calendar"><h5 id="calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> View Calendar</h5></a>
+    </div>
     <div class="col-md-3">
-      <a href="/resources"><h5 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> Add Resources</h5></a>
+      <a href="/resources"><h5 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> View/Add Resources</h5></a>
     </div>
     <div class="col-xs-12" style="display:none;" id="family-desc">
-      <p style="color:darkblue">Find other families and physicians with our interactive map search functionality.</p>
+      <p style="color:darkblue">Search for other families and physicians with our interactive map.</p>
     </div>
     <div class="col-xs-12" style="display:none;" id="data-desc">
       <p style="color:darkblue">See trisomy patient data in the form of tables and charts.</p>
     </div>
     <div class="col-xs-12" style="display:none;" id="resource-desc">
-      <p style="color:darkblue">Add resources for Trisomy-related topics.</h4>
+      <p style="color:darkblue">View and add resources for Trisomy-related topics.</h4>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="calendar-desc">
+      <p style="color:darkblue">View upcoming events on the calendar.</h4>
     </div>
   </div>
   <br>
@@ -132,20 +138,26 @@
 <script>
   $("#family").hover(function() {
     $("#family-desc").show();
-  })
+  });
   $("#family").mouseout(function() {
     $("#family-desc").hide();
-  })
+  });
   $("#data").hover(function() {
     $("#data-desc").show();
-  })
+  });
   $("#data").mouseout(function() {
     $("#data-desc").hide();
-  })
+  });
   $("#resource").hover(function() {
     $("#resource-desc").show();
-  })
+  });
   $("#resource").mouseout(function() {
     $("#resource-desc").hide();
-  })
+  });
+  $("#calendar").hover(function() {
+    $("#calendar-desc").show();
+  });
+  $("#calendar").mouseout(function() {
+    $("#calendar-desc").hide();
+  });
 </script>

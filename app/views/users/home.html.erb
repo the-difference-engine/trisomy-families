@@ -95,9 +95,6 @@
         </div>                  
       <% end %>
 
-
-
-
       <!-- SLIDESHOW / CAROUSEL-->
 
       <div class="container-fluid odd-row content-row" ng-app="app">
@@ -150,7 +147,7 @@
               <div class="carousel-inner">
                 <div class="item" ng-class="{active:!$index}" ng-repeat="image in images">                  
                   <div class="row">                 
-                    <img src="{{image.photo}}" style="height:350px; margin-left: 28%"/>
+                    <img ng-src="{{image.photo}}" style="height:350px; margin-left: 28%"/>
                     <div class="col-md-6">
                     </div>
                   </div>                  

@@ -17,7 +17,7 @@ class ProfessionalCenterController < ApplicationController
         render 'index.html.erb'
       else
         flash[:danger] = "You must have at least one fully registered trisomy participant in order to view that page"
-        redirect_to "/families/#{my_family.id}"
+        redirect_to(:back)
       end
     else
       render 'index.html.erb'

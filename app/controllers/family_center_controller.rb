@@ -3,7 +3,7 @@ class FamilyCenterController < ApplicationController
 
   def index
     if current_user.user_type == "doctor"
-      flash[:danger] = 'Youre account does not have access to view that page'
+      flash[:danger] = 'Your account does not have access to view that page'
       redirect_to '/'
     elsif current_user.user_type == "family"
 
@@ -18,8 +18,8 @@ class FamilyCenterController < ApplicationController
       if registered
         render 'index.html.erb'
       else
-        flash[:danger] = "#{current_user.email}You must have at least one fully registered trisomy participant in order to view that page"
-        redirect_to "/families/#{my_family.id}"
+        flash[:danger] = "You must have at least one fully registered trisomy participant in order to view that page"
+        redirect_to(:back)
       end
     else            
       render 'index.html.erb'
