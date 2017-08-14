@@ -6,42 +6,58 @@ class RegistrationsController < ApplicationController
   end
 
   def update
-    @child = Child.find_by(id: params[:id])
-    @family = Family.find_by(id: @child.family_id)
-    @contact_info = ContactInfoForm.find_by(child_id: @child.id)
-    @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
-    @health_history = HealthHistory.find_by(id: @child.health_history_id)
-    if @background_history != nil 
-      @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
-    end
-    if params["submission"] == "Submit Registration"
-      @child.update(
-        registered: true
-      )
-      if @child.save
-        admin_alert(@child)
-        flash[:success] = "Registration for #{@child.first_name} #{@child.last_name} has been submitted successfully."
-        render 'show.html.erb'
+    if current_user
+      my_family = Family.find_by(user_id: current_user.id)
+      @child = Child.find_by(id: params[:id])
+      if @child
+        @family = Family.find_by(id: @child.family_id)
+        @contact_info = ContactInfoForm.find_by(child_id: @child.id)
+        @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
+        @health_history = HealthHistory.find_by(id: @child.health_history_id)
+        if @background_history != nil 
+          @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
+        end
+        if (@child.family_id == my_family.id) || (current_user.user_type == "admin" && (@child.family_id == my_family.id))
+          if params["submission"] == "Submit Registration"
+            @child.update(
+              registered: true
+            )
+            if @child.save
+              admin_alert(@child)
+              flash[:success] = "Registration for #{@child.first_name} #{@child.last_name} has been submitted successfully."
+              render 'show.html.erb'
+            end
+          end
+        end
+      else
+        flash[:warning] = "You do not have permission to view that page."
+        redirect_to "/"
       end
     end
   end
 
   def show
-    @child = Child.find_by(id: params[:id])
+    if current_user
+      @my_family = Family.find_by(user_id: current_user.id)
+      @child = Child.find_by(id: params[:id])
 
-    if @child
-      @family = Family.find_by(id: @child.family_id)
-      @contact_info = ContactInfoForm.find_by(child_id: @child.id)
-      @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
-      @health_history = HealthHistory.find_by(id: @child.health_history_id)
-      if @background_history != nil 
-        @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
+      if @child && (@my_family.id == @child.family_id || current_user.user_type == "admin")
+        @family = Family.find_by(id: @child.family_id)
+        @contact_info = ContactInfoForm.find_by(child_id: @child.id)
+        @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
+        @health_history = HealthHistory.find_by(id: @child.health_history_id)
+        if @background_history != nil 
+          @mother_complications = presence_of_one(@background_history.mother_complication.attributes)
+        end
+
+        render 'show.html.erb'
+      else
+        flash[:danger] = "You do not have permission to view that page."
+        redirect_to '/'
       end
-
-      render 'show.html.erb'
-    else
-      flash[:danger] = "That registration does not exist! Do you have a child/participant profile?"
-      redirect_to '/'
+    else 
+      flash[:warning] = "You do not have permission to view that page."
+      redirect_to "/"
     end
   end
 

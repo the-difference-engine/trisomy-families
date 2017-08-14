@@ -13,52 +13,57 @@ class ChildrenController < ApplicationController
   end
 
   def create
-    @child = Child.new(child_params)
-    @child.birth_date = calculate_date(params["child"]["birth_date(1i)"], params["child"]["birth_date(2i)"], params["child"]["birth_date(3i)"])
-    @child.death_date = calculate_date(params["child"]["death_date(1i)"], params["child"]["death_date(2i)"], params["child"]["death_date(3i)"])
-    if params[:not_applicable] == "n/a"
-      @child.other_chrom_affected = ""
-    end
-    if params[:child][:primary_diagnosis] == 'Mosaic'
-      @child.mosaic_percentage = params[:child][:mosaic_percentage]
-      @child.partial_trisomy = nil
-    elsif params[:child][:primary_diagnosis] == 'Partial'
-      @child.partial_trisomy = params[:child][:partial_trisomy]
-      @child.mosaic_percentage = nil
-    else
-      @child.mosaic_percentage = nil
-      @child.partial_trisomy = nil
-    end
+    if current_user
+      @child = Child.new(child_params)
+      @child.birth_date = calculate_date(params["child"]["birth_date(1i)"], params["child"]["birth_date(2i)"], params["child"]["birth_date(3i)"])
+      @child.death_date = calculate_date(params["child"]["death_date(1i)"], params["child"]["death_date(2i)"], params["child"]["death_date(3i)"])
+      if params[:not_applicable] == "n/a"
+        @child.other_chrom_affected = ""
+      end
+      if params[:child][:primary_diagnosis] == 'Mosaic'
+        @child.mosaic_percentage = params[:child][:mosaic_percentage]
+        @child.partial_trisomy = nil
+      elsif params[:child][:primary_diagnosis] == 'Partial'
+        @child.partial_trisomy = params[:child][:partial_trisomy]
+        @child.mosaic_percentage = nil
+      else
+        @child.mosaic_percentage = nil
+        @child.partial_trisomy = nil
+      end
 
-    if params[:not_applicable_2] == "n/a"
-      @child.secondary_diagnosis = ""
-      @child.other_secondary_diagnosis = ""
-      @child.secondary_mosaic_percentage = nil
-      @child.secondary_partial_trisomy = nil
-    elsif params[:child][:secondary_diagnosis] == 'Mosaic'
-      @child.secondary_mosaic_percentage = params[:child][:secondary_mosaic_percentage]
-      @child.secondary_partial_trisomy = nil
-    elsif params[:child][:secondary_diagnosis] == 'Partial'
-      @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
-      @child.secondary_mosaic_percentage = nil
-    else
-      @child.secondary_mosaic_percentage = nil
-      @child.secondary_partial_trisomy = nil
-    end
-    @child.user_id = current_user.id
-    @child.build_privacy(privacy_params)
-    @child.family_id = current_user.family_ids[0]
+      if params[:not_applicable_2] == "n/a"
+        @child.secondary_diagnosis = ""
+        @child.other_secondary_diagnosis = ""
+        @child.secondary_mosaic_percentage = nil
+        @child.secondary_partial_trisomy = nil
+      elsif params[:child][:secondary_diagnosis] == 'Mosaic'
+        @child.secondary_mosaic_percentage = params[:child][:secondary_mosaic_percentage]
+        @child.secondary_partial_trisomy = nil
+      elsif params[:child][:secondary_diagnosis] == 'Partial'
+        @child.secondary_partial_trisomy = params[:child][:secondary_partial_trisomy]
+        @child.secondary_mosaic_percentage = nil
+      else
+        @child.secondary_mosaic_percentage = nil
+        @child.secondary_partial_trisomy = nil
+      end
+      @child.user_id = current_user.id
+      @child.build_privacy(privacy_params)
+      @child.family_id = current_user.family_ids[0]
 
-    #using add_photo method to allow initial photo upload
-    #if no photo uploaded, default image will be set
-    add_photo
+      #using add_photo method to allow initial photo upload
+      #if no photo uploaded, default image will be set
+      add_photo
 
-    # byebug
-    if @child.save
-      flash[:success] = "#{@child.full_name} was successfully created!"
-      redirect_to "/profile/#{@child.id}"
+      # byebug
+      if @child.save
+        flash[:success] = "#{@child.full_name} was successfully created!"
+        redirect_to "/profile/#{@child.id}"
+      else
+        render 'new.html.erb'
+      end
     else
-      render 'new.html.erb'
+      flash[:warning] = "You do not have permission to view that page."
+      redirect_to "/"
     end
   end
 

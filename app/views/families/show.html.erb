@@ -110,7 +110,7 @@
           <label>Trisomy Type:</label> <%= child.trisomy_type %>
         </p>
       <% end %>
-      <% if current_user.id == @family.user_id %>
+      <% if current_user.id == @family.user_id || current_user.user_type == "admin" %>
         <p>
           <label>Registered:</label> <%= child.registered.to_s.capitalize %>
         </p>

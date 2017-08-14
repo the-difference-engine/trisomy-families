@@ -1,23 +1,20 @@
 <!-- add class="fixed" if necesary !-->
-<header class="header clearfix">
-
-  <nav class="navbar navbar-default">
+<% if params[:controller] != "devise/sessions" && !current_page?('/users/sign_up') %>
+  <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <div id="link-container">
-          <a href="/" id="link">Trisomy Association</a>
-        </div>
+        <a href="/" id="link">Trisomy Association</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-left">
           <% if current_user && current_page?('/')%>
             <% if current_user && (current_user.user_type == "family" || current_user.user_type == "admin") %>
@@ -49,10 +46,10 @@
             <% elsif !current_page?('/resources') && !current_page?('/admin-dashboard') && !current_page?('/children-index') && (params[:controller] != 'families' && params[:action] != 'show') %>
               <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
             <% end %>
-
           <% end %>
-            
         </ul>
+        <form class="navbar-form navbar-left" style="visibility: hidden;">
+        </form>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <% if current_user.user_type == 'family' || current_user.user_type == 'admin' %>
@@ -71,15 +68,19 @@
             <% if current_user.user_type == "admin" && !current_page?('/admin-dashboard')%>
               <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Area</a></li>
             <% end %>
-            <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
+            <li><a href="/users/sign_out" data-method='delete'><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>&nbsp; Sign Out</a></li>
 
-          <% else %>
-             <li class="account-link"><%= link_to 'Sign Up', new_user_registration_path, :method => :get %></li>
-             <li class="account-link"><%= link_to 'Log In', new_user_session_path, :method => :get %></li>
+          <% elsif current_user %>
+             <li><a href="/users/sign_out" data-method='delete'><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>&nbsp; Sign Out</a></li>
+
+          <% elsif current_page?('/') %>
+            <li><a href="/users/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Sign Up</a></li>
+            <li><a href="/users/sign_in"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>&nbsp; Log In</a></li>
+
           <% end %>
+          
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
-</header>
+<% end %>
