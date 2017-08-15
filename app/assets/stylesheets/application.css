@@ -233,20 +233,9 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-black,.w3-hover-border-black:hover{border-color:#000!important}
 .w3-border-grey,.w3-hover-border-grey:hover,.w3-border-gray,.w3-hover-border-gray:hover{border-color:#bbb!important}
 
-#link-container {
-    text-align: center;
-}
-#link {
-    background: white;
-    color: #00A1F1;
-    display: inline-block;
-    padding: 25px;
-}
-
 #pic {
   width:auto;
   height:325px; 
-
 }
 
 #weight_at_birth, #one_month, #two_month, #three_month, #four_month, #five_month, #six_month, #one_year, #eighteen_month, #two_year, #three_year, #four_year, #five_year, #six_year, #seven_year, #eight_year, #nine_year, #ten_year, #eleven_year, #twelve_year, #thirteen_year, #fourteen_year, #fifteen_year, #sixteen_year, #seventeen_year, #eighteen_year, #nineteen_year, #twenty_year, #twentyone_year, #twentytwo_year, #twentythree_year, #twentyfour_year, #twentyfive_year, #twentysix_year, #twentyseven_year, #twentyeight_year, #twentynine_year, #thirty_year, #thirtyone_year, #thirtytwo_year, #thirtythree_year, #thirtyfour_year, #thirtyfive_year, #thirtysix_year, #thirtyseven_year, #thirtyeight_year, #thirtynine_year, #forty_year {

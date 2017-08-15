@@ -1,6 +1,6 @@
 <!-- add class="fixed" if necesary !-->
 <% if params[:controller] != "devise/sessions" && !current_page?('/users/sign_up') %>
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-default" style="background-color: #F2F2F2" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -10,7 +10,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/" id="link">Trisomy Association</a>
+        <div class="logo" style="padding-top: 15px; padding-right: 30px; padding-bottom: 15px;  text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+          <h4><a href="/" class="logo-font link-light">Trisomy <span class="text-default">Association </span></a></h4>
+        </div>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
