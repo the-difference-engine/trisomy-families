@@ -17,7 +17,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="myNavbar">
-      <% if current_page?('/') || current_page?('/resources') || current_page?('/calendar') || current_page?('/data-center') || current_page?('/family-center') %>
+      <% if (current_page?('/') || current_page?('/resources') || current_page?('/calendar') || current_page?('/data-center') || current_page?('/family-center')) && current_user %>
         <ul class="nav navbar-nav navbar-left">
           <% if current_user && current_page?('/')%>
             <% if current_user && (current_user.user_type == "family" || current_user.user_type == "admin") %>
