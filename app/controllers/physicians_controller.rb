@@ -6,7 +6,7 @@ class PhysiciansController < ApplicationController
     if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
       @physician = Physician.new
     else
-      flash[:warning] = 'You need to be an admin or doctor to see this page!'
+      flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
     end
   end
@@ -58,7 +58,7 @@ class PhysiciansController < ApplicationController
     if current_user.user_type == 'admin' || current_user.id == @physician.user_id || current_user.family_id
       render 'show.html.erb'
     else
-      flash[:warning] = 'You need to be an admin, the actual physician, or have registered your family to see this page!'
+      flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
     end
   end
@@ -68,7 +68,7 @@ class PhysiciansController < ApplicationController
     if current_user.id == @physician.user_id || current_user.user_type == 'admin'
       render 'edit.html.erb'
     else
-      flash[:warning] = 'You must be a doctor to edit this page!'
+      flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
     end
   end

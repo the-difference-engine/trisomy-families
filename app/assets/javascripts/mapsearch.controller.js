@@ -22,7 +22,7 @@
         });
     }, 100)
 
-    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, website) {      
+    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage) {      
           var marker = new google.maps.Marker({
             map: $scope.map,
             position: latlng,
@@ -40,8 +40,8 @@
               city+', '+
               state+' '+
               zipcode+'</p>'+
-              '<p><b>Specialty:</b> '+specialty+'<br>'+
-              '<a href='+website+' target="_blank">Website</a></p>'+
+              '<p><b>Specialty:</b> '+specialty.charAt(0).toUpperCase()+specialty.slice(1)+'</p>'+
+              '<b style="color: blue;"><a href='+showPage+'>View Profile</a></b>'+
               '</div>'+
               '</div>';
               $scope.infoWindow.setContent(contentString);
@@ -61,14 +61,14 @@
             var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h2 id="firstHeading" class="firstHeading"> '+ lastname +'</h2>'+
+            '<h2 id="firstHeading" class="firstHeading">'+ lastname +'</h2>'+
             '<div id="bodyContent">'+
             '<p><b>Address: </b><br>'+
             address+'<br>'+
             city+', '+
-            state+' '+ '<br>'+
-            "trisomy type: "+ trisomy+ '<br>'+
-            '<a href='+showPage+'>View Family Page</a>'+
+            state+' '+ '</p>'+
+            '<p><b>'+"Trisomy Type: "+'</b><br>'+ trisomy+ '</p>'+
+            '<b style="color: blue;"><a href='+showPage+'>View Profile</a></b>'+
             '</div>'+
             '</div>';
             $scope.infoWindow.setContent(contentString);
@@ -88,9 +88,9 @@
             var state = $scope.data[i]["state"];
             var city = $scope.data[i]["city"];
             var zipcode = $scope.data[i]["zip_code"];
-            var website = $scope.data[i]["website"];
             var specialty = $scope.data[i]["specialty"]
-            createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, website);
+            var showPage = "/physicians/" + $scope.data[i]["id"];
+            createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage);
         }
       }
       else if ($scope.query.type === "family") {
