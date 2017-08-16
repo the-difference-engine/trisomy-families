@@ -3,8 +3,13 @@ class PhysiciansController < ApplicationController
   include SendGrid
   
   def new
-    if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
-      @physician = Physician.new
+    if current_user
+      if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
+        @physician = Physician.new
+      else
+        flash[:warning] = 'You do not have permission to view that page.'
+        redirect_to '/'
+      end
     else
       flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
@@ -53,10 +58,24 @@ class PhysiciansController < ApplicationController
   end
 
   def show
-    @physician = Physician.find(params[:id])
-
-    if current_user.user_type == 'admin' || current_user.id == @physician.user_id || current_user.family_id
-      render 'show.html.erb'
+    @physician = Physician.find_by(id: params[:id])
+    if current_user
+      if current_user.user_type == "family"
+        registered = false
+        my_family = Family.find_by(user_id: current_user.id)
+        my_family.children.each do |child|
+          if child.accepted
+            registered = true
+            break
+          end
+        end
+      end
+      if (current_user.user_type == 'admin' || current_user.id == @physician.user_id || registered) && @physician
+        render 'show.html.erb'
+      else
+        flash[:warning] = 'You do not have permission to view that page.'
+        redirect_to '/'
+      end
     else
       flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
@@ -65,8 +84,13 @@ class PhysiciansController < ApplicationController
 
   def edit
     @physician = Physician.find_by(id: params[:id])
-    if current_user.id == @physician.user_id || current_user.user_type == 'admin'
-      render 'edit.html.erb'
+    if current_user
+      if current_user.id == @physician.user_id || current_user.user_type == 'admin'
+        render 'edit.html.erb'
+      else
+        flash[:warning] = 'You do not have permission to view that page.'
+        redirect_to '/'
+      end
     else
       flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
@@ -74,26 +98,31 @@ class PhysiciansController < ApplicationController
   end
 
   def update
-    @physician = Physician.find_by(id: params[:id])
+    if current_user
+      @physician = Physician.find_by(id: params[:id])
 
-    @physician.update(
-      first_name: params[:first_name] || @physician.first_name,
-      last_name: params[:last_name] || @physician.last_name,
-      phone_number: params[:phone_number] || @physician.phone_number,
-      address: params[:address] || @physician.address,
-      state: params[:state] || @physician.state,
-      city: params[:city] || @physician.city,
-      zip_code: params[:zip_code] || @physician.zip_code,
-      website: params[:website] || @physician.website,
-      specialty: params[:specialty] || @physician.specialty,
-      user_id: current_user.id
-    )
-    if @physician.save
-      flash[:success] = 'Profile Updated!'
+      @physician.update(
+        first_name: params[:first_name] || @physician.first_name,
+        last_name: params[:last_name] || @physician.last_name,
+        phone_number: params[:phone_number] || @physician.phone_number,
+        address: params[:address] || @physician.address,
+        state: params[:state] || @physician.state,
+        city: params[:city] || @physician.city,
+        zip_code: params[:zip_code] || @physician.zip_code,
+        website: params[:website] || @physician.website,
+        specialty: params[:specialty] || @physician.specialty,
+        user_id: current_user.id
+      )
+      if @physician.save
+        flash[:success] = 'Profile Updated!'
+      else
+        flash[:warning] = 'Profile could not be updated!'
+      end
+      redirect_to "/physicians/#{@physician.id}"
     else
-      flash[:warning] = 'Error!'
+      redirect_to "/"
+      flash[:warning] = 'You do not have permission to view that page.'
     end
-    redirect_to "/physicians/#{@physician.id}"
   end
 
   def update_photo
@@ -110,7 +139,7 @@ class PhysiciansController < ApplicationController
     @physician.update_columns(avatar_file_name: obj.public_url)
 
     if @physician.save
-      flash[:message] = "Uploaded succesfully."
+      flash[:success] = "Uploaded succesfully."
     else
       flash[:error] = "Error occured in uploading file."
     end

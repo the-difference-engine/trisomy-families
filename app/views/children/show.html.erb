@@ -7,6 +7,24 @@
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Profile Picture</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @child, url: "/profile/#{@child.id}/photo", html: { multipart: true } do |form| %>
+            <%= form.file_field :avatar_file_name, :class => "form-group"%>
+      </div>
+      <div class="modal-footer">
+        <%= submit_tag nil, class: "btn btn-success"%>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <body class="w3-light-grey">
   <div class="page-header">
     <h1><%= @child.first_name + " " + @child.last_name%></h1>
@@ -19,18 +37,22 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   
     <!-- Left Column -->
     <div class="w3-third">
-    
       <div class="w3-white w3-card-4">
         <div class="w3-display-container">
-          <% if @child.privacy.avatar == false %>
-            <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
-              <%= image_tag @child.avatar_file_name, :class => "img-thumbnail", id: "pic" %>
-            <% else %>
-              <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>
+          <div class="overlay-container overlay-visible">
+            <% if @child.privacy.avatar == false %>
+              <% if @child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+                <img src="<%= @child.avatar_file_name%>" alt="" id="pic">
+              <% else %>
+                <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>
+              <% end %>
+            <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
+              <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>          
             <% end %>
-          <% elsif !@child.privacy.story || !@child.privacy.birthday || !@child.privacy.trisomy_type %>
-            <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'>          
-          <% end %>
+            <% if current_user.id == @child.user_id || current_user.user_type == 'admin' %>
+              <a data-toggle="modal" data-target="#myModal" class="overlay-link" title="Change Picture"><i class="icon-plus-1"></i></a>
+            <% end %>
+          </div>
         </div>
         <% if @child.privacy.attributes.values[4..-3].any? {|value| value == false} %>
       </div>
@@ -38,11 +60,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <hr style="width: 0px;">
         <div class="w3-container">
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Basic Info</b></p>
-          <hr>
+          <hr style="width: 0px">
           <% if @child.privacy.birthday == false %>
             <% if @child.current_age < 12 && @child.current_age > 1 %>
               <label>Age:</label> <%= @child.current_age %> months
-              <hr>
+              <p></p>
             <% elsif @child.current_age == 1 %>  
               <label>Age:</label> <%= @child.current_age %> month
             <% elsif @child.current_age > 24 %>
@@ -53,28 +75,29 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <%= @child.current_age % 12 %> month
               <% end %>
               </p>
-              <hr>
+              <p></p>
             <% end %>
-            <label>Date of Birth:</label> <%= @child.birth_date.strftime("%b %d, %Y") %>
-            <hr>
+            <label>Date of Birth</label><br> <%= @child.birth_date.strftime("%b %d, %Y") %>
+            <p></p>
           <% end %>
           <% if @child.privacy.location == false %>
-            <label>Family Location:</label><br><%= @family.street_address %>, <br><%= @family.city %>, <%= @family.state %>
-            <hr>            
+            <label>Family Location</label><br><%= @family.street_address.split.map(&:capitalize).join(' ') %> <br><%= @family.city %>, <%= @family.state %>
+            <p></p>
           <% end %>
           <% if @child.privacy.trisomy_type == false && @child.death_date %>
-            <label>Trisomy Type:</label> <%= @child.trisomy_type %>
+            <label>Trisomy Type</label><br> <%= @child.trisomy_type %>
             <hr>
-            <label>Death Date:</label> <%= @child.death_date %>
-            <hr style="width: 0px">
+            <label>Date of Death</label><br> <%= @child.death_date %>
+            <p></p>
           <% elsif @child.privacy.trisomy_type == false  %>
-            <label>Trisomy Type:</label> <%= @child.trisomy_type %>
-            <hr style="width: 0px">
+            <label>Trisomy Type</label><br><%= @child.trisomy_type %>
+            <p></p>
           <% end %>
           <% if @child.death_date %>
-            <label>Death Date:</label> <%= @child.death_date %>
-            <hr style="width: 0px">
+            <label>Death Date</label><br> <%= @child.death_date %>
+            <p></p>
           <% end %>
+          <br>
         </div>
         <% end %>
       </div><br>
@@ -91,6 +114,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <p><%= @child.trisomy_story %></p>          
           </div>
         <% end %>
+        <br>
       </div>
 
     <!-- End Right Column -->
