@@ -63,12 +63,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <hr style="width: 0px">
           <% if @child.privacy.birthday == false %>
             <% if @child.current_age < 12 && @child.current_age > 1 %>
-              <label>Age:</label> <%= @child.current_age %> months
+              <label>Age</label><br> <%= @child.current_age %> months
               <p></p>
             <% elsif @child.current_age == 1 %>  
-              <label>Age:</label> <%= @child.current_age %> month
+              <label>Age</label><br> <%= @child.current_age %> month
             <% elsif @child.current_age > 24 %>
-              <label>Age:</label> <%= @child.current_age / 12 %> years 
+              <label>Age</label><br> <%= @child.current_age / 12 %> years 
               <% if (@child.current_age % 12) > 1 %>
                 <%= @child.current_age % 12 %> months
               <% elsif (@child.current_age % 12) == 1 %>
