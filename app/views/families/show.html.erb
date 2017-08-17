@@ -1,59 +1,163 @@
-<div ng-app="app">
-  <div ng-controller="familyCtrl" ng-init="setup()">
-    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-    <br>
-    <br>
-    
-    <div class="well">
-      <h1 style="text-align: center;">
-        The {{family.family_name}} Family
-      </h1>
-      <br>
-      <img src='{{family.photo}}'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
-      <br>
-      <p>
-        Address: {{family.address}}
-      </p>
-      <p>
-        City: {{family.city}}
-      </p>
-      <p>
-        State: {{family.state}}
-      </p>
-      <p>
-        Website: <a ng-href="{{family.website}}">{{family.website}}</a>
-      </p>
-      <p>
-        Story: {{family.story}}
-      </p>
-      
-      <%= link_to "Edit", '/families/{{family.id}}/edit', class: "btn btn-info" %>
-      <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
-      
+<% if current_user && @family.id.to_s == params[:id] %>
+  <div class="row" style="background-color:#f2f2f2; padding:15px;">
+    <div class="col-md-2">
+      <a href="/family-center"><h5 id="family"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h5></a>
     </div>
-    
-
-    <h2 ng-if='children[0] != nil'>Children: </h2>
-
-    <div class="col-md-4" ng-repeat="child in children">
-      <div class="well">
-        <p>
-          Name: <a href='/profile/{{child.id}}'>{{child.first_name}} {{child.last_name}}
-        </a></p>
-        <br>
-        <img ng-if="child.picture_url != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png'" src='{{child.picture_url}}' style="width:150px;height:150px; display: block; margin: auto;">
-        <img ng-if="child.picture_url === 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png'" src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
-        <br>
-        <p ng-if='child.nickname != nil'>
-          Nickname: {{child.nickname}}
-        </p>
-        <p>
-          Trisomy Type: {{child.trisomy_type}}
-        </p>
-
-      </div>
-      
+    <div class="col-md-2">
+      <a href="/data-center"><h5 id="data"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h5></a>
     </div>
-
+    <div class="col-md-2">
+      <a href="/calendar"><h5 id="calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> View Calendar</h5></a>
+    </div>
+    <div class="col-md-3">
+      <a href="/resources"><h5 id="resource"><i class="fa fa-list fa-fw" aria-hidden="true"></i> View/Add Resources</h5></a>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="family-desc">
+      <p style="color:darkblue">Search for other families and physicians with our interactive map.</p>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="data-desc">
+      <p style="color:darkblue">See trisomy patient data in the form of tables and charts.</p>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="resource-desc">
+      <p style="color:darkblue">View and add resources for Trisomy-related topics.</h4>
+    </div>
+    <div class="col-xs-12" style="display:none;" id="calendar-desc">
+      <p style="color:darkblue">View upcoming events on the calendar.</h4>
+    </div>
   </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>My Family Profile</h1>
+      <p>Welcome to your Trisomy Family profile page. Others will be able to see your profile page. If you set your story to "private", then only registered families will be able to to see your profile.</p>
+      <p>In order to see other's private profile pages, utilize the <a href="/family-center">family & physician search center</a> and explore <a href="/data-center">the data center</a>, you must first register at least one Trisomy participant (child). To start this process, create a child profile. From there you will be able to complete and submit a full registration form.</p>
+      <p>Click "Add Child" below to get started</p>
+    </div>
+  </div>
+  <br>
+<% end %>
+
+
+<div class="well">
+  <h1 style="text-align: center;">
+    The <%= @family.family_name %> Family
+  </h1>
+  <br>
+  <img src='<%=@family.photo%>'onerror="this.src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png'" style="height:400px; display: block; margin: auto;"></img>
+  <br>
+  <p>
+    <label>Address:</label> <%= @family.street_address %>
+  </p>
+  <p>
+    <label>City:</label> <%= @family.city %>
+  </p>
+  <p>
+    <label>State:</label> <%= @family.state %>
+  </p>
+  <% if @family.website != "" %>
+    <p>
+      <label>Website:</label> <a ng-href="#{@family.website}"><%= @family.website %></a>
+    </p>
+  <% end %>
+  <p>
+    <label>Story:</label> <%= @family.story %>
+  </p>
+  
+  <% if current_user.id == @family.user_id || (current_user.user_type == "admin" && @admin.id == current_user.id) %>
+    <%= link_to "Edit", "/families/#{@family.id}/edit", class: "btn btn-info" %>
+  <% end %>
+  <% if current_user.id == @family.user_id %>
+    <%= link_to 'Add Child', profile_new_path, class: "btn btn-success" %>
+  <% end %>
+  
 </div>
+
+<% if @children.count != 0 %>
+  <h2>Children: </h2>
+<% end %>
+
+<% @children.each do |child| %>
+  <div class="col-md-4">
+    <div class="well">
+      <div style="text-align: center">
+        <% if child.privacy.attributes.values[2..-3].select {|value| value == false}.count <= 1 %>
+          <h4><%= child.first_name %> <%= child.last_name %></a></h4>
+        <% elsif child.privacy.attributes.values[2..-3].select {|value| value == false}.count > 0 %> 
+          <h4><a href='/profile/<%= child.id %>' style="color: blue"><%= child.first_name %> <%= child.last_name %></a></h4>          
+        <% end %>
+        <hr>
+      </div>
+      <% if !child.privacy.avatar %>
+        <br>
+        <% if child.avatar_file_name != 'https://trisomy-families.s3.amazonaws.com/qejRsVmtlbnpiVuXcrWi_11529854.png' %>
+          <img src='<%= child.avatar_file_name %>' style="width:150px;height:150px; display: block; margin: auto;">
+        <% else %>
+          <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <% end %>
+        <br>
+      <% else %>
+        <br>
+        <img src='http://freevector.co/wp-content/uploads/2009/08/24029-profile-user-silhouette1.png' style="width:150px;height:150px; display: block; margin: auto;">
+        <br>
+      <% end %>
+      <% if child.nickname != "" %>
+        <p>
+          <label>Nickname:</label> <%= child.nickname %>
+        </p>
+      <% end %>
+      <% if child.privacy.trisomy_type === false %>
+        <p>
+          <label>Trisomy Type:</label> <%= child.trisomy_type %>
+        </p>
+      <% end %>
+      <% if current_user.id == @family.user_id || current_user.user_type == "admin" %>
+        <p>
+          <label>Registered:</label> <%= child.registered.to_s.capitalize %>
+        </p>
+        <% if child.nickname == "" && child.privacy.trisomy_type == true %>
+          <div>
+            <hr style="width: 0px; height: 58px">
+          </div>
+        <% elsif child.nickname != "" && child.privacy.trisomy_type == true %>
+          <div>
+            <hr style="width: 0px; height: 15px">
+          </div>
+        <% end %>
+        <div style="text-align: center">
+          <a href="/registrations/<%= child.id %>"><button class="btn btn-primary">View Registration</button></a>
+        </div>
+        <div style="text-align: center">
+          <%= link_to "Delete", "/profile/#{child.id}", class: "btn btn-danger", method: :delete %>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+<% end %>
+
+<script>
+  $("#family").hover(function() {
+    $("#family-desc").show();
+  });
+  $("#family").mouseout(function() {
+    $("#family-desc").hide();
+  });
+  $("#data").hover(function() {
+    $("#data-desc").show();
+  });
+  $("#data").mouseout(function() {
+    $("#data-desc").hide();
+  });
+  $("#resource").hover(function() {
+    $("#resource-desc").show();
+  });
+  $("#resource").mouseout(function() {
+    $("#resource-desc").hide();
+  });
+  $("#calendar").hover(function() {
+    $("#calendar-desc").show();
+  });
+  $("#calendar").mouseout(function() {
+    $("#calendar-desc").hide();
+  });
+</script>

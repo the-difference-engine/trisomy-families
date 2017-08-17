@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @home_page_contents = HomePageContent.last
     if current_user && current_user.user_type == 'admin'
       @family = Family.find_by(user_id: current_user.id)
       render 'index.html.erb'
@@ -13,7 +14,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def about
+    render 'about.html.erb'
+  end
+
   def home
+    @all_events = Event.all
+    sorted_events_old_first = @all_events.sort_by &:start
+    @sorted_events = sorted_events_old_first.reverse
+    @home_page_contents = HomePageContent.last
+    @images = Dir.glob("app/assets/images/carousel/*.{gif,jpg,png}")
   end
 
   def children_index

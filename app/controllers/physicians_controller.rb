@@ -1,9 +1,17 @@
 class PhysiciansController < ApplicationController
+  require 'sendgrid-ruby'
+  include SendGrid
+  
   def new
-    if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
-      @physician = Physician.new
+    if current_user
+      if current_user.user_type == 'admin' || current_user.user_type == 'doctor'
+        @physician = Physician.new
+      else
+        flash[:warning] = 'You do not have permission to view that page.'
+        redirect_to '/'
+      end
     else
-      flash[:warning] = 'You need to be an admin or doctor to see this page!'
+      flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
     end
   end
@@ -12,6 +20,19 @@ class PhysiciansController < ApplicationController
     @physician = Physician.new(physician_params)
 
     if @physician.save
+
+      admin_email = User.where(user_type: "admin").first.email
+
+      from = Email.new(email: ENV["SENDGRID_USERNAME"])
+      to = Email.new(email: admin_email)
+      subject = 'Physician created alert'
+      message = "#{current_user.first_name} #{current_user.last_name} (#{current_user.email}) has created a physician profile."
+
+      content = Content.new(type: 'text/html', value: message)
+      mail = Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
 
       flash[:success] = 'Profile created!'
       redirect_to "/physicians/#{@physician.id}"
@@ -38,46 +59,70 @@ class PhysiciansController < ApplicationController
 
   def show
     @physician = Physician.find_by(id: params[:id])
-
-    if current_user.user_type == 'admin' || current_user.id == @physician.user_id || current_user.family_id
-      render 'show.html.erb'
+    if current_user
+      if current_user.user_type == "family"
+        registered = false
+        my_family = Family.find_by(user_id: current_user.id)
+        my_family.children.each do |child|
+          if child.accepted
+            registered = true
+            break
+          end
+        end
+      end
+      if (current_user.user_type == 'admin' || current_user.id == @physician.user_id || registered) && @physician
+        render 'show.html.erb'
+      else
+        flash[:warning] = 'You do not have permission to view that page.'
+        redirect_to '/'
+      end
     else
-      flash[:warning] = 'You need to be an admin, the actual physician, or have registered your family to see this page!'
+      flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
     end
   end
 
   def edit
     @physician = Physician.find_by(id: params[:id])
-    if current_user.id == @physician.user_id || current_user.user_type == 'admin'
-      render 'edit.html.erb'
+    if current_user
+      if current_user.id == @physician.user_id || current_user.user_type == 'admin'
+        render 'edit.html.erb'
+      else
+        flash[:warning] = 'You do not have permission to view that page.'
+        redirect_to '/'
+      end
     else
-      flash[:warning] = 'You must be a doctor to edit this page!'
+      flash[:warning] = 'You do not have permission to view that page.'
       redirect_to '/'
     end
   end
 
   def update
-    @physician = Physician.find_by(id: params[:id])
+    if current_user
+      @physician = Physician.find_by(id: params[:id])
 
-    @physician.update(
-      first_name: params[:first_name] || @physician.first_name,
-      last_name: params[:last_name] || @physician.last_name,
-      phone_number: params[:phone_number] || @physician.phone_number,
-      address: params[:address] || @physician.address,
-      state: params[:state] || @physician.state,
-      city: params[:city] || @physician.city,
-      zip_code: params[:zip_code] || @physician.zip_code,
-      website: params[:website] || @physician.website,
-      specialty: params[:specialty] || @physician.specialty,
-      user_id: current_user.id
-    )
-    if @physician.save
-      flash[:success] = 'Profile Updated!'
+      @physician.update(
+        first_name: params[:first_name] || @physician.first_name,
+        last_name: params[:last_name] || @physician.last_name,
+        phone_number: params[:phone_number] || @physician.phone_number,
+        address: params[:address] || @physician.address,
+        state: params[:state] || @physician.state,
+        city: params[:city] || @physician.city,
+        zip_code: params[:zip_code] || @physician.zip_code,
+        website: params[:website] || @physician.website,
+        specialty: params[:specialty] || @physician.specialty,
+        user_id: current_user.id
+      )
+      if @physician.save
+        flash[:success] = 'Profile Updated!'
+      else
+        flash[:warning] = 'Profile could not be updated!'
+      end
+      redirect_to "/physicians/#{@physician.id}"
     else
-      flash[:warning] = 'Error!'
+      redirect_to "/"
+      flash[:warning] = 'You do not have permission to view that page.'
     end
-    redirect_to "/physicians/#{@physician.id}"
   end
 
   def update_photo
@@ -94,7 +139,7 @@ class PhysiciansController < ApplicationController
     @physician.update_columns(avatar_file_name: obj.public_url)
 
     if @physician.save
-      flash[:message] = "Uploaded succesfully."
+      flash[:success] = "Uploaded succesfully."
     else
       flash[:error] = "Error occured in uploading file."
     end

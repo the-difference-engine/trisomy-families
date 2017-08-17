@@ -1,8 +1,11 @@
 <h1>Background History</h1>
 <p>Please enter in the background history of the participant as best as you can. All fields must be filled. If you are not sure about a question, type in "na".</p>
 <%= form_tag "/registrations/background_history", method: :post do %>
-  <h3>Participant Measurements</h3>
-    <h4>Weight Info:</h4>
+  <h3>Participant Measurements:</h3>
+  <p></p> 
+  <div class="well">
+    <h4>Weights:</h4>
+    <hr>
       <% if @weight.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@weight.errors.count, "error") %> prohibited this weight from being updated:</h2>
@@ -15,48 +18,54 @@
       </div>
       <% end %>
       <div>
-        <%= label_tag :weight_at_birth %>
-        <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5)  %> 
+        <%= label_tag :weight_at_birth, "At Birth" %>:
+        <%= number_field_tag(:weight_at_birth, nil, in: 1.0..20, step: 0.5, required: true)  %> 
       </div>
-      
+      <p></p> 
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
         <% if @child.current_age <= 6 %>
           <% while i < @child.current_age do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>:
               <% key_name = (numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5, required: true)  %> 
             </div>
+            <p></p> 
             <% i += 1 %>
           <% end %>
         <% else %>
           <% while i < 6 do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>:
               <% key_name = (numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+              <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5, required: true)  %> 
             </div>
+            <p></p> 
             <% i += 1 %>
           <% end %>
         <% end %>
       <% end %>
       <% if @child.current_age >= 12 %>
         <div>
-          <%= label_tag :one_year %>
-          <%= number_field_tag(:one_year, nil, in: 1.0..20, step: 0.5)  %> 
+          <%= label_tag :first_year %>:
+          <%= number_field_tag(:one_year, nil, in: 1.0..20, step: 0.5, required: true)  %> 
         </div>
+        <p></p> 
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteen_month %>
-          <%= number_field_tag(:eighteen_month, nil, in: 1.0..20, step: 0.5)  %> 
+          <%= label_tag :eighteenth_month %>:
+          <%= number_field_tag(:eighteen_month, nil, in: 1.0..20, step: 0.5, required: true)  %> 
         </div>
+        <p></p> 
       <% end %>
 
       <% if @child.current_age > 18 %>
@@ -64,17 +73,21 @@
         <% age = @child.current_age / 12 %>
         <% while k < (age - 1) do %>
           <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
+          <% years = ['Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth', 'Twenty-First', 'Twenty-Second', 'Twenty-Third', 'Twenty-Fourth', 'Twenty-Fifth', 'Twenty-Sixth', 'Twenty-Seventh', 'Twenty-Eighth', 'Twenty-Ninth', 'Thirtieth', 'Thirty-First', 'Thirty-Second', 'Thirty-Third', 'Thirty-Fourth', 'Thirty-Fifth', 'Thirty-Sixth', 'Thirty-Seventh', 'Thirty-Eighth', 'Thirty-Ninth', 'Fortieth'] %>
           
           <div>
-            <%= label_tag string_year[k]+'_year' %>
+            <%= label_tag years[k]+'_year' %>:
             <% key_name = (string_year[k]+'_year').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5)  %> 
+            <%= number_field_tag(key_name, nil, in: 1.0..20, step: 0.5, required: true)  %> 
           </div>
+          <p></p> 
           <% k += 1 %>
         <% end %>
       <% end %>
-      
-    <h4>Height Info:</h4>
+  </div>
+  <div class="well">
+    <h4>Heights:</h4>
+    <hr>
       <% if @height.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@height.errors.count, "error") %> prohibited this height from being updated:</h2>
@@ -87,31 +100,36 @@
       </div>
       <% end %>
       <div>
-        <%= label_tag :height_at_birth %>
-        <%= number_field_tag(:height_at_birth, nil, in: 10.0..30, step: 0.5)  %> 
+        <%= label_tag :height_at_birth, "At Birth" %>:
+        <%= number_field_tag(:height_at_birth, nil, in: 10.0..30, step: 0.5, required: true)  %> 
       </div>
+      <p></p> 
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
         <% if @child.current_age <= 6 %>
           <% while i < @child.current_age do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>:
               <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, required: true)  %>  
             </div>
+            <p></p> 
             <% i += 1 %>
           <% end %>
         <% else %>
           <% while i < 6 do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>:
               <% key_name = ('height_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, required: true)  %> 
             </div>
+            <p></p> 
             <% i += 1 %>
           <% end %>
         <% end %>
@@ -119,34 +137,40 @@
 
       <% if @child.current_age >= 12 %>
         <div>
-          <%= label_tag :one_year %>
-          <%= number_field_tag(:height_one_year, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= label_tag :first_year %>:
+          <%= number_field_tag(:height_one_year, nil, in: 10.0..30, step: 0.5, required: true)  %> 
         </div>
+        <p></p> 
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteen_month %>
-          <%= number_field_tag(:height_eighteen_month, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= label_tag :eighteenth_month %>:
+          <%= number_field_tag(:height_eighteen_month, nil, in: 10.0..30, step: 0.5, required: true)  %> 
         </div>
+        <p></p> 
       <% end %>
 
       <% if @child.current_age > 18 %>
         <% k = 0 %>
         <% age = @child.current_age / 12 %>
         <% while k < (age - 1) do %>
-          <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty_year', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
+          <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
+          <% years = ['Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth', 'Twenty-First', 'Twenty-Second', 'Twenty-Third', 'Twenty-Fourth', 'Twenty-Fifth', 'Twenty-Sixth', 'Twenty-Seventh', 'Twenty-Eighth', 'Twenty-Ninth', 'Thirtieth', 'Thirty-First', 'Thirty-Second', 'Thirty-Third', 'Thirty-Fourth', 'Thirty-Fifth', 'Thirty-Sixth', 'Thirty-Seventh', 'Thirty-Eighth', 'Thirty-Ninth', 'Fortieth'] %>
           
           <div>
-            <%= label_tag string_year[k]+'_year' %>
+            <%= label_tag years[k]+'_year' %>:
             <% key_name = ('height_'+string_year[k]+'_year').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, required: true)  %> 
           </div>
+          <p></p> 
           <% k += 1 %>
         <% end %>
       <% end %>
-      
-    <h4>Head Circumference Info:</h4>
+  </div>
+  <div class="well">
+    <h4>Head Circumferences:</h4>
+    <hr>
       <% if @head_circumference.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@head_circumference.errors.count, "error") %> prohibited this head_circumference from being updated:</h2>
@@ -159,31 +183,36 @@
       </div>
       <% end %>
       <div>
-        <%= label_tag :head_circumference_at_birth %>
-        <%= number_field_tag(:head_circumference_at_birth, @background_history.head_circumference_at_birth, in: 10.0..30, step: 0.5)  %> 
+        <%= label_tag :head_circumference_at_birth, "At Birth" %>:
+        <%= number_field_tag(:head_circumference_at_birth, @background_history.head_circumference_at_birth, in: 10.0..30, step: 0.5, required: true)  %> 
       </div>
+      <p></p> 
       <% if @child.current_age <= 11 || @child.current_age >= 12 %>
         <% i = 0 %>
         <% if @child.current_age <= 6 %>
           <% while i < @child.current_age do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>:
               <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, required: true)  %>  
             </div>
+            <p></p> 
             <% i += 1 %>
           <% end %>
         <% else %>
           <% while i < 6 do %>
             <% numbers = ['one', 'two', 'three', 'four', 'five', 'six'] %>
+            <% months = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'] %>
             
             <div>
-              <%= label_tag numbers[i]+'_month' %>
+              <%= label_tag months[i]+'_month' %>:
               <% key_name = ('hc_'+numbers[i]+'_month').to_sym %>
-              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %>  
+              <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, required: true)  %>  
             </div>
+            <p></p> 
             <% i += 1 %>
           <% end %>
         <% end %>
@@ -191,123 +220,154 @@
 
       <% if @child.current_age >= 12 %>
         <div>
-          <%= label_tag :one_year %>
-          <%= number_field_tag(:hc_one_year, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= label_tag :first_year %>:
+          <%= number_field_tag(:hc_one_year, nil, in: 10.0..30, step: 0.5, required: true)  %> 
         </div>
+        <p></p> 
       <% end %>
 
       <% if @child.current_age >= 18 %>
         <div>
-          <%= label_tag :eighteen_month %>
-          <%= number_field_tag(:hc_eighteen_month, nil, in: 10.0..30, step: 0.5)  %> 
+          <%= label_tag :eighteenth_month %>:
+          <%= number_field_tag(:hc_eighteen_month, nil, in: 10.0..30, step: 0.5, required: true)  %> 
         </div>
+        <p></p> 
       <% end %>
 
       <% if @child.current_age > 18 %>
         <% k = 0 %>
         <% age = @child.current_age / 12 %>
         <% while k < (age - 1) do %>
-          <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty_year', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
+          <% string_year = ['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree', 'twentyfour', 'twentyfive', 'twentysix', 'twentyseven', 'twentyeight', 'twentynine', 'thirty', 'thirtyone', 'thirtytwo', 'thirtythree', 'thirtyfour', 'thirtyfive', 'thirtysix', 'thirtyseven', 'thirtyeight', 'thirtynine', 'forty'] %>
+          <% years = ['Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth', 'Twenty-First', 'Twenty-Second', 'Twenty-Third', 'Twenty-Fourth', 'Twenty-Fifth', 'Twenty-Sixth', 'Twenty-Seventh', 'Twenty-Eighth', 'Twenty-Ninth', 'Thirtieth', 'Thirty-First', 'Thirty-Second', 'Thirty-Third', 'Thirty-Fourth', 'Thirty-Fifth', 'Thirty-Sixth', 'Thirty-Seventh', 'Thirty-Eighth', 'Thirty-Ninth', 'Fortieth'] %>
           
           <div>
-            <%= label_tag string_year[k]+'_year' %>
+            <%= label_tag years[k]+'_year' %>:
             <% key_name = ('hc_'+string_year[k]+'_year').to_sym %>
-            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5)  %> 
+            <%= number_field_tag(key_name, nil, in: 10.0..30, step: 0.5, required: true)  %> 
           </div>
+          <p></p> 
           <% k += 1 %>
         <% end %>
       <% end %>
-
-  <h3>Birth Information</h3>
-    <p>Mother Complications:</p>
-      <div>
-        <%= label_tag :gestational_diabetes %>
-        <%= check_box_tag :gestational_diabetes, nil, @mother_complications.gestational_diabetes %>
-        <br>
-        <%= label_tag 'pre-eclampsia' %>
-        <%= check_box_tag :preeclampsia, nil, @mother_complications.preeclampsia %>
-        <br>
-        <%= label_tag :clampsia %>
-        <%= check_box_tag :clampsia, nil, @mother_complications.clampsia %>
-        <br>
-        <%= label_tag :rh_factor %>
-        <%= check_box_tag :rh_factor, nil, @mother_complications.rh_factor %>
-        <br>
-        <%= label_tag :separated_placenta %>
-        <%= check_box_tag :separated_placenta, nil, @mother_complications.separated_placenta %>
-        <br>
-        <%= label_tag :unsure %>
-        <%= check_box_tag :unsure, nil, @mother_complications.unsure %>
-        <br>
-        <%= label_tag :extra_fluid %>
-        <%= check_box_tag :extra_fluid, nil, @mother_complications.extra_fluid %>
-        <br>
-        <%= label_tag :other_complications %>
-        <%= text_field_tag :other_complications, @mother_complications.other %>
-      </div>
-    <br>
-      <div>
-        <%= label_tag 'Delivery Method:' %>
-        <%= select_tag( :delivery_method, options_for_select(delivery_method, @background_history.delivery_method)) %>
-      </div>
-    <br>
-      <div>
-      <p>Offered a c-section?</p>
-        <%= label_tag :yes %>
-        <%= radio_button_tag :offered_c_section, 'yes', (@background_history.offered_c_section == 'yes') %>
-        <br>
-        <%= label_tag :no %>
-        <%= radio_button_tag :offered_c_section, 'no', (@background_history.offered_c_section == 'no') %>
-        <br>
-        <%= label_tag :unsure %>
-        <%= radio_button_tag :offered_c_section, 'unsure', (@background_history.offered_c_section == 'unsure') %>
-      </div>
-    <br>
-      <div>
-        <p>Did the child have complications at birth?</p>
-        <%= label_tag :yes %>
-        <%= radio_button_tag :child_complication, 'yes', (@background_history.child_complication == 'yes') %>
-        <br>
-        <%= label_tag :no %>
-        <%= radio_button_tag :child_complication, 'no', (@background_history.child_complication == 'no') %>
-        <br>
-        <%= label_tag :unsure %>
-        <%= radio_button_tag :child_complication, 'unsure', (@background_history.child_complication == 'unsure') %>
-      </div>
-    <br>
-      <div>
-        <%= label_tag :apgar_score %>
-        <%= text_field_tag :apgar_score, @background_history.apgar_score %>
-      </div>
-      <div>
-        <%= label_tag :gestation_age %>
-        <%= number_field_tag :gestation_age, @background_history.gestation_age, in: 0..50, step: 1 %>
-      </div>
-      <div>
-        <%= label_tag :mother_age_at_birth %>
-        <%= number_field_tag :mother_age_at_birth, @background_history.mother_age_at_birth, in: 14..50, step: 1 %>
-      </div>
-      <div>
-        <%= label_tag :father_age_at_birth %>
+  </div>
+  <hr>
+  <h3>Birth Information:</h3>
+  <p></p> 
+  <div class="well">
+    <h4>Mother Complications? Mark all that apply:</h4>
+    <hr>
+      <%= label_tag :gestational_diabetes %>
+      <%= check_box_tag :gestational_diabetes, nil, @mother_complications.gestational_diabetes %>
+      <p></p>
+      <%= label_tag 'pre-eclampsia' %>
+      <%= check_box_tag :preeclampsia, nil, @mother_complications.preeclampsia %>
+      <p></p>
+      <%= label_tag :clampsia %>
+      <%= check_box_tag :clampsia, nil, @mother_complications.clampsia %>
+      <p></p>
+      <%= label_tag :rh_factor %>
+      <%= check_box_tag :rh_factor, nil, @mother_complications.rh_factor %>
+      <p></p>
+      <%= label_tag :separated_placenta %>
+      <%= check_box_tag :separated_placenta, nil, @mother_complications.separated_placenta %>
+      <p></p>
+      <%= label_tag :unsure %>
+      <%= check_box_tag :unsure, nil, @mother_complications.unsure %>
+      <p></p>
+      <%= label_tag :extra_fluid %>
+      <%= check_box_tag :extra_fluid, nil, @mother_complications.extra_fluid %>
+      <p></p>
+      <%= label_tag :other_complications, "Other" %>:
+      <%= text_field_tag :other_complications, @mother_complications.other %>
+    </div>
+    <p></p> 
+    <div class="well">
+      <h4><%= label_tag 'Delivery method', "Delivery Method?" %></h4>
+      <hr>
+      <%= select_tag( :delivery_method, options_for_select(delivery_method, @background_history.delivery_method), prompt: "-", required: true) %>
+    </div>
+    <p></p> 
+    <div class="well">
+      <h4>Offered A C-section?</h4>
+      <hr>
+      <%= label_tag :yes %>
+      <%= radio_button_tag :offered_c_section, 'yes', (@background_history.offered_c_section == 'yes') %>
+      <br>
+      <%= label_tag :no %>
+      <%= radio_button_tag :offered_c_section, 'no', (@background_history.offered_c_section == 'no') %>
+      <br>
+      <%= label_tag :unsure %>
+      <%= radio_button_tag :offered_c_section, 'unsure', (@background_history.offered_c_section == 'unsure') %>
+    </div>
+    <p></p> 
+    <div class="well">
+      <h4>Did The Child Have Complications At birth?</h4>
+      <hr>
+      <%= label_tag :yes %>
+      <%= radio_button_tag :child_complication, 'yes', (@background_history.child_complication == 'yes') %>
+      <br>
+      <%= label_tag :no %>
+      <%= radio_button_tag :child_complication, 'no', (@background_history.child_complication == 'no') %>
+      <br>
+      <%= label_tag :unsure %>
+      <%= radio_button_tag :child_complication, 'unsure', (@background_history.child_complication == 'unsure') %>
+    </div>
+    <p></p> 
+    <div class="well">
+      <%= label_tag :apgar_score %>:
+      <%= text_field_tag :apgar_score, @background_history.apgar_score %>
+      <p></p> 
+      <%= label_tag :gestation_age %>:
+      <%= number_field_tag :gestation_age, @background_history.gestation_age, in: 0..50, step: 1 %>
+      <p></p> 
+      <%= label_tag :mother_age_at_birth %>:
+      <%= number_field_tag :mother_age_at_birth, @background_history.mother_age_at_birth, in: 14..50, step: 1 %>
+      <p></p> 
+        <%= label_tag :father_age_at_birth %>:
         <%= number_field_tag :father_age_at_birth, @background_history.father_age_at_birth, in: 14..50, step: 1 %>
-      </div>
-      <div>
-        <%= label_tag :multiple_birth %>
-        <%= check_box_tag :multiple_birth, nil, @background_history.multiple_birth %>
-      </div>
-      <div>
-        <%= label_tag :multiple_birth_trisomy %>
-        <%= check_box_tag :multiple_birth_trisomy, nil, @background_history.multiple_birth_trisomy %>
-      </div>
-      <h3>Participant Genetic History</h3>
-      <div>
-        <%= label_tag :siblings_with_trisomy %>
-        <%= check_box_tag :siblings_with_trisomy, nil, @background_history.siblings_with_trisomy %>
-      </div>
-      <div>
-        <%= label_tag :trisomy_relative %>
-        <%= check_box_tag :trisomy_relative, nil, @background_history.trisomy_relative %>
-      </div>
-      <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
-  <%= submit_tag %>
+    </div>
+    <div class="well">
+        <h4><%= label_tag :multiple_birth, "Multiple Birth?" %></h4>
+        <hr>
+        <%= label_tag :yes %>
+        <%= radio_button_tag :multiple_birth, true, (@background_history.multiple_birth == true) %>
+        <br>
+        <%= label_tag :no %>
+        <%= radio_button_tag :multiple_birth, false, (@background_history.multiple_birth == false) %>
+    </div>
+    <div class="well">
+        <h4><%= label_tag :multiple_birth_trisomy, "Multiple Birth Trisomy?" %></h4>
+        <hr>
+        <%= label_tag :yes %>
+        <%= radio_button_tag :multiple_birth_trisomy, true, (@background_history.multiple_birth_trisomy == true) %>
+        <br>
+        <%= label_tag :no %>
+        <%= radio_button_tag :multiple_birth_trisomy, false, (@background_history.multiple_birth_trisomy == false) %>
+    </div>
+    <hr>
+    <h3>Participant Genetic History:</h3>
+    <p></p> 
+    <div class="well">       
+      <h4><%= label_tag :siblings_with_trisomy, "Siblings With Trisomy?" %></h4>
+      <hr>
+      <%= label_tag :yes %>
+      <%= radio_button_tag :siblings_with_trisomy, true, (@background_history.siblings_with_trisomy == true) %>
+      <br>
+      <%= label_tag :no %>
+      <%= radio_button_tag :siblings_with_trisomy, false, (@background_history.siblings_with_trisomy == false) %>
+    </div>
+    <div class="well">
+      <h4><%= label_tag :trisomy_relative, "Relatives With Trisomy?" %></h4>
+      <hr>
+      <%= label_tag :yes %>
+      <%= radio_button_tag :trisomy_relative, true, (@background_history.trisomy_relative == true) %>
+      <br>
+      <%= label_tag :no %>
+      <%= radio_button_tag :trisomy_relative, false, (@background_history.trisomy_relative == false) %>
+    </div>
+    <hr>
+    <%= hidden_field_tag(:child_id, value = params[:child_id]) %>
+    <%= submit_tag 'Save Changes', class: "btn btn-primary"%>
+  
 <% end %>

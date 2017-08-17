@@ -22,7 +22,7 @@
         });
     }, 100)
 
-    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage) {
+    function createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage) {      
           var marker = new google.maps.Marker({
             map: $scope.map,
             position: latlng,
@@ -40,8 +40,8 @@
               city+', '+
               state+' '+
               zipcode+'</p>'+
-              '<p><b>Specialty:</b> '+specialty+'<br>'+
-              '<a href='+showPage+'>More info</a></p>'+
+              '<p><b>Specialty:</b> '+specialty.charAt(0).toUpperCase()+specialty.slice(1)+'</p>'+
+              '<b style="color: blue;"><a href='+showPage+'>View Profile</a></b>'+
               '</div>'+
               '</div>';
               $scope.infoWindow.setContent(contentString);
@@ -61,14 +61,14 @@
             var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h2 id="firstHeading" class="firstHeading"> '+ lastname +'</h2>'+
+            '<h2 id="firstHeading" class="firstHeading">'+ lastname +'</h2>'+
             '<div id="bodyContent">'+
             '<p><b>Address: </b><br>'+
             address+'<br>'+
             city+', '+
-            state+' '+ '<br>'+
-            "trisomy type: "+ trisomy+ '<br>'+
-            '<a href='+showPage+'>View Family Page</a>'+
+            state+' '+ '</p>'+
+            '<p><b>'+"Trisomy Type: "+'</b><br>'+ trisomy+ '</p>'+
+            '<b style="color: blue;"><a href='+showPage+'>View Profile</a></b>'+
             '</div>'+
             '</div>';
             $scope.infoWindow.setContent(contentString);
@@ -80,22 +80,22 @@
     function displayMarkers() {
         // loop through data array
         if ($scope.query.type === "physician") {
-        for(var i = 0; i < $scope.data["data"].length; i++) {
-            var latlng = new google.maps.LatLng($scope.data["data"][i]["attributes"]["latitude"], $scope.data["data"][i]["attributes"]["longitude"] );
-            var firstname = $scope.data["data"][i]["attributes"]["first-name"];
-            var lastname = $scope.data["data"][i]["attributes"]["last-name"];
-            var address = $scope.data["data"][i]["attributes"]["address"];
-            var state = $scope.data["data"][i]["attributes"]["state"];
-            var city = $scope.data["data"][i]["attributes"]["city"];
-            var zipcode = $scope.data["data"][i]["attributes"]["zip-code"];
-            var showPage = $scope.data["data"][i]["attributes"]["self-url"];
-            var specialty = $scope.data["data"][i]["attributes"]["specialty"]
+        for(var i = 0; i < $scope.data.length; i++) {
+            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] );                     
+            var firstname = $scope.data[i]["first_name"]; 
+            var lastname = $scope.data[i]["last_name"];
+            var address = $scope.data[i]["address"];
+            var state = $scope.data[i]["state"];
+            var city = $scope.data[i]["city"];
+            var zipcode = $scope.data[i]["zip_code"];
+            var specialty = $scope.data[i]["specialty"]
+            var showPage = "/physicians/" + $scope.data[i]["id"];
             createPhysicianMarker(latlng, firstname, lastname, address, state, city, zipcode, specialty, showPage);
         }
       }
       else if ($scope.query.type === "family") {
         for(var i = 0; i < $scope.data.length; i++) {
-            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] )
+            var latlng = new google.maps.LatLng($scope.data[i]["latitude"], $scope.data[i]["longitude"] );
             var lastname = $scope.data[i]["family_name"];
             var address = $scope.data[i]["street_address"];
             var state = $scope.data[i]["state"];
@@ -131,9 +131,7 @@
     $scope.performSearch = function() {
         // send ajax only if form has changed
         if ($scope.search_form.$dirty) {
-          
             var url = "/api/v1/search?" + $httpParamSerializerJQLike($scope.query);
-            console.log(url);
 
             // need to clear trisomy type params from url if it equals nothing
             var url_sub_index = url.indexOf("trisomy_type=");

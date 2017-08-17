@@ -7,12 +7,14 @@
       });
 
       $scope.setOrderAttribute = function(inputAttribute) {
-        if (inputAttribute !== $scope.orderAttribute) {
-          $scope.isOrderDescending = false;
+        inputAttribute === "oldToNew" ? $scope.isOrderDescending = false : inputAttribute === "newToOld" ? $scope.isOrderDescending = !$scope.isOrderDescending : $scope.isOrderDescending = '';
+        
+        if ($scope.isOrderDescending != '') {
+          $scope.orderAttribute = 'id';
         } else {
-          $scope.isOrderDescending = !$scope.isOrderDescending;
-        }
-        $scope.orderAttribute = inputAttribute;
+          $scope.orderAttribute = undefined;
+        };
+        
       };
 
       $scope.alerts = [];
@@ -26,6 +28,14 @@
         $http.patch('api/v1/children.json', params).then(function(response) {
           $scope.children.push(response.data);
           $scope.alerts.push({type: 'success', msg: 'Well done! You successfully updated the acceptance of this child.'});
+        });
+      };
+
+      $scope.deleteChild = function(id) {
+
+        $http.delete('api/v1/children/'+ id +'.json').then(function(response) {
+
+          $scope.alerts.push({type: 'success', msg: 'Well done! You successfully deleted the child.'});
         });
       };
 

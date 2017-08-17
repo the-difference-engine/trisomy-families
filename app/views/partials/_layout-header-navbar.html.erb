@@ -1,120 +1,90 @@
 <!-- add class="fixed" if necesary !-->
-<header class="header clearfix">
-
-  <nav class="navbar navbar-default">
+<% if params[:controller] != "devise/sessions" && !current_page?('/users/sign_up') %>
+  <nav class="navbar navbar-default" style="background-color: #F2F2F2" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/"><img id="logo_img" class="img-responsive" src="/template/images/TrisomyFamilies_Logo.jpg" href="/" alt="The Project" height="75px" width="75px" style="padding: 5px;"></a>
+        <div class="logo" style="padding-top: 15px; padding-right: 30px; padding-bottom: 15px;  text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+          <h4><a href="/" class="logo-font link-light">Trisomy <span class="text-default">Association </span></a></h4>
+        </div>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="myNavbar">
+      <% if (current_page?('/') || current_page?('/resources') || current_page?('/calendar') || current_page?('/data-center') || current_page?('/family-center')) && current_user %>
         <ul class="nav navbar-nav navbar-left">
-        
-          <% if current_page?('/') %>
-            <li><a href="#">Get Involved</a></li>
-            <li><a href="#" aria-haspopup="true" aria-expanded="false">What is Trisomy</a></li>
-            <li><a href="#" aria-haspopup="true" aria-expanded="false">About</span></a></li>
-            <li><a href="#">Shop</a></li>
+          <% if current_user && current_page?('/')%>
+            <% if current_user && (current_user.user_type == "family" || current_user.user_type == "admin") %>
+              <% if !current_page?('/family-center') %>
+                <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Family Center</a></li>
+              <% end %>
+            <% end %>
+            <% if current_user && !current_page?('/calendar') %>
+              <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
+            <% end %>
+            <% if current_user && !current_page?('/data-center') %>
+                <li><a href="/data-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Data Center</a></li>
+            <% end %>                    
+            <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
+          <% elsif current_user %>
+            <% if current_user.user_type == "family" || current_user.user_type == "admin" %>
+              <% if !current_page?('/family-center') && !current_page?('/admin-dashboard') && !current_page?('/children-index') && (params[:controller] != 'families' && params[:action] != 'show') %>
+                <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Family Center</a></li>
+              <% end %>
+            <% end %>
+            <% if !current_page?('/calendar') && !current_page?('/admin-dashboard') && !current_page?('/children-index') && (params[:controller] != 'families' && params[:action] != 'show') %>
+              <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
+            <% end %>
+            <% if !current_page?('/data-center') && !current_page?('/admin-dashboard') && !current_page?('/children-index') && (params[:controller] != 'families' && params[:action] != 'show') %>
+                <li><a href="/data-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Data Center</a></li>
+            <% end %>
+            <% if !current_page?('/resources') && current_page?('/')  %>               
+              <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
+            <% elsif !current_page?('/resources') && !current_page?('/admin-dashboard') && !current_page?('/children-index') && (params[:controller] != 'families' && params[:action] != 'show') %>
+              <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
+            <% end %>
           <% end %>
-          <% if current_user && current_user.user_type != 'admin' %>
-            <% if current_user.user_type == 'family' %>
+        </ul>
+        <form class="navbar-form navbar-left" style="visibility: hidden;">
+        </form>
+      <% end %>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <% if current_user.user_type == 'family' || current_user.user_type == 'admin' %>
               <% if current_user.family_ids[0] && !current_page?('/families/'+ current_user.family_ids[0].to_s) %>
                 <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; My Family</a></li>
               <% elsif !current_page?('/families/'+ current_user.family_ids[0].to_s) && !current_page?('/families/new') %>
                 <li><a href="/families/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
               <% end %>
-            <% elsif current_user.user_type == 'doctor' %> 
+            <% elsif current_user.user_type == 'doctor' || current_user.user_type == 'admin' %> 
               <% if current_user.physician_ids[0] && !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) %>
-              <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; My Profile</a></li> 
-              <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span></li>
+              <li><a href="/physicians/<%= current_user.physician_ids[0] %>"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>&nbsp; My Profile</a></li> 
               <% elsif !current_page?('/physicians/'+ current_user.physician_ids[0].to_s) && !current_page?('/physicians/new') %>
                 <li><a href="/physicians/new"><i class="fa-user-circle-o" aria-hidden="true"></i>&nbsp; Create Profile</a></li>
               <% end %>
             <% end %>
-          <% else %>
-             <% if current_user && current_user.family_ids[0] && !current_page?('/families/' + current_user.family_ids[0].to_s) %>
-               <li><a href="/families/<%= current_user.family_ids[0] %>"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; My Family</a>
-               </li>
-             <% end %>
+            <% if current_user.user_type == "admin" && !current_page?('/admin-dashboard')%>
+              <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Area</a></li>
+            <% end %>
+            <li><a href="/users/sign_out" data-method='delete'><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>&nbsp; Sign Out</a></li>
+
+          <% elsif current_user %>
+             <li><a href="/users/sign_out" data-method='delete'><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>&nbsp; Sign Out</a></li>
+
+          <% elsif current_page?('/') %>
+            <li><a href="/users/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Sign Up</a></li>
+            <li><a href="/users/sign_in"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>&nbsp; Log In</a></li>
+
           <% end %>
-        
-          <li class="dropdown">
-              
-              <% if current_user && current_page?('/')%>
-                <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Tools
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <% if current_user && current_user.user_type == "family" %>
-                      <% if !current_page?('/family-center') %>
-                        <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
-                      <% end %>
-                    <% end %>
-                    <% if current_user && !current_page?('/calendar') %>
-                      <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
-                    <% end %>
-                    <% if current_user && !current_page?('/data-center') %>
-                        <li><a href="/data-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Data Center</a></li>
-                    <% end %>
-                    <% if current_user %>
-                      <% if current_user.user_type == 'admin' && !current_page?('/admin-dashboard') %>
-                        <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
-                      <% end %>
-                    <% end %>                    
-                    <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
-                  </ul>
-                </div>
-     
-              <% else %>
-                <% if current_user && current_user.user_type == "family" %>
-                  <% if current_user && !current_page?('/family-center') %>
-                    <li><a href="/family-center"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp;Find Families and Doctors</a></li>
-                  <% end %>
-                <% end %>
-                <% if current_user && !current_page?('/calendar') %>
-                  <li><a href="/calendar"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp; Calendar</a></li>
-                <% end %>
-                <% if current_user && !current_page?('/data-center') %>
-                    <li><a href="/data-center"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>&nbsp; Data Center</a></li>
-                <% end %>
-                <% if current_user %>
-                  <% if current_user.user_type == 'admin' && !current_page?('/admin-dashboard') %>
-                    <li><a href="/admin-dashboard"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>&nbsp; Admin Dashboard</a></li>
-                  <% end %>
-                <% end %> 
-                <% if !current_page?('/resources') && current_page?('/') %>               
-                  <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
-                <% elsif current_user && !current_page?('/resources') %>
-                  <li><a href="/resources"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp; Resources</a></li>
-                <% end %>
-
-              <% end %>
-             
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <% if current_user %>
-                <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
-
-              <% elsif current_page?('/') %>
-                 <li class="account-link"><%= link_to 'Sign Up', new_user_registration_path, :method => :get %></li>
-                 <li class="account-link"><%= link_to 'Log In', new_user_session_path, :method => :get %></li>
-
-              <% end %>
-            </ul>
-          </li>
+          
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
-</header>
+<% end %>

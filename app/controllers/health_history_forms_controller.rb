@@ -65,6 +65,7 @@ class HealthHistoryFormsController < ApplicationController
     )
     @gastric_surgery.save
     @nuerological_condition = NuerologicalCondition.new(
+      seizure_epilepsy: params[:seizure_epilepsy],
       brain_malformation: params[:brain_malformation],
       cyst: params[:cyst],
       cp: params[:cp],
@@ -268,7 +269,7 @@ class HealthHistoryFormsController < ApplicationController
          health_history_id: @health_history.id
        )
       flash[:success] = "Health History Added!"
-      redirect_to "/profile/#{@child.id}"
+      redirect_to "/registrations/#{@child.id}"
     else
       flash[:warning] = "Health History Could Not Be Added!"
       render 'new.html.erb'
@@ -351,6 +352,7 @@ class HealthHistoryFormsController < ApplicationController
         other: params[:other_gastric_surgery]
       ) &&
       @nuerological_condition.update(
+        seizure_epilepsy: params[:seizure_epilepsy],
         brain_malformation: params[:brain_malformation],
         cyst: params[:cyst],
         cp: params[:cp],
@@ -533,7 +535,7 @@ class HealthHistoryFormsController < ApplicationController
         health_history_id: @health_history.id
       )
       flash[:success] = "Health History Successfully Updated!"
-      redirect_to "/profile/#{@child.id}"
+      redirect_to "/registrations/#{@child.id}"
     else
       flash[:warning] = "Health History Could Not Be Updated!"
       render 'edit.html.erb'

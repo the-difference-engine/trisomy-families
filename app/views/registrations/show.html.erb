@@ -1,0 +1,574 @@
+<div class="row">
+  <div class="col-xs-12">
+    <br>
+    <h1>Registration Review</h1>
+    <p style="font-size:18px"><b>Use this page to review your entire registration and make sure everything is correct. Any missing fields are shown in red at the top of each section and must be filled before submitting your registration. Use the edit/add buttons at the bottom of each section if you need to change any part of your registration or fill it in.</b></p>
+    <p style="font-size:18px"><b>Once you have filled out all required fields and have reviewed your registration, click the submit button at the bottom of the page to send your registration for review. Once reviewed and accepted, you will be notified via email.</b></p>
+    <hr>
+    <br>
+
+    <h2>Contact Information:</h2>
+    <% if @contact_info %>
+      <!-- CHECK FOR MISSING REQUIRED FIELDS -->
+      <div>
+        <% @contact_info.attributes.each do |attr_name, attr_value| %>
+          <% if attr_value == nil %>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+        <% end %>
+      </div> 
+      <div class="well">
+        <label>Contact First Name:</label> <%= @contact_info.contact_first_name %>
+        <br>
+        <label>Contact Last Name:</label> <%= @contact_info.contact_last_name %>
+        <br>
+        <label>Contact Email:</label> <%= @contact_info.contact_email %>
+        <br>
+        <label>Contact Phone:</label> (<%= @contact_info.contact_phone[0,3] %>) <%= @contact_info.contact_phone[3,3] %>-<%= @contact_info.contact_phone[6..-1] %>
+        <br>
+        <% if (@contact_info.contact_first_name != @contact_info.parent_first_name) && (@contact_info.contact_last_name != @contact_info.parent_last_name) %>
+          <label>Parent First Name:</label> <%= @contact_info.parent_first_name %>
+          <br>
+        <% end %>
+        <% if (@contact_info.contact_last_name != @contact_info.parent_last_name) && (@contact_info.contact_first_name != @contact_info.parent_first_name) %>
+          <label>Parent Last Name:</label> <%= @contact_info.parent_last_name %>
+          <br>
+        <% end %>
+        <% if @contact_info.parent_email != @contact_info.contact_email %>
+          <label>Parent Email:</label> <%= @contact_info.parent_email %>
+          <br>
+        <% end %>
+        <% if @contact_info.parent_phone != @contact_info.contact_phone %>
+          <label>Parent Phone:</label> (<%= @contact_info.parent_phone[0,3] %>) <%= @contact_info.parent_phone[3,3] %>-<%= @contact_info.parent_phone[6..-1] %>
+          <br>
+        <% end %>
+        <label>Relationship:</label> <%= @contact_info.relationship %>
+        <br>
+        <% if @contact_info.other_info != "" %>
+          <label>Other Info:</label> <%= @contact_info.other_info %>
+          <br>
+        <% end %>
+      </div>
+      <a href="/registrations/contact_info/<%= @contact_info.id %>/edit" class="btn btn-warning" id="edit_contact_info">Edit Contact Info</a>
+    <% else %>
+      <a href="/registrations/contact_info/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Contact Info</button></a>
+    <% end %>
+    <br>
+    <br>
+    <hr>
+
+    <h2>Basic Participant Information:</h2>
+
+    <!-- CHECK FOR MISSING REQUIRED FIELDS -->
+    <div>
+      <% @family.attributes.each do |attr_name, attr_value| %>
+        <% if attr_value == "" %>
+          <% if attr_name == "street_address" || attr_name == "city" || attr_name == "state" %>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %> <a href="/families/<%= @family.id %>/edit">Edit address</a></span>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div> 
+    <div class="well">
+      <label>First name:</label> <%= @child.first_name %>
+      <br>
+      <label>Last name:</label> <%= @child.last_name %>
+      <br>
+      <label>Nickname:</label> <%= @child.nickname %>
+      <br>
+      <label>Birth date:</label> <%= @child.birth_date.strftime('%m/%d/%Y') %>
+      <br>
+      <% if @child.death_date %><label>Death date: </label> <%= @child.death_date.strftime('%m/%d/%Y') %><br><% end %>
+      <label>Family location:</label> <%= @family.street_address %>, <%= @family.city %> <%= @family.state %>
+      <br>
+      <label>Trisomy type:</label> <%= @child.trisomy_type %>
+      <br>
+      <label>Birth order:</label> <%= @child.birth_order %>
+      <br>
+      <label>Primary diagnosis:</label> <%= @child.primary_diagnosis %>
+      <br>
+      <% if @child.other_primary_diagnosis != "" %>
+        <label>Other primary diagnosis:</label> <%= @child.other_primary_diagnosis %>
+        <br>
+      <% end %>
+      <% if @child.secondary_diagnosis != "" %>
+        <label>Secondary diagnosis:</label> <%= @child.secondary_diagnosis %>
+        <br>
+      <% end %>
+      <% if @child.other_primary_diagnosis != "" %>
+        <label>Other secondary diagnosis:</label> <%= @child.other_secondary_diagnosis %>
+        <br>
+      <% end %>
+      <% if @child.mosaic_percentage != nil && @child.mosaic_percentage != "" %>
+        <label>Mosaic trisomy percent:</label> <%= @child.mosaic_percentage %>
+        <br>
+      <% end %>
+      <% if @child.partial_trisomy != nil && @child.partial_trisomy != "" %>
+        <label>Partial trisomy arm affected:</label> <%= @child.partial_trisomy %>
+        <br>
+      <% end %>
+      <% if @child.other_chrom_affected != nil && @child.other_chrom_affected != "" %>
+        <label>Additional chromosomes affected:</label> <%= @child.other_chrom_affected %>
+        <br>
+      <% end %>
+    </div>
+    <a href="/profile/<%= @child.id %>/edit" class="btn btn-warning">Edit Basic Participant Info</a>
+    <br>
+    <br>
+    <hr>
+
+    <h2>Background History</h2>
+    <% if @background_history %>
+      <!-- CHECK FOR MISSING REQUIRED FIELDS -->
+      <div>
+        <% @background_history.attributes.each do |attr_name, attr_value| %>
+          <% if attr_value == nil && attr_name != 'trisomy_relative' && attr_name != 'multiple_birth' && attr_name != 'multiple_birth_trisomy' && attr_name != 'siblings_with_trisomy' %>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+          <% if attr_name == "apgar_score" && attr_value == "" %>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+        <% end %>
+      </div> 
+
+      <h3>Participant Measurements:</h3>
+      
+      <div class="well">
+        <h4>Weights:</h4>
+        <hr>
+        <label>At Birth:</label> <%= @background_history.weight_at_birth.to_f %>
+        <p></p>
+        <% @background_history.weight.attributes.each do |attr_name, attr_value| %>
+          <% if attr_name != "id" && attr_name != "created_at" && attr_name != "updated_at" && attr_value != nil %>
+            <label><%= attr_name[0..attr_name.index("_")-1].capitalize %> <%= attr_name[attr_name.index("_")+1..-1].capitalize %>:</label> <%= attr_value.to_f %>
+            <p></p>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="well">
+        <h4>Heights:</h4>
+        <hr>
+        <label>At Birth:</label> <%= @background_history.height_at_birth.to_f %>
+        <p></p>
+        <% @background_history.height.attributes.each do |attr_name, attr_value| %>
+          <% if attr_name != "id" && attr_name != "created_at" && attr_name != "updated_at" && attr_value != nil %>
+            <label><%= attr_name[0..attr_name.index("_")-1].capitalize %> <%= attr_name[attr_name.index("_")+1..-1].capitalize %>:</label> <%= attr_value.to_f %>
+            <p></p>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="well">
+        <h4>Head Circumferences:</h4>
+        <hr>
+        <label>At Birth:</label> <%= @background_history.head_circumference_at_birth.to_f %>
+        <p></p>
+        <% @background_history.head_circumference.attributes.each do |attr_name, attr_value| %>
+          <% if attr_name != "id" && attr_name != "created_at" && attr_name != "updated_at" && attr_value != nil %>
+            <label><%= attr_name[0..attr_name.index("_")-1].capitalize %> <%= attr_name[attr_name.index("_")+1..-1].capitalize %>:</label> <%= attr_value.to_f %>
+            <p></p>
+          <% end %>
+        <% end %>
+      </div>
+
+      <h3>Birth Information:</h3>
+      <div class="well">
+        <label>Mother complications:</label>
+        <br>
+        <ul>
+          <% @background_history.mother_complication.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li><%= attr_name.gsub("_", " ").capitalize %></li> 
+            <% elsif attr_name == "other" && attr_value != "" %>
+              <li><%= attr_value.gsub("_", " ") %></li>        
+            <% end %>
+            <p></p>
+          <% end %>
+        </ul>
+      </div>
+      <div class="well">
+        <label>Delivery method:</label> <%= @background_history.delivery_method %>
+        <p></p>
+        <% if @background_history.offered_c_section %> 
+          <label>C Section offered?</label> <%= @background_history.offered_c_section.capitalize %>
+          <p></p>
+        <% end %>
+        <% if @background_history.child_complication %> 
+          <label>Child birth complications?</label> <%= @background_history.child_complication.capitalize %>
+          <p></p>
+        <% end %>
+        <% if @background_history.apgar_score %>
+          <label>Apgar score:</label> <%= @background_history.apgar_score %>
+          <p></p>
+        <% end %>
+        <% if @background_history.gestation_age %>
+          <label>Gestation age:</label> <%= @background_history.gestation_age %>
+          <p></p>
+        <% end %>
+        <% if @background_history.mother_age_at_birth %>
+          <label>Mother's age at birth:</label> <%= @background_history.mother_age_at_birth %>
+          <p></p>
+        <% end %>
+        <% if @background_history.father_age_at_birth %>
+          <label>Father's age at birth:</label> <%= @background_history.father_age_at_birth %>
+          <p></p>
+        <% end %>
+        <label>Multiple birth?</label> <% if @background_history.multiple_birth %>Yes<% else%>No<% end %>
+        <p></p>
+        <label>Multiple birth trisomy?</label> <% if @background_history.gestation_age %>Yes<% else %>No<% end %>
+      </div>
+
+      <h3>Genetic History:</h3>
+      <div class="well">
+        <label>Siblings with trisomy?</label> <% if @background_history.siblings_with_trisomy %>Yes<% else %>No<% end %>
+        <p></p>
+        <label>Trisomy relative?</label> <% if @background_history.trisomy_relative %>Yes<% else %>No<% end %>
+      </div>
+      <a href="/registrations/background_history/<%= @background_history.id %>/edit" class="btn btn-warning" id="edit_background_history">Edit Background History</a>
+    <% else %>
+      <a href="/registrations/background_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Background History</button></a>
+    <% end %>
+    <br>
+    <br>
+    <hr>
+    <h2>Health History</h2>
+    <% if @health_history %>
+      <!-- VALIDATE ENTITIES -->
+      <% @health_history.attributes.each do |attr_name, attr_value| %>
+        <% if attr_value == nil %>
+          <% if attr_name == 'offered_cardiac_surgery' || attr_name == 'first_cardiac_surgery_successful' || attr_name == 'sleep_apnea' || attr_name == 'hearing_test' || attr_name == 'failed_eye_exam' || attr_name == 'in_ei' %>
+            <span class="missing-field" style="color:red">* REQUIRED FIELD MISSING: <%= attr_name.gsub("_", " ") %></span>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <h3>Heart Issues:</h3>
+      <div class="well">
+        <label>Congenital Heart Disease?</label> <% if @health_history.chd %>Yes<% else %>No<% end %>
+      </div> 
+      <% if @health_history.congenital_heart_defect.attributes.values[1..-3].any? {|value| value == true} %>
+        <div class="well">
+          <label>Congenital Heart Defects:</label>
+          <br>
+          <ul>
+            <% @health_history.congenital_heart_defect.attributes.each do |attr_name, attr_value| %>
+              <% if attr_value == true %>
+                <li><%= attr_name.gsub("_", " ").capitalize %></li>
+              <% elsif attr_name == "other" && attr_value != nil %>
+                <li><%= attr_value.gsub("on", "other") %></li>  
+              <% elsif attr_value == nil %>
+
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="well">
+        <% if @health_history.offered_cardiac_surgery != nil %>
+          <label>Offered cardiac surgery?</label> <%= @health_history.offered_cardiac_surgery.capitalize %>
+          <p></p> 
+        <% end %>
+        <label>Multiple cardiac surgeries?</label> <% if @health_history.offered_cardiac_surgery %>Yes<% else %>No<% end %>
+        <p></p> 
+        <% if @health_history.first_cardiac_surgery_successful != nil %>
+          <label>First cardiac surgery successful?</label> <%= @health_history.first_cardiac_surgery_successful.capitalize %>
+          <p></p> 
+        <% end %>
+        <% if @health_history.first_cardiac_surgery_age != nil %> 
+          <label>Age when first cardiac surgery was performed:</label> <%= @health_history.first_cardiac_surgery_age %> 
+        <% end %>
+      </div>
+      <h3>Intestinal Issues:</h3> 
+      <div class="well">
+        <span id="intestinal-issues" style="display:none">None</span>
+        <ul>   
+          <% @health_history.intestinal_issue.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li class="intestinal-issues"><%= attr_name.gsub("_", " ") %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <h3>Gastric Surgeries:</h3> 
+      <div class="well">
+        <span id="gastric-surgery" style="display:none">None</span>
+        <ul>   
+          <% @health_history.gastric_surgery.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li class="gastric-surgery"><%= attr_name.gsub("_", " ") %></li> 
+            <% elsif attr_name == "other" && attr_value != "" %>
+              <li class="gastric-surgery"><%= attr_value.gsub("_", " ") %></li>         
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <h3>Neurological Conditions:</h3> 
+      <div class="well">
+        <span id="neuro-cond" style="display:none">None</span>
+        <ul>   
+          <% @health_history.nuerological_condition.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li class="neuro-cond"><%= attr_name.gsub("_", " ") %></li> 
+            <% elsif attr_name == "other" && attr_value != "" %>
+              <li class="neuro-cond"><%= attr_value.gsub("_", " ") %></li>         
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <h3>Muscular/Skeletal:</h3> 
+      <div class="well">
+        <span id="muscular" style="display:none">None</span>
+        <ul>   
+          <% @health_history.muscular_skeletal.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li class="muscular"><%= attr_name.gsub("_", " ") %></li>          
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <h3>Cranial/Facial:</h3> 
+      <div class="well">
+        <span id="cranial" style="display:none">None</span>
+        <ul>   
+          <% @health_history.cranial_facial.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li class="cranial"><%= attr_name.gsub("_", " ") %></li>          
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <% if @health_history.sleep_apnea != nil %>
+        <div class="well">
+          <label>Sleep Apnea?</label> <%= @health_history.sleep_apnea.capitalize %>
+        </div>
+      <% end %>
+
+      <h3>Cancer:</h3>
+      <div class="well">
+        <% if @health_history.cancer %>
+          <%= @health_history.cancer %>
+        <% end %>
+        <% if @health_history.other_cancer %>
+          <%= @health_history.other_cancer %>
+        <% end %>   
+      </div>
+
+      <h3>Endocrine:</h3> 
+      <div class="well">
+        <span id="endo" style="display:none">None</span>    
+        <ul>   
+          <% @health_history.endocrine.attributes.each do |attr_name, attr_value| %>
+            <% if attr_value == true %>
+              <li class="endo"><%= attr_name.gsub("_", " ") %></li>  
+            <% elsif attr_name == "other" && attr_value != "" %>
+              <li class="endo"><%= attr_value.gsub("_", " ") %></li>        
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <h3>Hearing:</h3>
+      <div class="well">
+        <% if @health_history.hearing_test %>
+          <label>Infant hearing test passed?</label> <%= @health_history.hearing_test.capitalize %>
+          <p></p> 
+        <% end %>
+        <label>Had an ABR?</label> <% if @health_history.had_an_abr %>Yes<% else%>No<% end %>
+        <p></p> 
+        <% if @health_history.hearing_loss_or_deaf %>
+          <label>Diagnosed with hearing loss or deafness?</label> <%= @health_history.hearing_loss_or_deaf.capitalize %>
+          <p></p> 
+        <% end %>
+      </div>
+      <% if @health_history.hearing.attributes.values[1..-3].any? {|value| value == true} %>
+        <div class="well">
+          <label>Hearing loss description:</label>
+          <ul>   
+            <% @health_history.hearing.attributes.each do |attr_name, attr_value| %>
+              <% if attr_value == true %>
+                <li><%= attr_name.gsub("_", " ") %></li>
+              <% elsif attr_name == "other" && attr_value != "" %>
+                <li><%= attr_value.gsub("_", " ") %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="well">
+        <label>Hearing loss treatment?</label> <%= @health_history.hearing_loss_treatment %>
+        <br>
+      </div>
+
+      <h3>Vision:</h3>
+      <% if @health_history.failed_eye_exam %>
+        <div class="well">
+          <label>Failed eye exam?</label> <%= @health_history.failed_eye_exam.capitalize %>
+          <br>
+        </div>
+      <% end %>
+      <% if @health_history.vision.attributes.values[1..-3].any? {|value| value == true} %>
+        <div class="well">
+          <label>Vision Diagnosis:</label>
+          <ul>   
+            <% @health_history.vision.attributes.each do |attr_name, attr_value| %>
+              <% if attr_value == true %>
+                <li><%= attr_name.gsub("_", " ") %></li>          
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% if @health_history.vision.attributes.values[1..-3].any? {|value| value == true} %>
+        <div class="well">
+          <label>Behavior & Development Diagnosis:</label>
+          <ul>   
+            <% @health_history.behavioral_health.attributes.each do |attr_name, attr_value| %>
+              <% if attr_value == true %>
+                <li><%= attr_name.gsub("_", " ") %></li>
+              <% elsif attr_name == "other_diagnosis" && attr_value != "" %>
+                <li><%= attr_value.gsub("_", " ") %></li>
+              <% elsif attr_name == "other_delay" && attr_value != "" %>
+                <li><%= attr_value.gsub("_", " ") %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <h3>School & Therapies</h3>
+      <div class="well">
+        <% if @health_history.in_ei != nil %>
+          <label>Participant attended EI?</label> <%= @health_history.in_ei.capitalize %>
+          <p></p> 
+        <% end %>
+        <label>Participant attended school?</label> <% if @health_history.attend_school %>Yes<% else %>No<% end %>
+        <p></p> 
+        <label>Participant home schooled?</label> <% if @health_history.home_schooled_bound %>Yes<% else %>No<% end %>
+        <p></p> 
+        <% if @health_history.highest_education != nil %>
+          <label>Highest level of education:</label> <%= @health_history.highest_education %>
+          <p></p> 
+        <% end %>
+      </div>
+      <% if @health_history.received_therapy.attributes.values[1..-3].any? {|value| value == true} %>
+        <div class="well">
+          <label>Therapy Treatments:</label>
+          <ul>   
+            <% @health_history.received_therapy.attributes.each do |attr_name, attr_value| %>
+              <% if attr_value == true %>
+                <li><%= attr_name.gsub("_", " ") %></li>
+              <% elsif attr_name == "other" && attr_value != "" %>
+                <li><%= attr_value.gsub("_", " ") %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <h3>Clinical Research & Trials</h3>
+      <div class="well">
+        <label>Currently participating in clincal trials or research studies? </label> <% if @health_history.clinical_trial %>Yes<% else %>No<% end %>
+        <p></p> 
+        <label>Interest in participating in upcomming trials? </label> <% if @health_history.clinical_trial_participation %>Yes<% else %>No<% end %>
+      </div>
+      <a href="/registrations/health_history/<%= @health_history.id %>/edit" class="btn btn-warning" id="edit_health_history">Edit Health History</a>
+    <% else %>
+      <a href="/registrations/health_history/new?child_id=<%= @child.id %>"><button class="btn btn-primary">Add Health History</button></a>
+    <% end %>
+    <br>
+    <br>
+    <hr>
+    <% if current_user %>
+      <% if current_user.user_type != "admin" && !@child.registered %>
+        <br>
+        <div id="fields-incomplete">
+          <h2>Registration Incomplete</h2>
+          <p style="color:red">All required must be filled before you can submit your application. See fields listed in each section above.</p>
+        </div>
+
+        <div id="fields-complete" style="display:none">
+          <h2>Submit Registration</h2>
+          <p>By submitting this registration, I agree that all information provided is true and as accurate as possible. Once your registration has been reviewed, you will receive a confirmation email and access to fully-registered features on our site.</p>
+
+          <%= form_tag "/registrations/#{@child.id}", method: :patch do %>
+            <%= submit_tag "Submit Registration", :name => "submission", class: "btn btn-success" %>
+          <% end %>
+        </div>
+        <br>
+      <% elsif current_user.user_type === "admin" && !@child.accepted && @child.registered && @my_family.id != @child.family_id %>
+        <div id="fields-complete" style="display:none">
+          <%= form_tag "../api/v1/children/#{@child.id}", method: :patch do %>
+            <%= submit_tag "Accept Child", :name => "accepted", class: "btn btn-info" %>
+          <% end %>
+        </div>
+      <% elsif current_user.user_type === "admin" && !@child.accepted && !@child.registered && @my_family.id == @child.family_id %>
+        <div id="fields-complete" style="display:none">
+          <%= form_tag "../api/v1/children/#{@child.id}", method: :patch do %>
+            <%= submit_tag "Accept & Register Child", :name => "accepted", class: "btn btn-info" %>
+          <% end %>
+        </div>
+      <% elsif current_user.user_type === "admin" && !@child.registered %>
+        <br>
+        <h2>Registration Not Received</h2>
+        <p></p>
+        <p style="color:red">User must submit child's registration for reviewal in order to be accepted.</p>
+        <br>
+        
+      <% elsif current_user.user_type != "admin" && @child.registered && !@child.accepted %>
+        <br>
+        <h2>Registration Sent</h2>
+        <p></p>
+        <p style="color:red">Admin has been notified and the child's registration is under review.</p>
+        <br>
+        
+      <% else %>
+        <br>
+        <h2>Child Accepted & Fully Registered</h2>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  var healthExists = document.getElementById("edit_health_history");
+  var backgroundExists = document.getElementById("edit_background_history");
+  var contactExists = document.getElementById("edit_contact_info");
+
+  if ($(".intestinal-issues").length == 0) {
+    $("#intestinal-issues").show();
+  }
+
+  if ($(".gastric-surgery").length == 0) {
+    $("#gastric-surgery").show();
+  }
+  
+  if ($(".neuro-cond").length == 0) {
+    $("#neuro-cond").show();
+  }
+
+  if ($(".muscular").length == 0) {
+    $("#muscular").show();
+  }
+
+  if ($(".cranial").length == 0) {
+    $("#cranial").show();
+  }
+
+  if ($(".endo").length == 0) {
+    $("#endo").show();
+  }
+
+  if ($(".missing-field").length == 0 && healthExists && backgroundExists && contactExists ) {
+    $("#fields-incomplete").hide();
+    $("#fields-complete").show();
+  }
+
+</script>

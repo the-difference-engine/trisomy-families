@@ -70,15 +70,43 @@ class FamiliesController < ApplicationController
 
   def show
     @family = Family.find_by(id: params[:id])
-    render 'show.html.erb'
+    if @family != nil
+      @admin = User.where(user_type: "admin").first
+      @children = []
+      Child.all.each do |child|
+        if child.family_id == @family.id
+          @children << child
+        end
+      end
+      if current_user && current_user.user_type != "doctor"
+        user_family = Family.find_by(user_id: current_user.id)
+        if user_family != nil
+          render 'show.html.erb'
+        else 
+          redirect_to "/families/new"
+        end
+      elsif current_user && current_user.user_type == "doctor"
+        doctor = Physician.find_by(user_id: current_user.id)
+        if doctor
+          redirect_to "/physicians/#{doctor.id}"
+        else
+          redirect_to "/physicians/new"
+        end
+      else
+        flash[:warning] = 'You must be logged in to view this page.'
+        redirect_to '/' 
+      end
+    else
+      redirect_to '/'
+    end
   end
 
   def edit
     @family = Family.find_by(id: params[:id])
 
-    if @family.user_id != current_user.id
+    if @family.user_id != current_user.id && current_user.user_type != "admin"
      @family = Family.find_by(user_id: current_user.id)
-     flash[:danger] = "You do not have authorization to view that page"
+     flash[:danger] = "You do not have permission to view that page."
      redirect_to "/families/#{@family.id}"
     end 
   
@@ -103,7 +131,11 @@ class FamiliesController < ApplicationController
       puts @family
       @family.update(photo: obj.public_url)
     end
-
-    redirect_to "/families/#{@family.id}"
+    if @family.save
+      flash[:success] = "Family Successfully Updated!"
+      redirect_to "/families/#{@family.id}"
+    else
+      render '/families/edit'
+    end 
   end
 end

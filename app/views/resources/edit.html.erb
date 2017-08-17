@@ -27,11 +27,20 @@
             <%= f.label :image, "Image URL:" %>
             <%= f.text_field :image, class: "form-control", :value => @resource.image %>
          </div>
+         <br>
+         <div class="form-group">
+            <%= f.label :state, 'State' %>
+            <%= f.select("state", options_for_select(us_states, @resource.state), prompt: "-", class: "form-control") %>
+         </div>
+         <br>
+         <div class="form-group">
+            <%= f.label :purpose, "Purpose" %>
+            <%= f.text_field :purpose, class: "form-control", :value => @resource.purpose %>
+         </div> 
          <hr>
          <div class="form-group">
             <%= f.label :description, 'Description:' %>
             <%= f.text_area :description, :value => @resource.description, class: "form-control", row: "3" %>
-            
          </div>
          <hr>
          <div>

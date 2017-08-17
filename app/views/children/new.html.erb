@@ -11,15 +11,16 @@
 <div class="container">
    <div class="row">
       <div class="col-md-6 col-md-offset-3">
-         <h1 class="text-center">Add a Child</h1>
+         <h1 class="text-center">Add Child</h1>
          <%= form_for @child, url: {action: "create"} do |f| %>
          <h5 style="color:gray">Basic Info</h5>
          <div class="form-group">
-            <%= f.label :child_first_name, "* Full Name" %>
-            <%= f.text_field(:first_name, class: "form-control", placeholder: 'First Name') %>
+            <%= f.label :child_first_name, "First Name" %>
+            <%= f.text_field(:first_name, class: "form-control") %>
          </div>
          <div class="form-group">
-            <%= f.text_field(:last_name, class: "form-control", placeholder: 'Last Name') %>
+            <%= f.label :child_first_name, "Last Name" %>
+            <%= f.text_field(:last_name, class: "form-control") %>
          </div>
          <div class="form-group">
             <%= f.label :child_nickname %>
@@ -27,12 +28,11 @@
          </div>
          <div class="form-group">
             <%= f.label :date_of_birth, "* Date of Birth" %>
-            <%= f.date_field(:birth_date, class: "form-control")%>
+            <%= f.date_select(:birth_date, class: "form-control", order: [:month, :day, :year], prompt: "-", start_year: 1950, end_year: DateTime.now.year)%>
          </div>
-         <div class="form-group">
-            <!-- Make optional -->
+         <div class="form-group">            
             <%= f.label :date_of_death, "Date of Death" %>
-            <%= f.date_field(:death_date, class: "form-control") %>
+            <%= f.date_select(:death_date, class: "form-control", order: [:month, :day, :year], prompt: "-", start_year: 1950, end_year: DateTime.now.year) %>
          </div>
          <div class="form-group">
             <%= f.label :child_birth_order %>
@@ -46,15 +46,55 @@
          <h5 style="color:gray">Trisomy</h5>
          <div class="form-group">
             <%= f.label :trisomy_type, "Type of Trisomy" %>
-            <%= f.select("trisomy_type", options_for_select(trisomy_type)) %>
+            <%= f.select("trisomy_type", options_for_select(trisomy_type), :include_blank => "-" ) %>
          </div>
          <div class="form-group">
+            <%= f.label :other_chrom_affected, "Additional chromosome affected" %>
+            <%= f.select("other_chrom_affected", options_for_select(trisomy_type), :include_blank => "-"  ) %>
+            <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable", checked_value = "n/a" %> N/A
+         </div>
+         <div class="form-group" id="primary_diagnosis">
             <%= f.label :child_primary_diagnosis %>
-            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis)) %>
+            <%= f.select("primary_diagnosis", options_for_select(primary_trisomy_diagnosis), :include_blank => "-" ) %>
+         </div>
+         <div class="form-group" id="mosaic_percentage" style="display: none;">
+            <%= f.label :mosaic_percentage %>
+            <%= f.number_field(:mosaic_percentage, in: 1..100, step: 1 , class: "form-control")%>
+            <br>
+         </div>
+         <div class="form-group" id="partial_trisomy" style="display: none;">
+            <%= f.label 'Partial Trisomy:' %>
+            <%= f.radio_button(:partial_trisomy, 'p') %> P
+            <%= f.radio_button(:partial_trisomy, 'q') %> Q
+            <%= f.radio_button(:partial_trisomy, 'both') %> Both
+            <br>
+            <br>
          </div>
          <div class="form-group">
             <%= f.label :other_primary_diagnosis %>
             <%= f.text_field(:other_primary_diagnosis) %>
+         </div>
+         <div class="form-group">
+            <%= f.label :child_secondary_diagnosis %>
+            <%= f.select("secondary_diagnosis", options_for_select(primary_trisomy_diagnosis), :include_blank => "-"  ) %>
+            <span style="display:inline-block; width: 10px;"></span><%= check_box_tag "not_applicable_2", checked_value = "n/a" %> N/A
+         </div>
+         <div class="form-group" id="mosaic_percentage_2" style="display: none;">
+            <%= f.label :secondary_mosaic_percentage %>
+            <%= f.number_field(:secondary_mosaic_percentage, in: 1..100, step: 1 , class: "form-control")%>
+            <br>
+         </div>
+         <div class="form-group" id="partial_trisomy_2"style="display: none;">
+            <%= f.label 'Partial Trisomy:' %>
+            <%= f.radio_button(:secondary_partial_trisomy, 'p') %> P
+            <%= f.radio_button(:secondary_partial_trisomy, 'q') %> Q
+            <%= f.radio_button(:secondary_partial_trisomy, 'both') %> Both
+            <br>
+            <br>
+         </div>
+         <div class="form-group" id="other_secondary_diagnosis">
+            <%= f.label :other_secondary_diagnosis %>
+            <%= f.text_field(:other_secondary_diagnosis) %>
          </div>
          <div class="form-group">
             <%= f.label :trisomy_story, "* Child Story" %>
@@ -99,3 +139,55 @@
 </div>
 <!-- container -->
 <% end %>
+
+<script>
+   document.getElementById('child_primary_diagnosis').addEventListener('change', function () {
+    var style = this.value === 'Mosaic' ? 'inline' : 'none';
+    document.getElementById('mosaic_percentage').style.display = style;
+    style = this.value === 'Partial' ? 'inline' : 'none';
+    document.getElementById('partial_trisomy').style.display = style;
+   });
+
+   document.getElementById('child_secondary_diagnosis').addEventListener('change', function () {
+    var style = this.value === 'Mosaic' ? 'inline' : 'none';
+    document.getElementById('mosaic_percentage_2').style.display = style;
+    style = this.value === 'Partial' ? 'inline' : 'none';
+    document.getElementById('partial_trisomy_2').style.display = style;
+   });
+
+   $('#not_applicable_2').change(function() {
+    if(this.checked) {
+      document.getElementById('other_secondary_diagnosis').style.display = 'none';
+    } else {
+      document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
+    };
+   });
+
+   $('#child_secondary_diagnosis').change(function() {
+      if(this.value != "") {
+         $('#not_applicable_2').prop('checked', false);
+         document.getElementById('other_secondary_diagnosis').style.display = 'inline-block';
+      }; 
+   });
+
+   $('#not_applicable_2').change(function() {
+      if(this.value === "n/a") {
+         $('#child_secondary_diagnosis').val('');
+         document.getElementById('partial_trisomy_2').style.display = 'none';
+         document.getElementById('mosaic_percentage_2').style.display = 'none';
+      };
+   });
+
+   $('#child_other_chrom_affected').change(function() {
+      if(this.value != "") {
+         $('#not_applicable').prop('checked', false);
+      }; 
+   });
+
+   $('#not_applicable').change(function() {
+      if(this.value === "n/a") {
+         $('#child_other_chrom_affected').val('');
+      };
+   });
+  
+</script>

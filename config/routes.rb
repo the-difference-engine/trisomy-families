@@ -9,13 +9,11 @@ Rails.application.routes.draw do
       get '/children/birth_order_totals' => 'children#birth_order_totals'
       get '/users' => 'users#index'
       patch '/users' => 'users#update'
-      patch '/children' => 'children#update'
+      patch '/children/:id' => 'children#update'
       delete '/users/:id' => 'users#destroy'
+      delete '/children/:id' => 'children#destroy'
 
       get '/birthdays' => 'birthdays#index'
-      get '/families' => 'families#index'
-      get '/families/children' => 'families#children'
-      get '/resources' => 'resources#index'
     end
   end
 
@@ -59,10 +57,16 @@ Rails.application.routes.draw do
   delete '/profile/:id' => 'children#destroy'
   patch '/profile/:id/photo' => 'children#update_photo'
 
+  get '/homepagecontents/new' => 'home_page_contents#new'
+  post '/homepagecontents' => 'home_page_contents#create'
+  get '/homepagecontents/:id/edit' => 'home_page_contents#edit'
+  patch '/homepagecontents/:id' => 'home_page_contents#update'
+
   # NEW ROUTES FOR CHILD REGISTRATION:
   get 'registrations' => 'registrations#index'
   get 'registrations/:id' => 'registrations#show'
-  get 'registrations/:id' => 'registrations#destroy'
+  delete 'registrations/:id' => 'registrations#destroy'
+  patch '/registrations/:id' => 'registrations#update'
 
   get 'registrations/contact_info/new' => 'contact_info_forms#new'
   post 'registrations/contact_info' => 'contact_info_forms#create'
@@ -87,5 +91,7 @@ Rails.application.routes.draw do
   get '/family-center' => 'family_center#index'
 
   get 'data-center' => 'professional_center#index'
+
+  get '/about' => 'users#about'
 
 end
