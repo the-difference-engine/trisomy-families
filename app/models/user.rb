@@ -10,7 +10,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :relationship, presence: true, on: :update
   validates :user_type, presence: true
 
   def full_name
