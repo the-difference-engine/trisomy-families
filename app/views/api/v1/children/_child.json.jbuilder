@@ -12,4 +12,6 @@ json.birth_order child.birth_order
 json.accepted child.accepted
 json.registered child.registered
 json.privacy child.privacy
-json.privacy_count child.privacy.attributes.values[2..-3].select {|value| value == false}.count
+if child.privacy != nil
+  json.privacy_count child.privacy.attributes.values[2..-3].select {|value| value == false}.count
+end
