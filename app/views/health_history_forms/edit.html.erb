@@ -1,7 +1,10 @@
+<br>
 <h1>Edit Health History</h1>
 <hr>
 <%= form_tag "/registrations/health_history/#{@health_history.id}", method: :patch do %>
+<hr style="width: 0px">
 <h3>Heart:</h3>
+<p></p>
   <% if @congenital_heart_defect.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@congenital_heart_defect.errors.count, "error") %> prohibited this congenital_heart_defect from being updated:</h2>
@@ -59,9 +62,6 @@
     <br>
     <%= label_tag :no %>
     <%= radio_button_tag :offered_cardiac_surgery, 'no', (@health_history.offered_cardiac_surgery == 'no') %>
-    <br>
-    <%= label_tag 'n/a' %>
-    <%= radio_button_tag :offered_cardiac_surgery, 'n/a', (@health_history.offered_cardiac_surgery == 'n/a') %>
   </div>
   <br>
   <div class="well">
@@ -93,7 +93,9 @@
     <%= radio_button_tag :multiple_cardiac_surgeries, false, (@health_history.multiple_cardiac_surgeries == false) %>
     <!-- change to save a string -->
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Gastric/Intestinal:</h3>
   <p></p>
     <% if @intestinal_issue.errors.any? %>
@@ -194,7 +196,9 @@
     <%= label_tag :none %>
     <%= check_box_tag :none, nil, @gastric_surgery.none %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Neurological:</h3>
   <p></p>
     <% if @nuerological_condition.errors.any? %>
@@ -248,7 +252,9 @@
     Other Neuro Surgery:
     <%= text_field_tag :other_nuero_surgery, @nuerological_condition.other %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Muscular/Skeletal:</h3>
   <p></p>
     <% if @muscular_skeletal.errors.any? %>
@@ -347,7 +353,9 @@
     <%= label_tag :rocker_bottom_feet_surgery %>
     <%= check_box_tag :rocker_bottom_feet_surgery, nil, @muscular_skeletal.rocker_bottom_feet_surgery %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Cranial/Facial:</h3>
   <p></p>
     <% if @cranial_facial.errors.any? %>
@@ -369,9 +377,6 @@
     <br>
     <%= label_tag :no %>
     <%= radio_button_tag :sleep_apnea, 'no', (@health_history.sleep_apnea == 'no') %>
-    <br>
-    <%= label_tag 'n/a' %>
-    <%= radio_button_tag :sleep_apnea, 'n/a', (@health_history.sleep_apnea == 'n/a') %>
   </div>
   <br>
   <div class="well">
@@ -407,7 +412,9 @@
     <%= label_tag :delayed_teething %>
     <%= check_box_tag :delayed_teething, nil, @cranial_facial.delayed_teething %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Cancer:</h3>
   <p></p>
   <div class="well">
@@ -417,7 +424,9 @@
     <%= label_tag :other %>:
     <%= text_field_tag :cancer_other, @health_history.other_cancer %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Endocrine:</h3>
   <p></p>
     <% if @endocrine.errors.any? %>
@@ -497,7 +506,9 @@
     <%= label_tag :other_endocrine %>:
     <%= text_field_tag :other_endocrine, @endocrine.other %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Hearing:</h3>
   <p></p>
     <% if @hearing.errors.any? %>
@@ -564,7 +575,9 @@
     <hr>
     <%= select_tag( :hearing_loss_treatment, options_for_select(hearing_treatments, @health_history.hearing_loss_treatment)) %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Vision:</h3>
   <p></p>
     <% if @vision.errors.any? %>
@@ -657,7 +670,9 @@
     <%= label_tag "Doesn't close eyes when sleeping" %>
     <%= check_box_tag :doesnt_close_eyes_when_sleeping, nil, @vision.doesnt_close_eyes_when_sleeping %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Behavior:</h3>
   <p></p>
     <% if @behavioral_health.errors.any? %>
@@ -744,10 +759,12 @@
     <%= label_tag :visual_processing %>
     <%= check_box_tag :visual_processing, nil, @behavioral_health.visual_processing %>
     <p></p>
-    <%= label_tag :other_delay %>
+    <%= label_tag :other_delay %>:
     <%= text_field_tag :other_delay, @behavioral_health.other_delay %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>School/Therapies:</h3>
   <p></p>
     <% if @received_therapy.errors.any? %>
@@ -769,9 +786,6 @@
     <br>
     <%= label_tag :no %>
     <%= radio_button_tag :in_ei, 'no', (@health_history.in_ei == 'no') %>
-    <br>
-    <%= label_tag 'n/a' %>
-    <%= radio_button_tag :in_ei, 'n/a', (@health_history.in_ei == 'n/a') %>
   </div>
   <br>
   <div class="well">
@@ -840,7 +854,9 @@
     <%= label_tag :other_therapy %>:
     <%= text_field_tag :other_therapy, @received_therapy.other %>
   </div>
+  <hr style="width: 0px">
   <hr>
+  <hr style="width: 0px">
   <h3>Clinical Research & Trials:</h3>
   <p></p>
   <div class="well">
@@ -864,6 +880,7 @@
     <%= radio_button_tag :clinical_trial_participation, false, (@health_history.clinical_trial_participation == false) %>
     <br>
   </div>
+  <hr style="width: 0px">
   <hr>
   <div>
     <%= submit_tag 'Save Changes', class: "btn btn-primary" %>
