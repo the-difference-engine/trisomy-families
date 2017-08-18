@@ -8,6 +8,7 @@
     <br>
 
     <h2>Contact Information:</h2>
+    <hr style="width: 0px">
     <% if @contact_info %>
       <!-- CHECK FOR MISSING REQUIRED FIELDS -->
       <div>
@@ -20,34 +21,34 @@
       </div> 
       <div class="well">
         <label>Contact First Name:</label> <%= @contact_info.contact_first_name %>
-        <br>
+        <p></p>
         <label>Contact Last Name:</label> <%= @contact_info.contact_last_name %>
-        <br>
+        <p></p>
         <label>Contact Email:</label> <%= @contact_info.contact_email %>
-        <br>
+        <p></p>
         <label>Contact Phone:</label> (<%= @contact_info.contact_phone[0,3] %>) <%= @contact_info.contact_phone[3,3] %>-<%= @contact_info.contact_phone[6..-1] %>
-        <br>
+        <p></p>
         <% if (@contact_info.contact_first_name != @contact_info.parent_first_name) && (@contact_info.contact_last_name != @contact_info.parent_last_name) %>
           <label>Parent First Name:</label> <%= @contact_info.parent_first_name %>
-          <br>
+          <p></p>
         <% end %>
         <% if (@contact_info.contact_last_name != @contact_info.parent_last_name) && (@contact_info.contact_first_name != @contact_info.parent_first_name) %>
           <label>Parent Last Name:</label> <%= @contact_info.parent_last_name %>
-          <br>
+          <p></p>
         <% end %>
         <% if @contact_info.parent_email != @contact_info.contact_email %>
           <label>Parent Email:</label> <%= @contact_info.parent_email %>
-          <br>
+          <p></p>
         <% end %>
         <% if @contact_info.parent_phone != @contact_info.contact_phone %>
           <label>Parent Phone:</label> (<%= @contact_info.parent_phone[0,3] %>) <%= @contact_info.parent_phone[3,3] %>-<%= @contact_info.parent_phone[6..-1] %>
-          <br>
+          <p></p>
         <% end %>
         <label>Relationship:</label> <%= @contact_info.relationship %>
-        <br>
+        <p></p>
         <% if @contact_info.other_info != "" %>
           <label>Other Info:</label> <%= @contact_info.other_info %>
-          <br>
+          <p></p>
         <% end %>
       </div>
       <a href="/registrations/contact_info/<%= @contact_info.id %>/edit" class="btn btn-warning" id="edit_contact_info">Edit Contact Info</a>
@@ -57,9 +58,9 @@
     <br>
     <br>
     <hr>
-
+    <hr style="width: 0px">
     <h2>Basic Participant Information:</h2>
-
+    <hr style="width: 0px">
     <!-- CHECK FOR MISSING REQUIRED FIELDS -->
     <div>
       <% @family.attributes.each do |attr_name, attr_value| %>
@@ -73,53 +74,63 @@
     </div> 
     <div class="well">
       <label>First name:</label> <%= @child.first_name %>
-      <br>
+      <p></p>
       <label>Last name:</label> <%= @child.last_name %>
-      <br>
-      <label>Nickname:</label> <%= @child.nickname %>
-      <br>
+      <p></p>
+      <% if @child.nickname != "" %>
+        <label>Nickname:</label> <%= @child.nickname %>
+        <p></p>
+      <% end %>
       <label>Birth date:</label> <%= @child.birth_date.strftime('%m/%d/%Y') %>
-      <br>
-      <% if @child.death_date %><label>Death date: </label> <%= @child.death_date.strftime('%m/%d/%Y') %><br><% end %>
+      <p></p>
+      <% if @child.death_date %>
+        <label>Death date: </label> <%= @child.death_date.strftime('%m/%d/%Y') %>
+        <p></p>
+      <% end %>
       <label>Family location:</label> <%= @family.street_address %>, <%= @family.city %> <%= @family.state %>
-      <br>
+      <p></p>
       <label>Trisomy type:</label> <%= @child.trisomy_type %>
-      <br>
-      <label>Birth order:</label> <%= @child.birth_order %>
-      <br>
-      <label>Primary diagnosis:</label> <%= @child.primary_diagnosis %>
-      <br>
+      <p></p>
+      <% if @child.birth_order != "" %>
+        <label>Birth order:</label> <%= @child.birth_order %>
+        <p></p>
+      <% end %>
+      <% if @child.primary_diagnosis != "" %>
+        <label>Primary diagnosis:</label> <%= @child.primary_diagnosis %>
+        <p></p>        
+      <% end %>
       <% if @child.other_primary_diagnosis != "" %>
         <label>Other primary diagnosis:</label> <%= @child.other_primary_diagnosis %>
-        <br>
+        <p></p>
       <% end %>
       <% if @child.secondary_diagnosis != "" %>
         <label>Secondary diagnosis:</label> <%= @child.secondary_diagnosis %>
-        <br>
+        <p></p>
       <% end %>
       <% if @child.other_primary_diagnosis != "" %>
         <label>Other secondary diagnosis:</label> <%= @child.other_secondary_diagnosis %>
-        <br>
+        <p></p>
       <% end %>
       <% if @child.mosaic_percentage != nil && @child.mosaic_percentage != "" %>
         <label>Mosaic trisomy percent:</label> <%= @child.mosaic_percentage %>
-        <br>
+        <p></p>
       <% end %>
       <% if @child.partial_trisomy != nil && @child.partial_trisomy != "" %>
         <label>Partial trisomy arm affected:</label> <%= @child.partial_trisomy %>
-        <br>
+        <p></p>
       <% end %>
       <% if @child.other_chrom_affected != nil && @child.other_chrom_affected != "" %>
         <label>Additional chromosomes affected:</label> <%= @child.other_chrom_affected %>
-        <br>
+        <p></p>
       <% end %>
     </div>
     <a href="/profile/<%= @child.id %>/edit" class="btn btn-warning">Edit Basic Participant Info</a>
     <br>
     <br>
     <hr>
-
+    <hr style="width: 0px">
     <h2>Background History</h2>
+    <hr style="width: 0px">
     <% if @background_history %>
       <!-- CHECK FOR MISSING REQUIRED FIELDS -->
       <div>
@@ -136,7 +147,7 @@
       </div> 
 
       <h3>Participant Measurements:</h3>
-      
+      <p></p>
       <div class="well">
         <h4>Weights:</h4>
         <hr>
@@ -176,6 +187,7 @@
       </div>
 
       <h3>Birth Information:</h3>
+      <p></p>
       <div class="well">
         <label>Mother complications:</label>
         <br>
@@ -223,6 +235,7 @@
       </div>
 
       <h3>Genetic History:</h3>
+      <p></p>
       <div class="well">
         <label>Siblings with trisomy?</label> <% if @background_history.siblings_with_trisomy %>Yes<% else %>No<% end %>
         <p></p>
@@ -235,7 +248,9 @@
     <br>
     <br>
     <hr>
+    <hr style="width: 0px">
     <h2>Health History</h2>
+    <hr style="width: 0px">
     <% if @health_history %>
       <!-- VALIDATE ENTITIES -->
       <% @health_history.attributes.each do |attr_name, attr_value| %>
@@ -248,6 +263,7 @@
       <% end %>
 
       <h3>Heart Issues:</h3>
+      <p></p>
       <div class="well">
         <label>Congenital Heart Disease?</label> <% if @health_history.chd %>Yes<% else %>No<% end %>
       </div> 
@@ -284,6 +300,7 @@
         <% end %>
       </div>
       <h3>Intestinal Issues:</h3> 
+      <p></p>
       <div class="well">
         <span id="intestinal-issues" style="display:none">None</span>
         <ul>   
@@ -294,7 +311,8 @@
           <% end %>
         </ul>
       </div>
-      <h3>Gastric Surgeries:</h3> 
+      <h3>Gastric Surgeries:</h3>
+      <p></p> 
       <div class="well">
         <span id="gastric-surgery" style="display:none">None</span>
         <ul>   
@@ -308,7 +326,8 @@
         </ul>
       </div>
 
-      <h3>Neurological Conditions:</h3> 
+      <h3>Neurological Conditions:</h3>
+      <p></p> 
       <div class="well">
         <span id="neuro-cond" style="display:none">None</span>
         <ul>   
@@ -323,6 +342,7 @@
       </div>
 
       <h3>Muscular/Skeletal:</h3> 
+      <p></p>
       <div class="well">
         <span id="muscular" style="display:none">None</span>
         <ul>   
@@ -335,6 +355,7 @@
       </div>
 
       <h3>Cranial/Facial:</h3> 
+      <p></p>
       <div class="well">
         <span id="cranial" style="display:none">None</span>
         <ul>   
@@ -352,6 +373,7 @@
       <% end %>
 
       <h3>Cancer:</h3>
+      <p></p>
       <div class="well">
         <% if @health_history.cancer %>
           <%= @health_history.cancer %>
@@ -362,6 +384,7 @@
       </div>
 
       <h3>Endocrine:</h3> 
+      <p></p>
       <div class="well">
         <span id="endo" style="display:none">None</span>    
         <ul>   
@@ -376,6 +399,7 @@
       </div>
 
       <h3>Hearing:</h3>
+      <p></p>
       <div class="well">
         <% if @health_history.hearing_test %>
           <label>Infant hearing test passed?</label> <%= @health_history.hearing_test.capitalize %>
@@ -408,6 +432,7 @@
       </div>
 
       <h3>Vision:</h3>
+      <p></p>
       <% if @health_history.failed_eye_exam %>
         <div class="well">
           <label>Failed eye exam?</label> <%= @health_history.failed_eye_exam.capitalize %>
@@ -442,7 +467,8 @@
           </ul>
         </div>
       <% end %>
-      <h3>School & Therapies</h3>
+      <h3>School & Therapies:</h3>
+      <p></p>
       <div class="well">
         <% if @health_history.in_ei != nil %>
           <label>Participant attended EI?</label> <%= @health_history.in_ei.capitalize %>
@@ -472,7 +498,8 @@
         </div>
       <% end %>
 
-      <h3>Clinical Research & Trials</h3>
+      <h3>Clinical Research & Trials:</h3>
+      <p></p>
       <div class="well">
         <label>Currently participating in clincal trials or research studies? </label> <% if @health_history.clinical_trial %>Yes<% else %>No<% end %>
         <p></p> 

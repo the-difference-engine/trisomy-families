@@ -82,7 +82,7 @@ class RegistrationsController < ApplicationController
 
     from = Email.new(email: ENV["SENDGRID_USERNAME"])
     to = Email.new(email: admin_email)
-    subject = 'Child Registration Submition'
+    subject = 'Child Registration Submission'
     message = "#{current_user.first_name} #{current_user.last_name} (#{current_user.email}) has submitted registration for #{child.first_name} #{child.last_name}. Please review it accordingly."
 
     content = Content.new(type: 'text/html', value: message)
