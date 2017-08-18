@@ -106,16 +106,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
     <!-- Right Column -->
     <div class="w3-twothird">
-    
-      <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
-        <% if @child.privacy.story == false %>
-          <h2 class="w3-padding-16">My Story</h2>
-          <div class="w3-container">  
-            <p><%= @child.trisomy_story %></p>          
-          </div>
-        <% end %>
-        <br>
-      </div>
+      <% if @child.privacy.story == false %>
+        <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+            <h2 class="w3-padding-16">My Story</h2>
+            <div class="w3-container">  
+              <p><%= @child.trisomy_story %></p>          
+            </div>
+          <br>
+        </div>
+      <% end %>
 
     <!-- End Right Column -->
     </div>
