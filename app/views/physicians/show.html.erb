@@ -60,8 +60,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <h3>Contact Me</h3>
           <div class="w3-container">  
             <ul class="list-icons">
-              <li><i class="fa fa-phone pr-10 text-default"></i> <%= @physician.phone_number %></li>
-              <li><i class="fa fa-mobile pr-10 text-default"></i> <%= @physician.personal_number %></li>
+              <% if @physician.phone_number != "" %>
+                <li><i class="fa fa-phone pr-10 text-default"></i> <%= @physician.phone_number %></li>
+              <% end %>
+              <% if @physician.personal_number != "" %>
+                <li><i class="fa fa-mobile pr-10 text-default"></i> <%= @physician.personal_number %></li>              
+              <% end %>
               <li><a href="mailto:<%= current_user.email %>"><i class="fa fa-envelope-o pr-10"></i><%= current_user.email %></a></li>
             </ul>
             <br>
