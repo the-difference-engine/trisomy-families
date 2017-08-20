@@ -41,9 +41,9 @@
               }
     <% else %>
       #banner{
-                background: url("https://blog.chocchildrens.org/wp-content/uploads/2016/03/iStock_000022912430_Full-1038x576.jpg");
+                background: url("https://static.pexels.com/photos/415798/pexels-photo-415798.jpeg");
                 background-position: center center;
-                background-size: auto 140%;
+                background-size: auto 200%;
                 background-repeat: no-repeat;
                 text-align: left;
               }
@@ -55,22 +55,40 @@
 
       <!-- BANNER -->
 
-      <% if @home_page_contents != nil && (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") && (@home_page_contents.banner_text != nil && @home_page_contents.banner_text != "") %>
+      <% if @home_page_contents != nil && (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") %>
         <section id="banner">
-          <header>
-              <h1><%= @home_page_contents.banner_title %></h1>
-              <span>
-                <h1 class="banner-text" style="color: white;"><%= @home_page_contents.banner_text %></h1>
-              </span>
+          <header style="padding-left: 40px">
+            <% word_index = 0 %>
+            <% @home_page_contents.banner_title.split(" ").each do |word| %>
+              <% if word_index % 2 == 0 %>
+                <h2 class="banner-text logo-font" style="display:inline-block; color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><%= word %></h2>&nbsp
+                <% word_index += 1 %>
+              <% else %>
+                <h2 class="banner-text logo-font" style="display:inline-block; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="text-default"><%= word %></span></h2>&nbsp
+                <% word_index += 1 %>
+              <% end %>
+            <% end %>
+            <br>
+          <% if @home_page_contents.banner_text != nil && @home_page_contents.banner_text != "" %>
+            <% word_index = 0 %>
+            <% @home_page_contents.banner_text.split(" ").each do |word| %>
+              <% if word_index % 2 != 0 %>
+                <h3 class="banner-text logo-font" style="display:inline-block; color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><%= word %></h3>&nbsp
+                <% word_index += 1 %>
+              <% else %>
+                <h3 class="banner-text logo-font" style="display:inline-block; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="text-default"><%= word %></span></h3>&nbsp
+                <% word_index += 1 %>
+              <% end %>
+            <% end %>
+          <% end %>
           </header>
         </section>
       <% else %>
         <section id="banner">
-          <header>
-              <h1>Trisomy Association</h1>
-              <span>
-                <h1 class="banner-text" style="color: white;">Bringing Families Together</h1>
-              </span>
+          <header style="padding-left: 40px"> 
+            <h2 style="text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="logo-font">Trisomy <span class="text-default">Association</span></span></h2>
+            <h3 class="banner-text logo-font" style="color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Bringing <span class="text-default">Families</span> Together</h3>
+            
           </header>
         </section>
       <% end %>
@@ -230,13 +248,13 @@
             <% end %>
           <% else %>
               <div class="col-md-4 col-sm-4 col-xs-12">
-                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/AeRi1.png"></p>
+                <img class="hover-zoom img-circle" style="height: 300px; width: 300px" src="https://static.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg">
               </div>
               <div class="col-md-4 col-sm-4 col-xs-12">
-                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/JiHyung1.png"></p>
+                <img class="hover-zoom img-circle" style="height: 300px; width: 300px" src="https://static.pexels.com/photos/62272/pexels-photo-62272.jpeg">
               </div>
               <div class="col-md-4 col-sm-4 col-xs-12">
-                <p><img class="hover-zoom img-circle" src="http://www.libertyinnorthkorea.org/wp-content/uploads/2013/08/GaYeon1.png"></p>
+                <img class="hover-zoom img-circle" style="height: 300px; width: 300px" src="https://static.pexels.com/photos/208134/pexels-photo-208134.jpeg">
               </div>
             <% end %>
         </div>
@@ -280,7 +298,7 @@
               <% end %>
             </div>
             <div class="col-md-6">
-              <img src="https://www.enterprisedb.com/sites/default/files/blogs/statistics.jpg" class="img-rounded" style="height: 375px; width: 500px"/>
+              <img src="https://static.pexels.com/photos/220357/pexels-photo-220357.jpeg" class="img-rounded" style="height: 375px; width: 500px"/>
             </div>
           <% end %>
         </div>
