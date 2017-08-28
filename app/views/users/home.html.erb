@@ -167,7 +167,7 @@
               <div class="carousel-inner">
                 <div class="item" ng-class="{active:!$index}" ng-repeat="image in images">                  
                   <div class="row">                 
-                    <img ng-src="{{image.photo}}" style="height:350px; margin-left: 35%"/>
+                    <img ng-src="{{image.photo}}" style="height:350px; margin-left: 34%"/>
                     <div class="col-md-6">
                     </div>
                   </div>                  
@@ -289,10 +289,10 @@
           <% else %>
             <div class="col-md-6">
               <% if @home_page_contents != nil && @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i><%= @home_page_contents.data_center_title %></h1>
                 <hr>
               <% else %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>Data Center</h1>
                 <hr>
               <% end %>
               <% if @home_page_contents != nil && @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
@@ -318,35 +318,35 @@
               <% if @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil  %>
                 <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
               <% else %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+                <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i> Data Center</h1>
               <% end %>
               <hr>
               <% if @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
                 <p><%= @home_page_contents.family_center_text %></p>
               <% else %>
-                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+                <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state.</p>
               <% end %>
             </div>
             <div class="col-md-6">
-              <img src=<%= @home_page_contents.data_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
+              <img src=<%= @home_page_contents.family_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
             </div>
           <% else %>
             <div class="col-md-6">
-              <% if @home_page_contents != nil && @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+              <% if @home_page_contents != nil && @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil %>
+                <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i><%= @home_page_contents.family_center_title %></h1>
                 <hr>
               <% else %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+                <h1><i class="fa fa-users fa-fw" aria-hidden="true"></i>Family Center</h1>
                 <hr>
               <% end %>
-              <% if @home_page_contents != nil && @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
-                <p><%= @home_page_contents.data_center_text %></p>
+              <% if @home_page_contents != nil && @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
+                <p><%= @home_page_contents.family_center_text %></p>
               <% else %>
-                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+                <p>Using the options provided, in the family center, users can search for other families by last name, trisomy type, or state or physicians by last name or state.</p>
               <% end %>
             </div>
             <div class="col-md-6">
-              <img src="https://static.pexels.com/photos/220357/pexels-photo-220357.jpeg" class="img-rounded" style="height: 375px; width: 500px"/>
+              <img src="https://static.pexels.com/photos/164531/pexels-photo-164531.jpeg" class="img-rounded" style="height: 375px; width: 500px"/>
             </div>
           <% end %>
         </div>
