@@ -233,6 +233,15 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-black,.w3-hover-border-black:hover{border-color:#000!important}
 .w3-border-grey,.w3-hover-border-grey:hover,.w3-border-gray,.w3-hover-border-gray:hover{border-color:#bbb!important}
 
+.img-overlay {
+  position: absolute;
+  top: 105px;
+  bottom: 0;
+  left: 655px;
+  right: 0;
+  text-align: center;
+}
+
 #pic {
   width:auto;
   height:325px; 

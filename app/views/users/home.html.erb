@@ -35,7 +35,7 @@
       #banner{
                 background: url(<%= @home_page_contents.banner_image %>);
                 background-position: center center;
-                background-size: auto 140%;
+                background-size: auto 200%;
                 background-repeat: no-repeat;
                 text-align: left;
               }
@@ -56,7 +56,7 @@
       <!-- BANNER -->
 
       <% if @home_page_contents != nil && (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") %>
-        <section id="banner">
+        <div id="banner">
           <header style="padding-left: 40px">
             <% word_index = 0 %>
             <% @home_page_contents.banner_title.split(" ").each do |word| %>
@@ -82,7 +82,7 @@
             <% end %>
           <% end %>
           </header>
-        </section>
+        </div>
       <% else %>
         <section id="banner">
           <header style="padding-left: 40px"> 
@@ -93,7 +93,7 @@
         </section>
       <% end %>
       <% if @home_page_contents != nil && @home_page_contents.mission_text != ""  %>
-        <div class="container-fluid content-row">
+        <div class="container-fluid content-row" style="background-color: #F2F2F2">
           <section>
             <% if @home_page_contents.mission_title != "" %>
               <h1 class="row-header" style="text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i>
@@ -110,6 +110,7 @@
             <hr>
             <h3><%= @home_page_contents.mission_text %></h3>
           </section>
+          <p></p>
         </div>                  
       <% end %>
 
@@ -166,7 +167,7 @@
               <div class="carousel-inner">
                 <div class="item" ng-class="{active:!$index}" ng-repeat="image in images">                  
                   <div class="row">                 
-                    <img ng-src="{{image.photo}}" style="height:350px; margin-left: 28%"/>
+                    <img ng-src="{{image.photo}}" style="height:350px; margin-left: 35%"/>
                     <div class="col-md-6">
                     </div>
                   </div>                  
@@ -188,15 +189,15 @@
 
       <!-- CREATE PROFILE -->
 
-      <div class="container-fluid content-row">
+      <div class="container-fluid content-row" style="background-color: #F2F2F2">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <% if @home_page_contents != nil && @home_page_contents.create_profile_title != "" %>
               <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> <%= @home_page_contents.create_profile_title %></h1>
             <% else %>
               <h1 class="row-header"><i class="fa fa-user" aria-hidden="true"></i> Create a Profile</h1>
             <% end %>
-            <hr style="width: 93%">
+            <hr>
             <% if @home_page_contents != nil && @home_page_contents.create_profile_text != "" %>
               <p><%= @home_page_contents.create_profile_text %></p>
             <% else %>
@@ -247,6 +248,7 @@
                 <p><img class="hover-zoom img-circle" style="height: 300px; width: 300px" src=<%= @home_page_contents.create_profile_image3 %>></p>
               </div>
             <% end %>
+            <br>
           <% else %>
               <div class="col-md-4 col-sm-4 col-xs-12">
                 <img class="hover-zoom img-circle" style="height: 300px; width: 300px" src="https://static.pexels.com/photos/160933/girl-rabbit-friendship-love-160933.jpeg">
@@ -258,6 +260,7 @@
                 <img class="hover-zoom img-circle" style="height: 300px; width: 300px" src="https://static.pexels.com/photos/208134/pexels-photo-208134.jpeg">
               </div>
             <% end %>
+            <p></p>
         </div>
       </div>
 
@@ -271,7 +274,7 @@
               <% if @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil  %>
                 <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
               <% else %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
               <% end %>
               <hr>
               <% if @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
@@ -289,7 +292,51 @@
                 <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
                 <hr>
               <% else %>
-                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Family Center</h1>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+                <hr>
+              <% end %>
+              <% if @home_page_contents != nil && @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
+                <p><%= @home_page_contents.data_center_text %></p>
+              <% else %>
+                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <img src="https://static.pexels.com/photos/220357/pexels-photo-220357.jpeg" class="img-rounded" style="height: 375px; width: 500px"/>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- FAMILY CENTER -->
+
+      <div class="container-fluid content-row" style="background-color: #F2F2F2">
+        <div class="row">
+          <% if @home_page_contents != nil && @home_page_contents.family_center_image != "" && @home_page_contents.family_center_image != nil %>
+            
+            <div class="col-md-6">
+              <% if @home_page_contents.family_center_title != "" && @home_page_contents.family_center_title != nil  %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.family_center_title %></h1>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
+              <% end %>
+              <hr>
+              <% if @home_page_contents.family_center_text != "" && @home_page_contents.family_center_text != nil %>                
+                <p><%= @home_page_contents.family_center_text %></p>
+              <% else %>
+                <p>Anonymously using user provided information view graphs and tables that could provide further insight into this complicated medical condition.</p>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <img src=<%= @home_page_contents.data_center_image %> class="img-rounded" style="height: 375px; width: 500px"/>
+            </div>
+          <% else %>
+            <div class="col-md-6">
+              <% if @home_page_contents != nil && @home_page_contents.data_center_title != "" && @home_page_contents.data_center_title != nil %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> <%= @home_page_contents.data_center_title %></h1>
+                <hr>
+              <% else %>
+                <h1><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Data Center</h1>
                 <hr>
               <% end %>
               <% if @home_page_contents != nil && @home_page_contents.data_center_text != "" && @home_page_contents.data_center_text != nil %>                
@@ -308,7 +355,7 @@
       <!-- SPECIAL EVENTS -->
 
       <% if @sorted_events.count != 0 %>
-        <div class="container-fluid content-row">
+        <div class="container-fluid odd-row content-row">
           <ul class="dates">
             <% if @sorted_events.count > 2 %>
               <section>
@@ -342,40 +389,38 @@
       <% end %>
 
       <!-- FOOTER -->
-
-      <footer class="footer">
-        <div class="container-fluid odd-row">
-          <div class="row">
-            <div class="col-md-6">
-              <% if @home_page_contents != nil %>
-                <address>
-                  <% if @home_page_contents.company_title != nil && @home_page_contents.company_title != "" %>
-                    <h2><%= @home_page_contents.company_title %><br></h2>
-                  <% end %>
-                  <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
-                    Number: (<%= @home_page_contents.company_phone_number[0,3] %>) <%= @home_page_contents.company_phone_number[3,3] %>-<%= @home_page_contents.company_phone_number[6..-1] %> <br>
-                  <% end %>
-                  <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
-                    Address: <%= @home_page_contents.company_address %><br>
-                  <% end %>
-                </address>
-              <% end %>
-            </div>
-            <div class="col-md-2">
-              <h6>You can also checkout our Facebook Page!</h6>
-              <ol class="social">
-                <li><a class="icon fa-facebook" href=""><span class="label">Facebook</span></a></li>
-              </ol>
-            </div>
+      <div class="container-fluid" style="background-color: #F2F2F2">
+        <div class="row">
+          <br>
+          <div class="col-md-6">
+            <% if @home_page_contents != nil %>
+              <address>
+                <% if @home_page_contents.company_title != nil && @home_page_contents.company_title != "" %>
+                  <h2><%= @home_page_contents.company_title %><br></h2>
+                <% end %>
+                <% if @home_page_contents.company_phone_number != nil && @home_page_contents.company_phone_number != "" %>
+                  Number: (<%= @home_page_contents.company_phone_number[0,3] %>) <%= @home_page_contents.company_phone_number[3,3] %>-<%= @home_page_contents.company_phone_number[6..-1] %> <br>
+                <% end %>
+                <% if @home_page_contents.company_address != nil && @home_page_contents.company_address != "" %>
+                  Address: <%= @home_page_contents.company_address %><br>
+                <% end %>
+              </address>
+            <% end %>
           </div>
-          
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center copyright">
-              <p>2017 © Trisomy Association. All Rights Reserved.</p>
-            </div>
+          <div class="col-md-2">
+            <h6>You can also checkout our Facebook Page!</h6>
+            <ol class="social">
+              <li><a class="icon fa-facebook" href=""><span class="label">Facebook</span></a></li>
+            </ol>
           </div>
         </div>
-      </footer>
-
+        
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center copyright">
+            <p>2017 © Trisomy Association. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+      
   </body>
 </html>
