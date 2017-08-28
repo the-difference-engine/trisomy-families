@@ -1,3 +1,4 @@
+<br>
 <% if @physician.errors.any?%>
 <div id="error_explanation" class="alert alert-danger" role="alert">
    <%= pluralize(@physician.errors.count, "Error") %>
@@ -11,31 +12,31 @@
 <div class="container">
    <div class="row">
       <div class="col-md-6 col-md-offset-3">
-         <h1 class="text-center">Physician Profile</h1>
-         <p class="text-center">Create a profile:</p>
-         <hr>
+         <h1 class="text-center">Create Physician Profile</h1>
+         <hr style="width: 0px">
          <%= form_for @physician, url: {action: "create"} do |f| %>
          <h5 style="color:gray">Personal Info</h5>
+         <br>
          <div class="form-group">
-            <span class="required">* </span><%= f.label :first_name, " Full Name" %>
+            <span class="required">* </span><%= f.label :first_name, "First Name" %>
             <%= f.text_field(:first_name, class: "form-control", value: current_user.first_name) %>
          </div>
          <div class="form-group">
+            <span class="required">* </span><%= f.label :first_name, "Last Name" %>
             <%= f.text_field(:last_name, class: "form-control", value: current_user.last_name) %>
          </div>
          <div class="form-group">
-            <%= f.label :personal_number %>
+            <%= f.label :personal_number, "Phone Number" %>
             <%= f.text_field(:personal_number, class: "form-control") %>
-
-
+            <br>
             <%= f.radio_button(:primary_phone_public, true) %> Public
             <%= f.radio_button(:primary_phone_public, false) %> Private
          </div>
-
-
-
+         <hr style="width: 0px">
          <hr>
+         <hr style="width: 0px">
          <h5 style="color:gray">Practice Info</h5>
+         <br>
          <div class="form-group">
             <span class="required">* </span><%= f.label :address, "Address" %>
             <%= f.text_field(:address, class: "form-control")%>
@@ -46,11 +47,12 @@
             <span class="required">* </span>Office Phone Number
             <%= f.text_field(:phone_number, class: "form-control") %>
          </div>
+         <br>
          <div class="form-group">
-         <span class="required">* </span><%= f.label :state, "State" %><br>
+         <span class="required">* </span><%= f.label :state, "State" %>
             <%= f.select("state", options_for_select(us_states, @physician.state), class: "form-control") %>
          </div>
-
+         <br>
          <div class="form-group">
             <span class="required">* </span><%= f.label :city, 'City' %>
             <%= f.text_field(:city, class: "form-control")%>
@@ -59,8 +61,6 @@
             <span class="required">* </span><%= f.label :zip_code, 'Zip Code' %>
             <%= f.text_field(:zip_code, class: "form-control")%>
          </div>
-
-         <hr>
          <div class="form-group">
             <%= f.label :website, 'Website' %>
             <%= f.text_field(:website, class: "form-control")%>
@@ -72,6 +72,7 @@
          <div class="form-group">
             <%= f.hidden_field(:user_id, value: current_user.id, class: "form-control")%>
          </div>
+         <br>
          <%= submit_tag 'Create', class: "btn btn-success btn-lg btn-block"%>
       <% end %>
       </div>
@@ -79,4 +80,3 @@
    </div>
    <!-- row -->
 </div>
-<!-- container -->

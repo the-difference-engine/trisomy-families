@@ -86,7 +86,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <% end %>
           <% if @child.privacy.trisomy_type == false && @child.death_date %>
             <label>Trisomy Type</label><br> <%= @child.trisomy_type %>
-            <hr>
+            <p></p>
             <label>Date of Death</label><br> <%= @child.death_date %>
             <p></p>
           <% elsif @child.privacy.trisomy_type == false  %>

@@ -60,8 +60,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <h3>Contact Me</h3>
           <div class="w3-container">  
             <ul class="list-icons">
-              <li><i class="fa fa-phone pr-10 text-default"></i> <%= @physician.phone_number %></li>
-              <li><i class="fa fa-mobile pr-10 text-default"></i> <%= @physician.personal_number %></li>
+              <li><i class="fa fa-phone pr-10 text-default"></i>(<%= @physician.phone_number[0,3] %>) <%= @physician.phone_number[3,3] %>-<%= @physician.phone_number[6..-1] %></li>
+            <% if @physician.primary_phone_public == true %>
+              <li><i class="fa fa-mobile pr-10 text-default"></i>(<%= @physician.personal_number[0,3] %>) <%= @physician.personal_number[3,3] %>-<%= @physician.personal_number[6..-1] %></li>
+            <% end %>
               <li><a href="mailto:<%= current_user.email %>"><i class="fa fa-envelope-o pr-10"></i><%= current_user.email %></a></li>
             </ul>
             <br>
@@ -86,6 +88,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
         <br>
       </div>
+      <% if current_user.id == @physician.user_id || current_user.user_type == 'admin' %>
+        <%= link_to 'Edit Profile',"/physicians/#{@physician.id}/edit", :class => "btn btn-default", :style => "background-color: red; border: red;" %>
+      <% end %>
 
     <!-- End Right Column -->
     </div>

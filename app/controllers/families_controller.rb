@@ -27,7 +27,7 @@ class FamiliesController < ApplicationController
 
   def new
     @family = Family.find_by(user_id: current_user.id)
-    if @family      
+    if @family && current_user.user_type == "family"      
       redirect_to "/families/#{@family.id}"
     else
       @family = Family.new

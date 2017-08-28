@@ -39,6 +39,8 @@
       }).then(function successCallback(response) {
         $scope.events.push($scope.event);
         $scope.alerts.push({ type: 'success', msg: 'Well done! You successfully added an event.' });
+        document.getElementById('event_creator').style.display = 'none';
+        document.getElementById('calendar').style.display = 'inline-block';
 
       }, function errorCallback(response) {
         $scope.alerts.push({ type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' });
@@ -53,10 +55,29 @@
       calendar:{
         height: 650,
         editable: true,
+        customButtons: {
+            myCustomButton: {
+                text: '+',
+                click: function() {
+                    document.getElementById('event_creator').style.display = 'inline-block';
+                    document.getElementById('calendar').style.display = 'none';
+                    $("event_creator").focus();
+                }
+            }
+        },
+        views: {
+          month: { // name of view
+              titleFormat: 'MMMM YYYY'
+              // other view-specific options here
+          }
+        },
+        buttonText: {
+          today: '↺'
+        },
         header:{
           left: 'title',
           center: '',
-          right: 'today prev,next'
+          right: 'myCustomButton today prev,next'
         },
         eventClick: $scope.alertOnEventClick
       }

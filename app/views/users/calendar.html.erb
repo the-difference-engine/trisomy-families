@@ -1,15 +1,13 @@
 <div ng-app="app">
   <div ng-controller="calendarCtrl" ng-init="setUp()">
-    <p></p> 
-    <div class="row">
+    <hr style="width: 0px"> 
+    <div class="row" id="calendar">
       <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
     </div>
 
-    <hr>
     <% if user_signed_in? && current_user.user_type == "admin" %>
 
-      <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6 col-md-offset-3" style="display:none" id="event_creator">
           <h2>Create Event</h2>
 
           <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
@@ -32,7 +30,7 @@
               <input type="datetime-local" class="form-control" id="eventEnd" ng-model="event.end">
 
               <label for="ngvalueselect">Event Type</label>
-              <select class="form-control" name="ngvalueselect" id="eventType" ng-model="event.event_type" style="float: none;">
+              <select class="form-control" name="ngvalueselect" id="eventType" ng-model="event.event_type">
                 <option value="birthdays">Birthday</option>
                 <option value="fundrasier">Fundraiser</option>
                 <option value="family">Family</option>
@@ -40,7 +38,7 @@
               </select>
 
               <label for="ngvalueselect">All Day</label>
-              <select class="form-control" name="ngvalueselect" id="eventAllDay" ng-model="event.allDay" style="float: none;">
+              <select class="form-control" name="ngvalueselect" id="eventAllDay" ng-model="event.allDay">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -49,8 +47,9 @@
             </div>
           </form>
         </div>
-      </div>
     <% end %>
   </div>
 </div>
+<script>
+</script>
 

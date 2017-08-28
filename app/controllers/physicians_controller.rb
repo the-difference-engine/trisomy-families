@@ -100,25 +100,29 @@ class PhysiciansController < ApplicationController
   def update
     if current_user
       @physician = Physician.find_by(id: params[:id])
-
-      @physician.update(
-        first_name: params[:first_name] || @physician.first_name,
-        last_name: params[:last_name] || @physician.last_name,
-        phone_number: params[:phone_number] || @physician.phone_number,
-        address: params[:address] || @physician.address,
-        state: params[:state] || @physician.state,
-        city: params[:city] || @physician.city,
-        zip_code: params[:zip_code] || @physician.zip_code,
-        website: params[:website] || @physician.website,
-        specialty: params[:specialty] || @physician.specialty,
-        user_id: current_user.id
-      )
-      if @physician.save
-        flash[:success] = 'Profile Updated!'
+      if current_user.user_type == "admin" || (current_user.user_type == "doctor" && current_user.id == @physician.user_id)
+        @physician.update(
+          first_name: params[:physician][:first_name] || @physician.first_name,
+          last_name: params[:physician][:last_name] || @physician.last_name,
+          phone_number: params[:physician][:phone_number] || @physician.phone_number,
+          address: params[:physician][:address] || @physician.address,
+          state: params[:physician][:state] || @physician.state,
+          city: params[:physician][:city] || @physician.city,
+          zip_code: params[:physician][:zip_code] || @physician.zip_code,
+          website: params[:physician][:website] || @physician.website,
+          specialty: params[:physician][:specialty] || @physician.specialty,
+          primary_phone_public: params[:physician][:primary_phone_public] || @physician.primary_phone_public
+        )
+        if @physician.save
+          flash[:success] = 'Profile Updated!'
+        else
+          flash[:warning] = 'Profile could not be updated!'
+        end
+        redirect_to "/physicians/#{@physician.id}"  
       else
-        flash[:warning] = 'Profile could not be updated!'
+        redirect_to "/"
+        flash[:warning] = 'You do not have permission to view that page.'
       end
-      redirect_to "/physicians/#{@physician.id}"
     else
       redirect_to "/"
       flash[:warning] = 'You do not have permission to view that page.'
