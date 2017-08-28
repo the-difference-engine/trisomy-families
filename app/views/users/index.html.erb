@@ -2,7 +2,8 @@
   <div ng-controller="adminCtrl" ng-init="setup()">
   
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="8000">{{alert.msg}}</div>
-    <div class="row" style="background-color:#f2f2f2; padding:15px;">
+    <br>
+    <div class="row well" style="background-color:#f2f2f2;">
       <div class="col-md-2">
         <a href="/family-center"><h5 id="family"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Family Center</h5></a>
       </div>
@@ -37,7 +38,7 @@
       <% end %>
       <a href="/children-index" class="btn btn-primary">See All Children</a>
     </div>
-    <hr />
+    <hr/>
 
     <h2>Users:</h2>
     <div>
