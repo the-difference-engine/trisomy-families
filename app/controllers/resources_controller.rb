@@ -31,9 +31,11 @@ class ResourcesController < ApplicationController
 
         my_family = Family.find_by(user_id: current_user.id)
         registered = false      
-        my_family.children.each do |child|
-          if child.accepted
-            registered = true
+        if my_family != nil
+          my_family.children.each do |child|
+            if child.accepted
+              registered = true
+            end
           end
         end
 
