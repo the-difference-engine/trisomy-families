@@ -6,10 +6,12 @@ class ProfessionalCenterController < ApplicationController
     if current_user.user_type == "family"
       
       my_family = Family.find_by(user_id: current_user.id)
-      registered = false      
-      my_family.children.each do |child|
-        if child.accepted
-          registered = true
+      registered = false     
+      if my_family != nil 
+        my_family.children.each do |child|
+          if child.accepted
+            registered = true
+          end
         end
       end
 
