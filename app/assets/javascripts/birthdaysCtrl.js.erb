@@ -1,34 +1,27 @@
 /* global angular */
-angular.module("app").controller('BirthdaysController', ['$scope', '$http', function($scope, $http) {
+angular.module("app").controller('BirthdaysController', function($scope, $http) {
 
   $scope.setUp = function() {
-      $http.get('/api/v1/birthdays.json').then(function successCallback(response) {
+    var userDate = new Date();
+    var month = userDate.getMonth() + 1;
+    var day = userDate.getDate();
 
-            // ChECK IF THERE ARE BIRTHDAYS
-            $scope.children = response.data;
-            if ($scope.children.length == 0) {
-              $scope.birthdays = false;
-            } else {
-              $scope.birthdays = true;
-            }
+    $http({url: "/api/v1/birthdays.json", method: "GET", params: {userMonth: month, userDay: day}
+     }).then(function successCallback(response) {
+        // CHECK IF THERE ARE BIRTHDAYS
+        $scope.children = response.data;
+        console.log($scope.children)
+        if ($scope.children.length == 0) {
+          $scope.birthdays = false;
+        } else {
+          $scope.birthdays = true;
+        }
 
-            // SET UP DEFAULT IMAGES IF NO BIRTHDAYS -> THIS IS CURRENTLY HARD-CODED IN
-            var url_str = window.location.href
-            var arr = url_str.split("/");
-            var domain_str = arr[0] + "//" + arr[2] + "/"
-
-            $scope.images = [
-                              {photo: domain_str + "t11.jpg"},
-                              {photo: domain_str + "t12.jpg"},
-                              {photo: domain_str + "t13.jpg"},
-                              {photo: domain_str + "t15.jpg"},
-                              {photo: domain_str + "t17.jpg"}
-                            ];
-          },
-          function errorCallback(response) {
-              console.log("Error on set-up");
-    });
+      },
+      function errorCallback(response) {
+          console.log("Error on set-up");
+      });
   };
 
   window.$scope = $scope;
-}]);
+});
