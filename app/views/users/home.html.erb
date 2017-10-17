@@ -52,9 +52,6 @@
   </head>
   <body class="homepage">
 
-
-      <!-- BANNER -->
-
       <% if @home_page_contents != nil && (@home_page_contents.banner_title != nil && @home_page_contents.banner_title != "") %>
         <div id="banner">
           <header style="padding-left: 40px">
@@ -85,7 +82,7 @@
           <% end %>
           </header>
         </div>
-      <% elsif  @home_page_contents.banner_text != nil && @home_page_contents.banner_text != "" %>
+      <% elsif @home_page_contents != nil && (@home_page_contents.banner_text != nil && @home_page_contents.banner_text != "") %>
         <section id="banner">
           <header style="padding-left: 40px"> 
             <h2 style="text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="logo-font">Trisomy <span class="text-default">Association</span></span></h2>
