@@ -179,6 +179,28 @@ class ChildrenController < ApplicationController
   def update
     @child = Child.find_by(id: params[:id])
     @privacy = @child.privacy
+    if @child.birth_date != calculate_date(params["child"]["birth_date(1i)"], params["child"]["birth_date(2i)"], params["child"]["birth_date(3i)"])
+      @background_history = BackgroundHistory.find_by(id: @child.background_history_id)
+      if @background_history != nil
+        if @background_history.mother_complication_id != nil
+          @mother_complications = MotherComplication.find_by(id: @background_history.mother_complication_id)
+          @mother_complications.destroy
+        end
+        if @background_history.weight_id != nil
+          @weight = Weight.find_by(id: @background_history.weight_id)
+          @weight.destroy
+        end
+        if @background_history.height_id != nil
+          @height = Height.find_by(id: @background_history.height_id)
+          @height.destroy
+        end
+        if @background_history.head_circumference_id != nil
+          @head_circumference = HeadCircumference.find_by(id: @background_history.head_circumference_id)
+          @head_circumference.destroy
+        end
+        @background_history.destroy
+      end
+    end
     @child.assign_attributes(
       first_name: params["child"]["first_name"],
       last_name: params["child"]["last_name"],
