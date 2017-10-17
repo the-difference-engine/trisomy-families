@@ -105,6 +105,7 @@ class PhysiciansController < ApplicationController
           first_name: params[:physician][:first_name] || @physician.first_name,
           last_name: params[:physician][:last_name] || @physician.last_name,
           phone_number: params[:physician][:phone_number] || @physician.phone_number,
+          personal_number: params[:physician][:personal_number] || @physician.personal_number,
           address: params[:physician][:address] || @physician.address,
           state: params[:physician][:state] || @physician.state,
           city: params[:physician][:city] || @physician.city,
