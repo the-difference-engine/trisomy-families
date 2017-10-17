@@ -119,6 +119,7 @@ class FamiliesController < ApplicationController
     @family.story = params[:family][:story]
     @family.city = params[:family][:city]
     @family.state = params[:family][:state]
+    @family.street_address = params[:family][:street_address]
     @family.website = params[:family][:website]
     @family.save
     if params["family"]["photo"] != nil
