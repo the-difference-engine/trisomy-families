@@ -80,27 +80,33 @@
                 <% word_index += 1 %>
               <% end %>
             <% end %>
+          <% else %>
+            <h3 class="banner-text logo-font" style="color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Bringing <span class="text-default">Families</span> Together</h3>
           <% end %>
           </header>
         </div>
+      <% elsif  @home_page_contents.banner_text != nil && @home_page_contents.banner_text != "" %>
+        <section id="banner">
+          <header style="padding-left: 40px"> 
+            <h2 style="text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="logo-font">Trisomy <span class="text-default">Association</span></span></h2>
+            <% word_index = 0 %>
+            <% @home_page_contents.banner_text.split(" ").each do |word| %>
+              <% if word_index % 2 != 0 %>
+                <h3 class="banner-text logo-font" style="display:inline-block; color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><%= word %></h3>&nbsp
+                <% word_index += 1 %>
+              <% else %>
+                <h3 class="banner-text logo-font" style="display:inline-block; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="text-default"><%= word %></span></h3>&nbsp
+                <% word_index += 1 %>
+              <% end %>
+            <% end %>
+            
+          </header>
+        </section>
       <% else %>
         <section id="banner">
           <header style="padding-left: 40px"> 
             <h2 style="text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="logo-font">Trisomy <span class="text-default">Association</span></span></h2>
-            <% if @home_page_contents.banner_text != nil && @home_page_contents.banner_text != "" %>
-              <% word_index = 0 %>
-              <% @home_page_contents.banner_text.split(" ").each do |word| %>
-                <% if word_index % 2 != 0 %>
-                  <h3 class="banner-text logo-font" style="display:inline-block; color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><%= word %></h3>&nbsp
-                  <% word_index += 1 %>
-                <% else %>
-                  <h3 class="banner-text logo-font" style="display:inline-block; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"><span class="text-default"><%= word %></span></h3>&nbsp
-                  <% word_index += 1 %>
-                <% end %>
-              <% end %>
-            <% else %>
-              <h3 class="banner-text logo-font" style="color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Bringing <span class="text-default">Families</span> Together</h3>
-            <% end %>
+            <h3 class="banner-text logo-font" style="color: white; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Bringing <span class="text-default">Families</span> Together</h3>
             
           </header>
         </section>
